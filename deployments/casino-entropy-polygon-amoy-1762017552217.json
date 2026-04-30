@@ -1,0 +1,12 @@
+{
+  "network": "polygon-amoy",
+  "chainId": 80002,
+  "contractAddress": "0xF7217745993538b0AE16319d43b88582Dae80ADa",
+  "entropyContract": "0x549Ebba8036Ab746611B4fFA1423eb0A4Df61440",
+  "entropyProvider": "0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344",
+  "treasuryAddress": "0x025182b20Da64b5997d09a5a62489741F68d9B96",
+  "deployerAddress": "0x025182b20Da64b5997d09a5a62489741F68d9B96",
+  "deploymentTime": "2025-11-01T17:19:12.083Z",
+  "transactionHash": "0xb3870b976f669734ef1f574719c7adc70a85389aacf5db7df94afec773cf9d26",
+  "blockNumber": 28479884
+}
