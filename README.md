@@ -1,16 +1,16 @@
-# APT Casino - Polygon Amoy
+# Midnight Casino
 
-A decentralized casino platform built on Polygon Amoy Testnet with Pyth Entropy (via Arbitrum Sepolia) for provably fair gaming/gambling
+A decentralized casino platform built on Midnight Network with Pyth Entropy (via Midnight Network) for provably fair gaming/gambling
 
-## 🎮 The Story Behind APT Casino
+## 🎮 The Story Behind Midnight Casino
 
-A few days ago, I was exploring some transactions on Etherscan, where I saw an advertisement of https://stake.com/ offering a 200% bonus on first deposits. I deposited 120 USDT and received 360 USDT in total balance in their custodial wallet.
+A few days ago, I was exploring some transactions on Explorer, where I saw an advertisement of https://stake.com/ offering a 200% bonus on first deposits. I deposited 120 USDT and received 360 USDT in total balance in their custodial wallet.
 
 When I started playing, I discovered I could only bet $1 per game and couldn't increase the amount. After contacting customer support, I learned I had been trapped by hidden "wager limits" tied to the bonus scheme. To withdraw my original deposit, I would need to play $12,300 worth of games!
 
 In a desperate attempt to recover my funds, I played different games all night - roulette, mines, spin wheel and lost everything.
 
-This frustrating experience inspired APT Casino: a combination of GameFi, AI, and DeFi where users can enjoy casino games in a safe, secure, and transparent environment that doesn't scam its users.
+This frustrating experience inspired Midnight Casino: a combination of GameFi, AI, and DeFi where users can enjoy casino games in a safe, secure, and transparent environment that doesn't scam its users.
 
 ## 🎯 The Problem
 
@@ -26,7 +26,7 @@ The traditional online gambling industry suffers from several issues:
 
 ## 💡 Our Solution
 
-APT Casino addresses these problems by offering:
+Midnight Casino addresses these problems by offering:
 
 - **Provably Fair Gaming**: Powered by Pyth Entropy
 
@@ -35,7 +35,7 @@ APT Casino addresses these problems by offering:
 
 - **Multiple Games**: Wheel, Roulette, Plinko, and Mines with verifiable outcomes
 - **MetaMask Smart Accounts**: Enhanced wallet experience with batch transactions
-- **POL Token**: Native currency for Polygon Amoy Testnet
+- **MIDN Token**: Native currency for Midnight Network
 - **Flexible Withdrawal**: Unrestricted access to funds
 - **Transparent Bonuses**: Clear terms without hidden traps
 - **True Asset Ownership**: Decentralized asset management
@@ -59,10 +59,10 @@ APT Casino addresses these problems by offering:
 - **On-Chain Verification**: All game outcomes verifiable
 - **Transparent Mechanics**: Open-source game logic
 
-### 3. Multi-Chain Architecture
+### 3. Midnight-Only Architecture
 
-- **Gaming Network**: Polygon Amoy Testnet (Chain ID: 80002)
-- **Entropy Network**: Arbitrum Sepolia (Chain ID: 421614)
+- **Gaming Network**: Midnight Network (Chain ID: 80002)
+- **Entropy Network**: Midnight Network (Chain ID: 421614)
 
 ### 4. Game Selection
 
@@ -86,15 +86,15 @@ APT Casino addresses these problems by offering:
 
 ## 🚀 Getting Started
 
-1. **Connect Wallet**: Connect your MetaMask wallet to Polygon Amoy Testnet
-2. **Get Tokens**: Get POL tokens from the Polygon Amoy testnet faucet
+1. **Connect Wallet**: Connect your MetaMask wallet to Midnight Network
+2. **Get Tokens**: Get POL tokens from the Midnight Network testnet faucet
 3. **Deposit**: Deposit POL to your house balance
 4. **Play**: Start playing provably fair games!
 
 
 ## 🔷 Smart Account Features
 
-APT Casino leverages MetaMask Smart Accounts for an enhanced gaming experience:
+Midnight Casino leverages MetaMask Smart Accounts for an enhanced gaming experience:
 
 ### Delegation Benefits:
 - **Auto-Betting Strategies**: Delegate betting permissions to strategy contracts
@@ -153,8 +153,8 @@ flowchart TD
     I --> K
     
     K --> L{Network Check}
-    L -->|Polygon Amoy| M[Connection Success]
-    L -->|Wrong Network| N[Switch to Polygon Amoy]
+    L -->|Midnight Network| M[Connection Success]
+    L -->|Wrong Network| N[Switch to Midnight Network]
     
     N --> O{User Approves?}
     O -->|Yes| M
@@ -211,9 +211,9 @@ sequenceDiagram
     participant U as User
     participant SA as Smart Account
     participant UI as Game UI
-    participant PA as Polygon Amoy
+    participant PA as Midnight Network
     participant API as API Route
-    participant SC as Smart Contract (Arbitrum)
+    participant SC as Smart Contract (Midnight Network)
     participant PE as Pyth Entropy
     participant DB as Database
     participant LP as Livepeer
@@ -312,8 +312,8 @@ sequenceDiagram
     participant U as User
     participant UI as Casino UI
     participant SA as Smart Account
-    participant PA as Polygon Amoy
-    participant AS as Arbitrum Sepolia
+    participant PA as Midnight Network
+    participant AS as Midnight Network
     participant PE as Pyth Entropy
     
     Note over U,PE: Smart Account Batch Gaming Session
@@ -321,17 +321,17 @@ sequenceDiagram
     U->>UI: Select Multiple Games
     UI->>SA: Prepare Batch Transaction
     
-    Note over SA,PA: Batch Transaction on Polygon
+    Note over SA,PA: Batch Transaction on Midnight Network
     SA->>PA: Batch Bet Transaction
     PA->>SA: Confirm All Bets
     
-    Note over AS,PE: Entropy Generation on Arbitrum
+    Note over AS,PE: Entropy Generation on Midnight Network
     UI->>AS: Request Entropy for All Games
     AS->>PE: Generate Multiple Random Numbers
     PE->>AS: Return Entropy Proofs
     AS->>UI: All Game Results
     
-    Note over SA,PA: Batch Payout on Polygon
+    Note over SA,PA: Batch Payout on Midnight Network
     UI->>SA: Process Batch Payouts
     SA->>PA: Batch Payout Transaction
     PA->>SA: Confirm All Payouts
@@ -381,5 +381,5 @@ flowchart TD
 
 ## 🔗 Links
 
-- **Live Demo**: https://apt-casino-polygon.vercel.app
-- **Pitch Deck**: https://www.figma.com/slides/rj3GKnMatIQQeTXLOrqWNK/APT-Casino-Polygon?node-id=0-1&t=xLmlQt2ZqR5Wugay-1
+- **Live Demo**: https://midnight-casino.vercel.app
+- **Pitch Deck**: https://www.figma.com/slides/rj3GKnMatIQQeTXLOrqWNK/APT-Casino-Midnight Network?node-id=0-1&t=xLmlQt2ZqR5Wugay-1

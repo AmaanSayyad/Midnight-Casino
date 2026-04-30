@@ -1,4 +1,4 @@
-# APT Casino Monad - Mermaid Architecture Diagrams
+# Midnight Casino - Mermaid Architecture Diagrams
 
 ## 🏗️ System Architecture Overview
 
@@ -20,21 +20,21 @@ graph TB
     
     subgraph API["API Layer"]
         I[Next.js API Routes] --> J[Pyth Entropy Endpoints]
-        I --> K[Deposit/Withdraw MATIC]
+        I --> K[Deposit/Withdraw MIDN]
         I --> L[Game Logic]
         I --> SAA[Smart Account API]
         I --> LOG[Logging API]
     end
     
-    subgraph Banking["Banking Network - Polygon"]
-        POL[Polygon Mainnet] --> MATIC[MATIC Token]
+    subgraph Banking["Banking Network - Midnight Network"]
+        POL[Midnight Network] --> MIDN[MIDN Token]
         POL --> DEP[Deposits/Withdrawals]
         POL --> SA_BATCH[Batch Transactions]
         POL --> LOGS[Game Logs & Events]
     end
     
-    subgraph Gaming["Gaming Network - Arbitrum Sepolia"]
-        AS[Arbitrum Sepolia] --> N[CasinoEntropyConsumer]
+    subgraph Gaming["Gaming Network - Midnight Network"]
+        AS[Midnight Network] --> N[CasinoEntropyConsumer]
         N --> O[Pyth Entropy]
         O --> P[Pyth Network]
         AS --> GAME[Game Execution]
@@ -100,8 +100,8 @@ flowchart TD
     I --> K
     
     K --> L{Network Check}
-    L -->|Polygon Mainnet| M[Connection Success]
-    L -->|Wrong Network| N[Switch to Polygon Mainnet]
+    L -->|Midnight Network| M[Connection Success]
+    L -->|Wrong Network| N[Switch to Midnight Network]
     
     N --> O{User Approves?}
     O -->|Yes| M
@@ -120,7 +120,7 @@ flowchart TD
     V --> X
     W --> X
     X --> Y[Enable Game Features]
-    X --> Z[Setup Cross-Chain Gaming]
+    X --> Z[Setup Midnight-Native Gaming]
 ```
 
 ## 🔷 Smart Account Detection & Features
@@ -164,7 +164,7 @@ graph TB
     end
 ```
 
-## 🌐 Multi-Network Architecture (Polygon + Arbitrum)
+## 🌐 Multi-Network Architecture (Midnight Network + Midnight Network)
 
 ```mermaid
 graph TB
@@ -177,13 +177,13 @@ graph TB
         F[Next.js Casino] --> WC[Wallet Connection]
         WC --> NS[Network Switcher]
         NS --> GM[Game Manager]
-        GM --> CM[Cross-Chain Manager]
+        GM --> CM[Midnight-Native Manager]
     end
     
-    subgraph PolygonNet["Polygon Mainnet (Chain ID: 137)"]
-        POL[Polygon Mainnet] --> MATIC[MATIC Token]
-        MATIC --> DEP[Deposit Contract]
-        MATIC --> WITH[Withdraw Contract]
+    subgraph Midnight NetworkNet["Midnight Network (Chain ID: 137)"]
+        POL[Midnight Network] --> MIDN[MIDN Token]
+        MIDN --> DEP[Deposit Contract]
+        MIDN --> WITH[Withdraw Contract]
         DEP --> TB[Treasury Balance]
         WITH --> TB
         POL --> LOGS[Game Logs Contract]
@@ -196,8 +196,8 @@ graph TB
         end
     end
     
-    subgraph ArbitrumNet["Arbitrum Sepolia (Chain ID: 421614)"]
-        AS[Arbitrum Sepolia] --> EC[Entropy Consumer]
+    subgraph Midnight NetworkNet["Midnight Network (Chain ID: 421614)"]
+        AS[Midnight Network] --> EC[Entropy Consumer]
         EC --> PE[Pyth Entropy Contract]
         PE --> PN[Pyth Network]
         AS --> GAME[Game Execution Contract]
@@ -209,8 +209,8 @@ graph TB
         end
     end
     
-    subgraph CrossChain["Cross-Chain Communication"]
-        CC[Cross-Chain Bridge]
+    subgraph CrossChain["Midnight-Native Communication"]
+        CC[Midnight-Native Bridge]
         MSG[Message Passing]
         SYNC[State Synchronization]
     end
@@ -258,18 +258,18 @@ graph LR
     K --> A
 ```
 
-## 🎮 Game Execution Flow (Cross-Chain Enhanced)
+## 🎮 Game Execution Flow (Midnight-Native Enhanced)
 
 ```mermaid
 sequenceDiagram
     participant U as User
     participant SA as Smart Account
     participant UI as Game UI
-    participant POL as Polygon (Banking)
+    participant POL as Midnight Network (Banking)
     participant API as API Route
-    participant SC as Smart Contract (Arbitrum)
+    participant SC as Smart Contract (Midnight Network)
     participant PE as Pyth Entropy
-    participant LOG as Logging Contract (Polygon)
+    participant LOG as Logging Contract (Midnight Network)
     participant DB as Database
     
     U->>SA: Initiate Game Session
@@ -277,10 +277,10 @@ sequenceDiagram
     
     alt Smart Account
         UI->>SA: Enable Batch Features
-        SA->>POL: Batch Bet Transactions (MATIC)
+        SA->>POL: Batch Bet Transactions (MIDN)
         POL->>UI: Confirm Batch
     else EOA Account
-        UI->>POL: Single Bet Transaction (MATIC)
+        UI->>POL: Single Bet Transaction (MIDN)
         POL->>UI: Confirm Single Bet
     end
     
@@ -294,16 +294,16 @@ sequenceDiagram
     SC->>API: Event: EntropyFulfilled
     API->>DB: Store Game Result
     
-    Note over LOG: Log Game Events to Polygon
+    Note over LOG: Log Game Events to Midnight Network
     API->>LOG: Log Game Result & Stats
-    LOG->>POL: Store on Polygon Chain
+    LOG->>POL: Store on Midnight Network Chain
     
     alt Smart Account Batch
         API->>SA: Batch Results
-        SA->>POL: Process Batch Payouts (MATIC)
+        SA->>POL: Process Batch Payouts (MIDN)
         POL->>UI: Batch Payout Complete
     else Single Transaction
-        API->>POL: Single Payout (MATIC)
+        API->>POL: Single Payout (MIDN)
         POL->>UI: Single Payout Complete
     end
     
@@ -470,27 +470,27 @@ graph LR
     K --> R
 ```
 
-## 🔄 Cross-Chain Request-Response Cycle
+## 🔄 Midnight-Native Request-Response Cycle
 
 ```mermaid
 sequenceDiagram
     participant U as User
     participant F as Frontend
     participant A as API
-    participant POL as Polygon Contract
-    participant ARB as Arbitrum Contract
+    participant POL as Midnight Network Contract
+    participant ARB as Midnight Network Contract
     participant PE as Pyth Entropy
-    participant LOG as Polygon Logging
+    participant LOG as Midnight Network Logging
     participant D as Database
     
     U->>F: Game Action
     F->>A: API Request
     
-    Note over A,POL: Banking on Polygon
-    A->>POL: Deposit/Bet (MATIC)
+    Note over A,POL: Banking on Midnight Network
+    A->>POL: Deposit/Bet (MIDN)
     POL->>A: Transaction Confirmed
     
-    Note over A,ARB: Gaming on Arbitrum
+    Note over A,ARB: Gaming on Midnight Network
     A->>ARB: Game Execution Request
     ARB->>PE: Entropy Request
     
@@ -499,14 +499,14 @@ sequenceDiagram
     PE->>ARB: entropyCallback
     ARB->>A: Game Result Event
     
-    Note over A,LOG: Logging on Polygon
+    Note over A,LOG: Logging on Midnight Network
     A->>LOG: Log Game Event
     LOG->>POL: Store Event Data
     
     A->>D: Store Result in DB
     
-    Note over A,POL: Payout on Polygon
-    A->>POL: Process Payout (MATIC)
+    Note over A,POL: Payout on Midnight Network
+    A->>POL: Process Payout (MIDN)
     POL->>A: Payout Confirmed
     
     A->>F: Complete Response
@@ -645,7 +645,7 @@ journey
       Cash Out: 4: User
 ```
 
-This comprehensive set of Mermaid diagrams provides visual representations of all major architectural components and flows in the APT Casino application, making it easier to understand the complex interactions between different system layers. The diagrams now accurately reflect the current Pyth Entropy integration for random number generation instead of Pyth Entropy.
+This comprehensive set of Mermaid diagrams provides visual representations of all major architectural components and flows in the Midnight Casino application, making it easier to understand the complex interactions between different system layers. The diagrams now accurately reflect the current Pyth Entropy integration for random number generation instead of Pyth Entropy.
 ## 🎯 
 Smart Account Gaming Benefits
 
@@ -694,31 +694,31 @@ graph TB
     end
 ```
 
-## 🔄 Cross-Chain Smart Account Transaction Flow
+## 🔄 Midnight-Native Smart Account Transaction Flow
 
 ```mermaid
 sequenceDiagram
     participant U as User
     participant UI as Casino UI
     participant SA as Smart Account
-    participant POL as Polygon (Banking)
-    participant AS as Arbitrum Sepolia (Gaming)
+    participant POL as Midnight Network (Banking)
+    participant AS as Midnight Network (Gaming)
     participant PE as Pyth Entropy
-    participant LOG as Polygon Logging
+    participant LOG as Midnight Network Logging
     
-    Note over U,LOG: Cross-Chain Smart Account Gaming Session
+    Note over U,LOG: Midnight-Native Smart Account Gaming Session
     
     U->>UI: Select Multiple Games
     UI->>SA: Prepare Batch Transaction
     
     rect rgb(200, 255, 200)
-        Note over SA,POL: Batch Banking on Polygon
-        SA->>POL: Batch Bet Transaction (MATIC)
+        Note over SA,POL: Batch Banking on Midnight Network
+        SA->>POL: Batch Bet Transaction (MIDN)
         POL->>SA: Confirm All Bets
     end
     
     rect rgb(200, 200, 255)
-        Note over AS,PE: Entropy Generation on Arbitrum
+        Note over AS,PE: Entropy Generation on Midnight Network
         UI->>AS: Request Entropy for All Games
         AS->>PE: Generate Multiple Random Numbers
         PE->>AS: Return Entropy Proofs
@@ -726,25 +726,25 @@ sequenceDiagram
     end
     
     rect rgb(255, 255, 200)
-        Note over LOG,POL: Logging on Polygon
+        Note over LOG,POL: Logging on Midnight Network
         UI->>LOG: Log All Game Events
         LOG->>POL: Store Game History
     end
     
     rect rgb(255, 200, 200)
-        Note over SA,POL: Batch Payout on Polygon
+        Note over SA,POL: Batch Payout on Midnight Network
         UI->>SA: Process Batch Payouts
-        SA->>POL: Batch Payout Transaction (MATIC)
+        SA->>POL: Batch Payout Transaction (MIDN)
         POL->>SA: Confirm All Payouts
     end
     
     SA->>UI: Update All Game States
     UI->>U: Display All Results
     
-    Note over U,LOG: Banking on Polygon, Gaming on Arbitrum!
+    Note over U,LOG: Banking on Midnight Network, Gaming on Midnight Network!
 ```
 
-## 🌉 Cross-Chain Gaming Architecture
+## 🌉 Midnight-Native Gaming Architecture
 
 ```mermaid
 graph TB
@@ -754,13 +754,13 @@ graph TB
         NM --> CM[Chain Manager]
     end
     
-    subgraph PolygonChain["Polygon Mainnet - Banking Layer"]
-        POL_NET[Polygon Network] --> MATIC_TOKEN[MATIC Token]
+    subgraph Midnight NetworkChain["Midnight Network - Banking Layer"]
+        POL_NET[Midnight Network Network] --> MIDN_TOKEN[MIDN Token]
         POL_NET --> DEPOSIT_CONTRACT[Deposit Contract]
         POL_NET --> WITHDRAW_CONTRACT[Withdraw Contract]
         POL_NET --> LOGGING_CONTRACT[Game Logging Contract]
         
-        MATIC_TOKEN --> TREASURY[Treasury Pool]
+        MIDN_TOKEN --> TREASURY[Treasury Pool]
         DEPOSIT_CONTRACT --> TREASURY
         WITHDRAW_CONTRACT --> TREASURY
         
@@ -769,8 +769,8 @@ graph TB
         LOGGING_CONTRACT --> AUDIT_TRAIL[Audit Trail]
     end
     
-    subgraph ArbitrumChain["Arbitrum Sepolia - Gaming Layer"]
-        ARB_NET[Arbitrum Network] --> ENTROPY_CONTRACT[Casino Entropy Consumer]
+    subgraph Midnight NetworkChain["Midnight Network - Gaming Layer"]
+        ARB_NET[Midnight Network Network] --> ENTROPY_CONTRACT[Casino Entropy Consumer]
         ARB_NET --> GAME_CONTRACTS[Game Logic Contracts]
         
         ENTROPY_CONTRACT --> PYTH_ENTROPY[Pyth Entropy Service]
@@ -782,7 +782,7 @@ graph TB
         GAME_CONTRACTS --> WHEEL_GAME[Wheel Game Logic]
     end
     
-    subgraph CrossChainBridge["Cross-Chain Communication"]
+    subgraph CrossChainBridge["Midnight-Native Communication"]
         BRIDGE[Message Bridge] --> STATE_SYNC[State Synchronization]
         BRIDGE --> EVENT_RELAY[Event Relay Service]
         BRIDGE --> BALANCE_SYNC[Balance Synchronization]
@@ -799,24 +799,24 @@ graph TB
     BALANCE_SYNC --> GAME_CONTRACTS
 ```
 
-## 💰 MATIC Token Flow Architecture
+## 💰 MIDN Token Flow Architecture
 
 ```mermaid
 graph LR
     subgraph UserWallet["User Wallet"]
         USER[User] --> WALLET[MetaMask/Smart Account]
-        WALLET --> MATIC_BALANCE[MATIC Balance]
+        WALLET --> MIDN_BALANCE[MIDN Balance]
     end
     
     subgraph DepositFlow["Deposit Flow"]
-        MATIC_BALANCE --> APPROVE[Approve MATIC]
+        MIDN_BALANCE --> APPROVE[Approve MIDN]
         APPROVE --> DEPOSIT[Deposit to Casino]
         DEPOSIT --> TREASURY_DEPOSIT[Treasury Pool]
     end
     
     subgraph GamingFlow["Gaming Flow"]
         TREASURY_DEPOSIT --> BET_PLACEMENT[Place Bets]
-        BET_PLACEMENT --> GAME_EXECUTION[Execute Games on Arbitrum]
+        BET_PLACEMENT --> GAME_EXECUTION[Execute Games on Midnight Network]
         GAME_EXECUTION --> RESULTS[Game Results]
     end
     
@@ -827,15 +827,15 @@ graph LR
         
         PAYOUT --> TREASURY_PAYOUT[Treasury Payout]
         TREASURY_PAYOUT --> WITHDRAW_REQUEST[Withdraw Request]
-        WITHDRAW_REQUEST --> MATIC_TRANSFER[Transfer MATIC]
-        MATIC_TRANSFER --> WALLET
+        WITHDRAW_REQUEST --> MIDN_TRANSFER[Transfer MIDN]
+        MIDN_TRANSFER --> WALLET
     end
     
     subgraph LoggingFlow["Logging Flow"]
-        RESULTS --> LOG_EVENT[Log to Polygon]
+        RESULTS --> LOG_EVENT[Log to Midnight Network]
         HOUSE_EDGE --> LOG_EVENT
         PAYOUT --> LOG_EVENT
-        LOG_EVENT --> POLYGON_LOGS[Polygon Event Logs]
+        LOG_EVENT --> POLYGON_LOGS[Midnight Network Event Logs]
     end
 ```
 
