@@ -1,7 +1,7 @@
 # Pyth Entropy Randomness Logic Documentation
 
 ## Overview
-This document explains the complete Pyth Entropy randomness implementation in the APT Casino project. The system uses Pyth Network's entropy service to generate verifiable random numbers for casino games.
+This document explains the complete Pyth Entropy randomness implementation in the Midnight Casino project. The system uses Pyth Network's entropy service to generate verifiable random numbers for casino games.
 
 ## Architecture
 
@@ -305,9 +305,9 @@ const gameResult = processor.processEntropy(result.randomValue, {
 ## Network Configuration
 
 Currently supports:
-- Arbitrum Sepolia (testnet) - Primary
-- Arbitrum One (mainnet) - Planned
-- Base Sepolia (testnet) - Planned
+- Midnight Network (testnet) - Primary
+- Midnight Network (mainnet) - Planned
+- Base Midnight (testnet) - Planned
 - Base (mainnet) - Planned
 - Blast (mainnet) - Planned
 
