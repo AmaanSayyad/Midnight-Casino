@@ -1,10 +1,13 @@
 import { ethers } from 'ethers';
 
-// Pyth Entropy V2 Contract Configuration for Arbitrum Sepolia
+// Pyth Entropy V2 Contract Configuration for Midnight Network
 const PYTH_ENTROPY_ADDRESS = process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_CONTRACT || '0x549Ebba8036Ab746611B4fFA1423eb0A4Df61440';
-const ARBITRUM_SEPOLIA_RPC = process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc';
+const ARBITRUM_SEPOLIA_RPC =
+  process.env.NEXT_PUBLIC_MIDNIGHT_RPC ||
+  process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC ||
+  'https://sepolia-rollup.arbitrum.io/rpc';
 
-// Minimal ABI for Pyth Entropy V2 on Arbitrum Sepolia
+// Minimal ABI for Pyth Entropy V2 on Midnight Network
 const PYTH_ENTROPY_ABI = [
   // Core entrypoint used by consumer contracts
   "function requestWithCallback(address provider, bytes32 userCommitment) external payable returns (uint64)",
@@ -26,7 +29,7 @@ export async function POST(request) {
     // Check if contract exists at this address
     const code = await provider.getCode(PYTH_ENTROPY_ADDRESS);
     if (code === '0x') {
-      throw new Error(`No contract found at address ${PYTH_ENTROPY_ADDRESS} on Arbitrum Sepolia`);
+      throw new Error(`No contract found at address ${PYTH_ENTROPY_ADDRESS} on Midnight Network`);
     }
     console.log('✅ Contract exists at address:', PYTH_ENTROPY_ADDRESS);
     
@@ -44,7 +47,7 @@ export async function POST(request) {
     // Let's try to call the contract with minimal data to see what happens
     console.log('🧪 Testing contract call with minimal parameters...');
     
-    // Check if we have a private key for signing (use Arbitrum Sepolia treasury)
+    // Check if we have a private key for signing (use Midnight Network treasury)
     const privateKey = process.env.ARBITRUM_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;
     if (!privateKey) {
       throw new Error('ARBITRUM_TREASURY_PRIVATE_KEY environment variable is required');
@@ -113,12 +116,12 @@ export async function POST(request) {
       blockNumber: receipt.blockNumber.toString(),
       // We cannot synchronously read randomness; return placeholder derived from tx for UI
       randomValue: generateRandomFromTxHash(tx.hash),
-      network: 'arbitrum-sepolia',
+      network: 'midnight-network',
       // Use tx hash for entropy explorer search to ensure results
-      explorerUrl: `https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${tx.hash}`,
-      polygonExplorerUrl: `https://amoy.polygonscan.com/tx/${tx.hash}`,
+      explorerUrl: `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${tx.hash}`,
+      midnightExplorerUrl: `https://amoy.midnightscan.com/tx/${tx.hash}`,
       timestamp: Date.now(),
-      source: 'Pyth Entropy V1 (Monad Testnet)'
+      source: 'Pyth Entropy V1 (Midnight Network)'
     };
     
     console.log('✅ API: Entropy generated successfully');

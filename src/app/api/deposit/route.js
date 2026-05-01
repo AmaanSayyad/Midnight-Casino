@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-// Polygon Amoy Treasury address from environment
+// Midnight Network Treasury address from environment
 const POLYGON_TREASURY_ADDRESS = process.env.POLYGON_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS || "0x025182b20Da64b5997d09a5a62489741F68d9B96";
 
 export async function POST(request) {
@@ -26,13 +26,13 @@ export async function POST(request) {
     // For now, we'll simulate a successful deposit
     const mockDepositId = 'deposit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     
-    console.log(`🏦 Processing deposit: ${amount} MATIC from ${userAddress}`);
+    console.log(`🏦 Processing deposit: ${amount} MIDN from ${userAddress}`);
     console.log(`📍 Treasury: ${POLYGON_TREASURY_ADDRESS}`);
     
     // Simulate processing delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    console.log(`✅ Deposit successful: ${amount} MATIC from ${userAddress}`);
+    console.log(`✅ Deposit successful: ${amount} MIDN from ${userAddress}`);
     
     return NextResponse.json({
       success: true,
