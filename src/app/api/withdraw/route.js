@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 
-// Polygon Amoy Treasury private key from environment
+// Midnight Network Treasury private key from environment
 const POLYGON_TREASURY_PRIVATE_KEY = process.env.POLYGON_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;
 
-// Polygon Amoy Testnet RPC URL
-const POLYGON_AMOY_RPC = process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology';
+// Midnight Network Testnet RPC URL
+const POLYGON_AMOY_RPC = process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.midnight.technology';
 
 // Create provider and wallet
 const provider = new ethers.JsonRpcProvider(POLYGON_AMOY_RPC);
@@ -36,14 +36,14 @@ export async function POST(request) {
       );
     }
 
-    console.log(`🏦 Processing withdrawal: ${amount} MATIC to ${userAddress}`);
+    console.log(`🏦 Processing withdrawal: ${amount} MIDN to ${userAddress}`);
     console.log(`📍 Treasury: ${treasuryWallet?.address || 'Not configured'}`);
 
     // Check treasury balance
     let treasuryBalance = 0;
     try {
       treasuryBalance = await provider.getBalance(treasuryWallet.address);
-      console.log(`💰 Treasury balance: ${ethers.formatEther(treasuryBalance)} MATIC`);
+      console.log(`💰 Treasury balance: ${ethers.formatEther(treasuryBalance)} MIDN`);
     } catch (balanceError) {
       console.log('⚠️ Could not check treasury balance, proceeding with transfer attempt...');
       console.log('Balance error:', balanceError.message);
@@ -53,7 +53,7 @@ export async function POST(request) {
     const amountWei = ethers.parseEther(amount.toString());
     if (treasuryBalance < amountWei) {
       return NextResponse.json(
-        { error: `Insufficient treasury funds. Available: ${ethers.formatEther(treasuryBalance)} MATIC, Requested: ${amount} MATIC` },
+        { error: `Insufficient treasury funds. Available: ${ethers.formatEther(treasuryBalance)} MIDN, Requested: ${amount} MIDN` },
         { status: 400 }
       );
     }
@@ -85,7 +85,7 @@ export async function POST(request) {
 
     // Return transaction hash immediately without waiting for confirmation
     // User can check transaction status on Etherscan
-    console.log(`✅ Withdraw MATIC to ${userAddress}, TX: ${tx.hash}`);
+    console.log(`✅ Withdraw MIDN to ${userAddress}, TX: ${tx.hash}`);
 
     return new Response(JSON.stringify({
       success: true,
@@ -94,8 +94,8 @@ export async function POST(request) {
       userAddress: userAddress,
       treasuryAddress: treasuryWallet.address,
       status: 'pending',
-      message: 'Transaction sent successfully. Check PolygonScan for confirmation.',
-      explorerUrl: `https://amoy.polygonscan.com/tx/${tx.hash}`
+      message: 'Transaction sent successfully. Check MidnightScan for confirmation.',
+      explorerUrl: `https://amoy.midnightscan.com/tx/${tx.hash}`
     }), {
       status: 200,
       headers: {
@@ -145,7 +145,7 @@ export async function GET() {
         balance: parseFloat(balanceInMatic),
         balanceWei: balance.toString(),
         status: 'active',
-        network: 'Polygon Amoy'
+        network: 'Midnight Network'
       });
     } catch (balanceError) {
       console.error('Balance check error:', balanceError);
@@ -155,7 +155,7 @@ export async function GET() {
         balanceWei: '0',
         status: 'error',
         error: balanceError.message,
-        network: 'Polygon Amoy'
+        network: 'Midnight Network'
       });
     }
 

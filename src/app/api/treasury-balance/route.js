@@ -5,7 +5,7 @@ import PYTH_ENTROPY_CONFIG from '@/config/pythEntropy.js';
 
 export async function GET() {
   try {
-    const network = process.env.NEXT_PUBLIC_NETWORK || 'monad-testnet';
+    const network = process.env.NEXT_PUBLIC_NETWORK || 'midnight-network';
     const networkConfig = PYTH_ENTROPY_CONFIG.getNetworkConfig(network);
     
     if (!networkConfig) {
@@ -42,7 +42,7 @@ export async function GET() {
       },
       entropy: {
         contractAddress: entropyContractAddress,
-        requiredFee: "0.001" // MATIC
+        requiredFee: "0.001" // MIDN
       }
     });
     

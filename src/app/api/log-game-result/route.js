@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 
-// Polygon Amoy Configuration
-const POLYGON_AMOY_RPC = process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology';
+// Midnight Network Configuration
+const POLYGON_AMOY_RPC = process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.midnight.technology';
 const POLYGON_TREASURY_PRIVATE_KEY = process.env.POLYGON_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY;
 const POLYGON_TREASURY_ADDRESS = process.env.POLYGON_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS;
 
@@ -24,7 +24,7 @@ export async function POST(request) {
       metadata = {} 
     } = await request.json();
 
-    console.log('🎮 Logging game result to Polygon Amoy:', {
+    console.log('🎮 Logging game result to Midnight Network:', {
       gameType,
       player,
       betAmount,
@@ -41,7 +41,7 @@ export async function POST(request) {
       );
     }
 
-    // Create provider and wallet for Polygon Amoy
+    // Create provider and wallet for Midnight Network
     const provider = new ethers.JsonRpcProvider(POLYGON_AMOY_RPC);
     
     if (!POLYGON_TREASURY_PRIVATE_KEY) {
@@ -52,10 +52,10 @@ export async function POST(request) {
     
     // Check wallet balance
     const balance = await provider.getBalance(wallet.address);
-    const minBalance = ethers.parseEther("0.001"); // 0.001 MATIC for gas
+    const minBalance = ethers.parseEther("0.001"); // 0.001 MIDN for gas
     
     if (balance < minBalance) {
-      console.warn(`⚠️ Low balance on Polygon Amoy: ${ethers.formatEther(balance)} MATIC`);
+      console.warn(`⚠️ Low balance on Midnight Network: ${ethers.formatEther(balance)} MIDN`);
     }
 
     // For now, we'll create a simple transaction with the game data in the transaction data
@@ -92,7 +92,7 @@ export async function POST(request) {
       walletAddress: wallet.address
     });
 
-    // Send transaction to Polygon Amoy with game data
+    // Send transaction to Midnight Network with game data
     const tx = await wallet.sendTransaction({
       to: POLYGON_TREASURY_ADDRESS, // Send to treasury address
       value: 0, // No value transfer, just logging
@@ -102,7 +102,7 @@ export async function POST(request) {
       gasPrice: gasPrice, // Higher gas price to avoid replacement fee issues
     });
 
-    console.log('📝 Game logged to Polygon Amoy:', tx.hash);
+    console.log('📝 Game logged to Midnight Network:', tx.hash);
     
     // Wait for confirmation with extended timeout
     const receipt = await Promise.race([
@@ -120,9 +120,9 @@ export async function POST(request) {
 
     return Response.json({
       success: true,
-      polygonTxHash: receipt.hash,
-      polygonBlockNumber: receipt.blockNumber,
-      polygonExplorerUrl: `https://amoy.polygonscan.com/tx/${receipt.hash}`,
+      midnightTxHash: receipt.hash,
+      midnightBlockNumber: receipt.blockNumber,
+      midnightExplorerUrl: `https://amoy.midnightscan.com/tx/${receipt.hash}`,
       gameData,
       gasUsed: receipt.gasUsed.toString()
     });
@@ -151,7 +151,7 @@ export async function POST(request) {
         error: errorMessage,
         code: error.code,
         shouldRetry,
-        details: 'Failed to log game result to Polygon Amoy'
+        details: 'Failed to log game result to Midnight Network'
       },
       { status: 500 }
     );
@@ -178,11 +178,11 @@ export async function GET(request) {
       {
         gameType: 'WHEEL',
         player,
-        betAmount: '1000000000000000000', // 1 MATIC in wei
-        payout: '2000000000000000000', // 2 MATIC in wei
+        betAmount: '1000000000000000000', // 1 MIDN in wei
+        payout: '2000000000000000000', // 2 MIDN in wei
         won: true,
         entropyTxHash: '0x1234...abcd',
-        polygonTxHash: '0x5678...efgh',
+        midnightTxHash: '0x5678...efgh',
         timestamp: Date.now() - 3600000, // 1 hour ago
         blockNumber: 12345678
       }
