@@ -130,12 +130,12 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
     console.log('handleBet called with betValue:', betValue, 'currentBalance (ETH):', currentBalance);
     
     if (betValue < 0.001) {
-      alert("Minimum bet amount is 0.001 MATIC");
+      alert("Minimum bet amount is 0.001 MIDN");
       return;
     }
     
     if (betValue > currentBalance) {
-      alert(`Insufficient balance! You have ${currentBalance.toFixed(5)} MATIC but need ${betValue} MATIC`);
+      alert(`Insufficient balance! You have ${currentBalance.toFixed(5)} MIDN but need ${betValue} MIDN`);
       return;
     }
     
@@ -189,7 +189,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
     });
     
     if (totalBetAmount > currentBalance) {
-      alert(`Insufficient balance for ${totalBets} bets of ${betAmount} MATIC each. You need ${totalBetAmount.toFixed(3)} MATIC but have ${currentBalance.toFixed(5)} MATIC`);
+      alert(`Insufficient balance for ${totalBets} bets of ${betAmount} MIDN each. You need ${totalBetAmount.toFixed(3)} MIDN but have ${currentBalance.toFixed(5)} MIDN`);
       setIsAutoPlaying(false);
       return;
     }
@@ -337,13 +337,13 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
     return totalBetAmount <= currentBalance && betValue >= 0.001;
   };
 
-  // Get current balance in MATIC for display
-  const getCurrentBalanceInMATIC = () => {
+  // Get current balance in MIDN for display
+  const getCurrentBalanceInMIDN = () => {
     return parseFloat(userBalance || '0').toFixed(5);
   };
 
   return (
-    <div className="bg-[#1A0015] rounded-xl border border-[#333947] p-6">
+    <div className="bg-[#0A0A0A] rounded-xl border border-[#333947] p-6">
 
       {/* Mode Toggle */}
       <div className="mb-6">
@@ -352,7 +352,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
             onClick={() => setGameMode("manual")}
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
               gameMode === "manual"
-                ? "bg-gradient-to-r from-pink-500 to-purple-500 text-white"
+                ? "bg-gradient-to-r from-midnight-blue to-midnight-blue text-white"
                 : "text-gray-400 hover:text-white"
             }`}
           >
@@ -362,7 +362,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
             onClick={() => setGameMode("auto")}
             className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
               gameMode === "auto"
-                ? "bg-gradient-to-r from-pink-500 to-purple-500 text-white"
+                ? "bg-gradient-to-r from-midnight-blue to-midnight-blue text-white"
                 : "text-gray-400 hover:text-white"
             }`}
           >
@@ -377,7 +377,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
           Bet Amount
         </label>
         <div className="mb-2">
-          <span className="text-2xl font-bold text-white">{betAmount} MATIC</span>
+          <span className="text-2xl font-bold text-white">{betAmount} MIDN</span>
         </div>
         <div className="relative">
           <input
@@ -392,7 +392,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
                 onBetAmountChange(numValue);
               }
             }}
-            className="w-full bg-[#2A0025] border border-[#333947] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+            className="w-full bg-[#2A0025] border border-[#333947] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-midnight-blue"
             placeholder="0.001"
             step="0.001"
             min="0.001"
@@ -433,37 +433,37 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
             onClick={() => handleBetAmountChange(0.001)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            0.001 MATIC
+            0.001 MIDN
           </button>
           <button
             onClick={() => handleBetAmountChange(0.01)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            0.01 MATIC
+            0.01 MIDN
           </button>
           <button
             onClick={() => handleBetAmountChange(0.1)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            0.1 MATIC
+            0.1 MIDN
           </button>
           <button
             onClick={() => handleBetAmountChange(1)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            1.0 MATIC
+            1.0 MIDN
           </button>
           <button
             onClick={() => handleBetAmountChange(5)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            5.0 MATIC
+            5.0 MIDN
           </button>
           <button
             onClick={() => handleBetAmountChange(10)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            10.0 MATIC
+            10.0 MIDN
           </button>
         </div>
       </div>
@@ -478,8 +478,8 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
             type="number"
             value={numberOfBets}
             onChange={(e) => setNumberOfBets(e.target.value)}
-            className={`w-full border border-[#333947] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 ${
-              isAutoPlaying ? 'bg-[#1A0015] cursor-not-allowed' : 'bg-[#2A0025]'
+            className={`w-full border border-[#333947] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-midnight-blue ${
+              isAutoPlaying ? 'bg-[#0A0A0A] cursor-not-allowed' : 'bg-[#2A0025]'
             }`}
             placeholder="1"
             step="1"
@@ -558,7 +558,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
       {gameMode === "auto" && isAutoPlaying ? (
         <button 
           onClick={stopAutoBetting}
-          className="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold py-4 px-6 rounded-lg hover:from-red-600 hover:to-pink-600 transition-all transform hover:scale-105"
+          className="w-full bg-gradient-to-r from-red-500 to-midnight-blue text-white font-bold py-4 px-6 rounded-lg hover:from-red-600 hover:to-midnight-blue transition-all transform hover:scale-105"
         >
           Stop Auto Betting ({numberOfBets} bets remaining)
         </button>
@@ -568,7 +568,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
           <div className="text-center p-3 bg-[#2A0025] rounded-lg border border-[#333947]">
             <span className="text-sm text-gray-400">Current Balance:</span>
             {isConnected ? (
-              <div className="text-lg font-bold text-green-400">{getCurrentBalanceInMATIC()} MATIC</div>
+              <div className="text-lg font-bold text-green-400">{getCurrentBalanceInMIDN()} MIDN</div>
             ) : (
               <div className="text-lg font-bold text-red-400">Connect Wallet</div>
             )}
@@ -580,7 +580,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
             disabled={gameMode === "auto" ? !hasSufficientBalanceForAutoBet() : !hasSufficientBalance()}
             className={`w-full font-bold py-4 px-6 rounded-lg transition-all transform hover:scale-105 ${
               (gameMode === "auto" ? hasSufficientBalanceForAutoBet() : hasSufficientBalance())
-                ? 'bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white' 
+                ? 'bg-gradient-to-r from-midnight-blue to-midnight-blue hover:from-midnight-blue hover:to-midnight-blue text-white' 
                 : 'bg-gray-600 text-gray-400 cursor-not-allowed'
             }`}
           >
@@ -591,8 +591,8 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
           {((gameMode === "auto" && !hasSufficientBalanceForAutoBet()) || (!gameMode === "auto" && !hasSufficientBalance())) && parseFloat(betAmount) > 0 && (
             <div className="text-center text-red-400 text-sm">
               {gameMode === "auto" 
-                ? `Insufficient balance MATIC each` 
-                : `Insufficient balance MATIC bet`
+                ? `Insufficient balance MIDN each` 
+                : `Insufficient balance MIDN bet`
               }
             </div>
           )}

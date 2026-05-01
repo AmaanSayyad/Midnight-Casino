@@ -6,12 +6,12 @@ export default function GameHistory({ history }) {
   const [visibleCount, setVisibleCount] = useState(5);
   const [renderKey, setRenderKey] = useState(0);
   
-  // Debug: Log history data to see if polygonTxHash is present
+  // Debug: Log history data to see if midnightTxHash is present
   console.log('🎮 GameHistory received history:', history?.map(item => ({
     id: item.id,
     game: item.game,
-    polygonTxHash: item.polygonTxHash,
-    polygonStatus: item.polygonStatus,
+    midnightTxHash: item.midnightTxHash,
+    midnightStatus: item.midnightStatus,
     entropyProof: !!item.entropyProof,
     timestamp: item.timestamp
   })));
@@ -19,44 +19,44 @@ export default function GameHistory({ history }) {
   // Force re-render when history changes
   React.useEffect(() => {
     console.log('🔄 GameHistory re-rendered, history length:', history?.length);
-    console.log('🔍 First item polygon status:', history?.[0]?.polygonTxHash);
+    console.log('🔍 First item midnight status:', history?.[0]?.midnightTxHash);
     setRenderKey(prev => prev + 1); // Force re-render
   }, [history]);
   
-  // Additional debug for polygon tx changes
+  // Additional debug for midnight tx changes
   React.useEffect(() => {
-    const polygonTxHashes = history?.map(item => item.polygonTxHash).filter(Boolean);
-    console.log('🔗 Polygon tx hashes in history:', polygonTxHashes);
-    if (polygonTxHashes.length > 0) {
-      setRenderKey(prev => prev + 1); // Force re-render when polygon tx appears
+    const midnightTxHashes = history?.map(item => item.midnightTxHash).filter(Boolean);
+    console.log('🔗 Midnight tx hashes in history:', midnightTxHashes);
+    if (midnightTxHashes.length > 0) {
+      setRenderKey(prev => prev + 1); // Force re-render when midnight tx appears
     }
-  }, [history?.map(item => item.polygonTxHash).join(',')]);
+  }, [history?.map(item => item.midnightTxHash).join(',')]);
   
   // Open Entropy Explorer link
   const openEntropyExplorer = (txHash) => {
     if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${txHash}`;
+      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
       window.open(entropyExplorerUrl, '_blank');
     }
   };
 
-  // Open Polygon Explorer link
-  const openPolygonExplorer = (txHash) => {
+  // Open Midnight Explorer link
+  const openMidnightExplorer = (txHash) => {
     if (txHash) {
-      const polygonExplorerUrl = `https://amoy.polygonscan.com/tx/${txHash}`;
-      window.open(polygonExplorerUrl, '_blank');
+      const midnightExplorerUrl = `https://amoy.midnightscan.com/tx/${txHash}`;
+      window.open(midnightExplorerUrl, '_blank');
     }
   };
 
   // Open Arbiscan link for transaction hash
   const openArbiscan = (hash) => {
     if (hash && hash !== 'unknown') {
-      const network = process.env.NEXT_PUBLIC_NETWORK || 'arbitrum-sepolia';
+      const network = process.env.NEXT_PUBLIC_NETWORK || 'midnight-network';
       let explorerUrl;
       
-      if (network === 'arbitrum-sepolia') {
+      if (network === 'midnight-network') {
         explorerUrl = `https://sepolia.arbiscan.io/tx/${hash}`;
-      } else if (network === 'arbitrum-one') {
+      } else if (network === 'midnight-one') {
         explorerUrl = `https://arbiscan.io/tx/${hash}`;
       } else {
         explorerUrl = `https://sepolia.etherscan.io/tx/${hash}`;
@@ -111,7 +111,7 @@ export default function GameHistory({ history }) {
               <tr key={game.id} className="border-b border-[#333947]/30 hover:bg-[#2A0025]/50 transition-colors">
                 <td className="py-3 px-4">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                    <div className="w-6 h-6 bg-gradient-to-r from-midnight-blue to-midnight-blue rounded-full flex items-center justify-center">
                       <span className="text-xs font-bold text-white">P</span>
                     </div>
                     <span className="text-white text-sm">Plinko</span>
@@ -143,24 +143,24 @@ export default function GameHistory({ history }) {
                           <div className="text-yellow-400 font-bold">{game.entropyProof.sequenceNumber && game.entropyProof.sequenceNumber !== '0' ? String(game.entropyProof.sequenceNumber) : ''}</div>
                         </div>
                         <div className="flex gap-1">
-                          {/* Debug: Show polygon tx hash status */}
-                          {console.log(`🔍 Game ${game.id} - polygonTxHash:`, game.polygonTxHash, 'Type:', typeof game.polygonTxHash)}
+                          {/* Debug: Show midnight tx hash status */}
+                          {console.log(`🔍 Game ${game.id} - midnightTxHash:`, game.midnightTxHash, 'Type:', typeof game.midnightTxHash)}
                           
-                          {/* Polygon Amoy Game Log Link - Only show if tx hash exists */}
-                          {game.polygonTxHash && game.polygonTxHash !== 'timeout' && game.polygonTxHash !== 'failed' ? (
+                          {/* Midnight Network Game Log Link - Only show if tx hash exists */}
+                          {game.midnightTxHash && game.midnightTxHash !== 'timeout' && game.midnightTxHash !== 'failed' ? (
                             <button
                               onClick={() => {
-                                console.log('🔗 Opening Polygon explorer for tx:', game.polygonTxHash);
-                                window.open(`https://amoy.polygonscan.com/tx/${game.polygonTxHash}`, '_blank');
+                                console.log('🔗 Opening Midnight explorer for tx:', game.midnightTxHash);
+                                window.open(`https://amoy.midnightscan.com/tx/${game.midnightTxHash}`, '_blank');
                               }}
                               className="flex items-center gap-1 px-2 py-1 bg-[#8B2398]/10 border border-[#8B2398]/30 rounded text-[#8B2398] text-xs hover:bg-[#8B2398]/20 transition-colors"
                             >
                               <FaExternalLinkAlt size={8} />
-                              Polygon
+                              Midnight
                             </button>
                           ) : (
                             <div className="text-xs text-gray-500">
-                              {game.polygonTxHash ? `Status: ${game.polygonTxHash}` : 'No Polygon TX'}
+                              {game.midnightTxHash ? `Status: ${game.midnightTxHash}` : 'No Midnight TX'}
                             </div>
                           )}
                           {game.entropyProof.transactionHash && game.entropyProof.transactionHash !== 'timeout' ? (
@@ -188,11 +188,11 @@ export default function GameHistory({ history }) {
                           Entropy
                         </button>
                         <button
-                          onClick={() => openPolygonExplorer(game.id)}
+                          onClick={() => openMidnightExplorer(game.id)}
                           className="flex items-center gap-1 px-2 py-1 bg-[#8B2398]/10 border border-[#8B2398]/30 rounded text-[#8B2398] text-xs hover:bg-[#8B2398]/20 transition-colors"
                         >
                           <FaExternalLinkAlt size={8} />
-                          Polygon
+                          Midnight
                         </button>
                       </div>
                     )}

@@ -46,13 +46,13 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
     if (binLandAudioRef.current) binLandAudioRef.current.volume = 0.7;
   }, []);
 
-  // Function to log game results to Polygon Amoy with retry mechanism
-  const logGameResultToPolygon = async (gameData, retryCount = 0) => {
+  // Function to log game results to Midnight Network with retry mechanism
+  const logGameResultToMidnight = async (gameData, retryCount = 0) => {
     const maxRetries = 3;
     const retryDelay = 500 * (retryCount + 1); // Faster backoff: 0.5s, 1s, 1.5s
     
     try {
-      console.log(`📝 Logging Plinko result to Polygon Amoy (attempt ${retryCount + 1}):`, gameData);
+      console.log(`📝 Logging Plinko result to Midnight Network (attempt ${retryCount + 1}):`, gameData);
       
       // Add shorter timeout for faster response
       const controller = new AbortController();
@@ -72,22 +72,22 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
       const result = await response.json();
       
       if (result.success) {
-        console.log('✅ Plinko game logged to Polygon successfully:', result.polygonTxHash);
+        console.log('✅ Plinko game logged to Midnight successfully:', result.midnightTxHash);
         return result;
       } else {
-        console.error('❌ Failed to log Plinko game to Polygon:', result.error);
+        console.error('❌ Failed to log Plinko game to Midnight:', result.error);
         
         // Check if we should retry
         if (result.shouldRetry && retryCount < maxRetries) {
           console.log(`🔄 Retrying Plinko game log in ${retryDelay}ms...`);
           await new Promise(resolve => setTimeout(resolve, retryDelay));
-          return logGameResultToPolygon(gameData, retryCount + 1);
+          return logGameResultToMidnight(gameData, retryCount + 1);
         }
         
         throw new Error(result.error);
       }
     } catch (error) {
-      console.error('❌ Error logging Plinko game to Polygon:', error);
+      console.error('❌ Error logging Plinko game to Midnight:', error);
       
       // Handle AbortError (timeout) specifically
       if (error.name === 'AbortError') {
@@ -95,7 +95,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
         if (retryCount < maxRetries) {
           console.log(`🔄 Retrying Plinko game log after timeout in ${retryDelay}ms...`);
           await new Promise(resolve => setTimeout(resolve, retryDelay));
-          return logGameResultToPolygon(gameData, retryCount + 1);
+          return logGameResultToMidnight(gameData, retryCount + 1);
         }
         throw new Error('Request timed out after multiple attempts');
       }
@@ -104,7 +104,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
       if (retryCount < maxRetries && (error.name === 'TypeError' || error.message.includes('fetch'))) {
         console.log(`🔄 Retrying Plinko game log due to network error in ${retryDelay}ms...`);
         await new Promise(resolve => setTimeout(resolve, retryDelay));
-        return logGameResultToPolygon(gameData, retryCount + 1);
+        return logGameResultToMidnight(gameData, retryCount + 1);
       }
       
       throw error;
@@ -548,7 +548,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
         console.log('Bet amount (ref):', betAmountRef.current);
         console.log('Multiplier:', multiplier, '(bin index:', binIndex, ')');
         console.log('Multiplier value:', multiplierValue);
-        console.log('Reward calculated:', reward, 'MATIC');
+        console.log('Reward calculated:', reward, 'MIDN');
         console.log('==================');
         
         // Add reward to current balance (bet amount already deducted when ball was spawned)
@@ -606,8 +606,8 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
           }).catch(() => {});
         } catch {}
 
-        // Log game result to Polygon Amoy (non-blocking) with fallback timeout
-        const polygonLoggingPromise = logGameResultToPolygon({
+        // Log game result to Midnight Network (non-blocking) with fallback timeout
+        const midnightLoggingPromise = logGameResultToMidnight({
           gameType: 'PLINKO',
           player: address || 'unknown',
           betAmount: latestBetAmount,
@@ -623,16 +623,16 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
           }
         });
 
-        // Set a fallback timeout - if Polygon logging takes too long, mark as failed
+        // Set a fallback timeout - if Midnight logging takes too long, mark as failed
         const fallbackTimeout = setTimeout(() => {
-          console.warn('⏰ Polygon logging timeout - marking as failed');
+          console.warn('⏰ Midnight logging timeout - marking as failed');
           setBetHistory(prev => {
             const updatedHistory = [...prev];
             if (updatedHistory.length > 0) {
               updatedHistory[0] = { 
                 ...updatedHistory[0], 
-                polygonTxHash: 'timeout',
-                polygonStatus: 'timeout'
+                midnightTxHash: 'timeout',
+                midnightStatus: 'timeout'
               };
             }
             return updatedHistory;
@@ -642,47 +642,47 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
             const timeoutBetResult = {
               ...newBetResult,
               id: betResultId, // Use the same ID
-              polygonTxHash: 'timeout',
-              polygonStatus: 'timeout'
+              midnightTxHash: 'timeout',
+              midnightStatus: 'timeout'
             };
             console.log('⏰ PlinkoGame: Notifying parent about timeout:', timeoutBetResult);
             onBetHistoryChange(timeoutBetResult);
           }
         }, 12000); // 12 second fallback
 
-        polygonLoggingPromise.then(polygonResult => {
+        midnightLoggingPromise.then(midnightResult => {
           clearTimeout(fallbackTimeout);
-          // Add Polygon transaction hash to bet history
-          if (polygonResult && polygonResult.polygonTxHash) {
-            console.log('✅ Plinko Polygon transaction hash received:', polygonResult.polygonTxHash);
+          // Add Midnight transaction hash to bet history
+          if (midnightResult && midnightResult.midnightTxHash) {
+            console.log('✅ Plinko Midnight transaction hash received:', midnightResult.midnightTxHash);
             setBetHistory(prev => {
               const updatedHistory = [...prev];
               if (updatedHistory.length > 0) {
                 updatedHistory[0] = { 
                   ...updatedHistory[0], 
-                  polygonTxHash: polygonResult.polygonTxHash,
-                  polygonExplorerUrl: polygonResult.polygonExplorerUrl
+                  midnightTxHash: midnightResult.midnightTxHash,
+                  midnightExplorerUrl: midnightResult.midnightExplorerUrl
                 };
               }
               return updatedHistory;
             });
             
-            // Notify parent component about Polygon transaction hash
+            // Notify parent component about Midnight transaction hash
             if (onBetHistoryChange) {
               const updatedBetResult = {
                 ...newBetResult,
                 id: betResultId, // Use the same ID
-                polygonTxHash: polygonResult.polygonTxHash,
-                polygonExplorerUrl: polygonResult.polygonExplorerUrl
+                midnightTxHash: midnightResult.midnightTxHash,
+                midnightExplorerUrl: midnightResult.midnightExplorerUrl
               };
-              console.log('📞 PlinkoGame: Updating parent with Polygon tx:', updatedBetResult);
-              console.log('📞 PlinkoGame: Calling onBetHistoryChange for Polygon update...');
+              console.log('📞 PlinkoGame: Updating parent with Midnight tx:', updatedBetResult);
+              console.log('📞 PlinkoGame: Calling onBetHistoryChange for Midnight update...');
               onBetHistoryChange(updatedBetResult);
             }
           }
         }).catch(error => {
           clearTimeout(fallbackTimeout);
-          console.error('❌ Failed to log Plinko game to Polygon:', error);
+          console.error('❌ Failed to log Plinko game to Midnight:', error);
           
           // Mark as failed in history
           setBetHistory(prev => {
@@ -690,9 +690,9 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
             if (updatedHistory.length > 0) {
               updatedHistory[0] = { 
                 ...updatedHistory[0], 
-                polygonTxHash: 'failed',
-                polygonStatus: 'failed',
-                polygonError: error.message
+                midnightTxHash: 'failed',
+                midnightStatus: 'failed',
+                midnightError: error.message
               };
             }
             return updatedHistory;
@@ -702,9 +702,9 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
             const failedBetResult = {
               ...newBetResult,
               id: betResultId, // Use the same ID
-              polygonTxHash: 'failed',
-              polygonStatus: 'failed',
-              polygonError: error.message
+              midnightTxHash: 'failed',
+              midnightStatus: 'failed',
+              midnightError: error.message
             };
             console.log('❌ PlinkoGame: Notifying parent about failure:', failedBetResult);
             onBetHistoryChange(failedBetResult);
@@ -761,7 +761,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
         betAmount: latestBetAmount,
         balanceInETH: currentBalance.toFixed(9)
       });
-              alert(`Insufficient balance! You have ${currentBalance.toFixed(9)} MATIC but need ${latestBetAmount} MATIC`);
+              alert(`Insufficient balance! You have ${currentBalance.toFixed(9)} MIDN but need ${latestBetAmount} MIDN`);
       return;
     }
     
@@ -835,17 +835,17 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
     const maxDistance = centerIndex;
     
     if (index === 0 || index === totalSlots - 1) {
-      return "from-pink-500 to-red-500";
+      return "from-midnight-blue to-red-500";
     } else if (index === centerIndex) {
-      return "from-blue-500 to-purple-500";
+      return "from-blue-500 to-midnight-blue";
     } else {
       const ratio = distanceFromCenter / maxDistance;
       if (ratio > 0.7) {
-        return "from-pink-500 to-purple-500";
+        return "from-midnight-blue to-midnight-blue";
       } else if (ratio > 0.4) {
-        return "from-purple-500 to-blue-500";
+        return "from-midnight-blue to-blue-500";
       } else {
-        return "from-blue-500 to-purple-500";
+        return "from-blue-500 to-midnight-blue";
       }
     }
   };
@@ -889,7 +889,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
   }, [betHistory]);
 
   return (
-    <div className="bg-[#1A0015] rounded-xl border border-[#333947] p-6">
+    <div className="bg-[#0A0A0A] rounded-xl border border-[#333947] p-6">
 
 
       {/* Plinko Board Container */}
@@ -901,7 +901,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
         {isRecreating && (
           <div className="absolute inset-0 bg-[#2A0025] bg-opacity-90 flex items-center justify-center z-50">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-midnight-blue mx-auto mb-4"></div>
               <p className="text-white text-lg">Recreating board...</p>
               <p className="text-gray-400 text-sm">Setting up {currentRows} rows with {currentRiskLevel} risk</p>
             </div>
@@ -945,7 +945,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
               {betHistory.slice(0, 5).map((bet, index) => (
                 <div key={index} className="w-16 h-16 bg-[#2A0025] border border-[#333947] rounded-lg flex flex-col items-center justify-center p-1">
                   <span className="w-full text-center leading-tight text-xs font-bold text-white">{bet.multiplier}</span>
-                  <span className="w-full text-center leading-tight text-[10px] text-green-400">+{bet.payout} MATIC</span>
+                  <span className="w-full text-center leading-tight text-[10px] text-green-400">+{bet.payout} MIDN</span>
                 </div>
               ))}
               {Array.from({ length: Math.max(0, 5 - Math.min(5, betHistory.length)) }).map((_, index) => (
@@ -1003,7 +1003,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
           <div className="text-xs text-gray-400">Best Multiplier</div>
         </div>
         <div className="text-center">
-                          <div className="text-2xl font-bold text-white">{totalWon.toFixed(5)} MATIC</div>
+                          <div className="text-2xl font-bold text-white">{totalWon.toFixed(5)} MIDN</div>
           <div className="text-xs text-gray-400">Total Won</div>
         </div>
       </div>
