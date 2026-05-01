@@ -12,8 +12,8 @@ import { FaChartLine, FaHistory, FaInfoCircle, FaExchangeAlt, FaCoins, FaWallet,
 const BORROW_ASSETS = {
   ethereum_testnet: [
     {
-      symbol: "MATIC",
-      name: "MATIC Token",
+      symbol: "MIDN",
+      name: "MIDN Token",
       iconColor: "#F1324D",
       address: null // Native token
     }
@@ -22,9 +22,9 @@ const BORROW_ASSETS = {
 
 // Mock transaction history
 const MOCK_TRANSACTIONS = [
-  { type: 'deposit', token: 'MATIC', amount: '120.5', date: new Date(Date.now() - 86400000 * 2), status: 'completed' },
+  { type: 'deposit', token: 'MIDN', amount: '120.5', date: new Date(Date.now() - 86400000 * 2), status: 'completed' },
   { type: 'borrow', token: 'MNT', amount: '0.3', date: new Date(Date.now() - 86400000), status: 'completed' },
-  { type: 'swap', tokenFrom: 'MNT', tokenTo: 'MATIC', amountFrom: '0.2', amountTo: '98.32', date: new Date(), status: 'completed' }
+  { type: 'swap', tokenFrom: 'MNT', tokenTo: 'MIDN', amountFrom: '0.2', amountTo: '98.32', date: new Date(), status: 'completed' }
 ];
 
 export default function Bank() {
@@ -66,8 +66,8 @@ export default function Bank() {
       setChainId('ethereum_testnet'); // Ethereum testnet for development
       setAssets([
         {
-          symbol: "MATIC",
-          name: "MATIC Token",
+          symbol: "MIDN",
+          name: "MIDN Token",
           iconColor: "#F1324D",
           address: "0x...",
           apr: "12.5%",
@@ -76,7 +76,7 @@ export default function Bank() {
         },
         {
           symbol: "APTC",
-          name: "APT Casino Token",
+          name: "Midnight Casino Token",
           iconColor: "#34C759",
           address: "0x...",
           apr: "8.2%",
@@ -84,8 +84,8 @@ export default function Bank() {
           available: "$320,000"
         },
         {
-          symbol: "MATIC",
-          name: 'MATIC',
+          symbol: "MIDN",
+          name: 'MIDN',
           iconColor: "#2196F3",
           address: null,
           apr: "4.8%",
@@ -110,8 +110,8 @@ export default function Bank() {
         // Set mock lending market data for Ethereum testnet
         setAssets([
           {
-            symbol: "MATIC",
-            name: "MATIC Token",
+            symbol: "MIDN",
+            name: "MIDN Token",
             iconColor: "#F1324D",
             address: "0x...",
             apr: "12.5%",
@@ -120,7 +120,7 @@ export default function Bank() {
           },
           {
             symbol: "APTC",
-            name: "APT Casino Token",
+            name: "Midnight Casino Token",
             iconColor: "#34C759",
             address: "0x...",
             apr: "8.2%",
@@ -190,7 +190,7 @@ export default function Bank() {
         {showNetworkBanner && (
           <div className="bg-gradient-to-r from-red-magic/80 to-blue-magic/80 py-2 px-4 text-center relative mb-8 rounded-lg">
             <p className="text-white text-sm">
-              Connected to Polygon Amoy Testnet. 
+              Connected to Midnight Network Testnet. 
               <button className="underline ml-2">Switch Network</button>
             </p>
             <button 
@@ -204,7 +204,7 @@ export default function Bank() {
         
         <div className="mb-10 text-center">
           <HeaderText
-            header="APT Casino Bank" 
+            header="Midnight Casino Bank" 
             description="Manage your assets, deposit collateral, and borrow tokens to play your favorite casino games"
           />
         </div>
@@ -247,26 +247,26 @@ export default function Bank() {
                 <div className="bg-gradient-to-r p-[1px] from-red-magic to-blue-magic rounded-xl">
                   {/* Ethereum Testnet Only - No Uniswap Integration */}
         <div className="bg-gray-800 rounded-lg p-6 text-center">
-          <h3 className="text-xl font-semibold text-white mb-2">Polygon Amoy Testnet Only</h3>
-          <p className="text-gray-400">This application works exclusively with Polygon Amoy Testnet</p>
+          <h3 className="text-xl font-semibold text-white mb-2">Midnight Network Testnet Only</h3>
+          <p className="text-gray-400">This application works exclusively with Midnight Network Testnet</p>
         </div>
                 </div>
               </div>
               
               {/* Market Trends - Only shown in swap tab */}
               <div className="mb-12 p-[1px] bg-gradient-to-r from-red-magic/50 to-blue-magic/50 rounded-xl">
-                <div className="bg-[#1A0015] rounded-xl p-6">
+                <div className="bg-midnight-black rounded-xl p-6">
                   <div className="flex items-center mb-4">
                     <FaChartLine className="text-blue-magic mr-2" />
                     <h2 className="text-xl font-display font-medium">Market Trends</h2>
                   </div>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="bg-[#250020] p-4 rounded-lg hover:bg-[#350030] transition-colors">
+                    <div className="bg-midnight-black/80 p-4 rounded-lg hover:bg-midnight-blue/20 transition-colors">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-white/70 text-sm">MATIC Price</span>
+                        <span className="text-white/70 text-sm">MIDN Price</span>
                         <div className="flex items-center">
-                          <div className="h-2 w-16 bg-[#120010] rounded-full overflow-hidden">
+                          <div className="h-2 w-16 bg-midnight-black rounded-full overflow-hidden">
                             <div 
                               className="h-full bg-gradient-to-r from-red-magic to-blue-magic"
                               style={{ width: `${Math.min(Math.abs(marketTrends.og24hChange), 100)}%` }}
@@ -284,7 +284,7 @@ export default function Bank() {
                       </div>
                     </div>
                     
-                    <div className="bg-[#250020] p-4 rounded-lg hover:bg-[#350030] transition-colors">
+                    <div className="bg-midnight-black/80 p-4 rounded-lg hover:bg-midnight-blue/20 transition-colors">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white/70 text-sm">Market Cap</span>
                         <FaInfoCircle className="text-white/40 hover:text-white/70 transition-colors cursor-help" />
@@ -294,7 +294,7 @@ export default function Bank() {
                       </div>
                     </div>
                     
-                    <div className="bg-[#250020] p-4 rounded-lg hover:bg-[#350030] transition-colors">
+                    <div className="bg-midnight-black/80 p-4 rounded-lg hover:bg-midnight-blue/20 transition-colors">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white/70 text-sm">Total Value Locked</span>
                         <FaInfoCircle className="text-white/40 hover:text-white/70 transition-colors cursor-help" />
@@ -304,7 +304,7 @@ export default function Bank() {
                       </div>
                     </div>
                     
-                    <div className="bg-[#250020] p-4 rounded-lg hover:bg-[#350030] transition-colors">
+                    <div className="bg-midnight-black/80 p-4 rounded-lg hover:bg-midnight-blue/20 transition-colors">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white/70 text-sm">APY Range</span>
                         <FaInfoCircle className="text-white/40 hover:text-white/70 transition-colors cursor-help" />
@@ -343,7 +343,7 @@ export default function Bank() {
           
           {activeTab === 'history' && (
             <div>
-              <p className="text-white/70 mb-6">Your transaction history in the APT Casino Bank. All transactions are recorded on the blockchain for transparency.</p>
+              <p className="text-white/70 mb-6">Your transaction history in the Midnight Casino Bank. All transactions are recorded on-chain for transparency.</p>
               
               {transactions.length > 0 ? (
                 <div className="overflow-x-auto">
@@ -388,7 +388,7 @@ export default function Bank() {
                   </table>
                 </div>
               ) : (
-                <div className="text-center py-12 bg-[#1A0015] rounded-xl">
+                <div className="text-center py-12 bg-midnight-black rounded-xl">
                   <FaHistory className="mx-auto text-4xl text-white/30 mb-4" />
                   <h3 className="text-xl mb-2">No transactions yet</h3>
                   <p className="text-white/50">Your transaction history will appear here</p>
@@ -401,19 +401,19 @@ export default function Bank() {
         {/* Information Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="p-[1px] bg-gradient-to-r from-red-magic/30 to-blue-magic/30 rounded-xl hover:from-red-magic hover:to-blue-magic transition-all duration-300">
-            <div className="bg-[#1A0015] rounded-xl p-6 h-full">
+            <div className="bg-midnight-black rounded-xl p-6 h-full">
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-[#250020] flex items-center justify-center mr-3">
+                <div className="w-10 h-10 rounded-full bg-midnight-black/80 flex items-center justify-center mr-3">
                   <FaCoins className="text-yellow-500" />
                 </div>
                 <h3 className="text-lg font-medium">Earn Interest</h3>
               </div>
               <p className="text-white/70 mb-4">
-                Deposit your tokens to earn competitive interest rates. APT Casino Bank offers some of the highest APYs in DeFi.
+                Deposit your tokens to earn competitive interest rates. Midnight Casino Bank offers some of the highest APYs in DeFi.
               </p>
               <ul className="space-y-2 mb-4">
                 <li className="flex justify-between">
-                  <span className="text-white/60">MATIC</span>
+                  <span className="text-white/60">MIDN</span>
                   <span className="text-green-500">12.5% APY</span>
                 </li>
                 <li className="flex justify-between">
@@ -427,7 +427,7 @@ export default function Bank() {
               </ul>
               <button 
                 onClick={() => setActiveTab('lend')}
-                className="text-sm bg-[#250020] hover:bg-[#350030] transition-colors py-2 px-4 rounded-lg flex items-center gap-2"
+                className="text-sm bg-midnight-black/80 hover:bg-midnight-blue/20 transition-colors py-2 px-4 rounded-lg flex items-center gap-2"
               >
                 <FaLock /> Deposit Now
               </button>
@@ -435,16 +435,16 @@ export default function Bank() {
           </div>
           
           <div className="p-[1px] bg-gradient-to-r from-red-magic/30 to-blue-magic/30 rounded-xl hover:from-red-magic hover:to-blue-magic transition-all duration-300">
-            <div className="bg-[#1A0015] rounded-xl p-6 h-full">
+            <div className="bg-midnight-black rounded-xl p-6 h-full">
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-[#250020] flex items-center justify-center mr-3">
+                <div className="w-10 h-10 rounded-full bg-midnight-black/80 flex items-center justify-center mr-3">
                   <FaWallet className="text-blue-magic" />
                 </div>
                 <h3 className="text-lg font-medium">How It Works</h3>
               </div>
               <ol className="space-y-4 mb-6">
                 <li className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#250020] flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-midnight-black/80 flex items-center justify-center shrink-0 mt-0.5">
                     <span className="text-sm">1</span>
                   </div>
                   <div>
@@ -453,7 +453,7 @@ export default function Bank() {
                   </div>
                 </li>
                 <li className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#250020] flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-midnight-black/80 flex items-center justify-center shrink-0 mt-0.5">
                     <span className="text-sm">2</span>
                   </div>
                   <div>
@@ -462,7 +462,7 @@ export default function Bank() {
                   </div>
                 </li>
                 <li className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[#250020] flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-midnight-black/80 flex items-center justify-center shrink-0 mt-0.5">
                     <span className="text-sm">3</span>
                   </div>
                   <div>

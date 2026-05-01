@@ -89,17 +89,17 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-xl shadow-xl overflow-hidden bg-gradient-to-br from-[#1A0015] to-[#120010] border border-purple-800/30"
+      className="rounded-xl shadow-xl overflow-hidden bg-gradient-to-br from-[#0A0A0A] to-[#0A0A0A] border border-midnight-blue/20"
     >
       {/* Form Header */}
-      <div className="bg-gradient-to-r from-[#250027] to-[#190018] p-4 flex justify-between items-center cursor-pointer border-b border-purple-900/30" 
+      <div className="bg-gradient-to-r from-[#250027] to-[#190018] p-4 flex justify-between items-center cursor-pointer border-b border-midnight-blue/20" 
         onClick={toggleExpanded}
       >
         <div className="flex items-center">
-          <div className="p-2.5 rounded-full bg-gradient-to-br from-purple-700/40 to-purple-900/30 mr-3 shadow-inner shadow-purple-900/20 border border-purple-800/20">
+          <div className="p-2.5 rounded-full bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/20 mr-3 shadow-inner shadow-midnight-blue/15 border border-midnight-blue/15">
             {isAutoMode ? 
               <FaRobot className="text-blue-400 text-lg" /> : 
-              <FaDice className="text-purple-400 text-lg" />
+              <FaDice className="text-blue-400 text-lg" />
             }
           </div>
           <div>
@@ -111,7 +111,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
             </p>
           </div>
         </div>
-        <button className="p-2 text-white/60 hover:text-white bg-purple-900/20 rounded-full hover:bg-purple-900/30 transition-all">
+        <button className="p-2 text-white/60 hover:text-white bg-midnight-blue/15 rounded-full hover:bg-midnight-blue/20 transition-all">
           {expanded ? <FaAngleUp /> : <FaAngleDown />}
         </button>
       </div>
@@ -135,10 +135,10 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
               initial="hidden"
               animate="show"
             >
-              <div className="pb-2 mb-1 border-b border-purple-900/20">
+              <div className="pb-2 mb-1 border-b border-midnight-blue/15">
                 <h4 className="text-white font-semibold text-sm flex items-center">
-                  <div className="p-1.5 rounded-full bg-gradient-to-br from-purple-700/40 to-purple-900/20 mr-2 border border-purple-800/20">
-                    <FaDice className="text-purple-400 text-xs" />
+                  <div className="p-1.5 rounded-full bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/15 mr-2 border border-midnight-blue/15">
+                    <FaDice className="text-blue-400 text-xs" />
                   </div>
                   Game Settings
                 </h4>
@@ -158,7 +158,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                       onChange={handleChange}
                       label={field.label}
                       options={field.options}
-                      className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                      className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                       disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                     />
                   )}
@@ -172,7 +172,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                       value={formData[field.id] || ""}
                       onChange={handleChange}
                       placeholder={field.placeholder || ""}
-                      className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                      className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                       disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                     />
                   )}
@@ -186,7 +186,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                       value={formData[field.id] || ""}
                       onChange={handleChange}
                       placeholder={field.placeholder || ""}
-                      className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                      className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                       disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                     />
                   )}
@@ -199,7 +199,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                       name={field.id}
                       value={formData[field.id] || false}
                       onChange={handleChange}
-                      className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                      className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                       disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                     />
                   )}
@@ -215,7 +215,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                 initial="hidden"
                 animate="show"
               >
-                <div className="pb-3 mb-4 border-b border-purple-900/20">
+                <div className="pb-3 mb-4 border-b border-midnight-blue/15">
                   <h4 className="text-blue-400 text-sm font-semibold flex items-center">
                     <div className="p-1.5 rounded-full bg-gradient-to-br from-blue-700/40 to-blue-900/20 mr-2 border border-blue-800/20">
                       <FaCog className="text-blue-400 text-xs" />
@@ -239,7 +239,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                           onChange={handleChange}
                           label={field.label}
                           options={field.options}
-                          className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                          className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                           disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                         />
                       )}
@@ -253,7 +253,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                           value={formData[field.id] || ""}
                           onChange={handleChange}
                           placeholder={field.placeholder || ""}
-                          className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                          className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                           disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                         />
                       )}
@@ -267,7 +267,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                           value={formData[field.id] || ""}
                           onChange={handleChange}
                           placeholder={field.placeholder || ""}
-                          className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                          className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                           disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                         />
                       )}
@@ -280,7 +280,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                           name={field.id}
                           value={formData[field.id] || false}
                           onChange={handleChange}
-                          className="pl-11 bg-black/20 border-purple-800/30 focus:border-purple-600/50"
+                          className="pl-11 bg-black/20 border-midnight-blue/20 focus:border-midnight-blue/50"
                           disabled={gameStatus.isPlaying || gameStatus.hasPlacedBet}
                         />
                       )}
@@ -300,7 +300,7 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
                   ? 'bg-gray-700 cursor-not-allowed opacity-50'
                   : isAutoMode 
                     ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' 
-                    : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700'
+                    : 'bg-gradient-to-r from-midnight-blue to-blue-600 hover:from-midnight-blue hover:to-blue-700'
               } rounded-lg text-white font-bold shadow-lg transition-all flex items-center justify-center mt-6`}
               whileHover={{ scale: gameStatus.isPlaying || gameStatus.hasPlacedBet ? 1 : 1.02 }}
               whileTap={{ scale: gameStatus.isPlaying || gameStatus.hasPlacedBet ? 1 : 0.98 }}
@@ -324,9 +324,9 @@ const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPla
             </motion.button>
             
             {/* How to Play Info with improved styling */}
-            <div className="mt-4 p-4 bg-gradient-to-br from-purple-900/10 to-black/20 rounded-lg border border-purple-800/20 shadow-inner">
+            <div className="mt-4 p-4 bg-gradient-to-br from-midnight-blue/10 to-black/20 rounded-lg border border-midnight-blue/15 shadow-inner">
               <div className="text-sm text-white/80 flex items-start">
-                <div className="p-2 bg-gradient-to-br from-blue-900/30 to-purple-900/20 rounded-full mr-3 flex-shrink-0 border border-purple-800/30">
+                <div className="p-2 bg-gradient-to-br from-blue-900/30 to-midnight-blue/15 rounded-full mr-3 flex-shrink-0 border border-midnight-blue/20">
                   <FaInfoCircle className="text-blue-400" />
                 </div>
                 <div>

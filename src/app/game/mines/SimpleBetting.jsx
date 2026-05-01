@@ -14,7 +14,7 @@ const SimpleBetting = ({ onSubmit, initialSettings = {} }) => {
   };
   
   return (
-    <div className="bg-gradient-to-br from-purple-900/20 to-blue-900/10 p-4 rounded-xl border border-purple-800/30">
+    <div className="bg-gradient-to-br from-midnight-blue/15 to-blue-900/10 p-4 rounded-xl border border-midnight-blue/20">
       <h3 className="text-xl font-bold text-white mb-4 flex items-center font-display">
         <FaCoins className="mr-2 text-yellow-400" /> 
         Place Your Bet
@@ -24,7 +24,7 @@ const SimpleBetting = ({ onSubmit, initialSettings = {} }) => {
         <div className="relative">
           <label className="block text-white/70 text-sm mb-1 font-sans">Bet Amount</label>
           <div className="flex items-center">
-            <div className="absolute left-3 text-purple-400">
+            <div className="absolute left-3 text-blue-400">
               <FaCoins />
             </div>
             <select
@@ -33,7 +33,7 @@ const SimpleBetting = ({ onSubmit, initialSettings = {} }) => {
               value={betAmount}
             >
               {[10, 25, 50, 100, 250, 500, 1000].map((amount) => (
-                <option key={amount} value={amount}>{amount} MATIC</option>
+                <option key={amount} value={amount}>{amount} MIDN</option>
               ))}
             </select>
           </div>
@@ -42,7 +42,7 @@ const SimpleBetting = ({ onSubmit, initialSettings = {} }) => {
         <div className="relative">
           <label className="block text-white/70 text-sm mb-1 font-sans">Mines Count</label>
           <div className="flex items-center">
-            <div className="absolute left-3 text-purple-400">
+            <div className="absolute left-3 text-blue-400">
               <FaBomb />
             </div>
             <select
@@ -60,7 +60,7 @@ const SimpleBetting = ({ onSubmit, initialSettings = {} }) => {
       
       <motion.button
         onClick={handleSubmit}
-        className="w-full py-3 mt-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-semibold shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all flex items-center justify-center space-x-2"
+        className="w-full py-3 mt-4 bg-gradient-to-r from-midnight-blue to-blue-600 rounded-lg text-white font-semibold shadow-lg hover:from-midnight-blue hover:to-blue-700 transition-all flex items-center justify-center space-x-2"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
