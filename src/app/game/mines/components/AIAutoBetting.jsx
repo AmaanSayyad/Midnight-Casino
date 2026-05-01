@@ -69,7 +69,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
           isOpen ? 'w-80' : 'w-auto'
         } overflow-hidden rounded-2xl shadow-2xl border-2 ${
           isActive ? 'border-blue-500/50 bg-gradient-to-r from-blue-900/90 to-indigo-900/90' 
-                   : 'border-purple-800/30 bg-gradient-to-r from-purple-900/80 to-black/80'
+                   : 'border-midnight-blue/20 bg-gradient-to-r from-midnight-black/80 to-black/80'
         }`}
         animate={{ width: isOpen ? 320 : 'auto', height: 'auto' }}
         transition={{ duration: 0.3 }}
@@ -77,7 +77,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
         {/* Header/Toggle Button */}
         <div 
           className={`p-3 flex justify-between items-center cursor-pointer ${
-            isActive ? 'bg-blue-800/30' : 'bg-purple-900/30'
+            isActive ? 'bg-blue-800/30' : 'bg-midnight-blue/20'
           }`}
           onClick={toggleOpen}
         >
@@ -85,9 +85,9 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
             <div className={`p-2 rounded-full mr-3 ${
               isActive 
                 ? 'bg-blue-900/50 border border-blue-600/30' 
-                : 'bg-purple-900/50 border border-purple-800/30'
+                : 'bg-midnight-blue/50 border border-midnight-blue/20'
             }`}>
-              <FaRobot className={`text-xl ${isActive ? 'text-blue-300' : 'text-purple-400'}`} />
+              <FaRobot className={`text-xl ${isActive ? 'text-blue-300' : 'text-blue-400'}`} />
             </div>
             <div>
               <h3 className="font-medium text-white">AI Auto-Betting</h3>
@@ -97,7 +97,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
                   <p className="text-xs text-blue-300">Active</p>
                 </div>
               )}
-              {!isActive && <p className="text-xs text-purple-300">Inactive</p>}
+              {!isActive && <p className="text-xs text-blue-300">Inactive</p>}
             </div>
           </div>
           <div className="h-8 w-8 flex items-center justify-center">
@@ -107,7 +107,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                className={`h-5 w-5 ${isActive ? 'text-blue-300' : 'text-purple-300'}`} 
+                className={`h-5 w-5 ${isActive ? 'text-blue-300' : 'text-blue-300'}`} 
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
@@ -124,11 +124,11 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
             {/* AI Status & Actions */}
             <div className="mb-4">
               <div className={`rounded-xl p-3 ${
-                isActive ? 'bg-blue-900/30 border border-blue-800/30' : 'bg-purple-900/30 border border-purple-800/30'
+                isActive ? 'bg-blue-900/30 border border-blue-800/30' : 'bg-midnight-blue/20 border border-midnight-blue/20'
               }`}>
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-medium text-sm text-white flex items-center">
-                    <FaBrain className={`mr-2 ${isActive ? 'text-blue-400' : 'text-purple-400'}`} />
+                    <FaBrain className={`mr-2 ${isActive ? 'text-blue-400' : 'text-blue-400'}`} />
                     AI Status
                   </h4>
                   <div className="flex items-center">
@@ -153,7 +153,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
                   <div>
                     <div className="flex items-center justify-between text-xs text-white/70 mb-2">
                       <span>Mode: <span className="text-blue-300 font-medium">{currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}</span></span>
-                      <span>Model: <span className="text-blue-300">MATIC GamingGPT v2</span></span>
+                      <span>Model: <span className="text-blue-300">MIDN GamingGPT v2</span></span>
                     </div>
                     <AnimatePresence>
                       {lastAction && (
@@ -183,7 +183,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
             {/* Strategy Selection */}
             <div className="mb-4">
               <h4 className="font-medium text-sm text-white flex items-center mb-2">
-                <FaChartLine className={`mr-2 ${isActive ? 'text-blue-400' : 'text-purple-400'}`} />
+                <FaChartLine className={`mr-2 ${isActive ? 'text-blue-400' : 'text-blue-400'}`} />
                 AI Strategy
               </h4>
               <div className="grid grid-cols-3 gap-2">
@@ -236,7 +236,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
                   <div className="bg-black/30 p-2 rounded-lg border border-blue-900/30">
                     <div className="text-white/60 text-xs mb-1">Profit</div>
                     <div className={`text-sm font-medium ${stats.profit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {stats.profit >= 0 ? '+' : ''}{stats.profit} MATIC
+                      {stats.profit >= 0 ? '+' : ''}{stats.profit} MIDN
                     </div>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
                 className={`flex items-center justify-center px-3 py-2 rounded-lg text-xs font-medium ${
                   isActive
                     ? 'bg-blue-900/50 border border-blue-800/30 text-blue-300 hover:bg-blue-800/50'
-                    : 'bg-purple-900/50 border border-purple-800/30 text-purple-300 hover:bg-purple-800/50'
+                    : 'bg-midnight-blue/50 border border-midnight-blue/20 text-blue-300 hover:bg-midnight-blue/25'
                 }`}
               >
                 <FaCog className="mr-1.5" />

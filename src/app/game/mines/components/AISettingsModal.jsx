@@ -132,19 +132,19 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="w-full max-w-2xl bg-gradient-to-br from-[#180028]/95 to-[#000]/95 rounded-xl shadow-2xl border-2 border-purple-800/30 overflow-hidden"
+          className="w-full max-w-2xl bg-gradient-to-br from-[#180028]/95 to-[#000]/95 rounded-xl shadow-2xl border-2 border-midnight-blue/20 overflow-hidden"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-900/50 to-indigo-900/30 p-4 flex justify-between items-center">
+          <div className="bg-gradient-to-r from-midnight-blue/50 to-indigo-900/30 p-4 flex justify-between items-center">
             <div className="flex items-center">
-              <div className="p-2 bg-purple-900/50 rounded-full mr-3 border border-purple-700/30">
-                <FaRobot className="text-purple-300 text-xl" />
+              <div className="p-2 bg-midnight-blue/50 rounded-full mr-3 border border-midnight-blue/20">
+                <FaRobot className="text-blue-300 text-xl" />
               </div>
               <h2 className="text-xl font-bold text-white">AI Agent Settings</h2>
             </div>
             <button 
               onClick={onClose}
-              className="text-white/70 hover:text-white p-1.5 rounded-full hover:bg-purple-800/30 transition-colors"
+              className="text-white/70 hover:text-white p-1.5 rounded-full hover:bg-midnight-blue/20 transition-colors"
             >
               <FaTimes className="text-xl" />
             </button>
@@ -155,7 +155,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
             {/* AI Strategy Section */}
             <div>
               <h3 className="text-white font-semibold mb-3 flex items-center">
-                <FaBrain className="mr-2 text-purple-400" />
+                <FaBrain className="mr-2 text-blue-400" />
                 AI Strategy
               </h3>
               <div className="grid grid-cols-3 gap-4">
@@ -226,7 +226,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                 </button>
               </div>
               
-              <div className="mt-4 bg-black/30 p-3 rounded-lg border border-purple-800/30">
+              <div className="mt-4 bg-black/30 p-3 rounded-lg border border-midnight-blue/20">
                 <div className="flex items-start">
                   <FaRegLightbulb className="text-yellow-400 mt-1 mr-2 flex-shrink-0" />
                   <p className="text-sm text-white/70">
@@ -244,12 +244,12 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
             {/* Game Parameters */}
             <div>
               <h3 className="text-white font-semibold mb-3 flex items-center">
-                <FaCog className="mr-2 text-purple-400" />
+                <FaCog className="mr-2 text-blue-400" />
                 Game Parameters
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-black/30 p-4 rounded-lg border border-purple-800/30">
+                <div className="bg-black/30 p-4 rounded-lg border border-midnight-blue/20">
                   <h4 className="text-sm font-medium text-white/90 mb-3">Bet Limits</h4>
                   
                   <div className="space-y-3">
@@ -260,7 +260,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                         name="maxBet"
                         value={settings.maxBet}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                        className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                       />
                     </div>
                     
@@ -271,7 +271,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                         name="stopLoss"
                         value={settings.stopLoss}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                        className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                       />
                     </div>
                     
@@ -282,14 +282,14 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                         name="targetProfit"
                         value={settings.targetProfit}
                         onChange={handleInputChange}
-                        className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                        className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                       />
                     </div>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
-                  <div className="bg-black/30 p-4 rounded-lg border border-purple-800/30">
+                  <div className="bg-black/30 p-4 rounded-lg border border-midnight-blue/20">
                     <h4 className="text-sm font-medium text-white/90 mb-2">Tiles to Reveal</h4>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
@@ -301,7 +301,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                           onChange={handleInputChange}
                           min="1"
                           max="15"
-                          className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                         />
                       </div>
                       <div>
@@ -313,13 +313,13 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                           onChange={handleInputChange}
                           min="1"
                           max="15"
-                          className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                         />
                       </div>
                     </div>
                   </div>
                   
-                  <div className="bg-black/30 p-4 rounded-lg border border-purple-800/30">
+                  <div className="bg-black/30 p-4 rounded-lg border border-midnight-blue/20">
                     <h4 className="text-sm font-medium text-white/90 mb-2">Mines Selection</h4>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
@@ -331,7 +331,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                           onChange={handleInputChange}
                           min="1"
                           max="24"
-                          className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                         />
                       </div>
                       <div>
@@ -343,7 +343,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                           onChange={handleInputChange}
                           min="1"
                           max="24"
-                          className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                          className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                         />
                       </div>
                     </div>
@@ -355,11 +355,11 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
             {/* Risk Management */}
             <div>
               <h3 className="text-white font-semibold mb-3 flex items-center">
-                <FaChartLine className="mr-2 text-purple-400" />
+                <FaChartLine className="mr-2 text-blue-400" />
                 Risk Management
               </h3>
               
-              <div className="bg-black/30 p-4 rounded-lg border border-purple-800/30">
+              <div className="bg-black/30 p-4 rounded-lg border border-midnight-blue/20">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <label className="text-sm text-white/90">Adapt to betting history</label>
@@ -367,7 +367,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                       type="button"
                       onClick={() => handleToggleChange('riskFactors.adaptToHistory')}
                       className={`relative inline-flex items-center w-10 h-5 rounded-full transition-colors ${
-                        settings.riskFactors.adaptToHistory ? 'bg-purple-600' : 'bg-gray-700'
+                        settings.riskFactors.adaptToHistory ? 'bg-midnight-blue' : 'bg-gray-700'
                       }`}
                     >
                       <span className={`inline-block w-3.5 h-3.5 transform transition-transform bg-white rounded-full ${
@@ -382,7 +382,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                       type="button"
                       onClick={() => handleToggleChange('riskFactors.increaseOnWin')}
                       className={`relative inline-flex items-center w-10 h-5 rounded-full transition-colors ${
-                        settings.riskFactors.increaseOnWin ? 'bg-purple-600' : 'bg-gray-700'
+                        settings.riskFactors.increaseOnWin ? 'bg-midnight-blue' : 'bg-gray-700'
                       }`}
                     >
                       <span className={`inline-block w-3.5 h-3.5 transform transition-transform bg-white rounded-full ${
@@ -397,7 +397,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                       type="button"
                       onClick={() => handleToggleChange('riskFactors.decreaseOnLoss')}
                       className={`relative inline-flex items-center w-10 h-5 rounded-full transition-colors ${
-                        settings.riskFactors.decreaseOnLoss ? 'bg-purple-600' : 'bg-gray-700'
+                        settings.riskFactors.decreaseOnLoss ? 'bg-midnight-blue' : 'bg-gray-700'
                       }`}
                     >
                       <span className={`inline-block w-3.5 h-3.5 transform transition-transform bg-white rounded-full ${
@@ -415,7 +415,7 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
                       onChange={handleInputChange}
                       min="1"
                       max="10"
-                      className="w-full bg-black/50 border border-purple-800/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                      className="w-full bg-black/50 border border-midnight-blue/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-midnight-blue"
                     />
                   </div>
                 </div>
@@ -424,16 +424,16 @@ const AISettingsModal = ({ isOpen, onClose, onSave, currentSettings }) => {
           </div>
           
           {/* Footer */}
-          <div className="border-t border-purple-900/30 p-4 flex justify-end gap-3">
+          <div className="border-t border-midnight-blue/20 p-4 flex justify-end gap-3">
             <button
               onClick={onClose}
-              className="px-5 py-2 rounded-lg border border-purple-800/30 text-white/80 hover:text-white hover:bg-purple-900/30 transition-colors"
+              className="px-5 py-2 rounded-lg border border-midnight-blue/20 text-white/80 hover:text-white hover:bg-midnight-blue/20 transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className="px-5 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-colors"
+              className="px-5 py-2 rounded-lg bg-gradient-to-r from-midnight-blue to-blue-600 text-white hover:from-midnight-blue hover:to-blue-700 transition-colors"
             >
               Save Settings
             </button>

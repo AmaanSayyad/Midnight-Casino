@@ -78,22 +78,22 @@ const MinesBettingTable = ({ bettingTableData }) => {
   }
   
   return (
-    <div className="bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 rounded-xl border-2 border-purple-700/30 p-6 mt-6 shadow-xl shadow-purple-900/10 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 rounded-xl border-2 border-midnight-blue/20 p-6 mt-6 shadow-xl shadow-midnight-blue/10 relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute top-0 right-0 w-40 h-40 bg-midnight-blue/10 rounded-full blur-3xl -z-10"></div>
       <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-bold text-white font-display flex items-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-          <div className="p-2 bg-gradient-to-br from-purple-900/40 to-purple-700/10 rounded-lg shadow-lg shadow-purple-900/10 border border-purple-800/20 mr-3">
-            <FaTable className="text-purple-300" />
+        <h3 className="text-xl font-bold text-white font-display flex items-center bg-gradient-to-r from-blue-400 to-pink-400 bg-clip-text text-transparent">
+          <div className="p-2 bg-gradient-to-br from-midnight-black/40 to-midnight-blue/10 rounded-lg shadow-lg shadow-midnight-blue/10 border border-midnight-blue/15 mr-3">
+            <FaTable className="text-blue-300" />
           </div>
           {bettingTableData.title || "Mines Payouts"}
         </h3>
         
         <button
           onClick={() => setShowTips(!showTips)}
-          className="flex items-center bg-gradient-to-r from-purple-900/30 to-purple-800/20 px-3 py-1.5 rounded-full text-white/80 text-sm font-medium border border-purple-800/30 hover:from-purple-800/40 hover:to-purple-700/30 transition-colors shadow-md shadow-purple-900/10"
+          className="flex items-center bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/15 px-3 py-1.5 rounded-full text-white/80 text-sm font-medium border border-midnight-blue/20 hover:from-midnight-blue/20 hover:to-midnight-blue/20 transition-colors shadow-md shadow-midnight-blue/10"
         >
           <GiTreasureMap className="mr-1.5 text-yellow-400" />
           Tips {showTips ? <FaChevronDown className="ml-1.5" /> : <FaChevronRight className="ml-1.5" />}
@@ -114,7 +114,7 @@ const MinesBettingTable = ({ bettingTableData }) => {
             exit={{ opacity: 0, height: 0 }}
             className="mb-6 overflow-hidden"
           >
-            <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/10 border border-purple-800/30 rounded-lg p-4 shadow-lg shadow-purple-900/5">
+            <div className="bg-gradient-to-r from-midnight-blue/15 to-blue-900/10 border border-midnight-blue/20 rounded-lg p-4 shadow-lg shadow-midnight-blue/5">
               <h4 className="text-white font-semibold mb-3 flex items-center font-display">
                 <GiTreasureMap className="mr-2 text-yellow-400" /> Strategy Guide
               </h4>
@@ -159,22 +159,22 @@ const MinesBettingTable = ({ bettingTableData }) => {
       {/* Tabs Navigation */}
       <div className="relative mb-6">
         {/* Swipe indicators */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-black/40 backdrop-blur-md rounded-full z-10 shadow-lg border border-purple-800/30">
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-black/40 backdrop-blur-md rounded-full z-10 shadow-lg border border-midnight-blue/20">
           <FaArrowLeft className="text-white/60" />
         </div>
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-black/40 backdrop-blur-md rounded-full z-10 shadow-lg border border-purple-800/30">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-black/40 backdrop-blur-md rounded-full z-10 shadow-lg border border-midnight-blue/20">
           <FaArrowRight className="text-white/60" />
         </div>
         
         {/* Tabs */}
-        <div className="flex overflow-x-auto custom-scrollbar py-2 px-10 bg-black/30 rounded-xl border border-purple-800/30 shadow-inner">
+        <div className="flex overflow-x-auto custom-scrollbar py-2 px-10 bg-black/30 rounded-xl border border-midnight-blue/20 shadow-inner">
           {bettingTableData.table.map((item, index) => (
             <motion.button
               key={index}
               onClick={() => setActiveTab(index)}
               className={`flex items-center min-w-[120px] px-5 py-2.5 rounded-lg mr-3 text-sm whitespace-nowrap transition-all ${
                 activeTab === index 
-                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-900/30 scale-105 font-medium'
+                  ? 'bg-gradient-to-r from-midnight-blue to-blue-600 text-white shadow-md shadow-midnight-blue/20 scale-105 font-medium'
                   : 'bg-gray-800/50 text-white/80 hover:bg-gray-800'
               }`}
               whileHover={{ y: -2, scale: activeTab === index ? 1.05 : 1.02 }}
@@ -188,11 +188,11 @@ const MinesBettingTable = ({ bettingTableData }) => {
       </div>
       
       {/* Table Content */}
-      <div className="bg-black/40 rounded-xl p-5 border border-purple-900/30 shadow-inner">
+      <div className="bg-black/40 rounded-xl p-5 border border-midnight-blue/20 shadow-inner">
         <div className="grid grid-cols-3 gap-3 mb-4 text-white/80 text-sm font-medium border-b border-gray-800/50 pb-3">
           <div className="font-display">Tiles Revealed</div>
           <div className="font-display">Multiplier</div>
-                          <div className="font-display">For 1 MATIC</div>
+                          <div className="font-display">For 1 MIDN</div>
         </div>
         
         <motion.div
@@ -208,13 +208,13 @@ const MinesBettingTable = ({ bettingTableData }) => {
             // Extract the numeric value from the multiplier string - safely
             const multiplierText = tile.multiplier || "0x";
             const multiplierValue = parseFloat(multiplierText.replace('x', '').replace(',', '')) || 0;
-            // Calculate payout for 1 MATIC
+            // Calculate payout for 1 MIDN
             const payout = (100 * multiplierValue).toFixed(0);
             
             // Determine background color based on payout
-            let bgGradient = "from-purple-900/20 to-blue-900/10";
+            let bgGradient = "from-midnight-blue/15 to-blue-900/10";
             let textColor = "text-green-400";
-            let borderColor = "border-purple-800/30";
+            let borderColor = "border-midnight-blue/20";
             
             if (payout > 10000) {
               bgGradient = "from-red-900/30 to-orange-900/20";
@@ -234,7 +234,7 @@ const MinesBettingTable = ({ bettingTableData }) => {
               <motion.div
                 key={index}
                 variants={rowVariants}
-                className={`grid grid-cols-3 gap-3 p-4 rounded-lg bg-gradient-to-r ${bgGradient} border ${borderColor} hover:border-purple-500/50 transition-all relative shadow-md`}
+                className={`grid grid-cols-3 gap-3 p-4 rounded-lg bg-gradient-to-r ${bgGradient} border ${borderColor} hover:border-midnight-blue/30 transition-all relative shadow-md`}
                 onMouseEnter={() => setHoverIndex(index)}
                 onMouseLeave={() => setHoverIndex(null)}
                 whileHover={{ y: -2, scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)" }}
@@ -256,7 +256,7 @@ const MinesBettingTable = ({ bettingTableData }) => {
                 <AnimatePresence>
                   {hoverIndex === index && (
                     <motion.div 
-                      className="absolute -right-2 -bottom-2 bg-black/90 text-xs px-3 py-1.5 rounded-full text-white/90 border border-purple-800/50 shadow-lg"
+                      className="absolute -right-2 -bottom-2 bg-black/90 text-xs px-3 py-1.5 rounded-full text-white/90 border border-midnight-blue/25 shadow-lg"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
@@ -275,8 +275,8 @@ const MinesBettingTable = ({ bettingTableData }) => {
       </div>
       
       {/* Additional Information */}
-      <div className="mt-5 text-white/80 text-sm flex items-start p-4 bg-purple-900/20 rounded-lg border border-purple-800/30 shadow-md">
-        <HiOutlineLightningBolt className="mt-0.5 mr-3 text-purple-400 flex-shrink-0 text-xl" />
+      <div className="mt-5 text-white/80 text-sm flex items-start p-4 bg-midnight-blue/15 rounded-lg border border-midnight-blue/20 shadow-md">
+        <HiOutlineLightningBolt className="mt-0.5 mr-3 text-blue-400 flex-shrink-0 text-xl" />
         <span className="font-sans">
           The multiplier formula is based on probability: <span className="text-xs bg-black/60 rounded px-2 py-1 font-mono">multiplier = totalTiles / (totalTiles - mines - revealed)</span>. Higher risk leads to exponentially higher rewards.
         </span>
