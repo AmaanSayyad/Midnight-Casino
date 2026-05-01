@@ -2,7 +2,7 @@ export const manualFormConfig = {
   fields: [
     {
       id: "betAmount",
-      label: "Bet Amount (MATIC)",
+      label: "Bet Amount (MIDN)",
       type: "singleSelect",
       options: [0.001, 0.01, 0.1, 1, 2, 5],
       defaultValue: 0.001,
@@ -25,7 +25,7 @@ export const autoFormConfig = {
   fields: [
     {
       id: "betAmount",
-      label: "Bet Amount (MATIC)",
+      label: "Bet Amount (MIDN)",
       type: "singleSelect",
       options: [0.001, 0.01, 0.1, 1, 2, 5],
       defaultValue: 0.001,

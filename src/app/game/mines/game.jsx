@@ -45,7 +45,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
 
   // Game Settings
   const defaultSettings = {
-    betAmount: 0.001, // Default to 0.001 MATIC
+    betAmount: 0.001, // Default to 0.001 MIDN
     mines: 5,
     isAutoBetting: false,
     tilesToReveal: 5,
@@ -336,11 +336,11 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
           return;
         }
         
-        // Check Redux balance MATIC)
+        // Check Redux balance MIDN)
         const currentBalance = parseFloat(userBalance || '0');
         
         if (currentBalance < parseFloat(settings.betAmount)) {
-          toast.error(`Insufficient balance. You have ${currentBalance.toFixed(5)} MATIC but need ${parseFloat(settings.betAmount)} MATIC`);
+          toast.error(`Insufficient balance. You have ${currentBalance.toFixed(5)} MIDN but need ${parseFloat(settings.betAmount)} MIDN`);
           return;
         }
 
@@ -353,14 +353,14 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
           console.log('Bet amount (ETH):', settings.betAmount);
           console.log('Current balance (ETH):', currentBalance);
           console.log('Mines count:', settings.mines);
-          console.log('balance MATIC');
+          console.log('balance MIDN');
           
           // Start the game immediately
           setIsPlaying(true);
           setHasPlacedBet(true);
           playSound('bet');
           
-          toast.success(`Bet placed! ${parseFloat(settings.betAmount).toFixed(5)} MATIC deducted from balance`);
+          toast.success(`Bet placed! ${parseFloat(settings.betAmount).toFixed(5)} MIDN deducted from balance`);
           toast.info(`Game starting...`);
           
           // Special message if AI-assisted auto betting
@@ -370,7 +370,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
           } else if (settings.isAutoBetting) {
             toast.info(`Auto betting mode: Will reveal ${settings.tilesToReveal || 5} tiles`);
           } else {
-            toast.info(`Bet placed: ${parseFloat(settings.betAmount).toFixed(5)} MATIC, ${settings.mines} mines`);
+            toast.info(`Bet placed: ${parseFloat(settings.betAmount).toFixed(5)} MIDN, ${settings.mines} mines`);
           }
           
           // If auto-betting is enabled, automatically reveal tiles with minimal delay
@@ -657,7 +657,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
       
       // Cashout is just a local operation - no blockchain transaction needed
       // The actual payout was already handled in the initial bet transaction
-              toast.success(`Cashed out: ${payout.toFixed(5)} MATIC (${multiplier.toFixed(2)}x)`);
+              toast.success(`Cashed out: ${payout.toFixed(5)} MIDN (${multiplier.toFixed(2)}x)`);
       playSound('cashout');
       
       // Update user balance in Redux store (add payout to current balance)
@@ -842,7 +842,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
       </div>
 
               <button 
-                className="mt-6 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-medium"
+                className="mt-6 px-4 py-2 bg-gradient-to-r from-midnight-blue to-blue-600 rounded-lg text-white font-medium"
                 onClick={toggleGameInfo}
               >
                 Got it!
@@ -856,7 +856,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
       <div className="w-full flex flex-wrap justify-between items-center gap-2 mb-4">
         <div className="flex items-center space-x-3">
           <button 
-            className="p-2 rounded-full bg-purple-900/20 hover:bg-purple-900/40 transition-colors"
+            className="p-2 rounded-full bg-midnight-blue/15 hover:bg-midnight-blue/30 transition-colors"
             onClick={toggleMute}
             title={isMuted ? "Unmute" : "Mute"}
           >
@@ -939,10 +939,10 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
                 ${cell.isRevealed ? (
                   cell.isBomb ? 'bg-red-900/70' : 'bg-blue-600/30'
                 ) : (
-                  cell.isHovered ? 'bg-purple-800/30' : 'bg-gray-900/70'
+                  cell.isHovered ? 'bg-midnight-blue/20' : 'bg-gray-900/70'
                 )}
                 ${!isPlaying ? 'cursor-not-allowed opacity-80' : 'cursor-pointer'}
-                ${cell.isRevealed ? '' : 'hover:bg-purple-800/30'}
+                ${cell.isRevealed ? '' : 'hover:bg-midnight-blue/20'}
                 transition-colors duration-200 text-2xl
                 border border-gray-800 shadow-lg
               `}
@@ -981,7 +981,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
               } rounded-lg text-white font-bold shadow-lg transition-all flex items-center justify-center gap-2`}
             >
               <FaCoins className="text-yellow-300" />
-              <span>CASH OUT ({calculatePayout()} MATIC)</span>
+              <span>CASH OUT ({calculatePayout()} MIDN)</span>
             </button>
           </div>
         )}
@@ -991,7 +991,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
           <div className="text-center py-3 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg text-white font-bold">
             <span>🎉 CONGRATULATIONS! YOU WON! 🎉</span>
             <div className="mt-2 text-sm opacity-90">
-              Winnings: {calculatePayout()} MATIC ({multiplier.toFixed(2)}x)
+              Winnings: {calculatePayout()} MIDN ({multiplier.toFixed(2)}x)
             </div>
           </div>
         )}
@@ -1021,10 +1021,10 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
           <div className="bg-black/40 p-4 rounded-xl border border-gray-700/60 shadow-lg">
             {/* Shadow indicators with arrow icons for better UX */}
             <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none flex items-center justify-center">
-              <FaArrowLeft className="text-purple-400 ml-2" />
+              <FaArrowLeft className="text-blue-400 ml-2" />
             </div>
             <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none flex items-center justify-center">
-              <FaArrowRight className="text-purple-400 mr-2" />
+              <FaArrowRight className="text-blue-400 mr-2" />
             </div>
             
             <div className="overflow-x-auto pb-1">
@@ -1034,7 +1034,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
                     key={index}
                     className={`min-w-[95px] p-2.5 text-center rounded-lg ${
                       item.tiles === revealedCount 
-                        ? 'bg-gradient-to-br from-purple-700 to-purple-600 text-white font-bold shadow-lg shadow-purple-700/50 border-2 border-purple-500/80' 
+                        ? 'bg-gradient-to-br from-midnight-blue to-midnight-blue text-white font-bold shadow-lg shadow-midnight-blue/50 border-2 border-midnight-blue/80' 
                         : 'bg-gradient-to-br from-gray-800/90 to-gray-900/90 text-white/90 hover:bg-gray-700/90 transition-colors shadow-md border border-gray-700/50'
                     }`}
                   >
@@ -1051,9 +1051,9 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
               </div>
             ) : multiplierTable.length > 6 && (
               <div className="text-xs text-center text-white/80 mt-3 flex items-center justify-center gap-2">
-                <FaArrowLeft className="text-purple-400" />
+                <FaArrowLeft className="text-blue-400" />
                 <span>Swipe to see more multipliers</span>
-                <FaArrowRight className="text-purple-400" />
+                <FaArrowRight className="text-blue-400" />
               </div>
             )}
           </div>
