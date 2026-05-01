@@ -69,12 +69,12 @@ const MinesProbability = ({ winProbabilities, gridSize = 5 }) => {
   };
   
   return (
-    <div className="bg-gradient-to-b from-[#1A0015]/90 to-[#190020]/90 rounded-xl border-2 border-[#333947] p-5 mt-6 shadow-lg shadow-purple-900/5 backdrop-blur-sm">
+    <div className="bg-gradient-to-b from-[#0A0A0A]/90 to-[#190020]/90 rounded-xl border-2 border-[#333947] p-5 mt-6 shadow-lg shadow-midnight-blue/5 backdrop-blur-sm">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-xl font-bold text-white flex items-center font-display">
           <HiOutlineChartBar className="mr-2 text-blue-400" /> Win Probabilities
         </h3>
-        <div className="text-xs px-2 py-1 bg-gradient-to-r from-purple-900/50 to-blue-900/30 rounded-full text-white/80 border border-purple-800/30">
+        <div className="text-xs px-2 py-1 bg-gradient-to-r from-midnight-blue/50 to-blue-900/30 rounded-full text-white/80 border border-midnight-blue/20">
           <span className="font-display">25 total tiles</span>
         </div>
       </div>
@@ -174,7 +174,7 @@ const MinesProbability = ({ winProbabilities, gridSize = 5 }) => {
                       <div className="bg-black/30 rounded p-2.5">
                         <p className="text-white/60 mb-1 font-sans">First click risk</p>
                         <p className="text-white font-medium flex items-center">
-                          <FaDice className="mr-1 text-purple-400" />
+                          <FaDice className="mr-1 text-blue-400" />
                           {item.firstClickMineProb.toFixed(1)}%
                         </p>
                       </div>
@@ -211,8 +211,8 @@ const MinesProbability = ({ winProbabilities, gridSize = 5 }) => {
       </motion.div>
       
       {/* Tips */}
-      <div className="mt-5 flex items-start bg-gradient-to-r from-purple-900/20 to-blue-900/10 p-3 rounded-lg border border-purple-900/30">
-        <FaInfoCircle className="mt-0.5 mr-2 text-purple-400 flex-shrink-0" />
+      <div className="mt-5 flex items-start bg-gradient-to-r from-midnight-blue/15 to-blue-900/10 p-3 rounded-lg border border-midnight-blue/20">
+        <FaInfoCircle className="mt-0.5 mr-2 text-blue-400 flex-shrink-0" />
         <div className="text-sm text-white/80 font-sans">
           <p className="mb-1"><strong className="font-display">Pro tip:</strong> Balance risk vs. reward based on your playing style.</p>
           <p>A positive expected value (EV) suggests favorable long-term returns, but remember that short-term variance can be significant.</p>

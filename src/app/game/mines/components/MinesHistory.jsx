@@ -11,10 +11,10 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState('asc');
 
-  // Open Monad Explorer link for transaction hash
-  const openMonadExplorer = (hash) => {
+  // Open Midnight Explorer link for transaction hash
+  const openMidnightExplorer = (hash) => {
     if (hash && hash !== 'unknown') {
-      const explorerUrl = `https://testnet.monadexplorer.com/tx/${hash}`;
+      const explorerUrl = `https://testnet.midnightexplorer.com/tx/${hash}`;
       window.open(explorerUrl, '_blank');
     }
   };
@@ -22,7 +22,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
   // Open Entropy Explorer link
   const openEntropyExplorer = (txHash) => {
     if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${txHash}`;
+      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
       window.open(entropyExplorerUrl, '_blank');
     }
   };
@@ -55,7 +55,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
   // Sort icon component
   const SortIcon = ({ field }) => {
     if (sortField !== field) return <FaSort className="text-white/30 ml-1" size={10} />;
-    return sortDirection === 'asc' ? <FaSortUp className="text-purple-400 ml-1" size={12} /> : <FaSortDown className="text-purple-400 ml-1" size={12} />;
+    return sortDirection === 'asc' ? <FaSortUp className="text-blue-400 ml-1" size={12} /> : <FaSortDown className="text-blue-400 ml-1" size={12} />;
   };
   
   // Animation variants
@@ -81,9 +81,9 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 rounded-xl border-2 border-purple-700/30 p-5 shadow-xl shadow-purple-900/20 backdrop-blur-sm relative overflow-hidden">
+    <div className="bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 rounded-xl border-2 border-midnight-blue/20 p-5 shadow-xl shadow-midnight-blue/15 backdrop-blur-sm relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-40 h-40 bg-purple-600/5 rounded-full blur-3xl -z-1"></div>
+      <div className="absolute top-0 right-0 w-40 h-40 bg-midnight-blue/5 rounded-full blur-3xl -z-1"></div>
       <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-600/5 rounded-full blur-3xl -z-1"></div>
       <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-pink-500/5 rounded-full blur-2xl -z-1"></div>
       
@@ -91,21 +91,21 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
       <div className="relative overflow-hidden mb-5">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-bold flex items-center font-display">
-            <div className="p-2 rounded-full bg-purple-900/30 mr-3 border border-purple-800/30 shadow-inner">
-              <FaHistory className="text-purple-400" />
+            <div className="p-2 rounded-full bg-midnight-blue/20 mr-3 border border-midnight-blue/20 shadow-inner">
+              <FaHistory className="text-blue-400" />
             </div>
-            <span className="bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
               Your Mines History
             </span>
           </h3>
-          <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/20 px-3 py-1.5 rounded-full text-xs border border-purple-800/30 shadow-inner">
+          <div className="bg-gradient-to-r from-midnight-blue/20 to-blue-900/20 px-3 py-1.5 rounded-full text-xs border border-midnight-blue/20 shadow-inner">
             <span className="font-medium text-white/90">{history.length}</span>
             <span className="text-white/70"> Games</span>
           </div>
         </div>
         
         {/* Animated underline */}
-        <div className="h-px mt-3 bg-gradient-to-r from-purple-600/50 via-blue-600/30 to-transparent relative overflow-hidden">
+        <div className="h-px mt-3 bg-gradient-to-r from-midnight-blue/50 via-blue-600/30 to-transparent relative overflow-hidden">
           <motion.div 
             className="h-full w-20 bg-gradient-to-r from-transparent via-white/70 to-transparent absolute"
             animate={{ 
@@ -124,7 +124,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
       {/* User Stats - Enhanced Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-3 mb-5">
         <motion.div 
-          className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-3 border border-purple-800/30 shadow-md"
+          className="bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/10 rounded-xl p-3 border border-midnight-blue/20 shadow-md"
           whileHover="hover"
           variants={cardHoverVariants}
         >
@@ -136,7 +136,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
         </motion.div>
         
         <motion.div 
-          className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-3 border border-purple-800/30 shadow-md"
+          className="bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/10 rounded-xl p-3 border border-midnight-blue/20 shadow-md"
           whileHover="hover"
           variants={cardHoverVariants}
         >
@@ -148,7 +148,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
         </motion.div>
         
         <motion.div 
-          className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-3 border border-purple-800/30 shadow-md"
+          className="bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/10 rounded-xl p-3 border border-midnight-blue/20 shadow-md"
           whileHover="hover"
           variants={cardHoverVariants}
         >
@@ -160,7 +160,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
         </motion.div>
         
         <motion.div 
-          className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-3 border border-purple-800/30 shadow-md"
+          className="bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/10 rounded-xl p-3 border border-midnight-blue/20 shadow-md"
           whileHover="hover"
           variants={cardHoverVariants}
         >
@@ -172,7 +172,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
         </motion.div>
         
         <motion.div 
-          className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-3 border border-purple-800/30 shadow-md"
+          className="bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/10 rounded-xl p-3 border border-midnight-blue/20 shadow-md"
           whileHover="hover"
           variants={cardHoverVariants}
         >
@@ -184,7 +184,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
         </motion.div>
         
         <motion.div 
-          className="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-xl p-3 border border-purple-800/30 shadow-md"
+          className="bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/10 rounded-xl p-3 border border-midnight-blue/20 shadow-md"
           whileHover="hover"
           variants={cardHoverVariants}
         >
@@ -199,9 +199,9 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
       </div>
 
       {/* Game History - Enhanced Table */}
-      <div className="bg-black/20 rounded-xl border border-purple-800/20 p-4 shadow-inner">
+      <div className="bg-black/20 rounded-xl border border-midnight-blue/15 p-4 shadow-inner">
         {/* Header */}
-        <div className="grid grid-cols-7 gap-2 pb-3 text-xs font-medium border-b border-purple-800/30 px-2">
+        <div className="grid grid-cols-7 gap-2 pb-3 text-xs font-medium border-b border-midnight-blue/20 px-2">
           <div 
             className="flex items-center cursor-pointer hover:text-white/90 transition-colors text-white/70"
             onClick={() => handleSort('id')}
@@ -302,8 +302,8 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
                 <span>{game.payout}</span>
               </div>
               <div className="text-white/70 flex items-center">
-                <div className="w-4 h-4 rounded-full bg-purple-900/30 border border-purple-800/30 flex items-center justify-center mr-1.5">
-                  <HiClock className="text-purple-400" size={8} />
+                <div className="w-4 h-4 rounded-full bg-midnight-blue/20 border border-midnight-blue/20 flex items-center justify-center mr-1.5">
+                  <HiClock className="text-blue-400" size={8} />
                 </div>
                 <span>{game.time}</span>
               </div>
@@ -314,16 +314,16 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
                       <div className="text-yellow-400 font-bold">{game.entropyProof.sequenceNumber && game.entropyProof.sequenceNumber !== '0' ? String(game.entropyProof.sequenceNumber) : ''}</div>
                     </div>
                     <div className="flex gap-1">
-                      {/* Polygon Amoy Game Log Link */}
-                      {game.polygonTxHash && (
+                      {/* Midnight Network Game Log Link */}
+                      {game.midnightTxHash && (
                         <button
                           onClick={() => {
-                            window.open(`https://amoy.polygonscan.com/tx/${game.polygonTxHash}`, '_blank');
+                            window.open(`https://amoy.midnightscan.com/tx/${game.midnightTxHash}`, '_blank');
                           }}
                           className="flex items-center gap-1 px-2 py-1 bg-[#8B2398]/10 border border-[#8B2398]/30 rounded text-[#8B2398] text-xs hover:bg-[#8B2398]/20 transition-colors"
                         >
                           <FaExternalLinkAlt size={8} />
-                          Polygon
+                          Midnight
                         </button>
                       )}
                       {game.entropyProof.transactionHash && (
@@ -339,8 +339,8 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-                    <span className="text-purple-400 text-xs">Generating...</span>
+                    <div className="w-4 h-4 border-2 border-midnight-blue border-t-transparent rounded-full animate-spin"></div>
+                    <span className="text-blue-400 text-xs">Generating...</span>
                   </div>
                 )}
               </div>
@@ -357,7 +357,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <GiTreasureMap className="mx-auto text-5xl mb-3 text-purple-500/60" />
+            <GiTreasureMap className="mx-auto text-5xl mb-3 text-midnight-blue/60" />
             <h4 className="text-lg font-medium text-white mb-2 font-display">No Game History Yet</h4>
             <p className="text-white/60 text-sm max-w-md mx-auto font-sans">
               Start playing to see your results! Your game history will track your wins, losses, and overall performance.

@@ -12,13 +12,13 @@ const MinesStrategyGuide = () => {
   return (
     <motion.div 
       id="strategy-guide"
-      className="mt-8 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 border-2 border-purple-700/30 rounded-xl p-6 backdrop-blur-sm shadow-xl shadow-purple-900/20 scroll-mt-24 relative overflow-hidden"
+      className="mt-8 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 border-2 border-midnight-blue/20 rounded-xl p-6 backdrop-blur-sm shadow-xl shadow-midnight-blue/15 scroll-mt-24 relative overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
     >
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-60 h-60 bg-purple-600/5 rounded-full blur-3xl -z-1"></div>
+      <div className="absolute top-0 right-0 w-60 h-60 bg-midnight-blue/5 rounded-full blur-3xl -z-1"></div>
       <div className="absolute bottom-0 left-0 w-60 h-60 bg-blue-600/5 rounded-full blur-3xl -z-1"></div>
       <div className="absolute top-1/3 left-1/3 w-40 h-40 bg-pink-500/5 rounded-full blur-2xl -z-1"></div>
       
@@ -35,7 +35,7 @@ const MinesStrategyGuide = () => {
           </h3>
           <button 
             onClick={() => setIsStatsExpanded(!isStatsExpanded)}
-            className="bg-gradient-to-r from-purple-900/30 to-purple-800/20 px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white flex items-center gap-2 border border-purple-800/30 hover:border-purple-700/40 transition-all duration-300 shadow-md"
+            className="bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/15 px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white flex items-center gap-2 border border-midnight-blue/20 hover:border-midnight-blue/20 transition-all duration-300 shadow-md"
           >
             {isStatsExpanded ? (
               <>
@@ -44,20 +44,20 @@ const MinesStrategyGuide = () => {
                   animate={{ rotate: 180 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <FaChevronDown className="text-purple-400" size={12} />
+                  <FaChevronDown className="text-blue-400" size={12} />
                 </motion.div>
               </>
             ) : (
               <>
                 <span>Show More</span>
-                <FaChevronDown className="text-purple-400" size={12} />
+                <FaChevronDown className="text-blue-400" size={12} />
               </>
             )}
           </button>
         </div>
         
         {/* Animated underline */}
-        <div className="h-px mt-4 bg-gradient-to-r from-yellow-600/50 via-purple-600/30 to-transparent relative overflow-hidden">
+        <div className="h-px mt-4 bg-gradient-to-r from-yellow-600/50 via-midnight-blue/20 to-transparent relative overflow-hidden">
           <motion.div 
             className="h-full w-20 bg-gradient-to-r from-transparent via-white/70 to-transparent absolute"
             animate={{ 
@@ -187,18 +187,18 @@ const MinesStrategyGuide = () => {
             transition={{ duration: 0.4 }}
           >
             <motion.div 
-              className="bg-gradient-to-br from-purple-900/20 to-purple-800/5 rounded-xl p-5 border border-purple-800/30 relative overflow-hidden hover:shadow-xl transition-all duration-300 group"
+              className="bg-gradient-to-br from-midnight-blue/15 to-midnight-blue/5 rounded-xl p-5 border border-midnight-blue/20 relative overflow-hidden hover:shadow-xl transition-all duration-300 group"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
             >
-              <div className="absolute -top-6 -right-6 w-16 h-16 bg-purple-500/10 rounded-full blur-xl group-hover:w-20 group-hover:h-20 transition-all"></div>
+              <div className="absolute -top-6 -right-6 w-16 h-16 bg-midnight-blue/10 rounded-full blur-xl group-hover:w-20 group-hover:h-20 transition-all"></div>
               <h4 className="text-lg font-semibold text-white mb-3 flex items-center font-display relative z-10">
-                <div className="p-2 bg-gradient-to-br from-purple-700/40 to-purple-900/20 rounded-full mr-3 border border-purple-700/30 shadow-inner">
+                <div className="p-2 bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/15 rounded-full mr-3 border border-midnight-blue/20 shadow-inner">
                   <FaChartLine className="text-blue-400" />
                 </div>
-                <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                   Advanced Pattern Play
                 </span>
                 <span className="ml-2 text-xs px-2 py-0.5 bg-blue-900/30 text-blue-300 rounded-full border border-blue-800/30">Pro Tip</span>
@@ -209,34 +209,34 @@ const MinesStrategyGuide = () => {
               </p>
               
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <div className="bg-black/30 rounded-lg p-3 border border-purple-800/20">
+                <div className="bg-black/30 rounded-lg p-3 border border-midnight-blue/15">
                   <h5 className="text-sm font-medium text-white/90 mb-1.5 flex items-center">
-                    <span className="w-5 h-5 rounded-full bg-purple-900/50 text-purple-300 text-xs flex items-center justify-center mr-1.5">1</span>
+                    <span className="w-5 h-5 rounded-full bg-midnight-blue/50 text-blue-300 text-xs flex items-center justify-center mr-1.5">1</span>
                     Edge-first
                   </h5>
                   <p className="text-xs text-white/70">Reveal tiles along the edges first</p>
                 </div>
                 
-                <div className="bg-black/30 rounded-lg p-3 border border-purple-800/20">
+                <div className="bg-black/30 rounded-lg p-3 border border-midnight-blue/15">
                   <h5 className="text-sm font-medium text-white/90 mb-1.5 flex items-center">
-                    <span className="w-5 h-5 rounded-full bg-purple-900/50 text-purple-300 text-xs flex items-center justify-center mr-1.5">2</span>
+                    <span className="w-5 h-5 rounded-full bg-midnight-blue/50 text-blue-300 text-xs flex items-center justify-center mr-1.5">2</span>
                     Center-out
                   </h5>
                   <p className="text-xs text-white/70">Start from center and work outward</p>
                 </div>
                 
-                <div className="bg-black/30 rounded-lg p-3 border border-purple-800/20">
+                <div className="bg-black/30 rounded-lg p-3 border border-midnight-blue/15">
                   <h5 className="text-sm font-medium text-white/90 mb-1.5 flex items-center">
-                    <span className="w-5 h-5 rounded-full bg-purple-900/50 text-purple-300 text-xs flex items-center justify-center mr-1.5">3</span>
+                    <span className="w-5 h-5 rounded-full bg-midnight-blue/50 text-blue-300 text-xs flex items-center justify-center mr-1.5">3</span>
                     Diagonal
                   </h5>
                   <p className="text-xs text-white/70">Reveal tiles in diagonal patterns</p>
                 </div>
               </div>
               
-              <div className="mt-4 bg-black/20 p-3 rounded-lg border border-purple-800/20 text-xs text-white/70">
+              <div className="mt-4 bg-black/20 p-3 rounded-lg border border-midnight-blue/15 text-xs text-white/70">
                 <div className="flex items-start">
-                  <FaInfoCircle className="text-purple-400 mt-0.5 mr-2 flex-shrink-0" />
+                  <FaInfoCircle className="text-blue-400 mt-0.5 mr-2 flex-shrink-0" />
                   <p>Remember that each mine placement is random and independent of previous games. Pattern play is purely psychological, not mathematical.</p>
                 </div>
               </div>
