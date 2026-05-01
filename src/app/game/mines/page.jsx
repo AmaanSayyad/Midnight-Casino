@@ -65,13 +65,13 @@ export default function Mines() {
   const { isConnected, address } = useWalletStatus();
   const { address: walletAddress } = useAccount();
 
-  // Function to log game results to Polygon Amoy with retry mechanism
-  const logGameResultToPolygon = async (gameData, retryCount = 0) => {
+  // Function to log game results to Midnight Network with retry mechanism
+  const logGameResultToMidnight = async (gameData, retryCount = 0) => {
     const maxRetries = 3;
     const retryDelay = 1000 * (retryCount + 1); // Exponential backoff: 1s, 2s, 3s
     
     try {
-      console.log(`📝 Logging Mines result to Polygon Amoy (attempt ${retryCount + 1}):`, gameData);
+      console.log(`📝 Logging Mines result to Midnight Network (attempt ${retryCount + 1}):`, gameData);
       
       const response = await fetch('/api/log-game-result', {
         method: 'POST',
@@ -84,32 +84,32 @@ export default function Mines() {
       const result = await response.json();
       
       if (result.success) {
-        console.log('✅ Mines game logged to Polygon Amoy:', {
-          txHash: result.polygonTxHash,
-          explorerUrl: result.polygonExplorerUrl
+        console.log('✅ Mines game logged to Midnight Network:', {
+          txHash: result.midnightTxHash,
+          explorerUrl: result.midnightExplorerUrl
         });
         
         return result;
       } else {
-        console.error('❌ Failed to log Mines game to Polygon:', result.error);
+        console.error('❌ Failed to log Mines game to Midnight:', result.error);
         
         // Check if we should retry
         if (result.shouldRetry && retryCount < maxRetries) {
           console.log(`🔄 Retrying Mines game log in ${retryDelay}ms...`);
           await new Promise(resolve => setTimeout(resolve, retryDelay));
-          return logGameResultToPolygon(gameData, retryCount + 1);
+          return logGameResultToMidnight(gameData, retryCount + 1);
         }
         
         throw new Error(result.error);
       }
     } catch (error) {
-      console.error('❌ Error logging Mines game to Polygon:', error);
+      console.error('❌ Error logging Mines game to Midnight:', error);
       
       // Retry on network errors
       if (retryCount < maxRetries && (error.name === 'TypeError' || error.message.includes('fetch'))) {
         console.log(`🔄 Retrying Mines game log due to network error in ${retryDelay}ms...`);
         await new Promise(resolve => setTimeout(resolve, retryDelay));
-        return logGameResultToPolygon(gameData, retryCount + 1);
+        return logGameResultToMidnight(gameData, retryCount + 1);
       }
       
       throw error;
@@ -165,7 +165,7 @@ export default function Mines() {
   const handleFormSubmit = async (formData) => {
     try {
       console.log('🔮 PYTH ENTROPY: Initializing Mines game session...');
-      console.log('🔗 Network: Polygon Amoy | Token: MATIC | Protocol: Pyth Entropy');
+      console.log('🔗 Network: Midnight Network | Token: MIDN | Protocol: Pyth Entropy');
       
       // Initialize Pyth Entropy
       console.log('🔮 PYTH ENTROPY: Initializing...');
@@ -173,7 +173,7 @@ export default function Mines() {
       console.log('✅ PYTH ENTROPY: Initialized successfully');
       
       console.log('✅ PYTH ENTROPY: Mines game session created successfully');
-      console.log(`🎮 Game Config: ${formData.mines || 3} mines | ${formData.betAmount || '0.01'} MATIC bet`);
+      console.log(`🎮 Game Config: ${formData.mines || 3} mines | ${formData.betAmount || '0.01'} MIDN bet`);
       
     } catch (error) {
       console.error('❌ PYTH ENTROPY: Connection failed:', error);
@@ -275,9 +275,9 @@ export default function Mines() {
     const newHistoryItem = {
       id: Date.now(),
       mines: result.mines || 0,
-      bet: `${result.betAmount || '0.00000'} MATIC`,
+      bet: `${result.betAmount || '0.00000'} MIDN`,
       outcome: result.won ? 'win' : 'loss',
-      payout: result.won ? `${result.payout || '0.00000'} MATIC` : '0.00000 MATIC',
+      payout: result.won ? `${result.payout || '0.00000'} MIDN` : '0.00000 MIDN',
       multiplier: result.won ? `${result.multiplier || '0.00'}x` : '0.00x',
       time: 'Just now',
       entropyProof: entropyProof
@@ -285,8 +285,8 @@ export default function Mines() {
     
     setGameHistory(prev => [newHistoryItem, ...prev].slice(0, 50));
 
-    // Log game result to Polygon Amoy (non-blocking)
-    logGameResultToPolygon({
+    // Log game result to Midnight Network (non-blocking)
+    logGameResultToMidnight({
       gameType: 'MINES',
       player: walletAddress || address || 'unknown',
       betAmount: result.betAmount || 0,
@@ -299,24 +299,24 @@ export default function Mines() {
         outcome: result.won ? 'win' : 'loss',
         gameMode: 'manual'
       }
-    }).then(polygonResult => {
-      // Add Polygon transaction hash to game history
-      if (polygonResult && polygonResult.polygonTxHash) {
-        console.log('✅ Mines Polygon transaction hash received:', polygonResult.polygonTxHash);
+    }).then(midnightResult => {
+      // Add Midnight transaction hash to game history
+      if (midnightResult && midnightResult.midnightTxHash) {
+        console.log('✅ Mines Midnight transaction hash received:', midnightResult.midnightTxHash);
         setGameHistory(prev => {
           const updatedHistory = [...prev];
           if (updatedHistory.length > 0) {
             updatedHistory[0] = { 
               ...updatedHistory[0], 
-              polygonTxHash: polygonResult.polygonTxHash,
-              polygonExplorerUrl: polygonResult.polygonExplorerUrl
+              midnightTxHash: midnightResult.midnightTxHash,
+              midnightExplorerUrl: midnightResult.midnightExplorerUrl
             };
           }
           return updatedHistory;
         });
       }
     }).catch(error => {
-      console.error('❌ Failed to log Mines game to Polygon:', error);
+      console.error('❌ Failed to log Mines game to Midnight:', error);
     });
     
     // Fire-and-forget casino session log
@@ -354,7 +354,7 @@ export default function Mines() {
   const renderHeader = () => (
     <div className="relative text-white px-4 md:px-8 lg:px-20 mb-8 pt-8 md:pt-10 mt-4">
       {/* Background Elements */}
-      <div className="absolute top-5 -right-32 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-5 -right-32 w-64 h-64 bg-midnight-blue/10 rounded-full blur-3xl"></div>
       <div className="absolute top-28 left-1/3 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
       <div className="absolute -bottom-20 left-1/4 w-48 h-48 bg-pink-500/5 rounded-full blur-3xl"></div>
       
@@ -363,8 +363,8 @@ export default function Mines() {
           {/* Left Column - Game Info */}
           <div className="md:w-3/4">
             <div className="flex items-center">
-              <div className="mr-3 p-3 bg-gradient-to-br from-purple-900/40 to-purple-700/10 rounded-lg shadow-lg shadow-purple-900/10 border border-purple-800/20">
-                <GiMineExplosion className="text-3xl text-purple-300" />
+              <div className="mr-3 p-3 bg-gradient-to-br from-midnight-black/40 to-midnight-blue/10 rounded-lg shadow-lg shadow-midnight-blue/10 border border-midnight-blue/15">
+                <GiMineExplosion className="text-3xl text-blue-300" />
               </div>
           <div>
                 <motion.div 
@@ -374,11 +374,11 @@ export default function Mines() {
                   transition={{ duration: 0.3 }}
                 >
                   <p className="text-sm text-gray-400 font-sans">Games / Mines</p>
-                  <span className="text-xs px-2 py-0.5 bg-purple-900/30 rounded-full text-purple-300 font-display">Popular</span>
+                  <span className="text-xs px-2 py-0.5 bg-midnight-blue/20 rounded-full text-blue-300 font-display">Popular</span>
                   <span className="text-xs px-2 py-0.5 bg-green-900/30 rounded-full text-green-300 font-display">Live</span>
                 </motion.div>
                 <motion.h1 
-                  className="text-3xl md:text-4xl font-bold font-display bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent"
+                  className="text-3xl md:text-4xl font-bold font-display bg-gradient-to-r from-blue-300 to-pink-300 bg-clip-text text-transparent"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.1 }}
@@ -403,15 +403,15 @@ export default function Mines() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="flex items-center text-sm bg-gradient-to-r from-purple-900/30 to-purple-800/10 px-3 py-1.5 rounded-full">
+              <div className="flex items-center text-sm bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/10 px-3 py-1.5 rounded-full">
                 <FaBomb className="mr-1.5 text-red-400" />
                 <span className="font-sans">Up to 24 mines</span>
               </div>
-              <div className="flex items-center text-sm bg-gradient-to-r from-purple-900/30 to-purple-800/10 px-3 py-1.5 rounded-full">
+              <div className="flex items-center text-sm bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/10 px-3 py-1.5 rounded-full">
                 <GiDiamonds className="mr-1.5 text-blue-400" />
                 <span className="font-sans">Customizable game grid</span>
               </div>
-              <div className="flex items-center text-sm bg-gradient-to-r from-purple-900/30 to-purple-800/10 px-3 py-1.5 rounded-full">
+              <div className="flex items-center text-sm bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/10 px-3 py-1.5 rounded-full">
                 <GiCrystalGrowth className="mr-1.5 text-green-400" />
                 <span className="font-sans">Provably fair gaming</span>
               </div>
@@ -420,7 +420,7 @@ export default function Mines() {
           
           {/* Right Column - Stats and Controls */}
           <div className="md:w-3/4">
-            <div className="bg-gradient-to-br from-purple-900/20 to-purple-800/5 rounded-xl p-3 border border-purple-800/20 shadow-lg shadow-purple-900/10">
+            <div className="bg-gradient-to-br from-midnight-blue/15 to-midnight-blue/5 rounded-xl p-3 border border-midnight-blue/15 shadow-lg shadow-midnight-blue/10">
               {/* Quick stats in top row */}
               <motion.div 
                 className="grid grid-cols-3 gap-2 mb-4"
@@ -462,7 +462,7 @@ export default function Mines() {
               >
                 <button 
                   onClick={() => scrollToElement('strategy-guide')}
-                  className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-800/40 to-purple-900/20 rounded-lg text-white font-medium text-sm hover:from-purple-700/40 hover:to-purple-800/20 transition-all duration-300"
+                  className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/15 rounded-lg text-white font-medium text-sm hover:from-midnight-blue/20 hover:to-midnight-blue/15 transition-all duration-300"
                 >
                   <GiCardRandom className="mr-2" />
                   Strategy Guide
@@ -486,7 +486,7 @@ export default function Mines() {
           </div>
         </div>
 
-        <div className="w-full h-0.5 bg-gradient-to-r from-purple-600 via-blue-500/30 to-transparent mt-6"></div>
+        <div className="w-full h-0.5 bg-gradient-to-r from-midnight-blue via-blue-500/30 to-transparent mt-6"></div>
       </div>
     </div>
   );
@@ -497,7 +497,7 @@ export default function Mines() {
           {/* Sidebar/Tabs */}
       <div className="w-full lg:w-1/3 xl:w-1/4">
         <motion.div 
-          className="rounded-xl border-2 border-purple-700/30 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 backdrop-blur-sm p-5 shadow-xl shadow-purple-900/20"
+          className="rounded-xl border-2 border-midnight-blue/20 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 backdrop-blur-sm p-5 shadow-xl shadow-midnight-blue/15"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -508,13 +508,13 @@ export default function Mines() {
 
       {/* Game Area */}
       <motion.div 
-        className="w-full lg:w-2/3 xl:w-3/4 rounded-xl border-2 border-purple-700/30 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 backdrop-blur-sm p-6 md:p-8 shadow-xl shadow-purple-900/20 relative overflow-hidden"
+        className="w-full lg:w-2/3 xl:w-3/4 rounded-xl border-2 border-midnight-blue/20 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 backdrop-blur-sm p-6 md:p-8 shadow-xl shadow-midnight-blue/15 relative overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute top-0 right-0 w-80 h-80 bg-midnight-blue/10 rounded-full blur-3xl -z-10"></div>
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl -z-10"></div>
         <div className="absolute top-1/3 left-1/3 w-40 h-40 bg-pink-500/5 rounded-full blur-2xl -z-10 animate-pulse"></div>
         
@@ -554,19 +554,19 @@ export default function Mines() {
             exit={{ opacity: 0 }}
           >
             <motion.div 
-              className="bg-gradient-to-br from-purple-900/80 to-[#290023]/90 rounded-xl p-3 w-full max-w-7xl border-2 border-purple-500/30 shadow-xl shadow-purple-900/20"
+              className="bg-gradient-to-br from-midnight-black/80 to-[#290023]/90 rounded-xl p-3 w-full max-w-7xl border-2 border-midnight-blue/20 shadow-xl shadow-midnight-blue/15"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
             >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-2xl font-bold text-white font-display flex items-center">
-                  <GiMineExplosion className="mr-3 text-purple-400 text-3xl" /> 
+                  <GiMineExplosion className="mr-3 text-blue-400 text-3xl" /> 
                   How to Play Mines
                 </h3>
                 <button 
                   onClick={() => setShowTutorial(false)}
-                  className="text-white/70 hover:text-white bg-purple-800/30 p-2 rounded-full hover:bg-purple-700/40 transition-all"
+                  className="text-white/70 hover:text-white bg-midnight-blue/20 p-2 rounded-full hover:bg-midnight-blue/20 transition-all"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -576,7 +576,7 @@ export default function Mines() {
               
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="md:w-3/4">
-                  <div className="relative w-full bg-black rounded-lg overflow-hidden shadow-lg shadow-purple-900/30 border border-purple-600/20" style={{ paddingTop: "56.25%" }}>
+                  <div className="relative w-full bg-black rounded-lg overflow-hidden shadow-lg shadow-midnight-blue/20 border border-midnight-blue/15" style={{ paddingTop: "56.25%" }}>
                     <iframe 
                       className="absolute top-0 left-0 w-full h-full"
                       src="https://www.youtube.com/embed/SJNWidJKOeA?si=SfKVKLsO_UyfGi5h" 
@@ -605,7 +605,7 @@ export default function Mines() {
               
               <div className="mt-4 flex justify-end">
                 <button 
-                  className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-medium hover:from-purple-700 hover:to-blue-700 transition-all shadow-lg shadow-purple-900/20 flex items-center"
+                  className="px-6 py-2.5 bg-gradient-to-r from-midnight-blue to-blue-600 rounded-lg text-white font-medium hover:from-midnight-blue hover:to-blue-700 transition-all shadow-lg shadow-midnight-blue/15 flex items-center"
                   onClick={() => setShowTutorial(false)}
                 >
                   <span>Got it!</span>
@@ -665,13 +665,13 @@ export default function Mines() {
       {/* Strategy Tips Section */}
       <motion.div 
         id="strategy-guide"
-        className="mt-8 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 border-2 border-purple-700/30 rounded-xl p-6 backdrop-blur-sm shadow-xl shadow-purple-900/20 scroll-mt-24 relative overflow-hidden"
+        className="mt-8 bg-gradient-to-br from-[#290023]/80 to-[#150012]/90 border-2 border-midnight-blue/20 rounded-xl p-6 backdrop-blur-sm shadow-xl shadow-midnight-blue/15 scroll-mt-24 relative overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-60 h-60 bg-purple-600/5 rounded-full blur-3xl -z-1"></div>
+        <div className="absolute top-0 right-0 w-60 h-60 bg-midnight-blue/5 rounded-full blur-3xl -z-1"></div>
         <div className="absolute bottom-0 left-0 w-60 h-60 bg-blue-600/5 rounded-full blur-3xl -z-1"></div>
         <div className="absolute top-1/3 left-1/3 w-40 h-40 bg-pink-500/5 rounded-full blur-2xl -z-1"></div>
         
@@ -688,7 +688,7 @@ export default function Mines() {
             </h3>
             <button 
               onClick={() => setIsStatsExpanded(!isStatsExpanded)}
-              className="bg-gradient-to-r from-purple-900/30 to-purple-800/20 px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white flex items-center gap-2 border border-purple-800/30 hover:border-purple-700/40 transition-all duration-300 shadow-md"
+              className="bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/15 px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white flex items-center gap-2 border border-midnight-blue/20 hover:border-midnight-blue/20 transition-all duration-300 shadow-md"
             >
               {isStatsExpanded ? (
                 <>
@@ -697,20 +697,20 @@ export default function Mines() {
                     animate={{ rotate: 180 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <FaChevronDown className="text-purple-400" size={12} />
+                    <FaChevronDown className="text-blue-400" size={12} />
                   </motion.div>
                 </>
               ) : (
                 <>
                   <span>Show More</span>
-                  <FaChevronDown className="text-purple-400" size={12} />
+                  <FaChevronDown className="text-blue-400" size={12} />
                 </>
               )}
             </button>
           </div>
           
           {/* Animated underline */}
-          <div className="h-px mt-4 bg-gradient-to-r from-yellow-600/50 via-purple-600/30 to-transparent relative overflow-hidden">
+          <div className="h-px mt-4 bg-gradient-to-r from-yellow-600/50 via-midnight-blue/20 to-transparent relative overflow-hidden">
             <motion.div 
               className="h-full w-20 bg-gradient-to-r from-transparent via-white/70 to-transparent absolute"
               animate={{ 
@@ -840,18 +840,18 @@ export default function Mines() {
               transition={{ duration: 0.4 }}
             >
               <motion.div 
-                className="bg-gradient-to-br from-purple-900/20 to-purple-800/5 rounded-xl p-5 border border-purple-800/30 relative overflow-hidden hover:shadow-xl transition-all duration-300 group"
+                className="bg-gradient-to-br from-midnight-blue/15 to-midnight-blue/5 rounded-xl p-5 border border-midnight-blue/20 relative overflow-hidden hover:shadow-xl transition-all duration-300 group"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
                 whileHover={{ y: -5, scale: 1.02 }}
               >
-                <div className="absolute -top-6 -right-6 w-16 h-16 bg-purple-500/10 rounded-full blur-xl group-hover:w-20 group-hover:h-20 transition-all"></div>
+                <div className="absolute -top-6 -right-6 w-16 h-16 bg-midnight-blue/10 rounded-full blur-xl group-hover:w-20 group-hover:h-20 transition-all"></div>
                 <h4 className="text-lg font-semibold text-white mb-3 flex items-center font-display relative z-10">
-                  <div className="p-2 bg-gradient-to-br from-purple-700/40 to-purple-900/20 rounded-full mr-3 border border-purple-700/30 shadow-inner">
+                  <div className="p-2 bg-gradient-to-br from-midnight-blue/20 to-midnight-blue/15 rounded-full mr-3 border border-midnight-blue/20 shadow-inner">
                     <FaChartLine className="text-blue-400" />
                   </div>
-                  <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                     Advanced Pattern Play
                   </span>
                   <span className="ml-2 text-xs px-2 py-0.5 bg-blue-900/30 text-blue-300 rounded-full border border-blue-800/30">Pro Tip</span>
@@ -862,34 +862,34 @@ export default function Mines() {
                 </p>
                 
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <div className="bg-black/30 rounded-lg p-3 border border-purple-800/20">
+                  <div className="bg-black/30 rounded-lg p-3 border border-midnight-blue/15">
                     <h5 className="text-sm font-medium text-white/90 mb-1.5 flex items-center">
-                      <span className="w-5 h-5 rounded-full bg-purple-900/50 text-purple-300 text-xs flex items-center justify-center mr-1.5">1</span>
+                      <span className="w-5 h-5 rounded-full bg-midnight-blue/50 text-blue-300 text-xs flex items-center justify-center mr-1.5">1</span>
                       Edge-first
                     </h5>
                     <p className="text-xs text-white/70">Reveal tiles along the edges first</p>
                   </div>
                   
-                  <div className="bg-black/30 rounded-lg p-3 border border-purple-800/20">
+                  <div className="bg-black/30 rounded-lg p-3 border border-midnight-blue/15">
                     <h5 className="text-sm font-medium text-white/90 mb-1.5 flex items-center">
-                      <span className="w-5 h-5 rounded-full bg-purple-900/50 text-purple-300 text-xs flex items-center justify-center mr-1.5">2</span>
+                      <span className="w-5 h-5 rounded-full bg-midnight-blue/50 text-blue-300 text-xs flex items-center justify-center mr-1.5">2</span>
                       Center-out
                     </h5>
                     <p className="text-xs text-white/70">Start from center and work outward</p>
                   </div>
                   
-                  <div className="bg-black/30 rounded-lg p-3 border border-purple-800/20">
+                  <div className="bg-black/30 rounded-lg p-3 border border-midnight-blue/15">
                     <h5 className="text-sm font-medium text-white/90 mb-1.5 flex items-center">
-                      <span className="w-5 h-5 rounded-full bg-purple-900/50 text-purple-300 text-xs flex items-center justify-center mr-1.5">3</span>
+                      <span className="w-5 h-5 rounded-full bg-midnight-blue/50 text-blue-300 text-xs flex items-center justify-center mr-1.5">3</span>
                       Diagonal
                     </h5>
                     <p className="text-xs text-white/70">Reveal tiles in diagonal patterns</p>
                   </div>
                 </div>
                 
-                <div className="mt-4 bg-black/20 p-3 rounded-lg border border-purple-800/20 text-xs text-white/70">
+                <div className="mt-4 bg-black/20 p-3 rounded-lg border border-midnight-blue/15 text-xs text-white/70">
                   <div className="flex items-start">
-                    <FaInfoCircle className="text-purple-400 mt-0.5 mr-2 flex-shrink-0" />
+                    <FaInfoCircle className="text-blue-400 mt-0.5 mr-2 flex-shrink-0" />
                     <p>Remember that each mine placement is random and independent of previous games. Pattern play is purely psychological, not mathematical.</p>
                   </div>
                 </div>
