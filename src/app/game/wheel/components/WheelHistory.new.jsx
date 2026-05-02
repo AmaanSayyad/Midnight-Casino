@@ -157,7 +157,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap'
               }}>
-                {totalVolume.toFixed(5)} MATIC
+                {totalVolume.toFixed(5)} MIDN
               </Typography>
               <Box 
                 sx={{ 
@@ -193,7 +193,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap'
               }}>
-                {biggestWin.toFixed(5)} MATIC
+                {biggestWin.toFixed(5)} MIDN
               </Typography>
               <FaTrophy color="#FFA500" />
             </Box>
@@ -513,7 +513,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                           whiteSpace: 'nowrap'
                         }}
                       >
-                        {item.betAmount} MATIC
+                        {item.betAmount} MIDN
                       </Typography>
                       <Image src="/coin.png" width={16} height={16} alt="coin" />
                     </Box>
@@ -544,7 +544,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                           whiteSpace: 'nowrap'
                         }}
                       >
-                        {item.payout} MATIC
+                        {item.payout} MIDN
                       </Typography>
                       <Image src="/coin.png" width={16} height={16} alt="coin" />
                     </Box>
