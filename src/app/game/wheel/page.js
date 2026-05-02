@@ -55,13 +55,13 @@ export default function Home() {
   const notification = useNotification();
   const { address } = useAccount();
 
-  // Function to log game results to Polygon Amoy with retry mechanism
-  const logGameResultToPolygon = async (gameData, retryCount = 0) => {
+  // Function to log game results to Midnight Network with retry mechanism
+  const logGameResultToMidnight = async (gameData, retryCount = 0) => {
     const maxRetries = 3;
     const retryDelay = 1000 * (retryCount + 1); // Exponential backoff: 1s, 2s, 3s
     
     try {
-      console.log(`📝 Logging Wheel result to Polygon Amoy (attempt ${retryCount + 1}):`, gameData);
+      console.log(`📝 Logging Wheel result to Midnight Network (attempt ${retryCount + 1}):`, gameData);
       
       const response = await fetch('/api/log-game-result', {
         method: 'POST',
@@ -74,32 +74,32 @@ export default function Home() {
       const result = await response.json();
       
       if (result.success) {
-        console.log('✅ Wheel game logged to Polygon Amoy:', {
-          txHash: result.polygonTxHash,
-          explorerUrl: result.polygonExplorerUrl
+        console.log('✅ Wheel game logged to Midnight Network:', {
+          txHash: result.midnightTxHash,
+          explorerUrl: result.midnightExplorerUrl
         });
         
         return result;
       } else {
-        console.error('❌ Failed to log Wheel game to Polygon:', result.error);
+        console.error('❌ Failed to log Wheel game to Midnight:', result.error);
         
         // Check if we should retry
         if (result.shouldRetry && retryCount < maxRetries) {
           console.log(`🔄 Retrying Wheel game log in ${retryDelay}ms...`);
           await new Promise(resolve => setTimeout(resolve, retryDelay));
-          return logGameResultToPolygon(gameData, retryCount + 1);
+          return logGameResultToMidnight(gameData, retryCount + 1);
         }
         
         throw new Error(result.error);
       }
     } catch (error) {
-      console.error('❌ Error logging Wheel game to Polygon:', error);
+      console.error('❌ Error logging Wheel game to Midnight:', error);
       
       // Retry on network errors
       if (retryCount < maxRetries && (error.name === 'TypeError' || error.message.includes('fetch'))) {
         console.log(`🔄 Retrying Wheel game log due to network error in ${retryDelay}ms...`);
         await new Promise(resolve => setTimeout(resolve, retryDelay));
-        return logGameResultToPolygon(gameData, retryCount + 1);
+        return logGameResultToMidnight(gameData, retryCount + 1);
       }
       
       throw error;
@@ -170,7 +170,7 @@ export default function Home() {
                 randomValue: entropyResult.randomValue,
                 randomNumber: entropyResult.randomValue,
                 transactionHash: entropyResult.entropyProof?.transactionHash,
-                polygonExplorerUrl: entropyResult.entropyProof?.polygonExplorerUrl,
+                midnightExplorerUrl: entropyResult.entropyProof?.midnightExplorerUrl,
                 explorerUrl: entropyResult.entropyProof?.explorerUrl,
                 timestamp: entropyResult.entropyProof?.timestamp,
                 source: 'Pyth Entropy'
@@ -205,11 +205,11 @@ export default function Home() {
     }
   };
 
-    // Check Redux balance (balance is already in MATIC)
+    // Check Redux balance (balance is already in MIDN)
     const currentBalance = parseFloat(userBalance || '0');
     
     if (currentBalance < betAmount) {
-      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} MATIC but need ${betAmount} MATIC`);
+      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} MIDN but need ${betAmount} MIDN`);
       return;
     }
 
@@ -226,7 +226,7 @@ export default function Home() {
       const newBalance = (parseFloat(userBalance || '0') - betAmount).toString();
       dispatch(setBalance(newBalance));
       
-      console.log('balance MATIC');
+      console.log('balance MIDN');
       
       // Set up callback to handle wheel animation completion
       window.wheelBetCallback = async (landedMultiplier) => {
@@ -277,8 +277,8 @@ export default function Home() {
             randomValue: Math.floor(Math.random() * 1000000),
             randomNumber: Math.floor(Math.random() * 1000000),
             transactionHash: 'generating...',
-            polygonExplorerUrl: 'https://amoy.polygonscan.com/',
-            explorerUrl: 'https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia',
+            midnightExplorerUrl: 'https://amoy.midnightscan.com/',
+            explorerUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network',
             timestamp: Date.now(),
             source: 'Generating...'
           };
@@ -290,7 +290,7 @@ export default function Home() {
           
           // Show result and update balance immediately
           if (actualMultiplier > 0) {
-            notification.success(`Congratulations! ${betAmount} MATIC × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(5)} MATIC won!`);
+            notification.success(`Congratulations! ${betAmount} MIDN × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(5)} MIDN won!`);
             
             // Update balance with winnings
             const currentBalance = parseFloat(userBalance || '0');
@@ -312,8 +312,8 @@ export default function Home() {
             console.error('❌ Background entropy generation failed:', error);
           });
 
-          // Log game result to Polygon Amoy (non-blocking)
-          logGameResultToPolygon({
+          // Log game result to Midnight Network (non-blocking)
+          logGameResultToMidnight({
             gameType: 'WHEEL',
             player: address || 'unknown',
             betAmount: betAmount,
@@ -326,24 +326,24 @@ export default function Home() {
               segments: noOfSegments,
               riskLevel: risk
             }
-          }).then(polygonResult => {
-            // Add Polygon transaction hash to game history
-            if (polygonResult && polygonResult.polygonTxHash) {
-              console.log('✅ Wheel Polygon transaction hash received:', polygonResult.polygonTxHash);
+          }).then(midnightResult => {
+            // Add Midnight transaction hash to game history
+            if (midnightResult && midnightResult.midnightTxHash) {
+              console.log('✅ Wheel Midnight transaction hash received:', midnightResult.midnightTxHash);
               setGameHistory(prev => {
                 const updatedHistory = [...prev];
                 if (updatedHistory.length > 0) {
                   updatedHistory[0] = { 
                     ...updatedHistory[0], 
-                    polygonTxHash: polygonResult.polygonTxHash,
-                    polygonExplorerUrl: polygonResult.polygonExplorerUrl
+                    midnightTxHash: midnightResult.midnightTxHash,
+                    midnightExplorerUrl: midnightResult.midnightExplorerUrl
                   };
                 }
                 return updatedHistory;
               });
             }
           }).catch(error => {
-            console.error('❌ Failed to log game to Polygon:', error);
+            console.error('❌ Failed to log game to Midnight:', error);
           });
           
           // Clean up callback
@@ -395,7 +395,7 @@ export default function Home() {
       });
       
       if (currentBalance < currentBet) {
-        alert(`Insufficient balance for bet ${i + 1}. Need ${currentBet.toFixed(5)} MATIC but have ${currentBalance.toFixed(5)} MATIC`);
+        alert(`Insufficient balance for bet ${i + 1}. Need ${currentBet.toFixed(5)} MIDN but have ${currentBalance.toFixed(5)} MIDN`);
         break;
       }
 
@@ -498,11 +498,11 @@ export default function Home() {
       
       // Show notification for win
       if (actualMultiplier > 0) {
-        notification.success(`Congratulations! ${currentBet} MATIC × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(8)} MATIC won!`);
+        notification.success(`Congratulations! ${currentBet} MIDN × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(8)} MIDN won!`);
       }
 
-      // Log auto bet result to Polygon Amoy (non-blocking)
-      logGameResultToPolygon({
+      // Log auto bet result to Midnight Network (non-blocking)
+      logGameResultToMidnight({
         gameType: 'WHEEL_AUTO',
         player: address || 'unknown',
         betAmount: currentBet,
@@ -516,25 +516,25 @@ export default function Home() {
           riskLevel: risk,
           autoBet: true
         }
-      }).then(polygonResult => {
-        // Add Polygon transaction hash to auto bet history
-        if (polygonResult && polygonResult.polygonTxHash) {
-          console.log('✅ Wheel Auto Bet Polygon transaction hash received:', polygonResult.polygonTxHash);
+      }).then(midnightResult => {
+        // Add Midnight transaction hash to auto bet history
+        if (midnightResult && midnightResult.midnightTxHash) {
+          console.log('✅ Wheel Auto Bet Midnight transaction hash received:', midnightResult.midnightTxHash);
           setGameHistory(prev => {
             const updatedHistory = [...prev];
             const targetIndex = updatedHistory.findIndex(item => item.id === (Date.now() + i));
             if (targetIndex >= 0) {
               updatedHistory[targetIndex] = { 
                 ...updatedHistory[targetIndex], 
-                polygonTxHash: polygonResult.polygonTxHash,
-                polygonExplorerUrl: polygonResult.polygonExplorerUrl
+                midnightTxHash: midnightResult.midnightTxHash,
+                midnightExplorerUrl: midnightResult.midnightExplorerUrl
               };
             }
             return updatedHistory;
           });
         }
       }).catch(error => {
-        console.error('❌ Failed to log auto bet to Polygon:', error);
+        console.error('❌ Failed to log auto bet to Midnight:', error);
       });
 
       // Store history entry
@@ -608,8 +608,8 @@ export default function Home() {
     // Sample statistics
     const gameStatistics = {
       totalBets: '1,856,342',
-      totalVolume: '8.3M MATIC',
-      maxWin: '243,500 MATIC'
+      totalVolume: '8.3M MIDN',
+      maxWin: '243,500 MIDN'
     };
     
     return (
@@ -617,7 +617,7 @@ export default function Home() {
         {/* Background Elements */}
         <div className="absolute top-5 -right-32 w-64 h-64 bg-red-500/10 rounded-full blur-3xl"></div>
         <div className="absolute top-28 left-1/3 w-32 h-32 bg-green-500/10 rounded-full blur-2xl"></div>
-        <div className="absolute -bottom-20 left-1/4 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 left-1/4 w-48 h-48 bg-midnight-blue/5 rounded-full blur-3xl"></div>
         
         <div className="relative">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
@@ -737,7 +737,7 @@ export default function Home() {
                   </button>
                   <button 
                     onClick={() => scrollToSection('history')}
-                    className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-800/40 to-purple-900/20 rounded-lg text-white font-medium text-sm hover:from-purple-700/40 hover:to-purple-800/20 transition-all duration-300"
+                    className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/15 rounded-lg text-white font-medium text-sm hover:from-midnight-blue/20 hover:to-midnight-blue/15 transition-all duration-300"
                   >
                     <FaChartLine className="mr-2" />
                     Game History
