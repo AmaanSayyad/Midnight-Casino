@@ -282,7 +282,7 @@ const LiveGames = () => {
                       </Typography>
                       <Typography variant="body2" fontWeight="medium" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                         <FaCoins size={12} color="#ffc107" />
-                        {game.minBet} MATIC
+                        {game.minBet} MIDN
                       </Typography>
                     </Box>
                     <Box sx={{ textAlign: 'right' }}>
@@ -291,7 +291,7 @@ const LiveGames = () => {
                       </Typography>
                       <Typography variant="body2" fontWeight="medium" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, justifyContent: 'flex-end' }}>
                         <FaCoins size={12} color="#ffc107" />
-                        {game.maxBet.toLocaleString()} MATIC
+                        {game.maxBet.toLocaleString()} MIDN
                       </Typography>
                     </Box>
                   </Box>

@@ -51,12 +51,12 @@ export default function Plinko() {
   const PlinkoHeader = () => {
     const gameStatistics = {
       totalBets: '1,234,567',
-      totalVolume: '5.2M MATIC',
-      maxWin: '120,000 MATIC'
+      totalVolume: '5.2M MIDN',
+      maxWin: '120,000 MIDN'
     };
     return (
       <div className="relative text-white px-4 md:px-8 lg:px-20 mb-8 pt-28 md:pt-32 lg:pt-36 mt-6">
-        <div className="absolute top-6 -right-24 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-6 -right-24 w-64 h-64 bg-midnight-blue/10 rounded-full blur-3xl"></div>
         <div className="absolute top-24 left-1/3 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl"></div>
         <div className="absolute -bottom-20 left-1/4 w-48 h-48 bg-violet-500/5 rounded-full blur-3xl"></div>
 
@@ -65,7 +65,7 @@ export default function Plinko() {
             {/* Left Column - Game Info */}
             <div className="md:w-1/2">
               <div className="flex items-center">
-                <div className="mr-3 p-3 bg-gradient-to-br from-purple-900/40 to-fuchsia-700/10 rounded-lg shadow-lg shadow-purple-900/10 border border-purple-800/20">
+                <div className="mr-3 p-3 bg-gradient-to-br from-midnight-black/40 to-fuchsia-700/10 rounded-lg shadow-lg shadow-midnight-blue/10 border border-midnight-blue/15">
                   <GiRollingDices className="text-3xl text-fuchsia-300" />
                 </div>
                 <div>
@@ -76,7 +76,7 @@ export default function Plinko() {
                     transition={{ duration: 0.3 }}
                   >
                     <p className="text-sm text-gray-400 font-sans">Games / Plinko</p>
-                    <span className="text-xs px-2 py-0.5 bg-purple-900/30 rounded-full text-purple-300 font-display">Classic</span>
+                    <span className="text-xs px-2 py-0.5 bg-midnight-blue/20 rounded-full text-blue-300 font-display">Classic</span>
                     <span className="text-xs px-2 py-0.5 bg-green-900/30 rounded-full text-green-300 font-display">Live</span>
                   </motion.div>
                   <motion.h1
@@ -105,15 +105,15 @@ export default function Plinko() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <div className="flex items-center text-sm bg-gradient-to-r from-purple-900/30 to-fuchsia-800/10 px-3 py-1.5 rounded-full">
+                <div className="flex items-center text-sm bg-gradient-to-r from-midnight-blue/20 to-fuchsia-800/10 px-3 py-1.5 rounded-full">
                   <FaPercentage className="mr-1.5 text-amber-400" />
                   <span className="font-sans">Configurable risk</span>
                 </div>
-                <div className="flex items-center text-sm bg-gradient-to-r from-purple-900/30 to-fuchsia-800/10 px-3 py-1.5 rounded-full">
+                <div className="flex items-center text-sm bg-gradient-to-r from-midnight-blue/20 to-fuchsia-800/10 px-3 py-1.5 rounded-full">
                   <GiPokerHand className="mr-1.5 text-blue-400" />
                   <span className="font-sans">8–16 rows</span>
                 </div>
-                <div className="flex items-center text-sm bg-gradient-to-r from-purple-900/30 to-fuchsia-800/10 px-3 py-1.5 rounded-full">
+                <div className="flex items-center text-sm bg-gradient-to-r from-midnight-blue/20 to-fuchsia-800/10 px-3 py-1.5 rounded-full">
                   <FaBalanceScale className="mr-1.5 text-green-400" />
                   <span className="font-sans">Provably fair</span>
                 </div>
@@ -122,7 +122,7 @@ export default function Plinko() {
 
             {/* Right Column - Stats and Quick links */}
             <div className="md:w-1/2">
-              <div className="bg-gradient-to-br from-purple-900/20 to-fuchsia-800/5 rounded-xl p-4 border border-purple-800/20 shadow-lg shadow-purple-900/10">
+              <div className="bg-gradient-to-br from-midnight-blue/15 to-fuchsia-800/5 rounded-xl p-4 border border-midnight-blue/15 shadow-lg shadow-midnight-blue/10">
                 <motion.div
                   className="grid grid-cols-3 gap-2 mb-4"
                   initial={{ opacity: 0 }}
@@ -158,7 +158,7 @@ export default function Plinko() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <button onClick={() => scrollToElement('strategy')} className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-800/40 to-fuchsia-900/20 rounded-lg text-white font-medium text-sm hover:from-purple-700/40 hover:to-fuchsia-800/20 transition-all duration-300">
+                  <button onClick={() => scrollToElement('strategy')} className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-midnight-blue/20 to-fuchsia-900/20 rounded-lg text-white font-medium text-sm hover:from-midnight-blue/20 hover:to-fuchsia-800/20 transition-all duration-300">
                     <GiCardRandom className="mr-2" />
                     Strategy Guide
                   </button>
@@ -166,7 +166,7 @@ export default function Plinko() {
                     <FaCoins className="mr-2" />
                     Payout Tables
                   </button>
-                  <button onClick={() => scrollToElement('history')} className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-800/40 to-purple-900/20 rounded-lg text-white font-medium text-sm hover:from-purple-700/40 hover:to-purple-800/20 transition-all duration-300">
+                  <button onClick={() => scrollToElement('history')} className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/15 rounded-lg text-white font-medium text-sm hover:from-midnight-blue/20 hover:to-midnight-blue/15 transition-all duration-300">
                     <FaChartLine className="mr-2" />
                     Game History
                   </button>
@@ -175,7 +175,7 @@ export default function Plinko() {
             </div>
           </div>
 
-          <div className="w-full h-0.5 bg-gradient-to-r from-pink-600 via-blue-500/30 to-transparent mt-6"></div>
+          <div className="w-full h-0.5 bg-gradient-to-r from-midnight-blue via-blue-500/30 to-transparent mt-6"></div>
         </div>
       </div>
     );
@@ -187,7 +187,7 @@ export default function Plinko() {
   };
 
   const handleBet = () => {
-    // Trigger the ball dropping animation in PlinkoGame. balance MATIC
+    // Trigger the ball dropping animation in PlinkoGame. balance MIDN
     console.log('Main page handleBet called');
     if (plinkoGameRef.current && plinkoGameRef.current.dropBall) {
       plinkoGameRef.current.dropBall();
@@ -199,9 +199,9 @@ export default function Plinko() {
     console.log('🔍 handleBetHistoryChange called with:', newBetResult);
     console.log('⏱️ Start time:', new Date(startTime).toISOString());
     
-    // Check if this is an update with Polygon transaction hash
-    if (newBetResult.polygonTxHash) {
-      console.log('📝 Updating existing game history with Polygon tx:', newBetResult.polygonTxHash);
+    // Check if this is an update with Midnight transaction hash
+    if (newBetResult.midnightTxHash) {
+      console.log('📝 Updating existing game history with Midnight tx:', newBetResult.midnightTxHash);
       console.log('🔍 Looking for entry with ID:', newBetResult.id);
       setGameHistory(prev => {
         console.log('📊 Current history length:', prev.length);
@@ -215,18 +215,18 @@ export default function Plinko() {
         if (index >= 0) {
           updatedHistory[index] = {
             ...updatedHistory[index],
-            polygonTxHash: newBetResult.polygonTxHash,
-            polygonExplorerUrl: newBetResult.polygonExplorerUrl,
-            polygonStatus: 'completed'
+            midnightTxHash: newBetResult.midnightTxHash,
+            midnightExplorerUrl: newBetResult.midnightExplorerUrl,
+            midnightStatus: 'completed'
           };
-          console.log('✅ Updated game history entry with Polygon tx:', updatedHistory[index]);
+          console.log('✅ Updated game history entry with Midnight tx:', updatedHistory[index]);
         } else {
-          console.warn('⚠️ Could not find entry to update with Polygon tx');
-          // If we can't find the entry, add it as a new entry with Polygon tx
-          console.log('📝 Adding new entry with Polygon tx since original not found');
+          console.warn('⚠️ Could not find entry to update with Midnight tx');
+          // If we can't find the entry, add it as a new entry with Midnight tx
+          console.log('📝 Adding new entry with Midnight tx since original not found');
           const newEntry = {
             ...newBetResult,
-            polygonStatus: 'completed'
+            midnightStatus: 'completed'
           };
           updatedHistory.unshift(newEntry);
         }
@@ -235,15 +235,15 @@ export default function Plinko() {
       return; // Don't process Pyth Entropy again for updates
     }
     
-    // Store the bet result immediately to ensure it exists for Polygon updates
+    // Store the bet result immediately to ensure it exists for Midnight updates
     const immediateResult = {
       ...newBetResult,
       timestamp: new Date().toISOString(),
-      polygonTxHash: null, // Will be updated later
-      polygonStatus: 'pending'
+      midnightTxHash: null, // Will be updated later
+      midnightStatus: 'pending'
     };
     
-    // Add to history immediately so Polygon updates can find it
+    // Add to history immediately so Midnight updates can find it
     setGameHistory(prev => [immediateResult, ...prev].slice(0, 100));
     
     // Use Pyth Entropy for randomness (only for new entries) with timeout
@@ -343,14 +343,14 @@ export default function Plinko() {
     <div className="min-h-screen bg-[#070005] text-white game-page-container">
       {showMobileWarning && (
         <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 px-4">
-          <div className="bg-[#1A0015] border border-[#333947] rounded-xl p-6 max-w-md w-full text-center">
+          <div className="bg-[#0A0A0A] border border-[#333947] rounded-xl p-6 max-w-md w-full text-center">
             <h3 className="text-xl font-semibold text-white mb-3">Desktop Mode Recommended</h3>
             <p className="text-gray-300 text-sm mb-4">
               For the best experience, please switch your mobile browser to Desktop Mode. The Plinko board and physics may not work correctly on small screens.
             </p>
             <button
               onClick={() => setShowMobileWarning(false)}
-              className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-3 rounded-lg"
+              className="w-full bg-gradient-to-r from-midnight-blue to-midnight-blue hover:from-midnight-blue hover:to-midnight-blue text-white font-medium py-3 rounded-lg"
             >
               I understand, continue
             </button>
@@ -411,7 +411,7 @@ export default function Plinko() {
           {/* Video on left */}
           <div>
             
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border-2 border-purple-600/40 transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/60"
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border-2 border-midnight-blue/40 transition-all duration-300 hover:scale-[1.02] hover:border-midnight-blue/60"
               style={{
                 background: 'linear-gradient(135deg, rgba(104, 29, 219, 0.1), rgba(216, 38, 51, 0.05))',
                 border: '2px solid rgba(104, 29, 219, 0.4)'
@@ -429,7 +429,7 @@ export default function Plinko() {
           </div>
           
           {/* Description on right */}
-          <div className="bg-[#1A0015] rounded-xl border border-[#333947] p-6 text-gray-300">
+          <div className="bg-[#0A0A0A] rounded-xl border border-[#333947] p-6 text-gray-300">
             <h3 className="text-lg font-semibold text-white mb-4">How to Play {gameData.title}</h3>
             {gameData.paragraphs.map((paragraph, index) => (
               <p key={index} className="mb-4">
@@ -442,10 +442,10 @@ export default function Plinko() {
 
       {/* Game History Section */}
       <div className="px-4 md:px-8 lg:px-20 pb-12" id="history">
-        <div className="bg-[#1A0015] rounded-xl border border-[#333947] overflow-hidden">
+        <div className="bg-[#0A0A0A] rounded-xl border border-[#333947] overflow-hidden">
           <div className="p-6">
             <GameHistory 
-              key={gameHistory.length + '-' + (gameHistory[0]?.polygonTxHash || 'none')} 
+              key={gameHistory.length + '-' + (gameHistory[0]?.midnightTxHash || 'none')} 
               history={gameHistory} 
             />
           </div>

@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Box, Typography, Paper, Tabs, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip, CircularProgress, Fade } from '@mui/material';
 import { FaHistory, FaChartLine, FaFire, FaExclamationCircle, FaCoins, FaInfoCircle, FaTrophy, FaDice, FaExternalLinkAlt } from 'react-icons/fa';
 
-// Utility function to format MATIC amounts with proper decimal precision
-const formatMATICAmount = (amount) => {
+// Utility function to format MIDN amounts with proper decimal precision
+const formatMIDNAmount = (amount) => {
   if (typeof amount !== 'number') {
     amount = parseFloat(amount) || 0;
   }
@@ -250,16 +250,16 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
     return redNumbers.includes(num) ? '#d82633' : '#333'; // Red or black
   };
 
-  // Open Monad Explorer link for transaction hash
-  const openMonadExplorer = (hash) => {
+  // Open Midnight Explorer link for transaction hash
+  const openMidnightExplorer = (hash) => {
     if (hash && hash !== 'unknown') {
-      const network = process.env.NEXT_PUBLIC_NETWORK || 'monad-testnet';
+      const network = process.env.NEXT_PUBLIC_NETWORK || 'midnight-network';
       let explorerUrl;
       
-      if (network === 'monad-testnet') {
-        explorerUrl = `https://testnet.monadexplorer.com/tx/${hash}`;
+      if (network === 'midnight-network') {
+        explorerUrl = `https://testnet.midnightexplorer.com/tx/${hash}`;
       } else {
-        explorerUrl = `https://testnet.monadexplorer.com/tx/${hash}`;
+        explorerUrl = `https://testnet.midnightexplorer.com/tx/${hash}`;
       }
       
       window.open(explorerUrl, '_blank');
@@ -269,7 +269,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
   // Open Entropy Explorer link
   const openEntropyExplorer = (txHash) => {
     if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${txHash}`;
+      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
       window.open(entropyExplorerUrl, '_blank');
     }
   };
@@ -484,7 +484,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                             )}
                           </Box>
                         </TableCell>
-                        <TableCell align="center">{formatMATICAmount(bet.amount || bet.totalBetAmount || 0)} MATIC</TableCell>
+                        <TableCell align="center">{formatMIDNAmount(bet.amount || bet.totalBetAmount || 0)} MIDN</TableCell>
                         <TableCell align="center">
                           <Box 
                             sx={{ 
@@ -520,7 +520,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                             {bet.win ? (
                               <>
                                 <FaCoins size={12} color="#14D854" />
-                                +{formatMATICAmount(bet.payout || bet.netResult || 0)} MATIC
+                                +{formatMIDNAmount(bet.payout || bet.netResult || 0)} MIDN
                               </>
                             ) : '-'}
                           </Typography>
@@ -584,11 +584,11 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                                     </Typography>
                                   </Box>
                                 )}
-                                {/* Polygon Amoy Game Log Link */}
-                                {bet.polygonTxHash && (
+                                {/* Midnight Network Game Log Link */}
+                                {bet.midnightTxHash && (
                                   <Box
                                     onClick={() => {
-                                      window.open(`https://amoy.polygonscan.com/tx/${bet.polygonTxHash}`, '_blank');
+                                      window.open(`https://amoy.midnightscan.com/tx/${bet.midnightTxHash}`, '_blank');
                                     }}
                                     sx={{
                                       display: 'flex',
@@ -608,7 +608,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                                   >
                                     <FaExternalLinkAlt size={10} color="#8B2398" />
                                     <Typography variant="caption" sx={{ color: '#8B2398', fontSize: '0.7rem', fontWeight: 'bold' }}>
-                                      Polygon
+                                      Midnight
                                     </Typography>
                                   </Box>
                                 )}
@@ -740,7 +740,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                       </Box>
                       <Typography variant="body2" color="rgba(255,255,255,0.7)">Total Wagered</Typography>
                     </Box>
-                    <Typography variant="h4" fontWeight="bold" color="white" sx={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{formatMATICAmount(stats.totalWagered)} MATIC</Typography>
+                    <Typography variant="h4" fontWeight="bold" color="white" sx={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{formatMIDNAmount(stats.totalWagered)} MIDN</Typography>
                   </Box>
                   
                   <Box 
@@ -782,7 +782,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                       color={stats.netProfit >= 0 ? '#14D854' : '#d82633'}
                       sx={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
                     >
-                      {stats.netProfit >= 0 ? '+' : ''}{formatMATICAmount(stats.netProfit)} MATIC
+                      {stats.netProfit >= 0 ? '+' : ''}{formatMIDNAmount(stats.netProfit)} MIDN
                     </Typography>
                   </Box>
                 </Box>
@@ -902,7 +902,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                             zIndex: 2 
                           }}
                         >
-                          {stats.biggestWin.payout} MATIC
+                          {stats.biggestWin.payout} MIDN
                         </Typography>
                         <Box 
                           sx={{ 
