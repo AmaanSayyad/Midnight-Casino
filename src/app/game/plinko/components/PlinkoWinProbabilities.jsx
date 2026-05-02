@@ -24,7 +24,7 @@ const rowsToChances = {
 
 const Meter = ({ value }) => (
   <div className="w-full bg-black/30 rounded-full h-2">
-    <div className="h-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500" style={{ width: `${Math.min(100, Math.max(0, value))}%` }} />
+    <div className="h-2 rounded-full bg-gradient-to-r from-midnight-blue to-midnight-blue" style={{ width: `${Math.min(100, Math.max(0, value))}%` }} />
   </div>
 );
 

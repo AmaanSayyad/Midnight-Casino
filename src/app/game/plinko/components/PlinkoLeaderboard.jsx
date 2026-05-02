@@ -4,11 +4,11 @@ import { Paper, Typography, Box, Avatar, Chip } from '@mui/material';
 import { FaTrophy } from 'react-icons/fa';
 
 const sampleLeaders = [
-  { name: 'PlinkoPro', country: 'US', winRate: 68, streaks: 3, time: '2h ago', winnings: '12,450 MATIC', color: '#FFD700' },
-  { name: 'EdgeHunter', country: 'CA', winRate: 62, streaks: 4, time: '6h ago', winnings: '9,820 MATIC', color: '#C0C0C0' },
-  { name: 'CenterMaster', country: 'UK', winRate: 59, streaks: 2, time: '1d ago', winnings: '7,360 MATIC', color: '#CD7F32' },
-  { name: 'RiskTaker', country: 'DE', winRate: 52, streaks: 2, time: '2d ago', winnings: '5,180 MATIC', color: '#888' },
-  { name: 'RowKing', country: 'JP', winRate: 48, streaks: 2, time: '5d ago', winnings: '4,120 MATIC', color: '#777' },
+  { name: 'PlinkoPro', country: 'US', winRate: 68, streaks: 3, time: '2h ago', winnings: '12,450 MIDN', color: '#FFD700' },
+  { name: 'EdgeHunter', country: 'CA', winRate: 62, streaks: 4, time: '6h ago', winnings: '9,820 MIDN', color: '#C0C0C0' },
+  { name: 'CenterMaster', country: 'UK', winRate: 59, streaks: 2, time: '1d ago', winnings: '7,360 MIDN', color: '#CD7F32' },
+  { name: 'RiskTaker', country: 'DE', winRate: 52, streaks: 2, time: '2d ago', winnings: '5,180 MIDN', color: '#888' },
+  { name: 'RowKing', country: 'JP', winRate: 48, streaks: 2, time: '5d ago', winnings: '4,120 MIDN', color: '#777' },
 ];
 
 const PlinkoLeaderboard = () => {

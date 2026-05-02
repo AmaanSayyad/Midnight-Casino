@@ -18,7 +18,7 @@ const PlinkoStrategyGuide = () => {
       description: 'Use Low risk with 14–16 rows and small bet amounts to target center multipliers frequently. Aim for long sessions with low variance.',
       pros: ['Low variance', 'Beginner friendly', 'Sustainable sessions'],
       cons: ['Lower peak payouts', 'Slow growth'],
-      example: 'Set risk to Low, rows to 16, bet 0.1–0.25 MATIC, play many rounds and cash out on streaks.'
+      example: 'Set risk to Low, rows to 16, bet 0.1–0.25 MIDN, play many rounds and cash out on streaks.'
     },
     {
       id: 's2',
@@ -30,7 +30,7 @@ const PlinkoStrategyGuide = () => {
       description: 'Balanced approach: Medium risk and 12–15 rows to mix frequent small wins with occasional larger multipliers.',
       pros: ['Balanced returns', 'Exciting gameplay'],
       cons: ['Still volatile on downswings'],
-      example: 'Risk Medium, rows 15, bet 0.25–0.5 MATIC. Stop-loss and take-profit rules keep variance under control.'
+      example: 'Risk Medium, rows 15, bet 0.25–0.5 MIDN. Stop-loss and take-profit rules keep variance under control.'
     },
     {
       id: 's3',
@@ -42,7 +42,7 @@ const PlinkoStrategyGuide = () => {
       description: 'High risk with fewer rows increases edge-slot payouts. Bankroll management is critical as variance is high.',
       pros: ['Huge top-end payouts', 'Adrenaline gameplay'],
       cons: ['High variance', 'Can deplete bankroll quickly'],
-      example: 'Risk High, rows 12–14, small fixed bet (e.g., 0.1 MATIC) and strict stop-loss.'
+      example: 'Risk High, rows 12–14, small fixed bet (e.g., 0.1 MIDN) and strict stop-loss.'
     }
   ];
 
