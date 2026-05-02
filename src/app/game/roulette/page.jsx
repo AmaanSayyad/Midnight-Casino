@@ -41,8 +41,8 @@ import pythEntropyService from '@/services/PythEntropyService';
 // Casino module address for Ethereum
 const CASINO_MODULE_ADDRESS = process.env.NEXT_PUBLIC_CASINO_MODULE_ADDRESS || "0x0000000000000000000000000000000000000000";
 
-const parseMATICAmount = (amount) => {
-  // Parse MATIC amount
+const parseMIDNAmount = (amount) => {
+  // Parse MIDN amount
   return parseFloat(amount);
 };
 
@@ -587,7 +587,7 @@ function GridZero({ inside, placeBet, ...props }) {
             width: width,
             height: height,
             cursor: "pointer",
-            clipPath: "polygon(100% 0%, 100% 100%, 40% 100%, 0% 50%, 40% 0%)",
+            clipPath: "midnight(100% 0%, 100% 100%, 40% 100%, 0% 50%, 40% 0%)",
             backgroundColor: (theme) => theme.palette.game.green,
           }}
           onClick={(e) => placeBet(e, "inside", 0)}
@@ -1017,7 +1017,7 @@ export default function GameRoulette() {
         {/* Background Elements */}
         <div className="absolute top-5 -right-32 w-64 h-64 bg-red-500/10 rounded-full blur-3xl"></div>
         <div className="absolute top-28 left-1/3 w-32 h-32 bg-green-500/10 rounded-full blur-2xl"></div>
-        <div className="absolute -bottom-20 left-1/4 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 left-1/4 w-48 h-48 bg-midnight-blue/5 rounded-full blur-3xl"></div>
 
         <div className="relative">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
@@ -1104,8 +1104,8 @@ export default function GameRoulette() {
                       <FaCoins className="text-yellow-400" />
                     </div>
                     <div className="text-xs text-white/50 font-sans text-center">Volume</div>
-                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.totalVolume} MATIC`}>
-                      {gameStatistics.totalVolume} MATIC
+                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.totalVolume} MIDN`}>
+                      {gameStatistics.totalVolume} MIDN
                     </div>
                   </div>
 
@@ -1114,8 +1114,8 @@ export default function GameRoulette() {
                       <FaTrophy className="text-yellow-500" />
                     </div>
                     <div className="text-xs text-white/50 font-sans text-center">Max Win</div>
-                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.maxWin} MATIC`}>
-                      {gameStatistics.maxWin} MATIC
+                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.maxWin} MIDN`}>
+                      {gameStatistics.maxWin} MIDN
                     </div>
                   </div>
                 </motion.div>
@@ -1143,7 +1143,7 @@ export default function GameRoulette() {
                   </button>
                   <button
                     onClick={() => scrollToElement('history')}
-                    className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-purple-800/40 to-purple-900/20 rounded-lg text-white font-medium text-sm hover:from-purple-700/40 hover:to-purple-800/20 transition-all duration-300"
+                    className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-midnight-blue/20 to-midnight-blue/15 rounded-lg text-white font-medium text-sm hover:from-midnight-blue/20 hover:to-midnight-blue/15 transition-all duration-300"
                   >
                     <FaChartLine className="mr-2" />
                     Game History
@@ -1195,13 +1195,13 @@ export default function GameRoulette() {
   const account = { address };
   const connected = isConnected;
 
-  // Function to log game results to Polygon Amoy with retry mechanism
-  const logGameResultToPolygon = async (gameData, retryCount = 0) => {
+  // Function to log game results to Midnight Network with retry mechanism
+  const logGameResultToMidnight = async (gameData, retryCount = 0) => {
     const maxRetries = 3;
     const retryDelay = 1000 * (retryCount + 1); // Exponential backoff: 1s, 2s, 3s
     
     try {
-      console.log(`📝 Logging Roulette result to Polygon Amoy (attempt ${retryCount + 1}):`, gameData);
+      console.log(`📝 Logging Roulette result to Midnight Network (attempt ${retryCount + 1}):`, gameData);
       
       const response = await fetch('/api/log-game-result', {
         method: 'POST',
@@ -1214,32 +1214,32 @@ export default function GameRoulette() {
       const result = await response.json();
       
       if (result.success) {
-        console.log('✅ Roulette game logged to Polygon Amoy:', {
-          txHash: result.polygonTxHash,
-          explorerUrl: result.polygonExplorerUrl
+        console.log('✅ Roulette game logged to Midnight Network:', {
+          txHash: result.midnightTxHash,
+          explorerUrl: result.midnightExplorerUrl
         });
         
         return result;
       } else {
-        console.error('❌ Failed to log Roulette game to Polygon:', result.error);
+        console.error('❌ Failed to log Roulette game to Midnight:', result.error);
         
         // Check if we should retry
         if (result.shouldRetry && retryCount < maxRetries) {
           console.log(`🔄 Retrying Roulette game log in ${retryDelay}ms...`);
           await new Promise(resolve => setTimeout(resolve, retryDelay));
-          return logGameResultToPolygon(gameData, retryCount + 1);
+          return logGameResultToMidnight(gameData, retryCount + 1);
         }
         
         throw new Error(result.error);
       }
     } catch (error) {
-      console.error('❌ Error logging Roulette game to Polygon:', error);
+      console.error('❌ Error logging Roulette game to Midnight:', error);
       
       // Retry on network errors
       if (retryCount < maxRetries && (error.name === 'TypeError' || error.message.includes('fetch'))) {
         console.log(`🔄 Retrying Roulette game log due to network error in ${retryDelay}ms...`);
         await new Promise(resolve => setTimeout(resolve, retryDelay));
-        return logGameResultToPolygon(gameData, retryCount + 1);
+        return logGameResultToMidnight(gameData, retryCount + 1);
       }
       
       throw error;
@@ -1250,7 +1250,7 @@ export default function GameRoulette() {
   const { balance } = useToken(address); // Keep for compatibility
   const HOUSE_ADDR = CASINO_MODULE_ADDRESS;
 
-  // Function to fetch real MATIC balance will be defined after useSelector
+  // Function to fetch real MIDN balance will be defined after useSelector
 
   // Sound refs
   const spinSoundRef = useRef(null);
@@ -1417,7 +1417,7 @@ export default function GameRoulette() {
   const dispatch = useDispatch();
   const { userBalance, isLoading: isLoadingBalance } = useSelector((state) => state.balance);
 
-  // Function to fetch real MATIC balance
+  // Function to fetch real MIDN balance
   const fetchRealBalance = useCallback(async () => {
     if (!account?.address) return;
 
@@ -1658,11 +1658,11 @@ export default function GameRoulette() {
     }
 
     // Check Redux balance instead of wallet
-    const currentBalance = parseFloat(userBalance || '0'); // Balance is already in MATIC
+    const currentBalance = parseFloat(userBalance || '0'); // Balance is already in MIDN
     const totalBetAmount = total;
 
     if (currentBalance < totalBetAmount) {
-      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} MATIC but need ${totalBetAmount.toFixed(5)} MATIC`);
+      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} MIDN but need ${totalBetAmount.toFixed(5)} MIDN`);
       return;
     }
 
@@ -1684,7 +1684,7 @@ export default function GameRoulette() {
       
       // Check if user has enough balance
       if (originalBalance < totalBetAmount) {
-        alert(`Insufficient balance. You have ${originalBalance.toFixed(5)} MATIC but need ${totalBetAmount.toFixed(5)} MATIC`);
+        alert(`Insufficient balance. You have ${originalBalance.toFixed(5)} MIDN but need ${totalBetAmount.toFixed(5)} MIDN`);
         setSubmitDisabled(false);
         setWheelSpinning(false);
         return;
@@ -2064,11 +2064,11 @@ export default function GameRoulette() {
           }
         };
 
-        // Log game result to Polygon Amoy function
+        // Log game result to Midnight Network function
         const logGameResult = async (entropyTxHash = 'roulette_pending') => {
           console.log('🎯 logGameResult called with entropyTxHash:', entropyTxHash);
           try {
-            const polygonResult = await logGameResultToPolygon({
+            const midnightResult = await logGameResultToMidnight({
               gameType: 'ROULETTE',
               player: address,
               betAmount: totalBetAmount,
@@ -2087,23 +2087,23 @@ export default function GameRoulette() {
               }
             });
 
-            // Add Polygon transaction hash to bet history
-            if (polygonResult && polygonResult.polygonTxHash) {
-              console.log('✅ Polygon transaction hash received:', polygonResult.polygonTxHash);
+            // Add Midnight transaction hash to bet history
+            if (midnightResult && midnightResult.midnightTxHash) {
+              console.log('✅ Midnight transaction hash received:', midnightResult.midnightTxHash);
               setBettingHistory(prev => {
                 const updatedHistory = [...prev];
                 if (updatedHistory.length > 0) {
                   updatedHistory[0] = { 
                     ...updatedHistory[0], 
-                    polygonTxHash: polygonResult.polygonTxHash,
-                    polygonExplorerUrl: polygonResult.polygonExplorerUrl
+                    midnightTxHash: midnightResult.midnightTxHash,
+                    midnightExplorerUrl: midnightResult.midnightExplorerUrl
                   };
                 }
                 return updatedHistory;
               });
             }
           } catch (error) {
-            console.error('❌ Failed to log Roulette game to Polygon:', error);
+            console.error('❌ Failed to log Roulette game to Midnight:', error);
           }
         };
 
@@ -2123,7 +2123,7 @@ export default function GameRoulette() {
               sequenceNumber: entropyResult.entropyProof.sequenceNumber,
               randomValue: entropyResult.randomValue,
               transactionHash: entropyResult.entropyProof.transactionHash,
-              polygonExplorerUrl: entropyResult.entropyProof.polygonExplorerUrl,
+              midnightExplorerUrl: entropyResult.entropyProof.midnightExplorerUrl,
               explorerUrl: entropyResult.entropyProof.explorerUrl,
               timestamp: entropyResult.entropyProof.timestamp,
               source: 'Pyth Entropy'
@@ -2196,16 +2196,16 @@ export default function GameRoulette() {
         // Show result notification
         if (netResult > 0) {
           const winMessage = winningBets.length === 1
-                    ? `🎉 WINNER! ${winningBets[0].name} - You won ${(netResult - totalBetAmount).toFixed(5)} MATIC!`
-                    : `🎉 MULTIPLE WINNERS! ${winningBets.length} bets won - Total: ${(netResult - totalBetAmount).toFixed(5)} MATIC!`;
+                    ? `🎉 WINNER! ${winningBets[0].name} - You won ${(netResult - totalBetAmount).toFixed(5)} MIDN!`
+                    : `🎉 MULTIPLE WINNERS! ${winningBets.length} bets won - Total: ${(netResult - totalBetAmount).toFixed(5)} MIDN!`;
 
           setNotificationMessage(winMessage);
           setNotificationSeverity("success");
           setSnackbarMessage(winMessage);
         } else {
-          setNotificationMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} MATIC!`);
+          setNotificationMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} MIDN!`);
           setNotificationSeverity("error");
-          setSnackbarMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} MATIC!`);
+          setSnackbarMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} MIDN!`);
         }
         setSnackbarOpen(true);
 
@@ -2718,7 +2718,7 @@ export default function GameRoulette() {
               }}
             >
               <FaCoins className="text-yellow-400" />
-              Balance: {isConnected ? `${parseFloat(userBalance || '0').toFixed(5)} MATIC` : 'Connect Wallet'}
+              Balance: {isConnected ? `${parseFloat(userBalance || '0').toFixed(5)} MIDN` : 'Connect Wallet'}
             </Typography>
           </Box>
 
@@ -3272,7 +3272,7 @@ export default function GameRoulette() {
               />
 
               <Typography color="white" sx={{ opacity: 0.8 }}>
-                Current Bet Total: {total.toFixed(5)} MATIC
+                Current Bet Total: {total.toFixed(5)} MIDN
               </Typography>
 
               {/* Quick Bet Buttons */}
@@ -3357,7 +3357,7 @@ export default function GameRoulette() {
                       loading={submitDisabled}
                       onClick={lockBet}
                     >
-                      {total > 0 ? `Place Bet (${total.toFixed(5)} MATIC)` : 'Place Bet (MATIC)'}
+                      {total > 0 ? `Place Bet (${total.toFixed(5)} MIDN)` : 'Place Bet (MIDN)'}
                     </Button>
                     {submitDisabled && rollResult < 0 && (
                       <Typography color="white" sx={{ opacity: 0.8 }}>
@@ -3600,7 +3600,7 @@ export default function GameRoulette() {
                     textShadow: '0 1px 2px rgba(0,0,0,0.3)',
                   }}
                 >
-                  European Roulette with a single zero and just no house edge - better odds than traditional casinos. Provably fair and powered by Aptos on-chain randomness module blockchain technology.
+                  European Roulette with a single zero and just no house edge - better odds than traditional casinos. Provably fair and powered by Midnight on-chain randomness module blockchain technology.
                 </Typography>
 
                 <Typography
@@ -3699,9 +3699,9 @@ export default function GameRoulette() {
             {notificationIndex === notificationSteps.RESULT_READY && (
               <Typography>
                 {winnings > 0
-                  ? `🎉 You won ${winnings.toFixed(4)} MATIC!`
+                  ? `🎉 You won ${winnings.toFixed(4)} MIDN!`
                   : winnings < 0
-                  ? `💸 You lost ${Math.abs(winnings).toFixed(4)} MATIC!`
+                  ? `💸 You lost ${Math.abs(winnings).toFixed(4)} MIDN!`
                   : "🤝 Break even!"}
               </Typography>
             )}

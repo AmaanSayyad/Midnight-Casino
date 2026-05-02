@@ -362,7 +362,7 @@ const RouletteLeaderboard = () => {
                     fontSize: index === 0 ? '1.05rem' : '1rem'
                   }}
                 >
-                  {player.winnings.toLocaleString()} MATIC
+                  {player.winnings.toLocaleString()} MIDN
                 </Typography>
               </Box>
               

@@ -15,7 +15,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
   // Open Entropy Explorer link
   const openEntropyExplorer = (txHash) => {
     if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${txHash}`;
+      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
       window.open(entropyExplorerUrl, '_blank');
     }
   };
@@ -156,7 +156,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap'
               }}>
-                {totalVolume.toFixed(5)} MATIC
+                {totalVolume.toFixed(5)} MIDN
               </Typography>
               <Box 
                 sx={{ 
@@ -192,7 +192,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap'
               }}>
-                {biggestWin.toFixed(5)} MATIC
+                {biggestWin.toFixed(5)} MIDN
               </Typography>
               <FaTrophy color="#FFA500" />
             </Box>
@@ -512,7 +512,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                           whiteSpace: 'nowrap'
                         }}
                       >
-                            {item.betAmount} MATIC
+                            {item.betAmount} MIDN
                       </Typography>
                       <Image src="/coin.png" width={16} height={16} alt="coin" />
                     </Box>
@@ -543,7 +543,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                           whiteSpace: 'nowrap'
                         }}
                       >
-                            {item.payout} MATIC
+                            {item.payout} MIDN
                       </Typography>
                       <Image src="/coin.png" width={16} height={16} alt="coin" />
                     </Box>
@@ -587,7 +587,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                           <Button
                             onClick={() => {
                               if (item.entropyProof.transactionHash) {
-                                window.open(`https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${item.entropyProof.transactionHash}`, '_blank');
+                                window.open(`https://entropy-explorer.pyth.network/?chain=midnight-network&search=${item.entropyProof.transactionHash}`, '_blank');
                               }
                             }}
                             size="small"
@@ -605,11 +605,11 @@ const WheelHistory = ({ gameHistory = [] }) => {
                           >
                             Entropy
                           </Button>
-                          {/* Polygon Amoy Explorer Link */}
-                          {item.polygonTxHash && (
+                          {/* Midnight Network Explorer Link */}
+                          {item.midnightTxHash && (
                             <Button
                               onClick={() => {
-                                window.open(`https://amoy.polygonscan.com/tx/${item.polygonTxHash}`, '_blank');
+                                window.open(`https://amoy.midnightscan.com/tx/${item.midnightTxHash}`, '_blank');
                               }}
                               size="small"
                               startIcon={<FaExternalLinkAlt size={10} />}
@@ -624,7 +624,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                                 }
                               }}
                             >
-                              Polygon
+                              Midnight
                             </Button>
                           )}
 
