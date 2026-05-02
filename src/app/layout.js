@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "@/styles/globals.css";
 import Providers from "./providers";
 import Navbar from "@/components/Navbar.js";
@@ -7,34 +7,25 @@ import GlobalWalletManager from "@/components/GlobalWalletManager";
 import NetworkSwitcher from "@/components/NetworkSwitcher";
 
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = localFont({
+  src: "../../public/Outfit/Outfit-VariableFont_wght.ttf",
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 export const metadata = {
-  title: "APT Casino",
-  description: "APT Casino",
+  title: "Midnight Casino",
+  description: "Midnight Casino",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link
-          rel="preload"
-          href="/fonts/ClashDisplay-Variable.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/PlusJakartaSans VariableFont.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        <link rel="icon" href="/Midnight%20Logo%20Pack/02_Symbol/Midnight-RGB_Symbol-White.svg" />
       </head>
       <body 
-        className={`${inter.className} overflow-x-hidden w-full`}
+        className={`${outfit.variable} font-sans overflow-x-hidden w-full`}
         suppressHydrationWarning={true}
       >
         <Providers>

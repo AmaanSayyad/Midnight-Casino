@@ -185,8 +185,8 @@ export default function LivePage() {
 
   return (
     <>
-    <div className="min-h-screen pt-36 md:pt-44 pb-16 px-4 md:px-10 lg:px-24 xl:px-36 bg-[#070005]">
-      <div className="bg-[#070005]/90 border border-purple-500/20 rounded-2xl p-4 md:p-6 shadow-xl backdrop-blur mb-6">
+    <div className="min-h-screen pt-36 md:pt-44 pb-16 px-4 md:px-10 lg:px-24 xl:px-36 bg-midnight-black">
+      <div className="bg-midnight-black/90 border border-midnight-blue/15 rounded-2xl p-4 md:p-6 shadow-xl backdrop-blur mb-6">
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-2xl md:text-3xl font-display font-semibold text-white">Live</h1>
           <button
@@ -201,12 +201,12 @@ export default function LivePage() {
               value={newPlaybackId}
               onChange={(e) => setNewPlaybackId(e.target.value)}
               placeholder="e.g. f5eese9wwl88k4g8 or https://...m3u8 or https://youtu.be/..."
-              className="w-full px-3 py-2 rounded-md bg-[#1a001a] border border-purple-500/30 text-white placeholder-white/30 focus:outline-none focus:border-purple-400"
+              className="w-full px-3 py-2 rounded-md bg-midnight-black/80 border border-midnight-blue/20 text-white placeholder:text-gray-300 focus:outline-none focus:border-blue-400"
             />
           </div>
           <button
             onClick={addStream}
-            className="px-5 py-2.5 rounded-md bg-gradient-to-r from-red-magic to-blue-magic text-white font-medium hover:opacity-90 transition"
+            className="px-5 py-2.5 rounded-md bg-blue-700 hover:bg-blue-600 text-white font-medium transition"
           >
             Add
           </button>
@@ -220,7 +220,7 @@ export default function LivePage() {
         )}
 
         {streams.map(({ playbackId }, idx) => (
-          <div key={playbackId} className={`bg-[#0e0010]/70 border border-purple-500/20 rounded-2xl p-3 shadow-lg transition-transform hover:-translate-y-0.5 hover:shadow-2xl fade-in-up`} style={{ animationDelay: `${idx * 80}ms` }}>
+          <div key={playbackId} className={`bg-midnight-black/70 border border-midnight-blue/15 rounded-2xl p-3 shadow-lg transition-transform hover:-translate-y-0.5 hover:shadow-2xl fade-in-up`} style={{ animationDelay: `${idx * 80}ms` }}>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2 min-w-0">
                 <span className="relative flex h-2.5 w-2.5 mr-0.5">
@@ -239,7 +239,7 @@ export default function LivePage() {
               </div>
             </div>
 
-            <div className="relative rounded-xl overflow-hidden ring-1 ring-purple-500/30 bg-gradient-to-b from-black to-[#130013]">
+            <div className="relative rounded-xl overflow-hidden ring-1 ring-midnight-blue/20 bg-gradient-to-b from-black to-midnight-black">
               {(() => {
                 if (/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//i.test(playbackId)) {
                   const embed = getYouTubeEmbedUrl(playbackId.startsWith("http") ? playbackId : `https://${playbackId}`);
@@ -340,7 +340,7 @@ export default function LivePage() {
     {guideOpen && (
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-black/70" onClick={() => setGuideOpen(false)} />
-        <div className="relative w-[96%] max-w-3xl rounded-2xl overflow-hidden shadow-2xl border border-purple-500/30">
+        <div className="relative w-[96%] max-w-3xl rounded-2xl overflow-hidden shadow-2xl border border-midnight-blue/20">
           <div className="bg-gradient-to-r from-red-magic/70 to-blue-magic/70 p-5">
             <div className="flex items-center justify-between">
               <h3 className="text-white text-xl md:text-2xl font-display font-semibold">How to Stream</h3>
@@ -352,7 +352,7 @@ export default function LivePage() {
           </div>
           <div className="bg-[#0e0010] text-white/90 p-6 md:p-7">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="rounded-xl border border-purple-500/20 bg-white/5 p-4">
+              <div className="rounded-xl border border-midnight-blue/15 bg-white/5 p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
                   <h4 className="text-white font-medium">Option 1 — Livepeer</h4>
@@ -364,7 +364,7 @@ export default function LivePage() {
                   <li>Paste the Playback ID into the input above and click <span className="text-white">Add</span>.</li>
                 </ol>
               </div>
-              <div className="rounded-xl border border-purple-500/20 bg-white/5 p-4">
+              <div className="rounded-xl border border-midnight-blue/15 bg-white/5 p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="inline-flex h-2.5 w-2.5 rounded-full bg-rose-400"></span>
                   <h4 className="text-white font-medium">Option 2 — YouTube Live</h4>
@@ -376,7 +376,7 @@ export default function LivePage() {
                 </ol>
               </div>
             </div>
-            <div className="mt-5 rounded-xl border border-purple-500/20 bg-white/5 p-4 text-xs text-white/70">
+            <div className="mt-5 rounded-xl border border-midnight-blue/15 bg-white/5 p-4 text-xs text-white/70">
               Tip: You can add multiple streams. Livepeer cards show metrics; YouTube cards show title and channel.
             </div>
           </div>
