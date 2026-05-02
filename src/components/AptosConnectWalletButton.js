@@ -36,7 +36,7 @@ export default function EthereumConnectWalletButton() {
       ) : (
         <button
           onClick={handleConnect}
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition-all transform hover:scale-105"
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-midnight-blue hover:from-blue-700 hover:to-midnight-blue text-white font-medium rounded-lg transition-all transform hover:scale-105"
         >
           Connect MetaMask
         </button>
