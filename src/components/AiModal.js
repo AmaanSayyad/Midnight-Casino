@@ -19,7 +19,7 @@ export default function AiModal() {
       }`}
     >
       <div
-        className={`modal w-1/2 duration-300 flex flex-col p-5 bg-purple-magic ${
+        className={`modal w-1/2 duration-300 flex flex-col p-5 bg-midnight-black ${
           isModalOpen
             ? "translate-y-0 opacity-100"
             : "translate-y-full opacity-0 pointer-events-none"

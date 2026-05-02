@@ -9,7 +9,7 @@ import { NotificationProvider } from '@/components/NotificationSystem';
 import WalletConnectionGuard from '@/components/WalletConnectionGuard';
 import { ThemeProvider } from 'next-themes';
 import { WagmiProvider, createConfig, http } from 'wagmi';
-import { polygonAmoy } from '@/config/chains';
+import { midnightNetwork } from '@/config/chains';
 import { RainbowKitProvider, getDefaultConfig, connectorsForWallets } from '@rainbow-me/rainbowkit';
 import { 
   metaMaskWallet,
@@ -30,14 +30,14 @@ const muiTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#8B2398',
+      main: '#0000FE',
     },
     secondary: {
-      main: '#31C4BE',
+      main: '#FFFFFF',
     },
     background: {
-      default: 'rgba(10, 0, 8, 0.98)',
-      paper: 'rgba(10, 0, 8, 0.98)',
+      default: '#0A0A0A',
+      paper: '#0A0A0A',
     },
     text: {
       primary: '#FFFFFF',
@@ -48,11 +48,11 @@ const muiTheme = createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          backgroundColor: 'rgba(10, 0, 8, 0.98)',
+          backgroundColor: 'rgba(10, 10, 10, 0.98)',
           backdropFilter: 'blur(20px)',
           border: '1px solid rgba(148, 163, 184, 0.3)',
           borderRadius: '16px',
-          background: 'linear-gradient(135deg, rgba(10, 0, 8, 0.98) 0%, rgba(26, 0, 21, 0.98) 100%)',
+          background: 'linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0.98) 100%)',
         },
       },
     },
@@ -61,7 +61,7 @@ const muiTheme = createTheme({
         root: {
           color: '#FFFFFF',
           borderBottom: '1px solid rgba(148, 163, 184, 0.3)',
-          background: 'linear-gradient(135deg, rgba(139, 35, 152, 0.1) 0%, rgba(49, 196, 190, 0.1) 100%)',
+          background: 'linear-gradient(135deg, rgba(0, 0, 254, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)',
         },
       },
     },
@@ -100,9 +100,9 @@ function createWagmiConfig() {
 
   try {
     wagmiConfig = getDefaultConfig({
-      appName: 'APT Casino Polygon',
+      appName: 'Midnight Casino',
       projectId: '226b43b703188d269fb70d02c107c34e',
-      chains: [polygonAmoy],
+      chains: [midnightNetwork],
       ssr: true,
     });
     console.log('🔧 Config created with getDefaultConfig:', wagmiConfig);
@@ -134,15 +134,15 @@ function createWagmiConfig() {
         ],
       },
     ], {
-      appName: 'APT Casino Polygon',
+      appName: 'Midnight Casino',
       projectId: '226b43b703188d269fb70d02c107c34e',
     });
 
     wagmiConfig = createConfig({
       connectors,
-      chains: [polygonAmoy],
+      chains: [midnightNetwork],
       transports: {
-        [polygonAmoy.id]: http(),
+        [midnightNetwork.id]: http(),
       },
       ssr: true,
     });
@@ -171,7 +171,7 @@ export default function Providers({ children }) {
         justifyContent: 'center', 
         alignItems: 'center', 
         height: '100vh',
-        background: 'linear-gradient(135deg, #0A0008 0%, #1A0015 100%)'
+        background: '#0A0A0A'
       }}>
         <div style={{ color: 'white', fontSize: '18px' }}>Loading...</div>
       </div>
