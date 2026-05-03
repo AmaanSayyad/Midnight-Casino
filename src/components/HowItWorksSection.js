@@ -24,13 +24,13 @@ const HowItWorksSection = () => {
     {
       id: 1,
       title: 'Connect Your Wallet',
-      description: 'Link any wallet in seconds to unlock the full APT Casino experience. We support Keyless login Walets, MetaMask and all major Web3 wallets.',
+      description: 'Link any wallet in seconds to unlock the full Midnight Casino experience. We support keyless login wallets, MetaMask, and all major Web3 wallets.',
       emoji: '👛'
     },
     {
       id: 2,
-      title: 'Get MATIC tokens',
-      description: 'Power your gameplay with MATIC tokens of Polygon Network.',
+      title: 'Get MIDN tokens',
+      description: 'Power your gameplay with MIDN tokens of Midnight Network.',
       emoji: '💰'
     },
     {
@@ -42,7 +42,7 @@ const HowItWorksSection = () => {
     {
       id: 4,
       title: 'Earn Rewards',
-      description: 'Win MATIC tokens and unlock exclusive perks through our multi-tiered loyalty program. Earn cashback on losses and gain access to tournaments.',
+      description: 'Win MIDN tokens and unlock exclusive perks through our multi-tiered loyalty program. Earn cashback on losses and gain access to tournaments.',
       emoji: '🏆'
     },
   ];
@@ -69,21 +69,21 @@ const HowItWorksSection = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="flex flex-col items-center mb-10 text-center">
           <div className="w-20 h-1 bg-gradient-to-r from-red-magic to-blue-magic rounded-full mb-5"></div>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">How APT Casino Works</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">How Midnight Casino Works</h2>
           <p className="text-white/70 max-w-2xl text-lg">Experience the future of decentralized gaming in four seamless steps</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Steps Navigation */}
-          <div className="p-[1px] bg-gradient-to-r from-red-magic via-purple-500 to-blue-magic rounded-xl shadow-xl">
-            <div className="bg-[#1A0015]/70 backdrop-blur-sm rounded-xl p-5">
+          <div className="p-[1px] bg-gradient-to-r from-red-magic via-midnight-blue to-blue-magic rounded-xl shadow-xl">
+            <div className="bg-midnight-black/80 backdrop-blur-sm rounded-xl p-5">
               {steps.map((step) => (
                 <div 
                   key={step.id}
                   className={`mb-4 p-4 rounded-lg cursor-pointer transition-all duration-300 transform ${
                     activeStep === step.id 
-                      ? 'bg-gradient-to-r from-[#250020] to-[#1A0015] border-l-2 border-red-magic scale-[1.02]' 
-                      : 'hover:bg-[#250020]/50 hover:scale-[1.01]'
+                      ? 'bg-gradient-to-r from-midnight-black to-midnight-blue/20 border-l-2 border-red-magic scale-[1.02]' 
+                      : 'hover:bg-midnight-blue/10 hover:scale-[1.01]'
                   } ${step.id < activeStep ? 'opacity-90' : 'opacity-100'}`}
                   onClick={() => handleStepChange(step.id)}
                 >
@@ -91,7 +91,7 @@ const HowItWorksSection = () => {
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 shadow-lg transform transition-all duration-300 ${
                       activeStep === step.id 
                         ? 'bg-gradient-to-r from-red-magic to-blue-magic scale-110' 
-                        : 'bg-[#250020]'
+                        : 'bg-midnight-black/80'
                     }`}>
                       <span className="text-white text-lg">{step.emoji}</span>
                     </div>
@@ -112,7 +112,7 @@ const HowItWorksSection = () => {
                   <EthereumConnectWalletButton />
                 ) : (
                   <GradientBorderButton className="transform hover:scale-105 transition-transform">
-                    {activeStep === 2 ? 'Get MATIC tokens' : 
+                    {activeStep === 2 ? 'Get MIDN tokens' : 
                      activeStep === 3 ? 'Browse Games' : 'View Rewards'}
                   </GradientBorderButton>
                 )}
@@ -147,8 +147,8 @@ const HowItWorksSection = () => {
               
               {/* Main illustration card */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="p-[1px] bg-gradient-to-r from-red-magic via-purple-500 to-blue-magic rounded-2xl shadow-2xl">
-                  <div className="bg-[#1A0015]/70 backdrop-blur-sm rounded-2xl p-10 w-[380px] h-[380px] flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-500 relative overflow-hidden">
+                <div className="p-[1px] bg-gradient-to-r from-red-magic via-midnight-blue to-blue-magic rounded-2xl shadow-2xl">
+                  <div className="bg-midnight-black/80 backdrop-blur-sm rounded-2xl p-10 w-[380px] h-[380px] flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-500 relative overflow-hidden">
                     {/* Animated glow effect */}
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-red-magic to-blue-magic opacity-75 blur-2xl transition duration-1000 rounded-2xl"></div>
                     
@@ -159,7 +159,7 @@ const HowItWorksSection = () => {
                     
                     <div className={`relative flex flex-col items-center text-center transform transition-all duration-500 px-4 ${animating ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
                       <div className="w-28 h-28 rounded-full bg-gradient-to-r from-red-magic to-blue-magic p-1 flex items-center justify-center mb-8 shadow-lg transform hover:rotate-6 transition-transform relative">
-                        <div className="absolute inset-0 rounded-full bg-[#250020] opacity-40"></div>
+                        <div className="absolute inset-0 rounded-full bg-midnight-black opacity-40"></div>
                         <div className="relative z-10 transform hover:scale-110 transition-transform">
                           <span className="text-6xl">{steps[activeStep-1].emoji}</span>
                         </div>
