@@ -9,7 +9,7 @@ const GameStats = () => {
           <FaDice className="text-blue-400" />
           <span className="uppercase tracking-wider font-display">Total Bets</span>
         </div>
-        <p className="font-display font-bold text-xl md:text-2xl bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">956,421</p>
+        <p className="font-display font-bold text-xl md:text-2xl bg-gradient-to-r from-blue-300 to-blue-300 bg-clip-text text-transparent">956,421</p>
       </div>
       
       <div className="flex flex-col items-center md:items-end">
@@ -17,7 +17,7 @@ const GameStats = () => {
           <FaCoins className="text-yellow-400" />
           <span className="uppercase tracking-wider font-display">Volume</span>
         </div>
-        <p className="font-display font-bold text-xl md:text-2xl bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">4.7M MATIC</p>
+        <p className="font-display font-bold text-xl md:text-2xl bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">4.7M MIDN</p>
       </div>
       
       <div className="flex flex-col items-center md:items-end">
@@ -25,7 +25,7 @@ const GameStats = () => {
           <FaTrophy className="text-green-400" />
           <span className="uppercase tracking-wider font-display">Max Win</span>
         </div>
-        <p className="font-display font-bold text-xl md:text-2xl bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">121,750 MATIC</p>
+        <p className="font-display font-bold text-xl md:text-2xl bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">121,750 MIDN</p>
       </div>
     </div>
   );

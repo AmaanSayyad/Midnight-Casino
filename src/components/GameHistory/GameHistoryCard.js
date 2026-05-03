@@ -37,13 +37,13 @@ const GameHistoryCard = ({ game, gameType }) => {
   };
 
   const openTransaction = (txHash, logIndex) => {
-    const network = process.env.NEXT_PUBLIC_NETWORK || 'monad-testnet';
+    const network = process.env.NEXT_PUBLIC_NETWORK || 'midnight-network';
     let explorerUrl;
     
-    if (network === 'monad-testnet') {
-      explorerUrl = `https://testnet.monadexplorer.com/tx/${txHash}#eventlog`;
+    if (network === 'midnight-network') {
+      explorerUrl = `https://testnet.midnightexplorer.com/tx/${txHash}#eventlog`;
     } else {
-      explorerUrl = `https://testnet.monadexplorer.com/tx/${txHash}#eventlog`;
+      explorerUrl = `https://testnet.midnightexplorer.com/tx/${txHash}#eventlog`;
     }
     
     window.open(explorerUrl, '_blank');
@@ -51,7 +51,7 @@ const GameHistoryCard = ({ game, gameType }) => {
 
   const openEntropyExplorer = (txHash) => {
     if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${txHash}`;
+      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
       window.open(entropyExplorerUrl, '_blank');
     }
   };
@@ -137,7 +137,7 @@ const GameHistoryCard = ({ game, gameType }) => {
                 Bet Amount:
               </Typography>
               <Typography variant="body1" sx={{ color: 'white', fontWeight: 'bold' }}>
-                {game.betAmount} MATIC
+                {game.betAmount} MIDN
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -145,7 +145,7 @@ const GameHistoryCard = ({ game, gameType }) => {
                 Payout:
               </Typography>
               <Typography variant="body1" sx={{ color: 'white', fontWeight: 'bold' }}>
-                {game.payout || '0'} MATIC
+                {game.payout || '0'} MIDN
               </Typography>
             </Grid>
           </Grid>
@@ -201,12 +201,12 @@ const GameHistoryCard = ({ game, gameType }) => {
                 Links:
               </Typography>
               <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
-                {game?.entropyProof?.monadExplorerUrl && (
+                {game?.entropyProof?.midnightExplorerUrl && (
                   <Button
                     size="small"
                     variant="outlined"
                     startIcon={<ExternalLink size={12} />}
-                    onClick={() => window.open(game.entropyProof.monadExplorerUrl, '_blank')}
+                    onClick={() => window.open(game.entropyProof.midnightExplorerUrl, '_blank')}
                     sx={{
                       color: '#8B2398',
                       borderColor: '#8B2398',
@@ -215,7 +215,7 @@ const GameHistoryCard = ({ game, gameType }) => {
                       px: 1
                     }}
                   >
-                    Monad
+                    Midnight
                   </Button>
                 )}
                 {entropyTransactionHash && (
