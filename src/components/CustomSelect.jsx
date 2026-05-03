@@ -21,7 +21,7 @@ const CustomSelect = ({
       case 'tilesToReveal':
         return <FaSearch className="text-blue-400" />;
       case 'numberOfBets':
-        return <FaHistory className="text-purple-400" />;
+        return <FaHistory className="text-blue-400" />;
       case 'onWin':
       case 'onLoss':
         return <FaPercentage className="text-green-400" />;
@@ -36,13 +36,13 @@ const CustomSelect = ({
   // Format value display for specific fields
   const formatOptionDisplay = (option, fieldName) => {
     if (fieldName === 'betAmount') {
-      return `${option.toLocaleString()} MATIC`;
+      return `${option.toLocaleString()} MIDN`;
     } else if (fieldName === 'mines') {
       return `${option} ${option === 1 ? 'Mine' : 'Mines'}`;
     } else if (fieldName === 'tilesToReveal') {
       return `${option} ${option === 1 ? 'Tile' : 'Tiles'}`;
     } else if (fieldName.includes('stop')) {
-      return `${option.toLocaleString()} MATIC`;
+      return `${option.toLocaleString()} MIDN`;
     } else {
       return option;
     }
@@ -67,7 +67,7 @@ const CustomSelect = ({
             name={name}
             value={value}
             onChange={onChange}
-            className="w-full rounded-lg py-3 pl-11 pr-4 bg-[#190026] text-white font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all cursor-pointer text-sm appearance-none"
+            className="w-full rounded-lg py-3 pl-11 pr-4 bg-[#0A0A0A] text-white font-medium focus:outline-none focus:ring-2 focus:ring-midnight-blue/30 transition-all cursor-pointer text-sm appearance-none"
             style={{ 
               backgroundColor: '#190026',
               backgroundImage: "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e\")",
@@ -76,14 +76,14 @@ const CustomSelect = ({
               backgroundSize: "1em" 
             }}
           >
-            <option value="" disabled className="bg-[#190026] text-white/70">
+            <option value="" disabled className="bg-[#0A0A0A] text-white/70">
               Select {label}
             </option>
             {options.map((option, index) => (
               <option 
                 key={index} 
                 value={option} 
-                className="bg-[#190026] text-white py-2"
+                className="bg-[#0A0A0A] text-white py-2"
               >
                 {formatOptionDisplay(option, name)}
               </option>

@@ -23,7 +23,7 @@ const CustomInput = ({
       case 'tilesToReveal':
         return <FaSearch className="text-blue-400" />;
       case 'numberOfBets':
-        return <FaHistory className="text-purple-400" />;
+        return <FaHistory className="text-blue-400" />;
       case 'onWin':
       case 'onLoss':
         return <FaPercentage className="text-green-400" />;
@@ -41,7 +41,7 @@ const CustomInput = ({
   // Format placeholder for specific fields
   const getFormattedPlaceholder = (fieldName) => {
     if (fieldName === 'betAmount') {
-      return 'Enter bet amount in MATIC';
+      return 'Enter bet amount in MIDN';
     } else if (fieldName === 'stopOnProfit') {
       return 'Auto-stop at this profit (ETH)';
     } else if (fieldName === 'stopOnLoss') {
@@ -74,16 +74,16 @@ const CustomInput = ({
               value={value}
               onChange={onChange}
               multiple
-              className="w-full rounded-lg py-3 pl-11 pr-4 bg-gradient-to-br from-[#190026]/90 to-[#0D0015]/90 text-white font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all cursor-pointer text-sm"
+              className="w-full rounded-lg py-3 pl-11 pr-4 bg-gradient-to-br from-[#0A0A0A]/90 to-[#0A0A0A]/90 text-white font-medium focus:outline-none focus:ring-2 focus:ring-midnight-blue/30 transition-all cursor-pointer text-sm"
             >
               {options.map((option, index) => (
-                <option key={index} value={option} className="bg-[#190026] text-white py-2">
+                <option key={index} value={option} className="bg-[#0A0A0A] text-white py-2">
                   {option}
                 </option>
               ))}
             </select>
           ) : type === "boolean" ? (
-            <div className="w-full rounded-lg py-3 pl-11 pr-4 bg-gradient-to-br from-[#190026]/90 to-[#0D0015]/90 flex items-center justify-between">
+            <div className="w-full rounded-lg py-3 pl-11 pr-4 bg-gradient-to-br from-[#0A0A0A]/90 to-[#0A0A0A]/90 flex items-center justify-between">
               <span className="text-white font-medium text-sm mr-4 truncate">Enable AI Assistant</span>
               <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
                 <input
@@ -101,7 +101,7 @@ const CustomInput = ({
                   }}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500/50 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-midnight-blue/30 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-midnight-blue"></div>
               </label>
             </div>
           ) : (
@@ -112,7 +112,7 @@ const CustomInput = ({
               onChange={onChange}
               type={type}
               placeholder={getFormattedPlaceholder(name)}
-              className={`w-full rounded-lg py-3 pl-11 ${(name === 'betAmount' || name.includes('stop')) ? 'pr-16' : 'pr-4'} bg-[#190026] text-white font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all cursor-pointer text-sm`}
+              className={`w-full rounded-lg py-3 pl-11 ${(name === 'betAmount' || name.includes('stop')) ? 'pr-16' : 'pr-4'} bg-[#0A0A0A] text-white font-medium focus:outline-none focus:ring-2 focus:ring-midnight-blue/30 transition-all cursor-pointer text-sm`}
               style={{ backgroundColor: '#190026' }}
             />
           )}
@@ -120,8 +120,8 @@ const CustomInput = ({
         
         {/* Display units or help text for specific fields */}
         {(name === 'betAmount' || name.includes('stop')) && (
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-white/50 pointer-events-none bg-[#190026]/80 px-2 py-1 rounded">
-            MATIC
+          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-white/50 pointer-events-none bg-[#0A0A0A]/80 px-2 py-1 rounded">
+            MIDN
           </div>
         )}
       </div>
