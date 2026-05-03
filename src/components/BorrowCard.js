@@ -98,7 +98,7 @@ const BorrowCard = ({ asset }) => {
   
   function calculateMaxBorrowable() {
     if (isDev) {
-      return asset.symbol === 'MATIC' 
+      return asset.symbol === 'MIDN' 
         ? 0.5123 
         : Math.random() * 2 + 0.05;
     }
@@ -226,7 +226,7 @@ const BorrowCard = ({ asset }) => {
   if (!isClient) {
     return (
       <div className="bg-gradient-to-r p-[1px] from-red-magic to-blue-magic rounded-xl">
-        <div className="bg-[#1A0015] rounded-xl p-6 h-full">
+        <div className="bg-[#0A0A0A] rounded-xl p-6 h-full">
           <div className="animate-pulse">
             <div className="h-6 w-32 bg-white/10 rounded mb-6"></div>
             <div className="h-10 w-full bg-white/10 rounded mb-6"></div>
@@ -242,7 +242,7 @@ const BorrowCard = ({ asset }) => {
   
   return (
     <div className="bg-gradient-to-r p-[1px] from-red-magic to-blue-magic rounded-xl">
-      <div className="bg-[#1A0015] rounded-xl p-6 h-full">
+      <div className="bg-[#0A0A0A] rounded-xl p-6 h-full">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center">
             <div 
@@ -278,7 +278,7 @@ const BorrowCard = ({ asset }) => {
         
         {/* Borrowed amount (if any) */}
         {existingBorrow && (
-          <div className="mb-6 p-3 bg-[#250020] rounded-lg">
+          <div className="mb-6 p-3 bg-[#0A0A0A] rounded-lg">
             <p className="text-sm text-white/70 mb-1">Borrowed Amount</p>
             <div className="flex items-baseline">
               <span className="text-xl font-medium">{existingBorrow.amount}</span>
@@ -293,7 +293,7 @@ const BorrowCard = ({ asset }) => {
         <div className="mb-6">
           <label className="block text-sm text-white/70 mb-2">Amount to Borrow</label>
           <div className="p-[1px] rounded-md bg-gradient-to-r from-red-magic to-blue-magic">
-            <div className="flex bg-[#250020] rounded-md overflow-hidden">
+            <div className="flex bg-[#0A0A0A] rounded-md overflow-hidden">
               <input
                 type="text"
                 placeholder="0.00"
@@ -303,7 +303,7 @@ const BorrowCard = ({ asset }) => {
                 disabled={!isConnected || isPending}
               />
               <button 
-                className="bg-[#1A0015] px-4 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#0A0A0A] px-4 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleMaxClick}
                 disabled={!isConnected || isPending || maxBorrowable <= 0}
               >

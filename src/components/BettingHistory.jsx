@@ -4,15 +4,15 @@ import { Box, Typography, Paper, Chip, IconButton, Tooltip } from '@mui/material
 import { OpenInNew, Verified, Security } from '@mui/icons-material';
 
 const BettingHistory = ({ history }) => {
-  const openMonadExplorer = (txHash) => {
+  const openMidnightExplorer = (txHash) => {
     if (txHash) {
-      const network = process.env.NEXT_PUBLIC_NETWORK || 'monad-testnet';
+      const network = process.env.NEXT_PUBLIC_NETWORK || 'midnight-network';
       let explorerUrl;
       
-      if (network === 'monad-testnet') {
-        explorerUrl = `https://testnet.monadexplorer.com/tx/${txHash}`;
+      if (network === 'midnight-network') {
+        explorerUrl = `https://testnet.midnightexplorer.com/tx/${txHash}`;
       } else {
-        explorerUrl = `https://testnet.monadexplorer.com/tx/${txHash}`;
+        explorerUrl = `https://testnet.midnightexplorer.com/tx/${txHash}`;
       }
       
       window.open(explorerUrl, '_blank');
@@ -77,7 +77,7 @@ const BettingHistory = ({ history }) => {
                 {bet.type}
               </Typography>
               <Typography variant="body1" color="text.primary">
-                {bet.amount} MATIC
+                {bet.amount} MIDN
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 {new Date(bet.timestamp).toLocaleTimeString()}
@@ -89,7 +89,7 @@ const BettingHistory = ({ history }) => {
                 fontWeight="bold"
                 color={bet.won ? 'success.main' : 'error.main'}
               >
-                {bet.won ? '+' : '-'}{bet.payout} MATIC
+                {bet.won ? '+' : '-'}{bet.payout} MIDN
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', mt: 0.5 }}>
                 <Typography variant="caption" color="text.secondary" sx={{ mr: 1 }}>
@@ -115,7 +115,7 @@ const BettingHistory = ({ history }) => {
                         transform: bet.vrfDetails?.transactionHash ? 'scale(1.1)' : 'none'
                       }
                     }}
-                    onClick={() => bet.vrfDetails?.transactionHash && openMonadExplorer(bet.vrfDetails.transactionHash)}
+                    onClick={() => bet.vrfDetails?.transactionHash && openMidnightExplorer(bet.vrfDetails.transactionHash)}
                   >
                     {bet.roll}
                     {bet.vrfDetails?.transactionHash && (
@@ -146,14 +146,14 @@ const BettingHistory = ({ history }) => {
                   <Typography variant="caption" color="text.secondary" sx={{ mr: 1 }}>
                     VRF:
                   </Typography>
-                  <Tooltip title="Click to verify on Monad Explorer">
+                  <Tooltip title="Click to verify on Midnight Explorer">
                     <Chip
                       label={formatTxHash(bet.vrfDetails.transactionHash)}
                       size="small"
                       variant="outlined"
                       color="success"
                       icon={<Verified />}
-                      onClick={() => openMonadExplorer(bet.vrfDetails.transactionHash)}
+                      onClick={() => openMidnightExplorer(bet.vrfDetails.transactionHash)}
                       sx={{ 
                         fontSize: '0.6rem', 
                         height: 20,
