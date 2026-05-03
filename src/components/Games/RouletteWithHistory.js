@@ -33,7 +33,7 @@ const RouletteWithHistory = () => {
   const [betConfig, setBetConfig] = useState({
     betType: 'straight',
     betValue: 7,
-    betAmount: ethers.parseEther('0.01') // 0.01 MATIC
+    betAmount: ethers.parseEther('0.01') // 0.01 MIDN
   });
 
   // Initialize roulette processor
@@ -303,8 +303,8 @@ const RouletteWithHistory = () => {
               {gameState.result.isWin ? '🎉 YOU WIN!' : '😔 YOU LOSE'}
             </div>
             <div className="text-sm text-gray-600">
-              Bet: {ethers.formatEther(betConfig.betAmount)} MATIC →
-              Payout: {ethers.formatEther(gameState.result.payoutResult.payout.toString())} MATIC
+              Bet: {ethers.formatEther(betConfig.betAmount)} MIDN →
+              Payout: {ethers.formatEther(gameState.result.payoutResult.payout.toString())} MIDN
             </div>
             <div className={`font-medium ${gameState.result.isWin ? 'text-green-600' : 'text-red-600'
               }`}>
@@ -337,7 +337,7 @@ const RouletteWithHistory = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800"
-                  title="View on Polygon Explorer"
+                  title="View on Midnight Explorer"
                 >
                   <ExternalLink size={14} />
                 </a>
