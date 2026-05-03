@@ -17,7 +17,7 @@ export default function FeatureSection() {
     {
       id: 2,
       title: "Cross-Chain Liquidity",
-      description: "Stake tokens across multiple chains to earn MATIC tokens while playing your favorite games with minimal slippage.",
+      description: "Stake tokens across multiple chains to earn MIDN tokens while playing your favorite games with minimal slippage.",
       icon: "⛓️"
     },
     {
@@ -45,13 +45,13 @@ export default function FeatureSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex items-center mb-12 justify-center">
           <div className="w-1 h-6 bg-gradient-to-r from-red-magic to-blue-magic rounded-full mr-3"></div>
-          <h2 className="text-2xl font-display font-bold text-white">Key Features of APT-Casino</h2>
+          <h2 className="text-2xl font-display font-bold text-white">Key Features of Midnight Casino</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
           {/* Casino Image */}
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
-            <div className="relative w-full max-w-md h-[350px] rounded-xl overflow-hidden bg-gradient-to-br from-purple-800 to-blue-900">
+            <div className="relative w-full max-w-md h-[350px] rounded-xl overflow-hidden bg-gradient-to-br from-midnight-black to-midnight-blue/60">
               {!imageError ? (
                 <Image
                   src="/images/casino-players.png"
@@ -66,7 +66,7 @@ export default function FeatureSection() {
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-center px-6">
                     <div className="text-5xl mb-4">🎰</div>
-                    <h3 className="text-xl font-medium text-white mb-2">APT Casino</h3>
+                    <h3 className="text-xl font-medium text-white mb-2">Midnight Casino</h3>
                     <p className="text-white/70">Experience the future of decentralized gaming</p>
                   </div>
                 </div>
@@ -76,12 +76,12 @@ export default function FeatureSection() {
 
           {/* Comparison section */}
           <div className="lg:col-span-7 p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-xl">
-            <div className="bg-[#1A0015] rounded-xl p-6 md:p-8">
-              <h3 className="text-white/70 text-sm uppercase tracking-wider mb-3">Traditional vs APT-Casino</h3>
+            <div className="bg-midnight-black rounded-xl p-6 md:p-8">
+              <h3 className="text-white/70 text-sm uppercase tracking-wider mb-3">Traditional vs Midnight Casino</h3>
               <h4 className="text-white text-2xl font-display font-medium mb-6">A New Era of Fair Gaming</h4>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="bg-[#250020] rounded-lg p-4 border-l-2 border-red-400/50">
+                <div className="bg-midnight-black/80 rounded-lg p-4 border-l-2 border-midnight-white/60">
                   <h5 className="text-red-magic font-medium mb-2">Traditional Casinos</h5>
                   <ul className="space-y-2 text-white/70 text-sm">
                     <li className="flex items-start">
@@ -103,8 +103,8 @@ export default function FeatureSection() {
                   </ul>
                 </div>
                 
-                <div className="bg-[#250020] rounded-lg p-4 border-l-2 border-blue-400/50">
-                  <h5 className="text-blue-magic font-medium mb-2">APT-Casino</h5>
+                <div className="bg-midnight-black/80 rounded-lg p-4 border-l-2 border-midnight-blue/60">
+                  <h5 className="text-blue-magic font-medium mb-2">Midnight Casino</h5>
                   <ul className="space-y-2 text-white/70 text-sm">
                     <li className="flex items-start">
                       <span className="text-green-400 mr-2">✓</span>
@@ -127,8 +127,8 @@ export default function FeatureSection() {
               </div>
               
               <p className="text-white/80 text-sm">
-                APT-Casino leverages Polygon Network Blockchain to provide a transparent, provably fair gaming
-                experience with DeFi integration, allowing players to earn passive income through staking.
+                Midnight Casino leverages Midnight infrastructure to provide transparent, provably fair gaming
+                with privacy-preserving architecture and strong on-chain guarantees.
               </p>
             </div>
           </div>
@@ -145,7 +145,7 @@ export default function FeatureSection() {
               className="p-[1px] bg-gradient-to-r from-red-magic/80 to-blue-magic/80 rounded-xl cursor-pointer hover:from-red-magic hover:to-blue-magic transition-all"
               onClick={() => setActiveFeature(index)}
             >
-              <div className={`bg-[#1A0015] rounded-xl p-6 h-full flex flex-col ${
+              <div className={`bg-midnight-black rounded-xl p-6 h-full flex flex-col ${
                 activeFeature === index ? 'border-l-2 border-red-magic' : ''
               }`}>
                 <div className="mb-4">

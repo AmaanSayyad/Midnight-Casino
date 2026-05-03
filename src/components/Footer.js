@@ -27,8 +27,8 @@ export default function Footer() {
   ];
   
   const paymentMethods = [
-    { name: "MATIC", icon: "/icons/eth.svg" },
-    { name: "MATIC", icon: "/icons/apt.svg" },
+    { name: "MIDN", icon: "/icons/eth.svg" },
+    { name: "MIDN", icon: "/icons/apt.svg" },
   ];
   
   const handleSubscribe = (e) => {
@@ -51,30 +51,35 @@ export default function Footer() {
       {/* Background Glow Effect */}
       <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-red-magic/10 blur-[100px] animate-pulse"></div>
       <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-blue-magic/10 blur-[100px] animate-pulse" style={{animationDelay: "1.5s"}}></div>
-      <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-purple-600/10 blur-[80px] animate-pulse" style={{animationDelay: "0.7s"}}></div>
+      <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-midnight-blue/10 blur-[80px] animate-pulse" style={{animationDelay: "0.7s"}}></div>
       
       {/* Top Divider with animated gradient */}
-      <div className="w-full h-0.5 bg-gradient-to-r from-red-magic via-blue-magic to-red-magic bg-[length:200%_auto] animate-gradient mb-12"></div>
+      <div className="w-full h-0.5 bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 bg-[length:200%_auto] animate-gradient mb-12"></div>
 
       {/* Footer Content */}
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 px-6">
         {/* Logo and Description */}
         <div className="md:col-span-4">
           <a href="/" className="logo block mb-6 transition-transform hover:scale-105">
-            <Image src="/PowerPlay.png" alt="PowerPlay logo" width={172} height={15} />
+            <Image
+              src="/Midnight%20Logo%20Pack/01_Symbol%20+%20Wordmark/Horizontal/Midnight-RGB_Logo-Horizontal-White.svg"
+              alt="Midnight logo"
+              width={180}
+              height={24}
+            />
           </a>
           <div className="p-[1px] bg-gradient-to-r from-red-magic/40 to-blue-magic/40 rounded-lg mb-6 hover:from-red-magic hover:to-blue-magic transition-all duration-300">
-            <div className="bg-[#120010] rounded-lg p-4">
+            <div className="bg-midnight-black rounded-lg p-4">
               <p className="text-white/80 text-sm leading-relaxed">
-                APT-Casino is your ultimate destination for Polygon Network gaming. Experience transparency, fairness,
-                and excitement powered by Polygon Network blockchain technology.
+                Midnight Casino is your destination for Midnight-powered gaming. Experience transparency, fairness,
+                and excitement built on Midnight network infrastructure.
               </p>
             </div>
           </div>
           
           {/* Social Media Links in a gradient border */}
           <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-lg hover:shadow-lg hover:shadow-red-magic/20 transition-all duration-300">
-            <div className="bg-[#120010] rounded-lg p-4 flex justify-between">
+            <div className="bg-midnight-black rounded-lg p-4 flex justify-between">
               {socialLinks.map((social) => (
                 <a 
                   key={social.name}
@@ -84,7 +89,7 @@ export default function Footer() {
                   aria-label={social.name}
                   className="group transition-transform hover:scale-110"
                 >
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#250020] rounded-full group-hover:bg-gradient-to-r group-hover:from-red-magic group-hover:to-blue-magic transition-all duration-300">
+                  <div className="w-10 h-10 flex items-center justify-center bg-midnight-black/80 rounded-full group-hover:bg-gradient-to-r group-hover:from-red-magic group-hover:to-blue-magic transition-all duration-300">
                     <Image 
                       src={social.icon} 
                       alt={social.name} 
@@ -101,7 +106,7 @@ export default function Footer() {
           {/* Language Selector */}
           <div className="mt-6 relative">
             <button 
-              className="flex items-center gap-2 text-white/70 hover:text-white p-2 rounded-md bg-[#250020] hover:bg-[#350030] w-full transition-colors"
+              className="flex items-center gap-2 text-white/70 hover:text-white p-2 rounded-md bg-midnight-black/80 hover:bg-midnight-blue/20 w-full transition-colors"
               onClick={() => setShowLanguage(!showLanguage)}
             >
               <FaGlobe className="text-blue-magic" />
@@ -110,7 +115,7 @@ export default function Footer() {
             </button>
             
             {showLanguage && (
-              <div className="absolute z-10 mt-1 w-full bg-[#250020] border border-white/10 rounded-md shadow-xl p-1 animate-fadeIn">
+              <div className="absolute z-10 mt-1 w-full bg-midnight-black border border-white/10 rounded-md shadow-xl p-1 animate-fadeIn">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
@@ -179,10 +184,10 @@ export default function Footer() {
               <FaShieldAlt className="mr-2 text-green-500" /> Security & Trust
             </h3>
             <div className="flex flex-wrap gap-2">
-              <div className="bg-[#250020] p-1.5 rounded-md flex items-center gap-1.5 text-xs text-white/80">
+              <div className="bg-midnight-black/80 p-1.5 rounded-md flex items-center gap-1.5 text-xs text-white/80">
                 <FaLock className="text-green-500" /> SSL Secured
               </div>
-              <div className="bg-[#250020] p-1.5 rounded-md flex items-center gap-1.5 text-xs text-white/80">
+              <div className="bg-midnight-black/80 p-1.5 rounded-md flex items-center gap-1.5 text-xs text-white/80">
                 <FaShieldAlt className="text-blue-magic" /> Provably Fair
               </div>
             </div>
@@ -196,8 +201,8 @@ export default function Footer() {
             <h3 className="font-display text-lg">Stay Updated</h3>
           </div>
           
-          <div className="mt-4 p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-lg shadow-lg transition-all hover:shadow-red-magic/30">
-            <div className="bg-[#120010] rounded-lg p-4">
+          <div className="mt-4 p-[1px] bg-gradient-to-r from-blue-900 to-blue-700 rounded-lg shadow-lg transition-all hover:shadow-blue-700/30">
+            <div className="bg-midnight-black rounded-lg p-4">
               <p className="text-white/70 text-sm mb-3">
                 Subscribe to receive updates about new games, features, and promotions.
               </p>
@@ -209,7 +214,7 @@ export default function Footer() {
                     placeholder="Your email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 bg-[#250020] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-magic transition-colors"
+                    className="flex-1 bg-midnight-black/80 border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-magic transition-colors"
                     required
                   />
                   <GradientBorderButton type="submit">
@@ -226,7 +231,7 @@ export default function Footer() {
               
               <div className="flex justify-center mt-6">
                 <Link href="/game" className="w-full">
-                  <button className="w-full magic-gradient hover:opacity-90 transition-all text-white font-display py-3 px-6 rounded-md hover:shadow-lg hover:shadow-red-magic/30">
+                  <button className="w-full border-2 border-white/80 text-white hover:bg-white/10 transition-all font-display py-3 px-6 rounded-md">
                     Launch Game
                   </button>
                 </Link>
@@ -244,7 +249,7 @@ export default function Footer() {
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-white/50">
-            © {new Date().getFullYear()} APT-Casino. All rights reserved.
+            © {new Date().getFullYear()} Midnight Casino. All rights reserved.
           </div>
           
           <div className="text-xs text-white/40 flex gap-4">
@@ -260,7 +265,7 @@ export default function Footer() {
         
         {/* Compliance Statement */}
         <div className="text-xs text-white/30 text-center mt-6">
-          APT-Casino encourages responsible gaming. Please play responsibly and only with funds you can afford to lose.
+          Midnight Casino encourages responsible gaming. Please play responsibly and only with funds you can afford to lose.
           Gambling can be addictive. If you need help or advice, please visit <a href="/responsible-gaming" className="underline hover:text-white/50 transition-colors">Responsible Gaming</a>.
         </div>
       </div>
