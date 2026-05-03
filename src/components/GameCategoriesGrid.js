@@ -57,7 +57,7 @@ const GameCategoriesGrid = () => {
                 onMouseEnter={() => setHoveredId(category.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <div className="bg-[#1A0015] rounded-xl h-full overflow-hidden relative">
+                <div className="bg-[#0A0A0A] rounded-xl h-full overflow-hidden relative">
                   {/* Placeholder for background image */}
                   <div className="absolute inset-0 bg-[#300030] opacity-40"></div>
                   
@@ -97,7 +97,7 @@ const GameCategoriesGrid = () => {
           <Link href="/game">
             <div className="inline-block">
               <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-md inline-block">
-                <button className="bg-[#1A0015] hover:bg-[#250020] transition-colors text-white font-display px-8 py-3 rounded-md flex items-center">
+                <button className="bg-[#0A0A0A] hover:bg-[#0A0A0A] transition-colors text-white font-display px-8 py-3 rounded-md flex items-center">
                   View All Games
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

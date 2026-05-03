@@ -18,7 +18,7 @@ const FEATURED_GAMES = [
     players: 142,
     categories: ['featured', 'table'],
     badge: 'POPULAR',
-    badgeColor: 'from-red-500 to-orange-500',
+    badgeColor: 'from-red-600/80 to-orange-600/80',
     isNew: false,
     isHot: true,
   },
@@ -31,7 +31,7 @@ const FEATURED_GAMES = [
     players: 156,
     categories: ['featured', 'instant'],
     badge: 'HOT',
-    badgeColor: 'from-green-500 to-emerald-500',
+    badgeColor: 'from-emerald-600/80 to-emerald-500/80',
     isNew: false,
     isHot: true,
   },
@@ -44,7 +44,7 @@ const FEATURED_GAMES = [
     players: 98,
     categories: ['featured', 'instant'],
     badge: 'FEATURED',
-    badgeColor: 'from-purple-500 to-pink-500',
+    badgeColor: 'from-midnight-blue to-midnight-blue',
     isNew: false,
     isHot: true,
   },
@@ -57,7 +57,7 @@ const FEATURED_GAMES = [
     players: 134,
     categories: ['featured', 'instant'],
     badge: 'POPULAR',
-    badgeColor: 'from-blue-500 to-cyan-500',
+    badgeColor: 'from-blue-700/80 to-cyan-700/80',
     isNew: false,
     isHot: true,
   }
@@ -165,8 +165,8 @@ const GameCarousel = () => {
               </h3>
               {/* Live indicator for specific games */}
               {(game.id === 'roulette' || game.id === 'plinko' || game.id === 'mines' || game.id === 'wheel') && (
-                <div className="flex items-center gap-1 bg-green-900/30 border border-green-500/30 px-2 py-0.5 rounded-full">
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <div className="flex items-center gap-1 bg-emerald-900/30 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                   <span className="text-green-400 text-xs font-medium">LIVE</span>
                 </div>
               )}
@@ -233,8 +233,8 @@ const GameCarousel = () => {
             onClick={() => setActiveCategory(category.id)}
             className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-all ${
               activeCategory === category.id
-                ? 'bg-gradient-to-r from-red-magic to-blue-magic text-white font-medium'
-                : 'bg-white/10 text-white/70 hover:bg-white/20'
+                ? 'bg-blue-800/60 text-blue-100 font-medium'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
             }`}
           >
             {category.label}
