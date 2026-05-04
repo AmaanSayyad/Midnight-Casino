@@ -25,14 +25,14 @@ const StatsOverview = () => {
   };
   
   return (
-    <div className="bg-[#1A0015] rounded-xl p-6 mb-10 shadow-xl">
+    <div className="bg-midnight-black rounded-xl p-6 mb-10 shadow-xl">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
         <div className="flex-1">
           <div className="flex items-center mb-1">
             <div className="w-2 h-2 rounded-full bg-gradient-to-r from-red-magic to-blue-magic mr-2"></div>
             <h3 className="text-white/70 font-display text-sm uppercase tracking-wider">Platform Statistics</h3>
           </div>
-          <p className="text-white/50 text-sm">Real-time overview of the APT Casino ecosystem</p>
+          <p className="text-white/50 text-sm">Real-time overview of the Midnight Casino ecosystem</p>
         </div>
         
         <div className="flex flex-wrap gap-8 justify-center md:justify-end">
@@ -46,7 +46,7 @@ const StatsOverview = () => {
                 </span>
               )}
             </div>
-            <p className="text-xs uppercase mt-1 text-white/70">Total MATIC Pool</p>
+            <p className="text-xs uppercase mt-1 text-white/70">Total MIDN Pool</p>
           </div>
           
           <div className="flex flex-col items-center">
@@ -59,7 +59,7 @@ const StatsOverview = () => {
                 </span>
               )}
             </div>
-            <p className="text-xs uppercase mt-1 text-white/70">MATIC APY</p>
+            <p className="text-xs uppercase mt-1 text-white/70">MIDN APY</p>
           </div>
           
           <div className="flex flex-col items-center">
@@ -72,7 +72,7 @@ const StatsOverview = () => {
                 </span>
               )}
             </div>
-            <p className="text-xs uppercase mt-1 text-white/70">MATIC Price</p>
+            <p className="text-xs uppercase mt-1 text-white/70">MIDN Price</p>
           </div>
           
           <div className="flex flex-col items-center">
@@ -85,7 +85,7 @@ const StatsOverview = () => {
       
       {/* Additional stats row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-[#250020] rounded-lg p-3">
+        <div className="bg-midnight-black/80 rounded-lg p-3">
           <p className="text-xs text-white/50 mb-1">Market Cap</p>
           <div className="text-lg font-medium">
             {stats.loading ? (
@@ -96,7 +96,7 @@ const StatsOverview = () => {
           </div>
         </div>
         
-        <div className="bg-[#250020] rounded-lg p-3">
+        <div className="bg-midnight-black/80 rounded-lg p-3">
           <p className="text-xs text-white/50 mb-1">24h Volume</p>
           <div className="text-lg font-medium">
             {stats.loading ? (
@@ -107,7 +107,7 @@ const StatsOverview = () => {
           </div>
         </div>
         
-        <div className="bg-[#250020] rounded-lg p-3">
+        <div className="bg-midnight-black/80 rounded-lg p-3">
           <p className="text-xs text-white/50 mb-1">24h Change</p>
           <div className={`text-lg font-medium ${stats.priceChange24h && stats.priceChange24h > 0 ? 'text-green-400' : 'text-red-400'}`}>
             {stats.loading ? (

@@ -115,7 +115,7 @@ const SmartAccountModal = ({ isOpen, onClose }) => {
             )}
 
             {/* Casino Benefits */}
-            <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg p-4 border border-purple-700/50">
+            <div className="bg-gradient-to-r from-midnight-blue/20 to-blue-900/30 rounded-lg p-4 border border-midnight-blue/50">
               <h5 className="text-sm font-semibold text-white mb-2">Casino Benefits</h5>
               <div className="space-y-1 text-xs text-gray-300">
                 {isSmartAccount ? (
@@ -163,7 +163,7 @@ const SmartAccountModal = ({ isOpen, onClose }) => {
             <div className="pt-2">
               <button
                 onClick={onClose}
-                className="w-full py-2 bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white rounded-lg font-medium transition-colors"
+                className="w-full py-2 bg-gradient-to-r from-midnight-blue to-blue-600 hover:from-midnight-blue hover:to-blue-700 text-white rounded-lg font-medium transition-colors"
               >
                 Got it!
               </button>
