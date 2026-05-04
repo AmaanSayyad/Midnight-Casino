@@ -97,9 +97,9 @@ export default function LiveChat({ open, onClose }) {
   if (!open || !mounted) return null;
 
   const node = (
-      <div className="fixed right-4 bottom-4 z-[1000] w-[360px] max-w-[90vw] bg-[#0e0010]/95 border border-purple-500/30 rounded-2xl shadow-2xl backdrop-blur">
+      <div className="fixed right-4 bottom-4 z-[1000] w-[360px] max-w-[90vw] bg-[#0e0010]/95 border border-midnight-blue/20 rounded-2xl shadow-2xl backdrop-blur">
         <div
-          className={`p-3 border-b border-purple-500/20 flex items-center justify-between ${minimized ? 'cursor-pointer' : ''}`}
+          className={`p-3 border-b border-midnight-blue/15 flex items-center justify-between ${minimized ? 'cursor-pointer' : ''}`}
           onClick={() => { if (minimized) setMinimized(false); }}
         >
           <div className="text-white/80 text-sm">Live Chat</div>
@@ -120,12 +120,12 @@ export default function LiveChat({ open, onClose }) {
         </div>
         )}
         {!minimized && (
-        <form onSubmit={sendMessage} className="p-3 border-t border-purple-500/20 flex items-center gap-2">
+        <form onSubmit={sendMessage} className="p-3 border-t border-midnight-blue/15 flex items-center gap-2">
           <input
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Type a message"
-            className="flex-1 px-3 py-2 rounded-md bg-[#1a001a] border border-purple-500/30 text-white placeholder-white/30 focus:outline-none focus:border-purple-400"
+            className="flex-1 px-3 py-2 rounded-md bg-[#1a001a] border border-midnight-blue/20 text-white placeholder-white/30 focus:outline-none focus:border-blue-400"
           />
           <button type="submit" className="px-3 py-2 rounded-md bg-gradient-to-r from-red-magic to-blue-magic text-white text-sm">Send</button>
         </form>
