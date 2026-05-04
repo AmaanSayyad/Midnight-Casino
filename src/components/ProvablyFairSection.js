@@ -10,7 +10,7 @@ const ProvablyFairSection = () => {
     {
       id: 1,
       title: 'Pyth Entropy Request',
-      description: 'When you start a game, a randomness request is sent to Pyth Network Entropy on Arbitrum Sepolia. The request includes a custom gas limit and required fee.',
+      description: 'When you start a game, a randomness request is sent to Pyth Network Entropy on Midnight Network. The request includes a custom gas limit and required fee.',
       icon: 'client-seed',
       code: 'import pythEntropyService from \'@/services/PythEntropyService\';\n\nconst result = await pythEntropyService.generateRandom(\'ROULETTE\', {\n  purpose: \'roulette_spin\',\n  gameType: \'ROULETTE\',\n  betAmount: 0.1\n});'
     },
@@ -24,7 +24,7 @@ const ProvablyFairSection = () => {
     {
       id: 3,
       title: 'On-Chain Verification',
-      description: 'All randomness requests and results are recorded on Arbitrum Sepolia blockchain, providing complete transparency and verifiability.',
+      description: 'All randomness requests and results are recorded on Midnight Network blockchain, providing complete transparency and verifiability.',
       icon: 'calculation',
       code: '// Verify randomness via Pyth Entropy Explorer\nconsole.log(\'Transaction:\', transactionHash);\nconsole.log(\'Explorer:\', explorerUrl);\nconsole.log(\'Arbiscan:\', `https://sepolia.arbiscan.io/tx/${transactionHash}`);'
     },
@@ -53,14 +53,14 @@ const ProvablyFairSection = () => {
           {/* Left explanation column */}
           <div className="lg:col-span-5">
             <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-xl h-full">
-              <div className="bg-[#1A0015] rounded-xl p-6 h-full">
+              <div className="bg-[#0A0A0A] rounded-xl p-6 h-full">
                 <h3 className="text-white text-xl font-medium mb-4">What is Pyth Entropy?</h3>
                 <p className="text-white/80 mb-6">
                   Pyth Entropy is a decentralized randomness service that provides cryptographically secure random numbers on-chain.
-                  It aggregates randomness from multiple sources and makes it available to smart contracts on Arbitrum Sepolia.
+                  It aggregates randomness from multiple sources and makes it available to smart contracts on Midnight Network.
                 </p>
                 
-                <div className="bg-[#250020] p-4 rounded-lg mb-6 border-l-2 border-red-magic">
+                <div className="bg-[#0A0A0A] p-4 rounded-lg mb-6 border-l-2 border-red-magic">
                   <h4 className="text-white font-medium mb-2">Why Pyth Entropy matters</h4>
                   <ul className="text-white/70 text-sm space-y-2 list-disc pl-4">
                     <li>Cryptographically secure randomness from multiple sources</li>
@@ -74,7 +74,7 @@ const ProvablyFairSection = () => {
                 <Link href="/provably-fair">
                   <div className="inline-block">
                     <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-md inline-block">
-                      <button className="bg-[#1A0015] hover:bg-[#250020] transition-colors text-white px-6 py-2 rounded-md flex items-center">
+                      <button className="bg-[#0A0A0A] hover:bg-[#0A0A0A] transition-colors text-white px-6 py-2 rounded-md flex items-center">
                         Verify On-Chain
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -90,7 +90,7 @@ const ProvablyFairSection = () => {
           {/* Right steps column */}
           <div className="lg:col-span-7">
             <div className="p-[1px] bg-gradient-to-r from-red-magic/40 to-blue-magic/40 rounded-xl">
-              <div className="bg-[#1A0015] rounded-xl p-6">
+              <div className="bg-[#0A0A0A] rounded-xl p-6">
                 <h3 className="text-white text-xl font-medium mb-4">How Pyth Entropy Works</h3>
                 
                 {/* Steps tabs */}
@@ -101,7 +101,7 @@ const ProvablyFairSection = () => {
                       className={`p-2 rounded-md text-sm font-medium transition-all text-center ${
                         activeTab === step.id
                           ? 'bg-gradient-to-r from-red-magic/80 to-blue-magic/80 text-white'
-                          : 'bg-[#250020] text-white/70 hover:text-white'
+                          : 'bg-[#0A0A0A] text-white/70 hover:text-white'
                       }`}
                       onClick={() => setActiveTab(step.id)}
                     >

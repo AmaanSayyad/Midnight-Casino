@@ -6,7 +6,7 @@ import { FaNetworkWired, FaCheckCircle, FaExclamationTriangle, FaSpinner } from 
 import { GiMineExplosion } from 'react-icons/gi';
 import usePythEntropy from '../hooks/usePythEntropy.js';
 
-const PythEntropyStatus = ({ network = 'arbitrum-sepolia' }) => {
+const PythEntropyStatus = ({ network = 'midnight-network' }) => {
   const {
     isInitialized,
     isLoading,
