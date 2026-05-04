@@ -73,12 +73,12 @@ const AssetRow = ({ asset, onDeposit, onWithdraw, depositData, isConnected }) =>
         {/* Deposit Modal */}
         {isDepositModalOpen && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-            <div className="bg-[#1A0015] rounded-xl p-6 max-w-md w-full">
+            <div className="bg-[#0A0A0A] rounded-xl p-6 max-w-md w-full">
               <h3 className="text-xl font-medium mb-4">Deposit {asset.symbol}</h3>
               <div className="mb-4">
                 <label className="block text-sm text-white/70 mb-2">Amount to Deposit</label>
                 <div className="p-[1px] rounded-md bg-gradient-to-r from-red-magic to-blue-magic">
-                  <div className="flex bg-[#250020] rounded-md overflow-hidden">
+                  <div className="flex bg-[#0A0A0A] rounded-md overflow-hidden">
                     <input
                       type="text"
                       placeholder="0.00"
@@ -86,7 +86,7 @@ const AssetRow = ({ asset, onDeposit, onWithdraw, depositData, isConnected }) =>
                       onChange={(e) => setDepositAmount(e.target.value)}
                       className="bg-transparent flex-1 p-3 focus:outline-none text-white"
                     />
-                    <button className="bg-[#1A0015] px-4 text-sm font-medium">MAX</button>
+                    <button className="bg-[#0A0A0A] px-4 text-sm font-medium">MAX</button>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,7 @@ const AssetRow = ({ asset, onDeposit, onWithdraw, depositData, isConnected }) =>
         {/* Withdraw Modal */}
         {isWithdrawModalOpen && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-            <div className="bg-[#1A0015] rounded-xl p-6 max-w-md w-full">
+            <div className="bg-[#0A0A0A] rounded-xl p-6 max-w-md w-full">
               <h3 className="text-xl font-medium mb-4">Withdraw {asset.symbol}</h3>
               <div className="mb-4">
                 <p className="text-white/70 mb-2">
@@ -270,7 +270,7 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
   if (isLoading || !isClient) {
     return (
       <div className="bg-gradient-to-r p-[1px] from-red-magic to-blue-magic rounded-xl overflow-hidden">
-        <div className="bg-[#1A0015] rounded-xl p-6 overflow-x-auto">
+        <div className="bg-[#0A0A0A] rounded-xl p-6 overflow-x-auto">
           <div className="flex justify-center py-8">
             <div className="animate-spin w-8 h-8 border-4 border-white/20 rounded-full border-t-[#E04C95]"></div>
           </div>
@@ -281,7 +281,7 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
   
   return (
     <div className="bg-gradient-to-r p-[1px] from-red-magic to-blue-magic rounded-xl overflow-hidden">
-      <div className="bg-[#1A0015] rounded-xl p-4 overflow-x-auto">
+      <div className="bg-[#0A0A0A] rounded-xl p-4 overflow-x-auto">
         <table className="w-full min-w-[800px]">
           <thead>
             <tr className="border-b border-white/10">
@@ -316,7 +316,7 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
         
         {/* Connection prompt */}
         {!isConnected && !isDev && (
-          <div className="mt-4 p-4 bg-[#250020] rounded-lg">
+          <div className="mt-4 p-4 bg-[#0A0A0A] rounded-lg">
             <p className="text-center text-white/70 mb-2">Connect your wallet to see your deposits and start earning</p>
             <div className="flex justify-center">
               <GradientBgButton onClick={() => {
@@ -330,7 +330,7 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
         )}
         
         {isDev && (
-          <div className="mt-4 p-4 bg-[#250020] rounded-lg border border-yellow-600/30">
+          <div className="mt-4 p-4 bg-[#0A0A0A] rounded-lg border border-yellow-600/30">
             <p className="text-center text-white/70">
               <span className="bg-yellow-600/80 text-white text-xs px-2 py-1 rounded-md mr-2">
                 Dev Mode
