@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAccount, useChainId, useSwitchChain } from 'wagmi';
-import { switchToPolygonAmoy, isPolygonAmoy, POLYGON_AMOY_CONFIG } from '@/utils/networkUtils';
+import { switchToMidnightNetwork, isMidnightNetwork } from '@/utils/networkUtils';
+import { midnightNetwork } from '@/config/chains';
 
 const NetworkSwitcher = () => {
   const { isConnected } = useAccount();
@@ -13,7 +14,7 @@ const NetworkSwitcher = () => {
 
   useEffect(() => {
     if (isConnected && chainId) {
-      setIsWrongNetwork(!isPolygonAmoy(chainId));
+      setIsWrongNetwork(!isMidnightNetwork(chainId));
     }
   }, [isConnected, chainId]);
 
@@ -25,19 +26,19 @@ const NetworkSwitcher = () => {
       // First try using wagmi's switchChain
       if (switchChain) {
         try {
-          await switchChain({ chainId: 80002 });
+          await switchChain({ chainId: midnightNetwork.id });
         } catch (wagmiError) {
           console.log('Wagmi switch failed, trying manual method:', wagmiError);
           // If wagmi fails, try manual MetaMask method
-          await switchToPolygonAmoy();
+          await switchToMidnightNetwork();
         }
       } else {
         // Fallback to manual method
-        await switchToPolygonAmoy();
+        await switchToMidnightNetwork();
       }
     } catch (error) {
       console.error('Failed to switch network:', error);
-      alert('Failed to switch to Polygon Amoy. Please add it manually in MetaMask.');
+      alert('Failed to switch to Midnight Network. Please add it manually in MetaMask.');
     } finally {
       setIsSwitching(false);
     }
@@ -53,7 +54,7 @@ const NetworkSwitcher = () => {
         <div className="flex items-center space-x-4">
           <div className="flex-1">
             <p className="font-medium">Wrong Network</p>
-            <p className="text-sm text-red-200">Please switch to Polygon Amoy to use this app</p>
+            <p className="text-sm text-red-200">Please switch to Midnight Network to use this app</p>
           </div>
           <button
             onClick={handleSwitchNetwork}

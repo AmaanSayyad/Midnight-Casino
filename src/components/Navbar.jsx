@@ -17,7 +17,7 @@ const Navbar = () => {
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 2 }}>
               <Typography variant="h6" component="div" sx={{ color: 'white', fontWeight: 'bold' }}>
-                APT Casino
+                Midnight Casino
               </Typography>
             </Box>
             
