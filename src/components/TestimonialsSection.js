@@ -10,7 +10,7 @@ const TestimonialsSection = () => {
       name: 'Michael T.',
       avatar: '/images/avatars/avatar1.png',
       rating: 5,
-              text: 'APT Casino offers the most transparent gaming experience I\'ve found on Polygon Network. The provably fair system gives me confidence that games are legitimate, and I\'ve already won over 500 MATIC tokens!',
+              text: 'Midnight Casino offers the most transparent gaming experience I\'ve found. The provably fair system gives me confidence that games are legitimate, and I\'ve already won over 500 tokens!',
       game: 'Roulette',
       amount: 520
     },
@@ -28,7 +28,7 @@ const TestimonialsSection = () => {
       name: 'CryptoQueen',
       avatar: '/images/avatars/avatar3.png',
       rating: 5,
-      text: 'The DeFi lending integration is brilliant. I was able to use my collateral to borrow MATIC for games, and when I won big, I paid back the loan and kept the profits. Smart financial gaming!',
+      text: 'The DeFi lending integration is brilliant. I was able to use my collateral to borrow MIDN for games, and when I won big, I paid back the loan and kept the profits. Smart financial gaming!',
       game: 'Fortune Tiger',
       amount: 876
     },
@@ -69,7 +69,7 @@ const TestimonialsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Featured Testimonial */}
           <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-xl">
-            <div className="bg-[#1A0015] rounded-xl p-6 md:p-8 h-full relative">
+            <div className="bg-midnight-black rounded-xl p-6 md:p-8 h-full relative">
               <FaQuoteLeft className="text-red-magic/20 text-6xl absolute top-4 right-4" />
               
               <div className="flex flex-col h-full">
@@ -106,7 +106,7 @@ const TestimonialsSection = () => {
                     </div>
                     <div>
                       <p className="text-white/50 text-sm">Biggest Win</p>
-                      <p className="text-white font-bold">{testimonials[activeIndex].amount} MATIC</p>
+                      <p className="text-white font-bold">{testimonials[activeIndex].amount} MIDN</p>
                     </div>
                   </div>
                 </div>
@@ -130,13 +130,13 @@ const TestimonialsSection = () => {
                   className={`w-full text-left p-4 rounded-lg transition-all ${
                     activeIndex === index 
                       ? 'bg-gradient-to-r from-red-magic/20 to-blue-magic/20 border-l-2 border-red-magic' 
-                      : 'hover:bg-[#250020]/30'
+                      : 'hover:bg-midnight-blue/10'
                   }`}
                   onClick={() => setActiveIndex(index)}
                 >
                   <div className="flex items-center">
                     {/* Small avatar placeholder */}
-                    <div className="w-10 h-10 rounded-full bg-[#250020] flex items-center justify-center mr-3">
+                    <div className="w-10 h-10 rounded-full bg-midnight-black/80 flex items-center justify-center mr-3">
                       <span className="text-white text-sm">{testimonial.name.charAt(0)}</span>
                     </div>
                     
@@ -153,7 +153,7 @@ const TestimonialsSection = () => {
                     </div>
                     
                     <span className="ml-auto text-white/60 text-sm">
-                      {testimonial.amount} MATIC
+                      {testimonial.amount} MIDN
                     </span>
                   </div>
                 </button>
