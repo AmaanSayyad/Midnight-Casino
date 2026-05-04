@@ -89,8 +89,8 @@ const MOCK_SEARCH_RESULTS = {
     { id: 'game4', name: 'Plinko', path: '/game/plinko', type: 'Popular' },
   ],
   tournaments: [
-    { id: 'tournament1', name: 'High Roller Tournament', path: '/tournaments/high-roller', prize: '10,000 MATIC' },
-    { id: 'tournament2', name: 'Weekend Battle', path: '/tournaments/weekend-battle', prize: '5,000 MATIC' },
+    { id: 'tournament1', name: 'High Roller Tournament', path: '/tournaments/high-roller', prize: '10,000 MIDN' },
+    { id: 'tournament2', name: 'Weekend Battle', path: '/tournaments/weekend-battle', prize: '5,000 MIDN' },
   ],
   pages: [
     { id: 'page1', name: 'Bank', path: '/bank', description: 'Deposit and withdraw funds' },
@@ -180,7 +180,7 @@ export default function Navbar() {
     {
       id: '1',
       title: 'Balance Updated',
-      message: 'Your MATIC balance has been updated',
+      message: 'Your MIDN balance has been updated',
       isRead: false,
       time: '2 min ago'
     },
@@ -400,7 +400,7 @@ export default function Navbar() {
       const txHash = result?.transactionHash || 'Unknown';
       const txDisplay = txHash !== 'Unknown' ? `${txHash.slice(0, 8)}...` : 'Pending';
       
-      notification.success(`Withdrawal transaction sent! ${balanceInMatic.toFixed(5)} MATIC will be transferred. TX: ${txDisplay}`);
+      notification.success(`Withdrawal transaction sent! ${balanceInMatic.toFixed(5)} MIDN will be transferred. TX: ${txDisplay}`);
       
       // Close the modal
       setShowBalanceModal(false);
@@ -439,17 +439,17 @@ export default function Navbar() {
     
     // Check deposit limits
     if (amount < TREASURY_CONFIG.LIMITS.MIN_DEPOSIT) {
-      notification.error(`Minimum deposit amount is ${TREASURY_CONFIG.LIMITS.MIN_DEPOSIT} MATIC`);
+      notification.error(`Minimum deposit amount is ${TREASURY_CONFIG.LIMITS.MIN_DEPOSIT} MIDN`);
       return;
     }
     
     if (amount > TREASURY_CONFIG.LIMITS.MAX_DEPOSIT) {
-      notification.error(`Maximum deposit amount is ${TREASURY_CONFIG.LIMITS.MAX_DEPOSIT} MATIC`);
+      notification.error(`Maximum deposit amount is ${TREASURY_CONFIG.LIMITS.MAX_DEPOSIT} MIDN`);
       return;
     }
 
     setIsDepositing(true);
-    console.log('🚀 Starting deposit process for:', amount, 'MATIC');
+    console.log('🚀 Starting deposit process for:', amount, 'MIDN');
     try {
       console.log('Depositing to house balance:', { address: address, amount });
       
@@ -469,7 +469,7 @@ export default function Navbar() {
       const userAccount = accounts[0];
       console.log('🔍 Debug - User account:', userAccount);
       
-      // Check if user is on Polygon Amoy network
+      // Check if user is on Midnight Network network
       const chainId = await window.ethereum.request({ method: 'eth_chainId' });
       const expectedChainId = TREASURY_CONFIG.NETWORK.CHAIN_ID;
       
@@ -478,19 +478,19 @@ export default function Navbar() {
       
       if (chainId !== expectedChainId) {
         console.log('🔄 Need to switch network...');
-        // Try to switch to Polygon Amoy
+        // Try to switch to Midnight Network
         try {
-          console.log('🔄 Attempting to switch to Polygon Amoy...');
+          console.log('🔄 Attempting to switch to Midnight Network...');
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: expectedChainId }],
           });
-          console.log('✅ Successfully switched to Polygon Amoy');
+          console.log('✅ Successfully switched to Midnight Network');
         } catch (switchError) {
           console.log('⚠️ Switch error:', switchError);
-          // If Polygon Amoy is not added, add it
+          // If Midnight Network is not added, add it
           if (switchError.code === 4902) {
-            console.log('🔧 Network not found, adding Polygon Amoy...');
+            console.log('🔧 Network not found, adding Midnight Network...');
             try {
               await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
@@ -498,25 +498,25 @@ export default function Navbar() {
                   chainId: expectedChainId,
                   chainName: TREASURY_CONFIG.NETWORK.CHAIN_NAME,
                   nativeCurrency: {
-                    name: 'MATIC',
-                    symbol: 'MATIC',
+                    name: 'MIDN',
+                    symbol: 'MIDN',
                     decimals: 18
                   },
                   rpcUrls: [TREASURY_CONFIG.NETWORK.RPC_URL],
                   blockExplorerUrls: [TREASURY_CONFIG.NETWORK.EXPLORER_URL]
                 }]
               });
-              console.log('✅ Successfully added Polygon Amoy network');
+              console.log('✅ Successfully added Midnight Network network');
               
               // Try to switch again after adding
               await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: expectedChainId }],
               });
-              console.log('✅ Successfully switched to Polygon Amoy after adding');
+              console.log('✅ Successfully switched to Midnight Network after adding');
             } catch (addError) {
               console.error('❌ Failed to add network:', addError);
-              throw new Error(`Failed to add Polygon Amoy network: ${addError.message}`);
+              throw new Error(`Failed to add Midnight Network network: ${addError.message}`);
             }
           } else {
             console.error('❌ Switch error:', switchError);
@@ -615,7 +615,7 @@ export default function Navbar() {
         // Don't fail the deposit if API call fails - balance is already updated
       }
       
-      notification.success(`Successfully deposited ${amount} MATIC to casino treasury! TX: ${txHash.slice(0, 10)}...`);
+      notification.success(`Successfully deposited ${amount} MIDN to casino treasury! TX: ${txHash.slice(0, 10)}...`);
       
       setDepositAmount("");
       
@@ -758,21 +758,21 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="backdrop-blur-md bg-[#070005]/90 fixed w-full z-20 transition-all duration-300 shadow-lg">
+      <nav className="backdrop-blur-md bg-midnight-black/95 fixed w-full z-20 transition-all duration-300 shadow-lg shadow-midnight-blue/10">
         <div className="flex w-full items-center justify-between py-6 px-4 sm:px-10 md:px-20 lg:px-36">
           <div className="flex items-center">
             <a href="/" className="logo mr-6">
             <Image
-              src="/PowerPlay.png"
-              alt="powerplay image"
-              width={172}
-              height={15}
+              src="/Midnight%20Logo%20Pack/01_Symbol%20+%20Wordmark/Horizontal/Midnight-RGB_Logo-Horizontal-White.svg"
+              alt="Midnight logo"
+              width={180}
+              height={24}
               />
             </a>
             
             {/* Mobile menu button */}
             <button 
-              className="md:hidden text-white p-1 rounded-lg hover:bg-purple-500/20 transition-colors"
+              className="md:hidden text-white p-1 rounded-lg hover:bg-midnight-blue/20 transition-colors"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               aria-label="Toggle mobile menu"
             >
@@ -811,7 +811,7 @@ export default function Navbar() {
             {/* Search Icon */}
             <div className="relative">
               <button 
-                className="p-2 text-white/70 hover:text-white transition-colors rounded-full hover:bg-purple-500/20"
+                className="p-2 text-gray-300 hover:text-white transition-colors rounded-full hover:bg-midnight-blue/20 drop-shadow-sm"
                 onClick={handleSearchIconClick}
                 aria-label="Search"
               >
@@ -824,7 +824,7 @@ export default function Navbar() {
               {/* Search Panel */}
               {showSearch && (
                 <div 
-                  className="absolute right-0 mt-2 w-80 md:w-96 bg-[#1A0015]/95 backdrop-blur-md border border-purple-500/30 rounded-lg shadow-xl z-40 animate-fadeIn"
+                  className="absolute right-0 mt-2 w-80 md:w-96 bg-midnight-black/95 backdrop-blur-md border border-midnight-blue/30 rounded-lg shadow-xl z-40 animate-fadeIn"
                   ref={searchPanelRef}
                 >
                   <div className="p-3">
@@ -835,7 +835,7 @@ export default function Navbar() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search games, tournaments..."
-                        className="w-full py-2 px-3 pr-10 bg-[#250020] border border-purple-500/20 rounded-md text-white focus:outline-none focus:border-purple-500"
+                        className="w-full py-2 px-3 pr-10 bg-midnight-black/80 border border-midnight-blue/20 rounded-md text-white focus:outline-none focus:border-midnight-blue"
                       />
                       <svg 
                         className="absolute right-3 top-2.5 text-white/50" 
@@ -871,11 +871,11 @@ export default function Navbar() {
                               {searchResults.games.map(game => (
                                 <div 
                                   key={game.id}
-                                  className="p-2 hover:bg-purple-500/10 rounded-md cursor-pointer mx-1"
+                                  className="p-2 hover:bg-midnight-blue/10 rounded-md cursor-pointer mx-1"
                                   onClick={() => handleSearchItemClick(game.path)}
                                 >
                                   <div className="flex items-center">
-                                    <div className="w-8 h-8 rounded-md bg-purple-800/30 flex items-center justify-center mr-3">
+                                    <div className="w-8 h-8 rounded-md bg-midnight-blue/20 flex items-center justify-center mr-3">
                                       <span className="text-sm">{game.name.charAt(0)}</span>
                                     </div>
                                     <div>
@@ -895,7 +895,7 @@ export default function Navbar() {
                               {searchResults.tournaments.map(tournament => (
                                 <div 
                                   key={tournament.id}
-                                  className="p-2 hover:bg-purple-500/10 rounded-md cursor-pointer mx-1"
+                                  className="p-2 hover:bg-midnight-blue/10 rounded-md cursor-pointer mx-1"
                                   onClick={() => handleSearchItemClick(tournament.path)}
                                 >
                                   <div className="flex items-center">
@@ -919,7 +919,7 @@ export default function Navbar() {
                               {searchResults.pages.map(page => (
                                 <div 
                                   key={page.id}
-                                  className="p-2 hover:bg-purple-500/10 rounded-md cursor-pointer mx-1"
+                                  className="p-2 hover:bg-midnight-blue/10 rounded-md cursor-pointer mx-1"
                                   onClick={() => handleSearchItemClick(page.path)}
                                 >
                                   <div className="flex items-center">
@@ -943,7 +943,7 @@ export default function Navbar() {
                   )}
                   
                   {searchQuery.length > 0 && (
-                    <div className="p-2 border-t border-purple-500/20 text-center">
+                    <div className="p-2 border-t border-midnight-blue/20 text-center">
                       <span className="text-xs text-white/50">
                         Press Enter to search for "{searchQuery}"
                 </span>
@@ -956,7 +956,7 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <button 
               onClick={toggleDarkMode}
-              className="p-2 text-white/70 hover:text-white transition-colors hidden md:block rounded-full hover:bg-purple-500/20"
+              className="p-2 text-gray-300 hover:text-white transition-colors hidden md:block rounded-full hover:bg-midnight-blue/20 drop-shadow-sm"
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDarkMode ? (
@@ -982,7 +982,7 @@ export default function Navbar() {
             <div className="relative hidden md:block">
               <button 
                 onClick={() => setShowNotificationsPanel(!showNotificationsPanel)}
-                className="p-2 text-white/70 hover:text-white transition-colors relative rounded-full hover:bg-purple-500/20"
+                className="p-2 text-gray-300 hover:text-white transition-colors relative rounded-full hover:bg-midnight-blue/20 drop-shadow-sm"
                 aria-label="Notifications"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -998,8 +998,8 @@ export default function Navbar() {
               
               {/* Notifications Panel */}
               {showNotificationsPanel && (
-                <div className="absolute right-0 mt-2 w-80 bg-[#1A0015]/95 backdrop-blur-md border border-purple-500/30 rounded-lg shadow-xl z-30 animate-fadeIn">
-                  <div className="p-3 border-b border-purple-500/20 flex justify-between items-center">
+                <div className="absolute right-0 mt-2 w-80 bg-midnight-black/95 backdrop-blur-md border border-midnight-blue/30 rounded-lg shadow-xl z-30 animate-fadeIn">
+                  <div className="p-3 border-b border-midnight-blue/20 flex justify-between items-center">
                     <h3 className="font-medium text-white">Notifications</h3>
                     <button 
                       onClick={clearAllNotifications}
@@ -1018,7 +1018,7 @@ export default function Navbar() {
                       notifications.map(notification => (
                         <div 
                           key={notification.id}
-                          className={`p-3 border-b border-purple-500/10 hover:bg-purple-500/5 cursor-pointer ${!notification.isRead ? 'bg-purple-900/10' : ''}`}
+                          className={`p-3 border-b border-midnight-blue/10 hover:bg-midnight-blue/5 cursor-pointer ${!notification.isRead ? 'bg-midnight-blue/10' : ''}`}
                           onClick={() => markNotificationAsRead(notification.id)}
                         >
                           <div className="flex justify-between">
@@ -1034,7 +1034,7 @@ export default function Navbar() {
                     )}
                   </div>
                   
-                  <div className="p-2 border-t border-purple-500/20 text-center">
+                  <div className="p-2 border-t border-midnight-blue/20 text-center">
                     <a href="/notifications" className="text-xs text-white/70 hover:text-white">
                       View all notifications
                     </a>
@@ -1052,7 +1052,7 @@ export default function Navbar() {
                   <div className="flex items-center space-x-2">
                     <span className="text-xs text-gray-300">Balance:</span>
                     <span className="text-sm text-green-300 font-medium">
-                      {isLoadingBalance ? 'Loading...' : `${parseFloat(userBalance || '0').toFixed(5)} MATIC`}
+                      {isLoadingBalance ? 'Loading...' : `${parseFloat(userBalance || '0').toFixed(5)} MIDN`}
                     </span>
                     <button
                       onClick={() => setShowBalanceModal(true)}
@@ -1095,7 +1095,7 @@ export default function Navbar() {
             {/* Live Chat Button */}
             <button
               onClick={() => setShowLiveChat(true)}
-              className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 flex items-center gap-2"
+              className="px-4 py-2 bg-gradient-to-r from-blue-700/90 to-blue-800/80 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg border border-blue-600/30 transition-all duration-200 hover:scale-105 flex items-center gap-2"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -1111,12 +1111,12 @@ export default function Navbar() {
         
         {/* Mobile Navigation Menu */}
         {showMobileMenu && (
-          <div className="md:hidden bg-[#0A0008]/95 backdrop-blur-md p-4 border-t border-purple-500/20 animate-slideDown">
+          <div className="md:hidden bg-midnight-black/95 backdrop-blur-md p-4 border-t border-midnight-blue/20 animate-slideDown">
             <div className="flex flex-col space-y-3">
               {navLinks.map(({ name, path, classes }, index) => (
                 <div key={index}>
                   <Link
-                    className={`${path === pathname ? 'text-white font-semibold' : 'text-white/80'} py-2 px-3 rounded-md hover:bg-purple-500/10 flex items-center w-full text-lg`}
+                    className={`${path === pathname ? 'text-white font-semibold' : 'text-white/80'} py-2 px-3 rounded-md hover:bg-midnight-blue/10 flex items-center w-full text-lg`}
                     href={path}
                     onClick={() => setShowMobileMenu(false)}
                   >
@@ -1129,7 +1129,7 @@ export default function Navbar() {
                 <span className="text-white/70">Dark Mode</span>
                 <button 
                   onClick={toggleDarkMode}
-                  className="p-2 text-white/70 hover:text-white bg-purple-500/10 rounded-full flex items-center justify-center h-8 w-8"
+                  className="p-2 text-white/70 hover:text-white bg-midnight-blue/10 rounded-full flex items-center justify-center h-8 w-8"
                 >
                   {isDarkMode ? (
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1153,12 +1153,12 @@ export default function Navbar() {
               
               {/* User Balance in Mobile Menu */}
               {isWalletReady && (
-                <div className="pt-2 mt-2 border-t border-purple-500/10">
+                <div className="pt-2 mt-2 border-t border-midnight-blue/10">
                   <div className="p-3 bg-gradient-to-r from-green-900/20 to-green-800/10 rounded-lg border border-green-800/30">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300">House Balance:</span>
                       <span className="text-sm text-green-300 font-medium">
-                      {isLoadingBalance ? 'Loading...' : `${parseFloat(userBalance || '0').toFixed(5)} MATIC`}
+                      {isLoadingBalance ? 'Loading...' : `${parseFloat(userBalance || '0').toFixed(5)} MIDN`}
                     </span>
                     </div>
                     <button
@@ -1174,10 +1174,10 @@ export default function Navbar() {
                 </div>
               )}
               
-              <div className="pt-2 mt-2 border-t border-purple-500/10">
+              <div className="pt-2 mt-2 border-t border-midnight-blue/10">
                 <a 
                   href="#support" 
-                  className="block py-2 px-3 text-white/80 hover:text-white hover:bg-purple-500/10 rounded-md"
+                  className="block py-2 px-3 text-white/80 hover:text-white hover:bg-midnight-blue/10 rounded-md"
                   onClick={() => setShowMobileMenu(false)}
                 >
                   Support
@@ -1194,7 +1194,7 @@ export default function Navbar() {
             onClick={() => setShowBalanceModal(false)}
           >
             <div
-              className="bg-[#0A0008] border border-purple-500/20 rounded-lg p-6 w-full max-w-md mx-4 shadow-xl"
+              className="bg-midnight-black border border-midnight-blue/20 rounded-lg p-6 w-full max-w-md mx-4 shadow-xl"
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
@@ -1218,13 +1218,13 @@ export default function Navbar() {
               <div className="mb-4 p-3 bg-gradient-to-r from-green-900/20 to-green-800/10 rounded-lg border border-green-800/30">
                 <span className="text-sm text-gray-300">Current Balance:</span>
                 <div className="text-lg text-green-300 font-bold">
-                  {isLoadingBalance ? 'Loading...' : `${parseFloat(userBalance || '0').toFixed(5)} MATIC`}
+                  {isLoadingBalance ? 'Loading...' : `${parseFloat(userBalance || '0').toFixed(5)} MIDN`}
                 </div>
               </div>
               
               {/* Deposit Section */}
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-white mb-2">Deposit MATIC to Casino Treasury</h4>
+                <h4 className="text-sm font-medium text-white mb-2">Deposit MIDN to Casino Treasury</h4>
                 <div className="text-xs text-gray-400 mb-2">
                   Treasury: {TREASURY_CONFIG.ADDRESS.slice(0, 10)}...{TREASURY_CONFIG.ADDRESS.slice(-8)}
                 </div>
@@ -1233,8 +1233,8 @@ export default function Navbar() {
                     type="number"
                     value={depositAmount}
                     onChange={(e) => setDepositAmount(e.target.value)}
-                    placeholder="Enter MATIC amount"
-                    className="flex-1 px-3 py-2 bg-gray-800/50 border border-gray-600/50 rounded text-white placeholder-gray-400 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/25"
+                    placeholder="Enter MIDN amount"
+                    className="flex-1 px-3 py-2 bg-gray-800/50 border border-gray-600/50 rounded text-white placeholder-gray-400 focus:outline-none focus:border-midnight-blue/50 focus:ring-1 focus:ring-midnight-blue/25"
                     min="0"
                     step="0.00000001"
                     disabled={isDepositing}
@@ -1242,7 +1242,7 @@ export default function Navbar() {
                   <button
                     onClick={handleDeposit}
                     disabled={!isConnected || !depositAmount || parseFloat(depositAmount) <= 0 || isDepositing}
-                    className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white rounded font-medium transition-colors flex items-center gap-2"
+                    className="px-4 py-2 bg-gradient-to-r from-blue-700/90 to-blue-800/80 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white rounded border border-blue-600/30 font-medium transition-colors flex items-center gap-2"
                   >
                     {isDepositing ? (
                       <>
@@ -1260,7 +1260,7 @@ export default function Navbar() {
                   </button>
                 </div>
                 <p className="text-xs text-gray-400 mt-1">
-                  Transfer MATIC from your wallet to house balance for gaming
+                  Transfer MIDN from your wallet to house balance for gaming
                 </p>
                 {/* Quick Deposit Buttons */}
                 <div className="flex gap-1 mt-2">
@@ -1271,7 +1271,7 @@ export default function Navbar() {
                       className="flex-1 px-2 py-1 text-xs bg-gray-700/50 hover:bg-gray-600/50 text-gray-300 rounded transition-colors"
                       disabled={isDepositing}
                     >
-                      {amount} MATIC
+                      {amount} MIDN
                     </button>
                   ))}
                 </div>
@@ -1280,7 +1280,7 @@ export default function Navbar() {
 
               {/* Withdraw Section */}
               <div className="mb-4">
-                <h4 className="text-sm font-medium text-white mb-2">Withdraw MATIC</h4>
+                <h4 className="text-sm font-medium text-white mb-2">Withdraw MIDN</h4>
                 <button
                   onClick={handleWithdraw}
                   disabled={!isConnected || parseFloat(userBalance || '0') <= 0 || isWithdrawing}
@@ -1292,7 +1292,7 @@ export default function Navbar() {
                       Processing...
                     </>
                   ) : isConnected ? (
-                    parseFloat(userBalance || '0') > 0 ? 'Withdraw All MATIC' : 'No Balance'
+                    parseFloat(userBalance || '0') > 0 ? 'Withdraw All MIDN' : 'No Balance'
                   ) : 'Connect Wallet'}
                   {isConnected && parseFloat(userBalance || '0') > 0 && !isWithdrawing && (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1302,7 +1302,7 @@ export default function Navbar() {
                 </button>
                 {isConnected && parseFloat(userBalance || '0') > 0 && (
                   <p className="text-xs text-gray-400 mt-1 text-center">
-                    Withdraw {parseFloat(userBalance || '0').toFixed(5)} MATIC to your wallet
+                    Withdraw {parseFloat(userBalance || '0').toFixed(5)} MIDN to your wallet
                   </p>
                 )}
               </div>
@@ -1320,7 +1320,7 @@ export default function Navbar() {
                       console.log('No saved balance in localStorage');
                     }
                   }}
-                  className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded font-medium transition-colors"
+                  className="w-full px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white rounded font-medium transition-colors"
                 >
                   Refresh Balance
                 </button>

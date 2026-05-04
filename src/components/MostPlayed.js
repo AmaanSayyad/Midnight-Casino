@@ -269,8 +269,8 @@ const MostPlayed = () => {
             onClick={() => setActiveFilter(filter.id)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
               activeFilter === filter.id
-                ? 'bg-gradient-to-r from-red-magic to-blue-magic text-white'
-                : 'bg-white/10 text-white/70 hover:bg-white/20'
+                ? 'bg-blue-800/60 text-blue-100'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
             }`}
           >
             {filter.label}
@@ -306,7 +306,7 @@ const MostPlayed = () => {
                     </div>
                     
                     {game.isHot && (
-                      <div className="absolute top-2 right-2 bg-gradient-to-r from-red-600 to-orange-500 text-white text-xs py-1 px-2 rounded-full flex items-center gap-1.5">
+                      <div className="absolute top-2 right-2 bg-gradient-to-r from-red-700/85 to-orange-600/85 text-white text-xs py-1 px-2 rounded-full flex items-center gap-1.5">
                         <FaFire className="text-yellow-300" /> HOT
                       </div>
                     )}
