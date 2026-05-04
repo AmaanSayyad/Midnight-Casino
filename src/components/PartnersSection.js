@@ -6,8 +6,8 @@ const PartnersSection = () => {
     {
       category: 'Blockchain',
       items: [
-        { id: 1, name: 'Polygon Network', logo: '/images/partners/ethereum.svg' },
-        { id: 2, name: 'Polygon Labs', logo: '/images/partners/ethereum.svg' },
+        { id: 1, name: 'Midnight Network', logo: '/images/partners/ethereum.svg' },
+        { id: 2, name: 'Midnight Labs', logo: '/images/partners/ethereum.svg' },
       ]
     },
     {
@@ -46,7 +46,7 @@ const PartnersSection = () => {
         </div>
         
         <div className="p-[1px] bg-gradient-to-r from-red-magic/60 to-blue-magic/60 rounded-xl">
-          <div className="bg-[#1A0015] rounded-xl p-6 md:p-8">
+          <div className="bg-midnight-black rounded-xl p-6 md:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {partners.map((category) => (
                 <div key={category.category}>
@@ -57,7 +57,7 @@ const PartnersSection = () => {
                   
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {category.items.map((partner) => (
-                      <div key={partner.id} className="bg-[#250020] rounded-lg p-4 flex flex-col items-center justify-center h-24 transition-transform hover:scale-105 hover:bg-[#300030]">
+                      <div key={partner.id} className="bg-midnight-black/80 rounded-lg p-4 flex flex-col items-center justify-center h-24 transition-transform hover:scale-105 hover:bg-midnight-blue/20">
                         {/* This would be replaced with actual logos in production */}
                         <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-2">
                           <span className="text-white font-bold">{partner.name.charAt(0)}</span>
@@ -74,7 +74,7 @@ const PartnersSection = () => {
             <div className="mt-10 text-center">
               <div className="p-4 bg-gradient-to-r from-red-magic/20 to-blue-magic/20 rounded-lg inline-block">
                 <h3 className="text-white font-medium mb-2">Interested in Partnering with Us?</h3>
-                <p className="text-white/70 text-sm mb-4">Join the APT Casino ecosystem and reach our growing player base.</p>
+                <p className="text-white/70 text-sm mb-4">Join the Midnight Casino ecosystem and reach our growing player base.</p>
                 <button className="bg-gradient-to-r from-red-magic to-blue-magic text-white font-medium py-2 px-6 rounded-md">
                   Contact Us
                 </button>

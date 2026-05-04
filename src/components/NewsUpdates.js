@@ -7,8 +7,8 @@ const NewsUpdates = () => {
   const newsItems = [
     {
       id: 1,
-      title: 'New Token Bridge Partnership with Polygon Network',
-      excerpt: 'APT Casino partners with Polygon Network to provide seamless cross-chain token transfers with lower fees.',
+      title: 'New Token Bridge Partnership with Midnight Network',
+      excerpt: 'Midnight Casino partners with Midnight ecosystem teams to deliver secure, privacy-focused cross-chain experiences.',
       date: '2025-05-08',
       category: 'Partnership',
       image: '/images/news/partnership.png',
@@ -16,7 +16,7 @@ const NewsUpdates = () => {
     },
     {
       id: 2,
-      title: 'MATIC Governance Proposal: Community Jackpots',
+      title: 'MIDN Governance Proposal: Community Jackpots',
       excerpt: 'Vote on the new proposal to allocate 5% of platform fees to community-controlled jackpot pools.',
       date: '2025-05-04',
       category: 'Governance',
@@ -35,7 +35,7 @@ const NewsUpdates = () => {
     {
       id: 4,
       title: 'Security Audit Completed by Certik',
-      excerpt: 'APT Casino\'s smart contracts have passed rigorous security auditing by Certik with high scores.',
+      excerpt: 'Midnight Casino smart contracts have passed rigorous security auditing with strong scores.',
       date: '2025-05-02',
       category: 'Security',
       image: '/images/news/security.png',
@@ -72,7 +72,7 @@ const NewsUpdates = () => {
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 activeCategory === category
                   ? 'bg-gradient-to-r from-red-magic to-blue-magic text-white'
-                  : 'bg-[#250020] text-white/70 hover:text-white'
+                  : 'bg-midnight-black/80 text-white/70 hover:text-white'
               }`}
               onClick={() => setActiveCategory(category)}
             >
@@ -86,7 +86,7 @@ const NewsUpdates = () => {
           {filteredNews.map((item) => (
             <Link href={item.url} key={item.id}>
               <div className="p-[1px] bg-gradient-to-r from-red-magic/80 to-blue-magic/80 rounded-xl h-full cursor-pointer hover:from-red-magic hover:to-blue-magic transition-all">
-                <div className="bg-[#1A0015] rounded-xl h-full overflow-hidden">
+                <div className="bg-midnight-black rounded-xl h-full overflow-hidden">
                   {/* News Image */}
                   <div className="h-40 relative">
                     <Image 
@@ -124,7 +124,7 @@ const NewsUpdates = () => {
           <Link href="/news">
             <div className="inline-block">
               <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-md inline-block">
-                <button className="bg-[#1A0015] hover:bg-[#250020] transition-colors text-white font-display px-8 py-3 rounded-md flex items-center">
+                <button className="bg-midnight-black hover:bg-midnight-blue/20 transition-colors text-white font-display px-8 py-3 rounded-md flex items-center">
                   View All News
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
