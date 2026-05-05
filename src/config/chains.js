@@ -5,59 +5,42 @@
 
 import { defineChain } from 'viem';
 
-// Polygon Amoy Testnet Chain Definition
-export const polygonAmoy = defineChain({
-  id: 80002,
-  name: 'Polygon Amoy',
+const CHAIN_ID = Number(process.env.NEXT_PUBLIC_MIDNIGHT_CHAIN_ID || 80002);
+const RPC_URL = process.env.NEXT_PUBLIC_MIDNIGHT_RPC || process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology';
+const EXPLORER_URL = process.env.NEXT_PUBLIC_MIDNIGHT_EXPLORER || process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://amoy.polygonscan.com';
+
+// Primary Midnight network definition used app-wide.
+export const midnightNetwork = defineChain({
+  id: CHAIN_ID,
+  name: 'Midnight Network',
   nativeCurrency: {
     decimals: 18,
-    name: 'MATIC',
-    symbol: 'MATIC',
+    name: 'Midnight',
+    symbol: 'MIDN',
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc-amoy.polygon.technology'],
+      http: [RPC_URL],
     },
     public: {
-      http: ['https://rpc-amoy.polygon.technology'],
+      http: [RPC_URL],
     },
   },
   blockExplorers: {
     default: {
-      name: 'Polygon Amoy Explorer',
-      url: 'https://amoy.polygonscan.com',
+      name: 'Midnight Network Explorer',
+      url: EXPLORER_URL,
     },
   },
   testnet: true,
 });
 
-// Monad Testnet Chain Definition (kept for reference)
-export const monadTestnet = defineChain({
-  id: 10143,
-  name: 'Monad Testnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'Monad',
-    symbol: 'MATIC',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://testnet-rpc.monad.xyz'],
-    },
-    public: {
-      http: ['https://testnet-rpc.monad.xyz'],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: 'Monad Testnet Explorer',
-      url: 'https://testnet.monadexplorer.com',
-    },
-  },
-  testnet: true,
-});
+// Backward-compatible aliases to avoid touching every import immediately.
+export const polygonAmoy = midnightNetwork;
+export const monadTestnet = midnightNetwork;
 
 export default {
+  midnightNetwork,
   polygonAmoy,
   monadTestnet,
 };

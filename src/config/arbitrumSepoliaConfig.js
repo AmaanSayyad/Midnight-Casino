@@ -1,15 +1,15 @@
 /**
- * Arbitrum Sepolia Configuration for Yellow Network Casino
- * Optimized for Arbitrum Sepolia testnet with Yellow Network integration
+ * Midnight Network Configuration for Yellow Network Casino
+ * Optimized for Midnight Network testnet with Yellow Network integration
  */
 
 import { arbitrumSepolia } from 'viem/chains';
 
-// Arbitrum Sepolia Chain Configuration
+// Midnight Network Chain Configuration
 export const ARBITRUM_SEPOLIA_CONFIG = {
   chainId: 421614,
-  name: 'Arbitrum Sepolia',
-  network: 'arbitrum-sepolia',
+  name: 'Midnight Network',
+  network: 'midnight-network',
   nativeCurrency: {
     decimals: 18,
     name: 'Ethereum',
@@ -32,7 +32,7 @@ export const ARBITRUM_SEPOLIA_CONFIG = {
   testnet: true,
 };
 
-// Arbitrum Sepolia Tokens
+// Midnight Network Tokens
 export const ARBITRUM_SEPOLIA_TOKENS = {
   ETH: {
     symbol: 'ETH',
@@ -54,7 +54,7 @@ export const ARBITRUM_SEPOLIA_TOKENS = {
   }
 };
 
-// Yellow Network Configuration for Arbitrum Sepolia
+// Yellow Network Configuration for Midnight Network
 export const YELLOW_ARBITRUM_CONFIG = {
   clearNodeUrl: 'wss://testnet.clearnode.yellow.org/ws',
   apiUrl: 'https://testnet.clearnode.yellow.org/api',
@@ -125,7 +125,7 @@ export const switchToArbitrumSepolia = async () => {
   }
 
   try {
-    // Try to switch to Arbitrum Sepolia
+    // Try to switch to Midnight Network
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: '0x66eee' }], // 421614 in hex
@@ -137,7 +137,7 @@ export const switchToArbitrumSepolia = async () => {
         method: 'wallet_addEthereumChain',
         params: [{
           chainId: '0x66eee',
-          chainName: 'Arbitrum Sepolia',
+          chainName: 'Midnight Network',
           nativeCurrency: {
             name: 'Ethereum',
             symbol: 'ETH',
