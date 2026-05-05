@@ -1,13 +1,13 @@
 /**
- * Monad Testnet Testnet Configuration
- * Configuration for Monad Testnet testnet with MATIC token
+ * Midnight Network Testnet Configuration
+ * Configuration for Midnight Network testnet with MATIC token
  */
 
-// Monad Testnet Chain Configuration
+// Midnight Network Chain Configuration
 export const MONAD_TESTNET_CONFIG = {
   chainId: 16602,
-  name: 'monad-testnet-Testnet',
-  network: 'monad-testnet-testnet',
+  name: 'midnight-network-Testnet',
+  network: 'midnight-network-testnet',
   nativeCurrency: {
     decimals: 18,
     name: 'MATIC',
@@ -29,14 +29,14 @@ export const MONAD_TESTNET_CONFIG = {
   },
   blockExplorers: {
     default: {
-      name: 'Monad Testnet Explorer',
+      name: 'Midnight Network Explorer',
       url: process.env.NEXT_PUBLIC_0G_GALILEO_EXPLORER || 'https://testnet.monadexplorer.com',
     },
   },
   testnet: true,
 };
 
-// Monad Testnet Tokens
+// Midnight Network Tokens
 export const MONAD_TESTNET_TOKENS = {
   MATIC: {
     symbol: 'MATIC',
@@ -49,7 +49,7 @@ export const MONAD_TESTNET_TOKENS = {
   }
 };
 
-// Casino configuration for Monad Testnet
+// Casino configuration for Midnight Network
 export const MONAD_TESTNET_CASINO_CONFIG = {
   // Deposit/Withdraw settings
   minDeposit: '0.001', // 0.001 MATIC
@@ -86,14 +86,14 @@ export const MONAD_TESTNET_CASINO_CONFIG = {
   }
 };
 
-// Network switching helper for Monad Testnet
+// Network switching helper for Midnight Network
 export const switchToOGGalileo = async () => {
   if (typeof window === 'undefined' || !window.ethereum) {
     throw new Error('MetaMask not found');
   }
 
   try {
-    // Try to switch to Monad Testnet
+    // Try to switch to Midnight Network
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: '0x40da' }], // 16602 in hex
@@ -105,7 +105,7 @@ export const switchToOGGalileo = async () => {
         method: 'wallet_addEthereumChain',
         params: [{
           chainId: '0x40da',
-          chainName: 'monad-testnet-Testnet',
+          chainName: 'midnight-network-Testnet',
           nativeCurrency: {
             name: 'MATIC',
             symbol: 'MATIC',

@@ -1,8 +1,8 @@
-// Polygon Amoy Testnet Configuration
+// Midnight Network Testnet Configuration
 export const polygonAmoyConfig = {
   id: 80002,
-  name: 'Polygon Amoy',
-  network: 'polygon-amoy',
+  name: 'Midnight Network',
+  network: 'midnight-network',
   nativeCurrency: {
     decimals: 18,
     name: 'MATIC',
@@ -18,7 +18,7 @@ export const polygonAmoyConfig = {
   },
   blockExplorers: {
     default: {
-      name: 'Polygon Amoy Explorer',
+      name: 'Midnight Network Explorer',
       url: 'https://amoy.polygonscan.com',
     },
   },
