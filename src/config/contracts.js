@@ -1,6 +1,6 @@
 // Arbitrum Network Configuration
 export const ARBITRUM_NETWORKS = {
-  SEPOLIA: 'arbitrum-sepolia',
+  SEPOLIA: 'midnight-network',
   MAINNET: 'arbitrum-one',
   DEVNET: 'arbitrum-devnet'
 };
@@ -72,7 +72,7 @@ export const TOKEN_CONFIG = {
 // Network Information for Arbitrum
 export const NETWORK_INFO = {
   [ARBITRUM_NETWORKS.SEPOLIA]: {
-    name: "Arbitrum Sepolia",
+    name: "Midnight Network",
     chainId: 421614,
     nativeCurrency: TOKEN_CONFIG.ARB,
     explorer: ARBITRUM_EXPLORER_URLS[ARBITRUM_NETWORKS.SEPOLIA],

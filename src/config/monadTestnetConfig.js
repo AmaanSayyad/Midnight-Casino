@@ -1,8 +1,8 @@
-// Monad Testnet Configuration
+// Midnight Network Configuration
 export const monadTestnetConfig = {
   id: 41454,
-  name: 'Monad Testnet',
-  network: 'monad-testnet',
+  name: 'Midnight Network',
+  network: 'midnight-network',
   nativeCurrency: {
     decimals: 18,
     name: 'MATIC',
@@ -18,7 +18,7 @@ export const monadTestnetConfig = {
   },
   blockExplorers: {
     default: {
-      name: 'Monad Testnet Explorer',
+      name: 'Midnight Network Explorer',
       url: 'https://testnet-explorer.monad.xyz',
     },
   },
