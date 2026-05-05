@@ -71,7 +71,7 @@ const BettingPanel = ({
           <span className="text-sm text-gray-300">Balance:</span>
           {isConnected ? (
             <span className="text-sm text-green-300 font-medium">
-              {parseFloat(balance || 0).toFixed(5)} MATIC
+              {parseFloat(balance || 0).toFixed(5)} MIDN
             </span>
           ) : (
             <span className="text-sm text-red-300 font-medium">
@@ -82,11 +82,11 @@ const BettingPanel = ({
       </div>
 
       {/* Pyth Entropy Status */}
-      <div className="mb-4 p-3 bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-lg border border-purple-800/30">
+      <div className="mb-4 p-3 bg-gradient-to-r from-midnight-blue/15 to-pink-900/20 rounded-lg border border-midnight-blue/20">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <Shield size={16} className="text-purple-300" />
-            <span className="text-sm font-medium text-purple-300">Pyth Entropy</span>
+            <Shield size={16} className="text-blue-300" />
+            <span className="text-sm font-medium text-blue-300">Pyth Entropy</span>
           </div>
           {isConnected && (
             <div className={`w-2 h-2 rounded-full ${pythReady ? 'bg-green-400' : 'bg-red-400'}`}></div>
@@ -103,7 +103,7 @@ const BettingPanel = ({
                   window.ethereum.request({ method: 'eth_requestAccounts' });
                 }
               }}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
+              className="bg-gradient-to-r from-midnight-blue to-midnight-blue hover:from-midnight-blue hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
             >
               Connect Wallet
             </button>
@@ -145,7 +145,7 @@ const BettingPanel = ({
       <div className="mb-4">
         <div className="flex justify-between p-1 mb-1">
           <label className="text-sm text-white">Bet Amount</label>
-          <div className="text-sm">{betAmount.toFixed(5)} MATIC</div>
+          <div className="text-sm">{betAmount.toFixed(5)} MIDN</div>
         </div>
         <div className="flex w-full gradient-border">
         <div className="flex items-center w-[60%]">

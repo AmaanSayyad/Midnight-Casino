@@ -19,12 +19,12 @@ const GameHistory = ({ gameHistory }) => {
   // Open Arbiscan link
   const openArbiscan = (hash) => {
     if (hash) {
-      const network = process.env.NEXT_PUBLIC_NETWORK || 'arbitrum-sepolia';
+      const network = process.env.NEXT_PUBLIC_NETWORK || 'midnight-network';
       let explorerUrl;
       
-      if (network === 'arbitrum-sepolia') {
+      if (network === 'midnight-network') {
         explorerUrl = `https://sepolia.arbiscan.io/tx/${hash}`;
-      } else if (network === 'arbitrum-one') {
+      } else if (network === 'midnight-one') {
         explorerUrl = `https://arbiscan.io/tx/${hash}`;
       } else {
         explorerUrl = `https://sepolia.etherscan.io/tx/${hash}`;
@@ -66,7 +66,7 @@ const GameHistory = ({ gameHistory }) => {
         <div className="flex gradient-border mb-5 md:mb-0">
           <div className="flex space-x-4">
             <select 
-              className="bg-[#120521] text-white text-md p-3 px-2 md:px-6 rounded border border-purple-900/30"
+              className="bg-[#120521] text-white text-md p-3 px-2 md:px-6 rounded border border-midnight-blue/20"
               value={entriesShown}
               onChange={(e) => setEntriesShown(Number(e.target.value))}
             >
@@ -143,7 +143,7 @@ const GameHistory = ({ gameHistory }) => {
                             )}
                             {item.entropyProof.transactionHash && (
                               <button
-                                onClick={() => window.open(`https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${item.entropyProof.transactionHash}`, '_blank')}
+                                onClick={() => window.open(`https://entropy-explorer.pyth.network/?chain=midnight-network&search=${item.entropyProof.transactionHash}`, '_blank')}
                                 className="flex items-center gap-1 px-2 py-1 bg-[#681DDB]/10 border border-[#681DDB]/30 rounded text-[#681DDB] text-xs hover:bg-[#681DDB]/20 transition-colors"
                               >
                                 <FaExternalLinkAlt size={8} />
@@ -154,8 +154,8 @@ const GameHistory = ({ gameHistory }) => {
                         </div>
                       ) : (
                         <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-                          <span className="text-purple-400 text-xs">Generating...</span>
+                          <div className="w-4 h-4 border-2 border-midnight-blue border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-blue-400 text-xs">Generating...</span>
                         </div>
                       )}
                     </td>
