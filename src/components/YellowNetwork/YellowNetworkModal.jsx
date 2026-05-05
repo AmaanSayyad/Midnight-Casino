@@ -29,8 +29,8 @@ const YellowNetworkModal = ({ isOpen, onClose, gameType = 'MINES' }) => {
       
       // Create game session with SDK randomness
       await createGameSession(gameType, {
-        network: 'arbitrum-sepolia',
-        token: 'MATIC',
+        network: 'midnight-network',
+        token: 'MIDN',
         randomnessSource: 'sdk'
       });
       
@@ -55,7 +55,7 @@ const YellowNetworkModal = ({ isOpen, onClose, gameType = 'MINES' }) => {
         onClick={onClose}
       >
         <motion.div
-          className="bg-gradient-to-br from-purple-900/90 to-purple-800/80 rounded-2xl border border-purple-600/30 shadow-2xl shadow-purple-900/20 max-w-md w-full p-6"
+          className="bg-gradient-to-br from-midnight-black/90 to-midnight-blue/80 rounded-2xl border border-midnight-blue/20 shadow-2xl shadow-midnight-blue/15 max-w-md w-full p-6"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -69,7 +69,7 @@ const YellowNetworkModal = ({ isOpen, onClose, gameType = 'MINES' }) => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Yellow Network</h3>
-                <p className="text-purple-300 text-sm">Gasless Gaming Experience</p>
+                <p className="text-blue-300 text-sm">Gasless Gaming Experience</p>
               </div>
             </div>
             <button
@@ -83,7 +83,7 @@ const YellowNetworkModal = ({ isOpen, onClose, gameType = 'MINES' }) => {
           {/* Content */}
           <div className="space-y-4 mb-6">
             <div className="text-center">
-              <GiMineExplosion className="text-4xl text-purple-400 mx-auto mb-3" />
+              <GiMineExplosion className="text-4xl text-blue-400 mx-auto mb-3" />
               <h4 className="text-lg font-semibold text-white mb-2">
                 Ready to Play {gameType}?
               </h4>
@@ -123,8 +123,8 @@ const YellowNetworkModal = ({ isOpen, onClose, gameType = 'MINES' }) => {
             <div className="bg-blue-900/20 border border-blue-600/30 rounded-lg p-3">
               <div className="text-blue-300 font-medium text-sm mb-1">Network Details</div>
               <div className="text-white/70 text-xs space-y-1">
-                <div>🔵 Monad Network Testnet</div>
-                <div>⟠ MATIC token</div>
+                <div>🔵 Midnight Network Testnet</div>
+                <div>⟠ MIDN token</div>
                 <div>🟡 Yellow Network State Channels</div>
               </div>
             </div>
