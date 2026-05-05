@@ -95,10 +95,10 @@ const UpcomingTournaments = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tournaments.map((tournament) => (
             <div key={tournament.id} className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-xl">
-              <div className="bg-[#1A0015] rounded-xl h-full">
+              <div className="bg-[#0A0A0A] rounded-xl h-full">
                 <div className="p-4 relative h-32 overflow-hidden rounded-t-xl">
                   {/* This would be replaced with actual images in production */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#250020] to-[#1A0015]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] to-[#0A0A0A]"></div>
                   
                   {/* Tournament name and game banner */}
                   <div className="relative z-10">
@@ -118,7 +118,7 @@ const UpcomingTournaments = () => {
                     </div>
                     <div>
                       <p className="text-white/50 text-xs">Entry Fee</p>
-                      <p className="text-white font-bold">{tournament.entryFee} MATIC</p>
+                      <p className="text-white font-bold">{tournament.entryFee} MIDN</p>
                     </div>
                     <div>
                       <p className="text-white/50 text-xs">Participants</p>
@@ -136,7 +136,7 @@ const UpcomingTournaments = () => {
                   
                   {/* Progress bar */}
                   <div className="mb-4">
-                    <div className="w-full h-2 bg-[#250020] rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-[#0A0A0A] rounded-full overflow-hidden">
                       <div 
                         className="h-full magic-gradient"
                         style={{ width: `${(tournament.participants / tournament.maxParticipants) * 100}%` }}

@@ -55,20 +55,20 @@ const TokenPerformance = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex items-center mb-8">
           <div className="w-1 h-6 bg-gradient-to-r from-red-magic to-blue-magic rounded-full mr-3"></div>
-          <h2 className="text-2xl font-display font-bold text-white">MATIC Token Performance</h2>
+          <h2 className="text-2xl font-display font-bold text-white">MIDN Token Performance</h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Chart Section */}
           <div className="md:col-span-8 p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-xl">
-            <div className="bg-[#1A0015] rounded-xl p-6 h-full">
+            <div className="bg-[#0A0A0A] rounded-xl p-6 h-full">
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <div className="flex items-center">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-r from-red-magic to-blue-magic flex items-center justify-center mr-2">
                       <span className="text-white font-bold text-sm">A</span>
                     </div>
-                    <h3 className="text-white text-xl font-medium">MATIC</h3>
+                    <h3 className="text-white text-xl font-medium">MIDN</h3>
                     <span className={`ml-3 px-2 py-1 rounded text-xs ${
                       tokenData.priceChange24h >= 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
                     }`}>
@@ -79,13 +79,13 @@ const TokenPerformance = () => {
                 </div>
                 
                 <div className="flex space-x-2">
-                  <button className="bg-[#250020] hover:bg-[#300030] text-white/70 px-3 py-1 rounded-md text-sm">
+                  <button className="bg-[#0A0A0A] hover:bg-[#300030] text-white/70 px-3 py-1 rounded-md text-sm">
                     24H
                   </button>
-                  <button className="bg-[#250020] hover:bg-[#300030] text-white/70 px-3 py-1 rounded-md text-sm">
+                  <button className="bg-[#0A0A0A] hover:bg-[#300030] text-white/70 px-3 py-1 rounded-md text-sm">
                     7D
                   </button>
-                  <button className="bg-[#250020] hover:bg-[#300030] text-white/70 px-3 py-1 rounded-md text-sm">
+                  <button className="bg-[#0A0A0A] hover:bg-[#300030] text-white/70 px-3 py-1 rounded-md text-sm">
                     30D
                   </button>
                 </div>
@@ -106,7 +106,7 @@ const TokenPerformance = () => {
                     </div>
                   ))}
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A0015] to-transparent opacity-40"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-40"></div>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ const TokenPerformance = () => {
           {/* Stats and CTA */}
           <div className="md:col-span-4 flex flex-col gap-4">
             <div className="p-[1px] bg-gradient-to-r from-red-magic/40 to-blue-magic/40 rounded-xl">
-              <div className="bg-[#1A0015] rounded-xl p-6">
+              <div className="bg-[#0A0A0A] rounded-xl p-6">
                 <h3 className="text-white/70 text-sm mb-4">Token Metrics</h3>
                 
                 <div className="space-y-3">
@@ -139,10 +139,10 @@ const TokenPerformance = () => {
             </div>
             
             <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-xl">
-              <div className="bg-[#1A0015] rounded-xl p-6">
-                <h3 className="text-white text-lg font-medium mb-2">Ready to invest in MATIC?</h3>
+              <div className="bg-[#0A0A0A] rounded-xl p-6">
+                <h3 className="text-white text-lg font-medium mb-2">Ready to invest in MIDN?</h3>
                 <p className="text-white/70 text-sm mb-4">
-                  Stake MATIC to earn passive income while playing your favorite games.
+                  Stake MIDN to earn passive income while playing your favorite games.
                 </p>
                 <Link href="/bank">
                   <div className="block w-full">
