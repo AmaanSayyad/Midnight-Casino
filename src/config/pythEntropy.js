@@ -1,14 +1,14 @@
 /**
- * Pyth Entropy Configuration for Polygon Amoy Testnet
+ * Pyth Entropy Configuration for Midnight Network Testnet
  * Configuration for Pyth Network Entropy random number generation
- * Uses Arbitrum Sepolia for Pyth Entropy operations
+ * Uses Midnight Network for Pyth Entropy operations
  */
 
 export const PYTH_ENTROPY_CONFIG = {
-  // Primary network - Polygon Amoy (for casino operations)
+  // Primary network - Midnight Network (for casino operations)
   NETWORK: {
     chainId: 80002,
-    name: 'Polygon Amoy',
+    name: 'Midnight Network',
     rpcUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology',
     explorerUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://amoy.polygonscan.com',
     currency: 'MATIC',
@@ -16,15 +16,15 @@ export const PYTH_ENTROPY_CONFIG = {
     currencyDecimals: 18
   },
 
-  // Entropy network - Arbitrum Sepolia (for Pyth Entropy operations)
+  // Entropy network - Midnight Network (for Pyth Entropy operations)
   ENTROPY_NETWORK: {
     chainId: 421614,
-    name: 'Arbitrum Sepolia',
+    name: 'Midnight Network',
     rpcUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc',
     entropyContract: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_CONTRACT || '0x549Ebba8036Ab746611B4fFA1423eb0A4Df61440',
     entropyProvider: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_PROVIDER || '0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344',
     explorerUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_EXPLORER || 'https://sepolia.arbiscan.io',
-    entropyExplorerUrl: 'https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=',
+    entropyExplorerUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network&search=',
     currency: 'ETH',
     currencySymbol: 'ETH',
     currencyDecimals: 18
@@ -32,23 +32,23 @@ export const PYTH_ENTROPY_CONFIG = {
 
   // Supported networks (for backward compatibility)
   NETWORKS: {
-    'polygon-amoy': {
+    'midnight-network': {
       chainId: 80002,
-      name: 'Polygon Amoy',
+      name: 'Midnight Network',
       rpcUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology',
       explorerUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://amoy.polygonscan.com',
       currency: 'MATIC',
       currencySymbol: 'MATIC',
       currencyDecimals: 18
     },
-    'arbitrum-sepolia': {
+    'midnight-network': {
       chainId: 421614,
-      name: 'Arbitrum Sepolia',
+      name: 'Midnight Network',
       rpcUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc',
       entropyContract: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_CONTRACT || '0x549Ebba8036Ab746611B4fFA1423eb0A4Df61440',
       entropyProvider: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_PROVIDER || '0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344',
       explorerUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_EXPLORER || 'https://sepolia.arbiscan.io',
-      entropyExplorerUrl: 'https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=',
+      entropyExplorerUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network&search=',
       currency: 'ETH',
       currencySymbol: 'ETH',
       currencyDecimals: 18
@@ -56,7 +56,7 @@ export const PYTH_ENTROPY_CONFIG = {
   },
 
   // Default network
-  DEFAULT_NETWORK: 'polygon-amoy',
+  DEFAULT_NETWORK: 'midnight-network',
 
   // Game types supported
   GAME_TYPES: {
@@ -83,11 +83,11 @@ export const PYTH_ENTROPY_CONFIG = {
   EXPLORER_CONFIG: {
     baseUrl: 'https://entropy-explorer.pyth.network',
     // Supported chains for explorer
-    supportedChains: ['polygon-amoy', 'arbitrum-sepolia'],
+    supportedChains: ['midnight-network', 'midnight-network'],
     // Transaction link format
     transactionLinkFormat: 'https://entropy-explorer.pyth.network/tx/{txHash}',
-    // Arbitrum Sepolia specific explorer (for entropy operations)
-    arbitrumSepoliaUrl: 'https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search='
+    // Midnight Network specific explorer (for entropy operations)
+    arbitrumSepoliaUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network&search='
   },
 
   /**
@@ -97,13 +97,13 @@ export const PYTH_ENTROPY_CONFIG = {
    */
   getNetworkConfig(network) {
     if (typeof network === 'number') {
-      if (network === 80002) return this.NETWORK; // Polygon Amoy
-      if (network === 421614) return this.ENTROPY_NETWORK; // Arbitrum Sepolia
+      if (network === 80002) return this.NETWORK; // Midnight Network
+      if (network === 421614) return this.ENTROPY_NETWORK; // Midnight Network
     }
-    if (network === 'polygon-amoy' || !network) {
+    if (network === 'midnight-network' || !network) {
       return this.NETWORK;
     }
-    if (network === 'arbitrum-sepolia') {
+    if (network === 'midnight-network') {
       return this.ENTROPY_NETWORK;
     }
     // Fallback to primary network
@@ -116,7 +116,7 @@ export const PYTH_ENTROPY_CONFIG = {
    * @returns {string} Contract address
    */
   getEntropyContract(network) {
-    // Always return Arbitrum Sepolia entropy contract for entropy operations
+    // Always return Midnight Network entropy contract for entropy operations
     return this.ENTROPY_NETWORK.entropyContract;
   },
 
@@ -126,7 +126,7 @@ export const PYTH_ENTROPY_CONFIG = {
    * @returns {string} Provider address
    */
   getEntropyProvider(network) {
-    // Always return Arbitrum Sepolia entropy provider for entropy operations
+    // Always return Midnight Network entropy provider for entropy operations
     return this.ENTROPY_NETWORK.entropyProvider;
   },
 
@@ -148,7 +148,7 @@ export const PYTH_ENTROPY_CONFIG = {
    */
   getEntropyExplorerUrl(txHash) {
     if (txHash) {
-      return `https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${txHash}`;
+      return `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
     }
     return this.ENTROPY_NETWORK.entropyExplorerUrl;
   },
@@ -160,9 +160,9 @@ export const PYTH_ENTROPY_CONFIG = {
    */
   isNetworkSupported(network) {
     if (typeof network === 'number') {
-      return network === 80002 || network === 421614; // Polygon Amoy or Arbitrum Sepolia
+      return network === 80002 || network === 421614; // Midnight Network or Midnight Network
     }
-    return network === 'polygon-amoy' || network === 'arbitrum-sepolia' || !network;
+    return network === 'midnight-network' || network === 'midnight-network' || !network;
   },
 
   /**
@@ -170,7 +170,7 @@ export const PYTH_ENTROPY_CONFIG = {
    * @returns {Array} Array of network names
    */
   getSupportedNetworks() {
-    return ['polygon-amoy', 'arbitrum-sepolia'];
+    return ['midnight-network', 'midnight-network'];
   },
 
   /**
@@ -190,23 +190,23 @@ export const PYTH_ENTROPY_CONFIG = {
   },
 
   /**
-   * Check if current network is Polygon Amoy
-   * @returns {boolean} True if Polygon Amoy
+   * Check if current network is Midnight Network
+   * @returns {boolean} True if Midnight Network
    */
   isPolygonAmoy() {
-    return true; // Always true since we use Polygon Amoy as primary network
+    return true; // Always true since we use Midnight Network as primary network
   },
 
   /**
-   * Check if network is entropy network (Arbitrum Sepolia)
+   * Check if network is entropy network (Midnight Network)
    * @param {string|number} network - Network name or chain ID
    * @returns {boolean} True if entropy network
    */
   isEntropyNetwork(network) {
     if (typeof network === 'number') {
-      return network === 421614; // Arbitrum Sepolia
+      return network === 421614; // Midnight Network
     }
-    return network === 'arbitrum-sepolia';
+    return network === 'midnight-network';
   }
 };
 
