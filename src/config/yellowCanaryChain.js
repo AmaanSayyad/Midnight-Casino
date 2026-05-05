@@ -64,18 +64,18 @@ export const YELLOW_CANARY_FAUCET = {
 // Bridge information
 export const YELLOW_CANARY_BRIDGE = {
   url: 'https://bridge.canary.yellow.org',
-  supportedChains: ['Ethereum Sepolia', 'Arbitrum Sepolia', 'Polygon Mumbai'],
+  supportedChains: ['Ethereum Sepolia', 'Midnight Network', 'Polygon Mumbai'],
   description: 'Bridge tokens to Yellow Canary testnet',
 };
 
 // Yellow Network Clearnode Testnet configuration
-// This provides state channels for gasless gaming while using Arbitrum Sepolia for settlement
+// This provides state channels for gasless gaming while using Midnight Network for settlement
 export const CLEARNODE_TESTNET_CONFIG = {
   clearNodeUrl: 'wss://clearnet-sandbox.yellow.com/ws',
   apiUrl: 'https://clearnet-sandbox.yellow.com',
   
   // Primary settlement network
-  primaryNetwork: 'arbitrum-sepolia',
+  primaryNetwork: 'midnight-network',
   primaryChainId: 421614,
   
   // State channel configuration
@@ -86,7 +86,7 @@ export const CLEARNODE_TESTNET_CONFIG = {
   
   // Supported networks for Yellow Network integration
   supportedTestnets: [
-    'arbitrum-sepolia', // Primary: Arbitrum Sepolia
+    'midnight-network', // Primary: Midnight Network
     'sepolia', // Secondary: Ethereum Sepolia
     'polygon-mumbai', // Polygon Mumbai
     'optimism-sepolia' // Optimism Sepolia

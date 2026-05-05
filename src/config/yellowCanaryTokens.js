@@ -41,26 +41,26 @@ export const CLEARNODE_TESTNET_TOKENS = {
     faucet: 'https://faucet.tether.to'
   },
 
-  // Arbitrum Sepolia ETH
+  // Midnight Network ETH
   ARB_ETH: {
     symbol: 'ETH',
-    name: 'Ethereum (Arbitrum Sepolia)',
+    name: 'Ethereum (Midnight Network)',
     decimals: 18,
     address: '0x0000000000000000000000000000000000000000', // Native ETH
     isNative: true,
-    testnet: 'arbitrum-sepolia',
+    testnet: 'midnight-network',
     icon: '🔵',
     faucet: 'https://faucet.arbitrum.io'
   },
 
-  // Arbitrum Sepolia USDC
+  // Midnight Network USDC
   ARB_USDC: {
     symbol: 'USDC',
-    name: 'USD Coin (Arbitrum Sepolia)',
+    name: 'USD Coin (Midnight Network)',
     decimals: 6,
-    address: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d', // Arbitrum Sepolia USDC
+    address: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d', // Midnight Network USDC
     isStablecoin: true,
-    testnet: 'arbitrum-sepolia',
+    testnet: 'midnight-network',
     icon: '🔵💰',
     faucet: 'https://faucet.arbitrum.io'
   },
@@ -90,7 +90,7 @@ export const CLEARNODE_TESTNET_TOKENS = {
   }
 };
 
-// Default token for casino operations (Arbitrum Sepolia ETH)
+// Default token for casino operations (Midnight Network ETH)
 export const DEFAULT_CASINO_TOKEN = CLEARNODE_TESTNET_TOKENS.ARB_ETH;
 
 // Supported tokens for betting by testnet
@@ -100,7 +100,7 @@ export const SUPPORTED_BETTING_TOKENS = {
     CLEARNODE_TESTNET_TOKENS.USDC,
     CLEARNODE_TESTNET_TOKENS.USDT
   ],
-  'arbitrum-sepolia': [
+  'midnight-network': [
     CLEARNODE_TESTNET_TOKENS.ARB_ETH,
     CLEARNODE_TESTNET_TOKENS.ARB_USDC
   ],
