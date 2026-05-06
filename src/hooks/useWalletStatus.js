@@ -40,7 +40,7 @@ export function WalletStatusProvider({ children }) {
       setDevWallet({
         isConnected: true,
         address: '0x1234...dev',
-        chain: { id: 'arbitrum_testnet', name: 'Arbitrum Sepolia' },
+        chain: { id: 'arbitrum_testnet', name: 'Midnight Network' },
       });
     }
 
@@ -56,7 +56,7 @@ export function WalletStatusProvider({ children }) {
           ? {
             isConnected: true,
             address: '0x1234...dev',
-            chain: { id: 'arbitrum_testnet', name: 'Arbitrum Sepolia' },
+            chain: { id: 'arbitrum_testnet', name: 'Midnight Network' },
           }
           : {
             isConnected: false,
@@ -78,7 +78,7 @@ export function WalletStatusProvider({ children }) {
       setDevWallet({
         isConnected: true,
         address: '0x1234...dev',
-        chain: { id: 'arbitrum_testnet', name: 'Arbitrum Sepolia' },
+        chain: { id: 'arbitrum_testnet', name: 'Midnight Network' },
       });
       return;
     }

@@ -31,7 +31,7 @@ class PythEntropyService {
 
   /**
    * Initialize the Pyth Entropy service
-   * @param {string} network - Network name (arbitrum-sepolia, base, etc.)
+   * @param {string} network - Network name (midnight-network, base, etc.)
    */
   async initialize(network = null) {
     try {
@@ -146,7 +146,7 @@ class PythEntropyService {
         gameConfig: gameConfig,
         metadata: {
           source: 'Pyth Entropy (API)',
-          network: 'monad-testnet',
+          network: 'midnight-network',
           algorithm: 'pyth-entropy-hardhat',
           generatedAt: new Date().toISOString()
         }
@@ -173,9 +173,9 @@ class PythEntropyService {
           transactionHash: 'fallback_no_tx',
           blockNumber: null,
           randomValue: Math.floor(Math.random() * 1000000),
-          network: 'monad-testnet',
-          explorerUrl: 'https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia',
-          polygonExplorerUrl: 'https://amoy.polygonscan.com/',
+          network: 'midnight-network',
+          explorerUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network',
+          midnightExplorerUrl: 'https://amoy.midnightscan.com/',
           timestamp: Date.now(),
           source: 'Pyth Entropy (API Fallback)'
         },
@@ -184,7 +184,7 @@ class PythEntropyService {
         gameConfig: gameConfig,
         metadata: {
           source: 'Pyth Entropy (Fallback)',
-          network: 'monad-testnet',
+          network: 'midnight-network',
           algorithm: 'fallback',
           generatedAt: new Date().toISOString()
         }
@@ -193,18 +193,18 @@ class PythEntropyService {
   }
 
   /**
-   * Get Polygon Explorer URL for transaction
+   * Get Midnight Explorer URL for transaction
    * @param {string} txHash - Transaction hash
-   * @returns {string} Polygon Explorer URL
+   * @returns {string} Midnight Explorer URL
    */
-  getPolygonExplorerUrl(txHash) {
-    const network = this.network || 'monad-testnet';
+  getMidnightExplorerUrl(txHash) {
+    const network = this.network || 'midnight-network';
     
-    if (network === 'monad-testnet') {
-      return `https://testnet.monadexplorer.com/tx/${txHash}`;
+    if (network === 'midnight-network') {
+      return `https://testnet.midnightexplorer.com/tx/${txHash}`;
     }
     
-    return `https://testnet.monadexplorer.com/tx/${txHash}`;
+    return `https://testnet.midnightexplorer.com/tx/${txHash}`;
   }
 
   /**
