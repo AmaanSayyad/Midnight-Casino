@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 
-// Mock data for Polygon Amoy testnet
+// Mock data for Midnight Network testnet
 const MOCK_BALANCES = {
   native: {
     symbol: 'MATIC',

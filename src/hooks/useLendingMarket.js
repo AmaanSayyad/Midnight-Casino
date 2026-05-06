@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 
-// Mock data for Polygon Amoy testnet lending market
+// Mock data for Midnight Network testnet lending market
 const MOCK_LENDING_DATA = {
   userDeposits: [
     {
