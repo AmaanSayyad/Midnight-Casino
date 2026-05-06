@@ -1,7 +1,7 @@
 @tailwind utilities;
 
 @layer utilities {
-  .inner-purple-shadow {
+  .inner-midnight-shadow {
     box-shadow: 0px 4px 8px 0px #ffffff1f inset;
     box-shadow: 0px -2px 4px 0px #ffffff14 inset;
   }

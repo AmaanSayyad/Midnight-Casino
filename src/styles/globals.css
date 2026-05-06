@@ -19,17 +19,26 @@ body {
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 10, 10, 10;
+  --midnight-black: #0A0A0A;
+  --midnight-white: #FFFFFF;
+  --midnight-blue: #0000FE;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 10, 10, 10;
+    --background-end-rgb: 10, 10, 10;
   }
+}
+
+body {
+  background: var(--midnight-black);
+  color: var(--midnight-white);
+  font-family: var(--font-outfit), sans-serif;
 }
 
 .format-scroll::-webkit-scrollbar {
