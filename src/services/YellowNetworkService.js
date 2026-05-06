@@ -7,7 +7,7 @@ import { YELLOW_ARBITRUM_CONFIG, switchToArbitrumSepolia } from '../config/arbit
 
 /**
  * Yellow Network Service
- * Handles state channel integration with Yellow Network for APT Casino
+ * Handles state channel integration with Yellow Network for Midnight Casino
  */
 class YellowNetworkService {
   constructor() {
@@ -21,7 +21,7 @@ class YellowNetworkService {
     this.maxRetries = 2;
     this.selectedToken = DEFAULT_CASINO_TOKEN;
     this.channelBalance = '0';
-    this.selectedTestnet = 'arbitrum-sepolia'; // Default to Arbitrum Sepolia
+    this.selectedTestnet = 'midnight-network'; // Default to Midnight Network
     // Managed service connection (optional)
     this.autoConnectToken = process.env.YELLOW_SERVICE_ACCESS_TOKEN || null;
     this.defaultChannelId = process.env.YELLOW_DEFAULT_CHANNEL_ID || null;
@@ -117,13 +117,17 @@ class YellowNetworkService {
         console.log('🟡 YELLOW NETWORK: Initializing ERC-7824 Nitrolite client...');
         console.log('🔗 Connecting to Clearnode Testnet:', process.env.CLEARNODE_TESTNET_WS_URL || CLEARNODE_TESTNET_CONFIG.clearNodeUrl);
 
-        // Create Polygon Network client for on-chain operations
-        const arbitrumClient = createPublicClient({
+        // Create Midnight Network client for on-chain operations
+        const midnightClient = createPublicClient({
           chain: arbitrumSepolia,
-          transport: http(process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc')
+          transport: http(
+            process.env.NEXT_PUBLIC_MIDNIGHT_RPC ||
+            process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC ||
+            'https://sepolia-rollup.arbitrum.io/rpc'
+          )
         });
 
-        console.log('🔗 Primary Network: Polygon Network (Chain ID: 80002)');
+        console.log('🔗 Primary Network: Midnight Network (Chain ID: 80002)');
         console.log('🟡 Yellow Network: Clearnode Testnet for state channels');
 
         // Get wallet client from window.ethereum if available
@@ -133,7 +137,12 @@ class YellowNetworkService {
             walletClient = {
               account: window.ethereum.selectedAddress,
               chain: { id: 421614 },
-              transport: { url: 'https://sepolia-rollup.arbitrum.io/rpc' }
+              transport: {
+                url:
+                  process.env.NEXT_PUBLIC_MIDNIGHT_RPC ||
+                  process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC ||
+                  'https://sepolia-rollup.arbitrum.io/rpc',
+              }
             };
           } catch (error) {
             console.warn('⚠️  Could not create wallet client:', error);
@@ -153,7 +162,7 @@ class YellowNetworkService {
         this.client = new NitroliteClient({
           url: process.env.CLEARNODE_TESTNET_WS_URL || CLEARNODE_TESTNET_CONFIG.clearNodeUrl,
           debug: process.env.NODE_ENV === 'development',
-          publicClient: arbitrumClient,
+          publicClient: midnightClient,
           walletClient: walletClient,
           challengeDuration: 86400,
           chainId: 421614,
@@ -268,7 +277,7 @@ class YellowNetworkService {
       this.connectionRetries = 0;
       
       console.log('✅ YELLOW NETWORK: ERC-7824 connection established');
-      console.log('🔗 State channels active on Polygon Network settlement layer');
+      console.log('🔗 State channels active on Midnight Network settlement layer');
       console.log('⚡ Gasless transactions enabled via state channels');
       
       return true;
@@ -321,7 +330,7 @@ class YellowNetworkService {
       // Create application session for the game (handle SDK method name differences)
       let session;
       const payload = {
-        appId: `apt-casino-${gameType.toLowerCase()}`,
+        appId: `midnight-casino-${gameType.toLowerCase()}`,
         params: {
           gameType,
           config: gameConfig,
@@ -649,7 +658,7 @@ class YellowNetworkService {
 
   /**
    * Set the testnet to use
-   * @param {string} testnet - Testnet name (sepolia, arbitrum-sepolia, etc.)
+   * @param {string} testnet - Testnet name (sepolia, midnight-network, etc.)
    */
   setTestnet(testnet) {
     if (!CLEARNODE_TESTNET_CONFIG.supportedTestnets.includes(testnet)) {
