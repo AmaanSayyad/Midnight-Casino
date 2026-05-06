@@ -1,28 +1,28 @@
-// Network utilities for Polygon Amoy Testnet
-import { polygonAmoy } from '@/config/chains';
+// Network utilities for Midnight Network
+import { midnightNetwork } from '@/config/chains';
 
-export const POLYGON_AMOY_CONFIG = {
-  chainId: '0x13882', // 80002 in hex
-  chainName: 'Polygon Amoy',
+export const MIDNIGHT_NETWORK_CONFIG = {
+  chainId: `0x${midnightNetwork.id.toString(16)}`,
+  chainName: midnightNetwork.name,
   nativeCurrency: {
-    name: 'MATIC',
-    symbol: 'MATIC',
+    name: 'Midnight',
+    symbol: 'MIDN',
     decimals: 18,
   },
-  rpcUrls: ['https://rpc-amoy.polygon.technology'],
-  blockExplorerUrls: ['https://amoy.polygonscan.com'],
+  rpcUrls: midnightNetwork.rpcUrls.default.http,
+  blockExplorerUrls: [midnightNetwork.blockExplorers.default.url],
 };
 
-export const switchToPolygonAmoy = async () => {
+export const switchToMidnightNetwork = async () => {
   if (!window.ethereum) {
     throw new Error('MetaMask is not installed');
   }
 
   try {
-    // Try to switch to Polygon Amoy
+    // Try to switch to Midnight Network
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: POLYGON_AMOY_CONFIG.chainId }],
+      params: [{ chainId: MIDNIGHT_NETWORK_CONFIG.chainId }],
     });
   } catch (switchError) {
     // If the chain is not added, add it
@@ -30,39 +30,46 @@ export const switchToPolygonAmoy = async () => {
       try {
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
-          params: [POLYGON_AMOY_CONFIG],
+          params: [MIDNIGHT_NETWORK_CONFIG],
         });
       } catch (addError) {
-        throw new Error('Failed to add Polygon Amoy to MetaMask');
+        throw new Error('Failed to add Midnight Network to MetaMask');
       }
     } else {
-      throw new Error('Failed to switch to Polygon Amoy');
+      throw new Error('Failed to switch to Midnight Network');
     }
   }
 };
 
-export const isPolygonAmoy = (chainId) => {
-  return chainId === 80002 || chainId === '0x13882';
+export const isMidnightNetwork = (chainId) => {
+  const hexId = `0x${midnightNetwork.id.toString(16)}`;
+  return chainId === midnightNetwork.id || chainId === hexId;
 };
 
-export const formatPolBalance = (balance, decimals = 5) => {
+export const formatMidnightBalance = (balance, decimals = 5) => {
   const numBalance = parseFloat(balance || '0');
-  return `${numBalance.toFixed(decimals)} MATIC`;
+  return `${numBalance.toFixed(decimals)} MIDN`;
 };
 
-export const getPolygonAmoyExplorerUrl = (txHash) => {
-  return `https://amoy.polygonscan.com/tx/${txHash}`;
+export const getMidnightExplorerUrl = (txHash) => {
+  return `${midnightNetwork.blockExplorers.default.url}/tx/${txHash}`;
 };
 
-// Legacy functions for backward compatibility
+// Legacy exports for backward compatibility
+export const POLYGON_AMOY_CONFIG = MIDNIGHT_NETWORK_CONFIG;
+export const switchToPolygonAmoy = switchToMidnightNetwork;
+export const isPolygonAmoy = isMidnightNetwork;
+export const formatPolBalance = formatMidnightBalance;
+export const getPolygonAmoyExplorerUrl = getMidnightExplorerUrl;
+
 export const isMonadTestnet = (chainId) => {
-  return isPolygonAmoy(chainId);
+  return isMidnightNetwork(chainId);
 };
 
 export const formatMonBalance = (balance, decimals = 5) => {
-  return formatPolBalance(balance, decimals);
+  return formatMidnightBalance(balance, decimals);
 };
 
 export const getMonadTestnetExplorerUrl = (txHash) => {
-  return getPolygonAmoyExplorerUrl(txHash);
+  return getMidnightExplorerUrl(txHash);
 };
