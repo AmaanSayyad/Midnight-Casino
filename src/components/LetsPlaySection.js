@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import LaunchGameButton from "./LaunchGameButton";
-import EthereumConnectWalletButton from "./EthereumConnectWalletButton";
+import MidnightConnectWalletButton from "./MidnightConnectWalletButton";
 import { FaUsers, FaTrophy, FaCoins } from "react-icons/fa";
 
 export default function LetsPlaySection() {
@@ -63,7 +63,7 @@ export default function LetsPlaySection() {
           
           {/* Action buttons with improved layout */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-4">
-            <EthereumConnectWalletButton />
+            <MidnightConnectWalletButton />
             <LaunchGameButton />
           </div>
           

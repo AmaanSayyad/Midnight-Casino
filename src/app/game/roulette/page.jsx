@@ -36,9 +36,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, setLoading, loadBalanceFromStorage } from '@/store/balanceSlice';
 import pythEntropyService from '@/services/PythEntropyService';
 
-// Ethereum client functions will be added here when needed
+// Midnight client functions will be added here when needed
 
-// Casino module address for Ethereum
+// Casino module address for Midnight
 const CASINO_MODULE_ADDRESS = process.env.NEXT_PUBLIC_CASINO_MODULE_ADDRESS || "0x0000000000000000000000000000000000000000";
 
 const parseMIDNAmount = (amount) => {
@@ -59,7 +59,7 @@ const CasinoGames = {
 };
 
 
-// Ethereum wallet integration will be added here
+// Wallet integration will be added here
 
 const TooltipWide = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -1190,7 +1190,7 @@ export default function GameRoulette() {
   const [bettingHistory, setBettingHistory] = useState([]);
   const [error, setError] = useState(null);
 
-  // Ethereum wallet
+  // wallet
   const { address, isConnected } = useAccount();
   const account = { address };
   const connected = isConnected;
@@ -1422,7 +1422,7 @@ export default function GameRoulette() {
     if (!account?.address) return;
 
     try {
-      // For Ethereum, we can use the userBalance from Redux store
+      // For Midnight, we can use the userBalance from Redux store
       // or fetch from the blockchain if needed
       const currentBalance = parseFloat(userBalance || '0');
       setRealBalance(currentBalance.toFixed(8));
@@ -1648,7 +1648,7 @@ export default function GameRoulette() {
   const lockBet = async () => {
     // Check if wallet is connected
     if (!isConnected) {
-      alert("Please connect your Ethereum wallet first to play Roulette!");
+      alert("Please connect your wallet first to play Roulette!");
       return;
     }
 
@@ -2279,7 +2279,7 @@ export default function GameRoulette() {
 
       // Simulate the contract interaction
       const withdrawSimulation =
-        await ViemClient.publicPharosSepoliaClient.simulateContract({
+        await ViemClient.publicPharosMidnightClient.simulateContract({
           address: rouletteContractAddress,
           abi: rouletteABI,
           functionName: "withdrawTokens",
@@ -2348,12 +2348,12 @@ export default function GameRoulette() {
       // Fall back to window.ethereum check with retry
       const checkWithRetry = async (attempts = 3) => {
         if (window.ethereum && typeof window.ethereum.request === 'function') {
-          console.log("Ethereum provider found, requesting chain ID...");
+          console.log("Midnight provider found, requesting chain ID...");
           try {
             const chainId = await window.ethereum.request({ method: "eth_chainId" });
             console.log("Current chain ID:", chainId);
 
-            // Support both Mantle Sepolia (0x138b) and Pharos Devnet (0xc352)
+            // Support both Midnight Network (0x138b) and Pharos Devnet (0xc352)
             const isCorrectNetwork = chainId === "0x138b" || chainId === "0xc352";
             console.log("Is correct network:", isCorrectNetwork);
             setCorrectNetwork(isCorrectNetwork);
@@ -2367,7 +2367,7 @@ export default function GameRoulette() {
             }
           }
         } else {
-          console.log("Ethereum provider not available or not fully initialized");
+          console.log("Midnight provider not available or not fully initialized");
           if (attempts > 1) {
             console.log(`Retrying... (${attempts - 1} attempts left)`);
             setTimeout(() => checkWithRetry(attempts - 1), 500);
@@ -2432,20 +2432,20 @@ export default function GameRoulette() {
 
       // Check if ethereum provider exists
       if (!window.ethereum || typeof window.ethereum.request !== 'function') {
-        alert("No Ethereum wallet detected. Please install a wallet like MetaMask.");
+        alert("No wallet detected. Please install a wallet like MetaMask.");
         return;
       }
 
-      console.log("Attempting to switch to Mantle Sepolia network");
+      console.log("Attempting to switch to Midnight Network network");
 
       try {
-        // Try Mantle Sepolia first
+        // Try Midnight Network first
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: "0x138b" }],
         });
 
-        console.log("Successfully switched to Mantle Sepolia");
+        console.log("Successfully switched to Midnight Network");
         // Set network to correct and reload after short delay
         setCorrectNetwork(true);
         setTimeout(() => window.location.reload(), 1000);
@@ -2456,13 +2456,13 @@ export default function GameRoulette() {
         // If network doesn't exist in wallet (error code 4902), try adding it
         if (switchError.code === 4902) {
           try {
-            console.log("Adding Mantle Sepolia to wallet");
+            console.log("Adding Midnight Network to wallet");
             await window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
                   chainId: "0x138b",
-                  chainName: "Mantle Sepolia",
+                  chainName: "Midnight Network",
                   nativeCurrency: {
                     name: "Mantle",
                     symbol: "MNT",
@@ -2481,7 +2481,7 @@ export default function GameRoulette() {
                 params: [{ chainId: "0x138b" }],
               });
 
-              console.log("Successfully switched to Mantle Sepolia after adding");
+              console.log("Successfully switched to Midnight Network after adding");
               // Set network to correct and reload after short delay
               setCorrectNetwork(true);
               setTimeout(() => window.location.reload(), 1000);
@@ -2490,9 +2490,9 @@ export default function GameRoulette() {
               console.error("Error switching to Mantle after adding:", error);
             }
           } catch (addError) {
-            console.error("Failed to add Mantle Sepolia:", addError);
+            console.error("Failed to add Midnight Network:", addError);
 
-            // If Mantle Sepolia fails, try Pharos Devnet as fallback
+            // If Midnight Network fails, try Pharos Devnet as fallback
             try {
               console.log("Adding Pharos Devnet to wallet");
               await window.ethereum.request({
@@ -2529,13 +2529,13 @@ export default function GameRoulette() {
               }
             } catch (pharosError) {
               console.error("Failed to add Pharos Devnet:", pharosError);
-              alert("Unable to switch to required networks. Please try adding Mantle Sepolia manually.");
+              alert("Unable to switch to required networks. Please try adding Midnight Network manually.");
             }
           }
         } else {
           // Handle other errors
           console.error("Failed to switch network:", switchError);
-          alert("Failed to switch network. Please try again or add Mantle Sepolia manually.");
+          alert("Failed to switch network. Please try again or add Midnight Network manually.");
         }
       }
     } catch (error) {

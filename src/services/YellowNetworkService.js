@@ -1,9 +1,9 @@
 import { NitroliteClient } from '@erc7824/nitrolite';
 import { createPublicClient, http } from 'viem';
-import { arbitrumSepolia } from 'viem/chains';
 import { yellowCanary, CLEARNODE_TESTNET_CONFIG } from '../config/yellowCanaryChain.js';
 import { CLEARNODE_TESTNET_TOKENS, DEFAULT_CASINO_TOKEN, getTokensByTestnet } from '../config/yellowCanaryTokens.js';
-import { YELLOW_ARBITRUM_CONFIG, switchToArbitrumSepolia } from '../config/arbitrumSepoliaConfig.js';
+import { midnightNetwork } from '../config/chains.js';
+import { YELLOW_MIDNIGHT_CONFIG, switchToMidnightNetwork } from '../config/midnightNetworkConfig.js';
 
 /**
  * Yellow Network Service
@@ -119,11 +119,11 @@ class YellowNetworkService {
 
         // Create Midnight Network client for on-chain operations
         const midnightClient = createPublicClient({
-          chain: arbitrumSepolia,
+          chain: midnightNetwork,
           transport: http(
             process.env.NEXT_PUBLIC_MIDNIGHT_RPC ||
             process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC ||
-            'https://sepolia-rollup.arbitrum.io/rpc'
+            'https://midnight.network/rpc'
           )
         });
 
@@ -141,7 +141,7 @@ class YellowNetworkService {
                 url:
                   process.env.NEXT_PUBLIC_MIDNIGHT_RPC ||
                   process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC ||
-                  'https://sepolia-rollup.arbitrum.io/rpc',
+                  'https://midnight.network/rpc',
               }
             };
           } catch (error) {

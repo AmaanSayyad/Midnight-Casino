@@ -142,7 +142,7 @@ export default function Home() {
     // Check if wallet is connected first
     console.log('🔌 Wheel Bet - Wallet Status:', { isConnected, userBalance });
     if (!isConnected) {
-      alert("Please connect your Ethereum wallet first to play Wheel!");
+      alert("Please connect your wallet first to play Wheel!");
       return;
     }
 
@@ -373,7 +373,7 @@ export default function Home() {
   }) => {
     // Check if wallet is connected first
     if (!isConnected) {
-      alert('Please connect your Ethereum wallet first to play Wheel!');
+      alert('Please connect your wallet first to play Wheel!');
       return;
     }
     

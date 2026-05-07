@@ -8,7 +8,7 @@ const ethereumClient = {
     // Mock resources for demo
     return [
       {
-        type: "0x1::coin::CoinStore<0x1::ethereum_coin::EthereumCoin>",
+        type: "0x1::coin::CoinStore<0x1::ethereum_coin::MidnightCoin>",
         data: { coin: { value: "1000000000000000000" } }
       }
     ];
@@ -73,7 +73,7 @@ const CasinoGames = {
   }
 };
 
-export const useEthereumCasino = () => {
+export const useMidnightCasino = () => {
   const { address: account, isConnected: connected } = useAccount();
   const [balance, setBalance] = useState('0');
   const [loading, setLoading] = useState(false);
@@ -107,7 +107,7 @@ export const useEthereumCasino = () => {
   const getAccountBalance = async (address) => {
     try {
       const resources = await ethereumClient.getAccountResources({ accountAddress: address });
-      const ethCoinResource = resources.find(r => r.type === "0x1::coin::CoinStore<0x1::ethereum_coin::EthereumCoin>");
+      const ethCoinResource = resources.find(r => r.type === "0x1::coin::CoinStore<0x1::ethereum_coin::MidnightCoin>");
       if (ethCoinResource) {
         return ethCoinResource.data.coin.value;
       }

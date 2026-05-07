@@ -30,7 +30,7 @@ export const monadTestnetTokens = {
     address: 'native',
     decimals: 18,
     symbol: 'MATIC',
-    name: 'Monad',
+    name: 'Midnight',
     isNative: true,
   },
 };

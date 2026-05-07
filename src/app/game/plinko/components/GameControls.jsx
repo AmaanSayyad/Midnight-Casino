@@ -115,12 +115,12 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
     console.log('🔌 Plinko Bet - Wallet Status:', { 
       isConnected, 
       userBalance,
-      windowEthereum: !!window.ethereum,
-      windowEthereumConnected: window.ethereum?.isConnected?.(),
-      windowEthereumAccount: window.ethereum?.selectedAddress
+      windowProvider: !!window.ethereum,
+      windowProviderConnected: window.ethereum?.isConnected?.(),
+      windowProviderAccount: window.ethereum?.selectedAddress
     });
     if (!isConnected) {
-      alert("Please connect your Ethereum wallet first to play Plinko!");
+      alert("Please connect your wallet first to play Plinko!");
       return;
     }
     

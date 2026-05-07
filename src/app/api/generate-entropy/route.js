@@ -5,7 +5,7 @@ const PYTH_ENTROPY_ADDRESS = process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_CONTRA
 const ARBITRUM_SEPOLIA_RPC =
   process.env.NEXT_PUBLIC_MIDNIGHT_RPC ||
   process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC ||
-  'https://sepolia-rollup.arbitrum.io/rpc';
+  'https://midnight.network/rpc';
 
 // Minimal ABI for Pyth Entropy V2 on Midnight Network
 const PYTH_ENTROPY_ABI = [

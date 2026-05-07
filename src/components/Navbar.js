@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, setLoading, loadBalanceFromStorage } from '@/store/balanceSlice';
 import { useSmartAccount } from '@/hooks/useSmartAccount';
 import { formatSmartAccountAddress } from '@/utils/smartAccountUtils';
-import EthereumConnectWalletButton from "./EthereumConnectWalletButton";
+import MidnightConnectWalletButton from "./MidnightConnectWalletButton";
 import WithdrawModal from "./WithdrawModal";
 import LiveChat from "./LiveChat";
 import SmartAccountInfo from "./SmartAccountInfo";
@@ -297,7 +297,7 @@ export default function Navbar() {
       setIsDarkMode(savedMode === 'true');
     }
     
-    // Ethereum wallet integration - simplified for testnet only
+    // Wallet integration - simplified for testnet only
     // In development mode, use mock data
     if (isDev) {
       setUserAddress('0x1234...dev');
@@ -735,7 +735,7 @@ export default function Navbar() {
 
   // Pyth Entropy handles randomness generation
 
-  // Detect Ethereum wallet network (best-effort)
+  // Detect wallet network (best-effort)
   useEffect(() => {
     const readNetwork = async () => {
       try {
@@ -1103,8 +1103,8 @@ export default function Navbar() {
               Live Chat
             </button>
             
-            {/* Ethereum Wallet Button */}
-            <EthereumConnectWalletButton />
+            {/* Midnight Wallet Button */}
+            <MidnightConnectWalletButton />
       
           </div>
         </div>

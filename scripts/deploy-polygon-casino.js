@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 async function main() {
-  console.log("🚀 Deploying Casino Entropy Consumer to Polygon Amoy...");
+  console.log("🚀 Deploying Casino Entropy Consumer to Midnight Network...");
 
   // Get network info
   const network = await ethers.provider.getNetwork();
@@ -23,13 +23,13 @@ async function main() {
   const balance = await ethers.provider.getBalance(deployerAddress);
   console.log(`💰 Balance: ${ethers.formatEther(balance)} POL`);
 
-  // Deployment parameters for Polygon Amoy
+  // Deployment parameters for Midnight Network
   const ARBITRUM_SEPOLIA_ENTROPY_CONTRACT = process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_CONTRACT || "0x549Ebba8036Ab746611B4fFA1423eb0A4Df61440";
   const ARBITRUM_SEPOLIA_ENTROPY_PROVIDER = process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_PROVIDER || "0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344";
   const TREASURY_ADDRESS = process.env.TREASURY_ADDRESS || deployerAddress;
 
-  console.log(`🔧 Entropy Contract (Arbitrum Sepolia): ${ARBITRUM_SEPOLIA_ENTROPY_CONTRACT}`);
-  console.log(`🔧 Entropy Provider (Arbitrum Sepolia): ${ARBITRUM_SEPOLIA_ENTROPY_PROVIDER}`);
+  console.log(`🔧 Entropy Contract (Midnight Network): ${ARBITRUM_SEPOLIA_ENTROPY_CONTRACT}`);
+  console.log(`🔧 Entropy Provider (Midnight Network): ${ARBITRUM_SEPOLIA_ENTROPY_PROVIDER}`);
   console.log(`🔧 Treasury Address: ${TREASURY_ADDRESS}`);
 
   try {
@@ -107,12 +107,12 @@ async function main() {
 
     console.log("\n🎉 Deployment completed successfully!");
     console.log(`\n📋 Summary:`);
-    console.log(`   Network: Polygon Amoy (${network.chainId})`);
+    console.log(`   Network: Midnight Network (${network.chainId})`);
     console.log(`   Contract: ${contractAddress}`);
-    console.log(`   Entropy Network: Arbitrum Sepolia`);
+    console.log(`   Entropy Network: Midnight Network`);
     console.log(`   Entropy Contract: ${ARBITRUM_SEPOLIA_ENTROPY_CONTRACT}`);
     console.log(`   Treasury: ${TREASURY_ADDRESS}`);
-    console.log(`   Explorer: https://amoy.polygonscan.com/address/${contractAddress}`);
+    console.log(`   Explorer: https://midnight.network/address/${contractAddress}`);
 
   } catch (error) {
     console.error("❌ Deployment failed:", error);

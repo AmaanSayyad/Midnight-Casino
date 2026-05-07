@@ -53,9 +53,9 @@ export class GameHistoryService {
         throw new Error('Missing required game data fields');
       }
 
-      // Validate Ethereum address
+      // Validate Midnight address
       if (!/^0x[a-fA-F0-9]{40}$/.test(userAddress)) {
-        throw new Error('Invalid Ethereum address format');
+        throw new Error('Invalid Midnight address format');
       }
 
       // Validate game type
@@ -164,7 +164,7 @@ export class GameHistoryService {
 
   /**
    * Get user's game history
-   * @param {string} userAddress - User's Ethereum address
+   * @param {string} userAddress - User's Midnight address
    * @param {Object} options - Query options
    * @returns {Promise<Object>} Game history
    */
@@ -273,7 +273,7 @@ export class GameHistoryService {
 
   /**
    * Get game statistics for a user
-   * @param {string} userAddress - User's Ethereum address
+   * @param {string} userAddress - User's Midnight address
    * @param {Object} options - Query options
    * @returns {Promise<Object>} User statistics
    */

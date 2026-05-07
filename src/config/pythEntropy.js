@@ -10,7 +10,7 @@ export const PYTH_ENTROPY_CONFIG = {
     chainId: 80002,
     name: 'Midnight Network',
     rpcUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology',
-    explorerUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://amoy.polygonscan.com',
+    explorerUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://midnight.network',
     currency: 'MATIC',
     currencySymbol: 'MATIC',
     currencyDecimals: 18
@@ -20,10 +20,10 @@ export const PYTH_ENTROPY_CONFIG = {
   ENTROPY_NETWORK: {
     chainId: 421614,
     name: 'Midnight Network',
-    rpcUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc',
+    rpcUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://midnight.network/rpc',
     entropyContract: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_CONTRACT || '0x549Ebba8036Ab746611B4fFA1423eb0A4Df61440',
     entropyProvider: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_PROVIDER || '0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344',
-    explorerUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_EXPLORER || 'https://sepolia.arbiscan.io',
+    explorerUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_EXPLORER || 'https://midnight.network',
     entropyExplorerUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network&search=',
     currency: 'ETH',
     currencySymbol: 'ETH',
@@ -36,7 +36,7 @@ export const PYTH_ENTROPY_CONFIG = {
       chainId: 80002,
       name: 'Midnight Network',
       rpcUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology',
-      explorerUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://amoy.polygonscan.com',
+      explorerUrl: process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://midnight.network',
       currency: 'MATIC',
       currencySymbol: 'MATIC',
       currencyDecimals: 18
@@ -44,10 +44,10 @@ export const PYTH_ENTROPY_CONFIG = {
     'midnight-network': {
       chainId: 421614,
       name: 'Midnight Network',
-      rpcUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc',
+      rpcUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://midnight.network/rpc',
       entropyContract: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_CONTRACT || '0x549Ebba8036Ab746611B4fFA1423eb0A4Df61440',
       entropyProvider: process.env.NEXT_PUBLIC_POLYGON_PYTH_ENTROPY_PROVIDER || '0x6CC14824Ea2918f5De5C2f75A9Da968ad4BD6344',
-      explorerUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_EXPLORER || 'https://sepolia.arbiscan.io',
+      explorerUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_EXPLORER || 'https://midnight.network',
       entropyExplorerUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network&search=',
       currency: 'ETH',
       currencySymbol: 'ETH',
@@ -87,7 +87,7 @@ export const PYTH_ENTROPY_CONFIG = {
     // Transaction link format
     transactionLinkFormat: 'https://entropy-explorer.pyth.network/tx/{txHash}',
     // Midnight Network specific explorer (for entropy operations)
-    arbitrumSepoliaUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network&search='
+    midnightEntropyUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network&search='
   },
 
   /**
@@ -193,7 +193,7 @@ export const PYTH_ENTROPY_CONFIG = {
    * Check if current network is Midnight Network
    * @returns {boolean} True if Midnight Network
    */
-  isPolygonAmoy() {
+  isMidnightMidnight() {
     return true; // Always true since we use Midnight Network as primary network
   },
 

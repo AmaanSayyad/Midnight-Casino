@@ -64,7 +64,7 @@ export const YELLOW_CANARY_FAUCET = {
 // Bridge information
 export const YELLOW_CANARY_BRIDGE = {
   url: 'https://bridge.canary.yellow.org',
-  supportedChains: ['Ethereum Sepolia', 'Midnight Network', 'Polygon Mumbai'],
+  supportedChains: ['Midnight Midnight', 'Midnight Network', 'Midnight Network'],
   description: 'Bridge tokens to Yellow Canary testnet',
 };
 
@@ -87,8 +87,8 @@ export const CLEARNODE_TESTNET_CONFIG = {
   // Supported networks for Yellow Network integration
   supportedTestnets: [
     'midnight-network', // Primary: Midnight Network
-    'sepolia', // Secondary: Ethereum Sepolia
-    'polygon-mumbai', // Polygon Mumbai
-    'optimism-sepolia' // Optimism Sepolia
+    'sepolia', // Secondary: Midnight Midnight
+    'polygon-mumbai', // Midnight Network
+    'optimism-sepolia' // Optimism Midnight
   ]
 };

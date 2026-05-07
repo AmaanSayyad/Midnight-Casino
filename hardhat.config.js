@@ -14,7 +14,7 @@ module.exports = {
   },
   networks: {
     'arbitrum-sepolia': {
-      url: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || "https://sepolia-rollup.arbitrum.io/rpc",
+      url: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || "https://midnight.network/rpc",
       accounts: ["0x080c0b0dc7aa27545fab73d29b06f33e686d1491aef785bf5ced325a32c14506"],
       chainId: 421614,
       timeout: 120000, // 2 minutes
@@ -56,9 +56,7 @@ module.exports = {
   },
   etherscan: {
     apiKey: {
-      arbitrumSepolia: process.env.ARBISCAN_API_KEY || "",
-      arbitrumOne: process.env.ARBISCAN_API_KEY || "",
-      polygonAmoy: process.env.POLYGONSCAN_API_KEY || "",
+      midnightNetwork: process.env.MIDNIGHTSCAN_API_KEY || process.env.ARBISCAN_API_KEY || process.env.POLYGONSCAN_API_KEY || "",
     },
   },
   paths: {

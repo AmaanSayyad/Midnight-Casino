@@ -3,7 +3,7 @@ import React from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { MetaMaskConnector } from '@wagmi/connectors/metaMask';
 
-export default function EthereumConnectWalletButton() {
+export default function MidnightConnectWalletButton() {
   const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();

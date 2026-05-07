@@ -1,8 +1,8 @@
 const { ethers } = require("hardhat");
 
-// Arbitrum Sepolia VRF Configuration
+// Midnight Network VRF Configuration
 const VRF_CONFIG = {
-  COORDINATOR: "0x6D80646bEAdd07cE68cab36c27c626790bBcf17f", // Arbitrum Sepolia VRF Coordinator
+  COORDINATOR: "0x6D80646bEAdd07cE68cab36c27c626790bBcf17f", // Midnight Network VRF Coordinator
   SUBSCRIPTION_ID: "2719622116", // Subscription ID from transaction (0xa21a23e4)
 };
 
@@ -62,8 +62,8 @@ async function main() {
     console.log("=====================================");
     
     console.log("\n🔗 Explorer Links:");
-    console.log(`VRF Coordinator: https://sepolia.arbiscan.io/address/${VRF_CONFIG.COORDINATOR}`);
-    console.log(`VRF Consumer: https://sepolia.arbiscan.io/address/${vrfConsumerAddress}`);
+    console.log(`VRF Coordinator: https://midnight.network/address/${VRF_CONFIG.COORDINATOR}`);
+    console.log(`VRF Consumer: https://midnight.network/address/${vrfConsumerAddress}`);
 
   } catch (error) {
     console.error("❌ Error configuring VRF subscription:", error.message);

@@ -63,7 +63,7 @@ const REPLACEMENTS = [
   { from: /Display balance POL/g, to: 'Display balance MATIC' },
   
   // Network names
-  { from: /Polygon Ecosystem Token/g, to: 'MATIC Token' },
+  { from: /Midnight Ecosystem Token/g, to: 'MATIC Token' },
   { from: /POL Casino Token/g, to: 'MATIC Casino Token' },
   { from: /MON Casino Token/g, to: 'MATIC Casino Token' },
 ];

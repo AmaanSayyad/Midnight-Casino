@@ -156,10 +156,10 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
       return;
     }
     
-    // Load connection state for Ethereum
+    // Load connection state for Midnight
     const loadConnectionState = async () => {
       try {
-        // Set connected state for Ethereum testnet
+        // Set connected state for Midnight network
         setIsConnected(true);
         
         // Try to load user deposits
@@ -182,9 +182,9 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
   
   const handleDeposit = async (asset, amount) => {
     if (!isConnected) {
-      // Show Ethereum wallet connection message
+      // Show wallet connection message
       if (!isDev) {
-        alert("Please connect your Ethereum wallet to continue");
+        alert("Please connect your wallet to continue");
       }
       return;
     }
@@ -225,9 +225,9 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
   
   const handleWithdraw = async (asset, amount) => {
     if (!isConnected) {
-      // Show Ethereum wallet connection message
+      // Show wallet connection message
       if (!isDev) {
-        alert("Please connect your Ethereum wallet to continue");
+        alert("Please connect your wallet to continue");
       }
       return;
     }
@@ -320,10 +320,10 @@ const LendingTable = ({ assets = [], isLoading = false }) => {
             <p className="text-center text-white/70 mb-2">Connect your wallet to see your deposits and start earning</p>
             <div className="flex justify-center">
               <GradientBgButton onClick={() => {
-                // Show Ethereum wallet connection message
-                alert("Please connect your Ethereum wallet to continue");
+                // Show wallet connection message
+                alert("Please connect your wallet to continue");
               }}>
-                Connect Ethereum Wallet
+                Connect Wallet
               </GradientBgButton>
             </div>
           </div>

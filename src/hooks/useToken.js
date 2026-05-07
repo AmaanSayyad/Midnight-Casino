@@ -7,7 +7,7 @@ export const useToken = (address) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Mock balance for Ethereum testnet
+  // Mock balance for Midnight network
   useEffect(() => {
     if (address) {
       // Simulate loading

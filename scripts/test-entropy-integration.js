@@ -5,7 +5,7 @@ async function testEntropyIntegration() {
   
   try {
     // Get the provider
-    const provider = new ethers.JsonRpcProvider('https://sepolia-rollup.arbitrum.io/rpc');
+    const provider = new ethers.JsonRpcProvider('https://midnight.network/rpc');
     console.log('✅ Provider connected');
     
     // Check if we can connect to the Pyth Entropy contract
@@ -74,7 +74,7 @@ async function testEntropyIntegration() {
     });
     
     console.log(`📤 Transaction sent: ${tx.hash}`);
-    console.log(`🔗 Arbiscan: https://sepolia.arbiscan.io/tx/${tx.hash}`);
+    console.log(`🔗 Arbiscan: https://midnight.network/tx/${tx.hash}`);
     console.log(`🔗 Entropy Explorer: https://entropy-explorer.pyth.network/?chain=arbitrum-sepolia&search=${tx.hash}`);
     
     // Wait for confirmation

@@ -332,7 +332,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
         // Check if wallet is connected first
         console.log('🔌 Mines Bet - Wallet Status:', { isConnected, userBalance });
         if (!isConnected) {
-          toast.error('Please connect your Ethereum wallet first to play Mines!');
+          toast.error('Please connect your wallet first to play Mines!');
           return;
         }
         

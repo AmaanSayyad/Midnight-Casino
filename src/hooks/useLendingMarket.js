@@ -40,7 +40,7 @@ export const useLendingMarket = () => {
   const [marketRates, setMarketRates] = useState(MOCK_LENDING_DATA.marketRates);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mock functions for Ethereum testnet
+  // Mock functions for Midnight network
   const depositAsset = async (asset, amount) => {
     setIsLoading(true);
     try {

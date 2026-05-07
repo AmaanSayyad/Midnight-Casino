@@ -2,15 +2,15 @@ const { ethers } = require("hardhat");
 require("dotenv").config();
 
 async function main() {
-  console.log("🧪 Testing Polygon Amoy Casino Integration...");
+  console.log("🧪 Testing Midnight Network Casino Integration...");
 
   // Get network info
   const network = await ethers.provider.getNetwork();
   console.log(`📡 Network: ${network.name} (Chain ID: ${network.chainId})`);
 
-  // Verify we're on Polygon Amoy
+  // Verify we're on Midnight Network
   if (Number(network.chainId) !== 80002) {
-    console.error("❌ Not connected to Polygon Amoy testnet!");
+    console.error("❌ Not connected to Midnight Network testnet!");
     process.exit(1);
   }
 
@@ -81,33 +81,33 @@ async function main() {
       isValid: isValid
     });
 
-    // Test 6: Check network connectivity to Arbitrum Sepolia (for entropy)
-    console.log("\n🌐 Test 6: Checking Arbitrum Sepolia connectivity...");
+    // Test 6: Check network connectivity to Midnight Network (for entropy)
+    console.log("\n🌐 Test 6: Checking Midnight Network connectivity...");
     const arbitrumProvider = new ethers.JsonRpcProvider(
-      process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || "https://sepolia-rollup.arbitrum.io/rpc"
+      process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || "https://midnight.network/rpc"
     );
     
     try {
       const arbitrumNetwork = await arbitrumProvider.getNetwork();
       const arbitrumBlockNumber = await arbitrumProvider.getBlockNumber();
-      console.log(`✅ Arbitrum Sepolia Connection:`, {
+      console.log(`✅ Midnight Network Connection:`, {
         chainId: Number(arbitrumNetwork.chainId),
         blockNumber: arbitrumBlockNumber,
         rpcUrl: process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC
       });
     } catch (error) {
-      console.error("❌ Failed to connect to Arbitrum Sepolia:", error.message);
+      console.error("❌ Failed to connect to Midnight Network:", error.message);
     }
 
     console.log("\n🎉 All tests completed successfully!");
     console.log(`\n📋 Summary:`);
-    console.log(`   ✅ Polygon Amoy casino contract is deployed and functional`);
-    console.log(`   ✅ Entropy configuration is correct (points to Arbitrum Sepolia)`);
+    console.log(`   ✅ Midnight Network casino contract is deployed and functional`);
+    console.log(`   ✅ Entropy configuration is correct (points to Midnight Network)`);
     console.log(`   ✅ Contract functions are working properly`);
     console.log(`   ✅ Network connectivity is established`);
     console.log(`\n🔗 Useful Links:`);
-    console.log(`   Polygon Amoy Explorer: https://amoy.polygonscan.com/address/${contractAddress}`);
-    console.log(`   Arbitrum Sepolia Explorer: https://sepolia.arbiscan.io/address/${entropyAddress}`);
+    console.log(`   Midnight Network Explorer: https://midnight.network/address/${contractAddress}`);
+    console.log(`   Midnight Network Explorer: https://midnight.network/address/${entropyAddress}`);
 
   } catch (error) {
     console.error("❌ Test failed:", error);

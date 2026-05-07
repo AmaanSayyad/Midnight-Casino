@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 const RPC_URL =
   process.env.NEXT_PUBLIC_MIDNIGHT_RPC ||
   process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC ||
-  'https://sepolia-rollup.arbitrum.io/rpc';
+  'https://midnight.network/rpc';
 const CASINO_ADDRESS = process.env.NEXT_PUBLIC_YELLOW_CASINO_ADDRESS || '';
 const CASINO_PRIVKEY = process.env.CASINO_WALLET_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY || '';
 

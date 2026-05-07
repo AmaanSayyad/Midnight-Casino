@@ -3,7 +3,7 @@ const { ethers } = require('ethers');
 
 // Treasury configuration
 const TREASURY_PRIVATE_KEY = process.env.TREASURY_PRIVATE_KEY || "0x080c0b0dc7aa27545fab73d29b06f33e686d1491aef785bf5ced325a32c14506";
-const ARBITRUM_SEPOLIA_RPC = process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://sepolia-rollup.arbitrum.io/rpc';
+const ARBITRUM_SEPOLIA_RPC = process.env.NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC || 'https://midnight.network/rpc';
 
 async function fundTreasuryForEntropy() {
   try {

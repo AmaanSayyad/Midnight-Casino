@@ -57,7 +57,7 @@ export const MONAD_TESTNET_CASINO_CONFIG = {
   minWithdraw: '0.001', // 0.001 MATIC
   maxWithdraw: '100',   // 100 MATIC
   
-  // Game settings (same as Arbitrum for consistency)
+  // Game settings (same as Midnight for consistency)
   games: {
     MINES: {
       minBet: '0.001',

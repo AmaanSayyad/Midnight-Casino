@@ -52,7 +52,7 @@ export const getRouletteContract = async (withSigner = false) => {
   return contract;
 };
 
-export const switchToPharosSepolia = async () => {
+export const switchToPharosMidnight = async () => {
   if (typeof window === 'undefined' || !window.ethereum) return;
 
   try {

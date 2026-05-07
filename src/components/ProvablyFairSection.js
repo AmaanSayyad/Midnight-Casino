@@ -26,7 +26,7 @@ const ProvablyFairSection = () => {
       title: 'On-Chain Verification',
       description: 'All randomness requests and results are recorded on Midnight Network blockchain, providing complete transparency and verifiability.',
       icon: 'calculation',
-      code: '// Verify randomness via Pyth Entropy Explorer\nconsole.log(\'Transaction:\', transactionHash);\nconsole.log(\'Explorer:\', explorerUrl);\nconsole.log(\'Arbiscan:\', `https://sepolia.arbiscan.io/tx/${transactionHash}`);'
+      code: '// Verify randomness via Pyth Entropy Explorer\nconsole.log(\'Transaction:\', transactionHash);\nconsole.log(\'Explorer:\', explorerUrl);\nconsole.log(\'Arbiscan:\', `https://midnight.network/tx/${transactionHash}`);'
     },
     {
       id: 4,

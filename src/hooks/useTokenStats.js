@@ -33,7 +33,7 @@ const useTokenStats = () => {
         
         const data = await response.json();
         
-        // Using Ethereum as a stand-in for demo purposes
+        // Using Midnight as a stand-in for demo purposes
         // In production, replace with your actual token data
         const priceData = data.ethereum;
         

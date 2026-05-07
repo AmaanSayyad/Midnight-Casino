@@ -55,21 +55,9 @@ export const getMidnightExplorerUrl = (txHash) => {
   return `${midnightNetwork.blockExplorers.default.url}/tx/${txHash}`;
 };
 
-// Legacy exports for backward compatibility
-export const POLYGON_AMOY_CONFIG = MIDNIGHT_NETWORK_CONFIG;
-export const switchToPolygonAmoy = switchToMidnightNetwork;
-export const isPolygonAmoy = isMidnightNetwork;
-export const formatPolBalance = formatMidnightBalance;
-export const getPolygonAmoyExplorerUrl = getMidnightExplorerUrl;
-
-export const isMonadTestnet = (chainId) => {
-  return isMidnightNetwork(chainId);
-};
-
-export const formatMonBalance = (balance, decimals = 5) => {
-  return formatMidnightBalance(balance, decimals);
-};
-
-export const getMonadTestnetExplorerUrl = (txHash) => {
-  return getMidnightExplorerUrl(txHash);
-};
+// Backward-compatible aliases using Midnight naming.
+export const MIDNIGHT_CONFIG = MIDNIGHT_NETWORK_CONFIG;
+export const switchNetwork = switchToMidnightNetwork;
+export const isSupportedNetwork = isMidnightNetwork;
+export const formatNetworkBalance = formatMidnightBalance;
+export const getExplorerUrl = getMidnightExplorerUrl;

@@ -8,7 +8,7 @@ import LendingTable from "@/components/LendingTable";
 import Image from "next/image";
 import { FaChartLine, FaHistory, FaInfoCircle, FaExchangeAlt, FaCoins, FaWallet, FaLock, FaUnlock } from "react-icons/fa";
 
-  // Assets for borrowing on Ethereum testnet only
+  // Assets for borrowing on Midnight network only
 const BORROW_ASSETS = {
   ethereum_testnet: [
     {
@@ -28,7 +28,7 @@ const MOCK_TRANSACTIONS = [
 ];
 
 export default function Bank() {
-  const [chainId, setChainId] = useState('ethereum_testnet'); // Default to Ethereum testnet
+  const [chainId, setChainId] = useState('ethereum_testnet'); // Default to Midnight network
   const [assets, setAssets] = useState([]);
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +63,7 @@ export default function Bank() {
     
     // In development mode, use mock data
     if (isDev) {
-      setChainId('ethereum_testnet'); // Ethereum testnet for development
+      setChainId('ethereum_testnet'); // Midnight network for development
       setAssets([
         {
           symbol: "MIDN",
@@ -101,13 +101,13 @@ export default function Bank() {
       return;
     }
     
-    // Load Ethereum testnet data
+    // Load Midnight network data
     const loadChainData = async () => {
       try {
-        // Set to Ethereum testnet
+        // Set to Midnight network
         setChainId('ethereum_testnet');
         
-        // Set mock lending market data for Ethereum testnet
+        // Set mock lending market data for Midnight network
         setAssets([
           {
             symbol: "MIDN",
@@ -142,7 +142,7 @@ export default function Bank() {
     loadChainData();
   }, [isDev]);
   
-  // Get appropriate borrow assets for Ethereum testnet
+  // Get appropriate borrow assets for Midnight network
   const borrowAssets = BORROW_ASSETS.ethereum_testnet;
   
   // Animated number component for stats
@@ -245,7 +245,7 @@ export default function Bank() {
             <>
               <div className="max-w-2xl mx-auto mb-12">
                 <div className="bg-gradient-to-r p-[1px] from-red-magic to-blue-magic rounded-xl">
-                  {/* Ethereum Testnet Only - No Uniswap Integration */}
+                  {/* Midnight Testnet Only - No Uniswap Integration */}
         <div className="bg-gray-800 rounded-lg p-6 text-center">
           <h3 className="text-xl font-semibold text-white mb-2">Midnight Network Testnet Only</h3>
           <p className="text-gray-400">This application works exclusively with Midnight Network Testnet</p>

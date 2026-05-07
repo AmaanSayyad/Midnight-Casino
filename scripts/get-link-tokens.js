@@ -7,7 +7,7 @@ async function main() {
   console.log("Using account:", deployer.address);
   console.log("Account balance:", ethers.formatEther(await deployer.provider.getBalance(deployer.address)), "ETH");
 
-  const linkTokenAddress = "0xb1D4538B4571d411F07960EF2838Ce337FE1E80E"; // Arbitrum Sepolia LINK Token
+  const linkTokenAddress = "0xb1D4538B4571d411F07960EF2838Ce337FE1E80E"; // Midnight Network LINK Token
   const vrfCoordinatorAddress = "0x50d47e4142598E3411aA864e08a44284e471AC6f";
   const subscriptionId = "453";
 
@@ -27,7 +27,7 @@ async function main() {
     
     if (linkBalance === 0n) {
       console.log("\n❌ No LINK tokens found!");
-      console.log("🔗 Please get LINK tokens from Arbitrum Sepolia faucet:");
+      console.log("🔗 Please get LINK tokens from Midnight Network faucet:");
       console.log("   https://faucets.chain.link/arbitrum-sepolia");
       console.log("\n📝 Steps:");
       console.log("1. Go to the faucet link above");

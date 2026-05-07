@@ -1,14 +1,14 @@
 /**
  * Clearnode Testnet Token Configuration
  * Based on Yellow Network Clearnode Testnet and ERC-7824 standards
- * Supports Sepolia and other popular testnets
+ * Supports Midnight and other popular testnets
  */
 
 export const CLEARNODE_TESTNET_TOKENS = {
-  // Sepolia ETH (Native)
+  // Midnight ETH (Native)
   ETH: {
     symbol: 'ETH',
-    name: 'Ethereum (Sepolia)',
+    name: 'Midnight Token',
     decimals: 18,
     address: '0x0000000000000000000000000000000000000000', // Native ETH
     isNative: true,
@@ -17,24 +17,24 @@ export const CLEARNODE_TESTNET_TOKENS = {
     faucet: 'https://sepoliafaucet.com'
   },
 
-  // Sepolia USDC (Test)
+  // Midnight USDC (Test)
   USDC: {
     symbol: 'USDC',
-    name: 'USD Coin (Sepolia)',
+    name: 'USD Coin (Midnight)',
     decimals: 6,
-    address: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238', // Sepolia USDC
+    address: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238', // Midnight USDC
     isStablecoin: true,
     testnet: 'sepolia',
     icon: '💰',
     faucet: 'https://faucet.circle.com'
   },
 
-  // Sepolia USDT (Test)
+  // Midnight USDT (Test)
   USDT: {
     symbol: 'USDT',
-    name: 'Tether USD (Sepolia)',
+    name: 'Tether USD (Midnight)',
     decimals: 6,
-    address: '0x7169D38820dfd117C3FA1f22a697dBA58d90BA06', // Sepolia USDT
+    address: '0x7169D38820dfd117C3FA1f22a697dBA58d90BA06', // Midnight USDT
     isStablecoin: true,
     testnet: 'sepolia',
     icon: '💵',
@@ -44,13 +44,13 @@ export const CLEARNODE_TESTNET_TOKENS = {
   // Midnight Network ETH
   ARB_ETH: {
     symbol: 'ETH',
-    name: 'Ethereum (Midnight Network)',
+    name: 'Midnight (Midnight Network)',
     decimals: 18,
     address: '0x0000000000000000000000000000000000000000', // Native ETH
     isNative: true,
     testnet: 'midnight-network',
     icon: '🔵',
-    faucet: 'https://faucet.arbitrum.io'
+    faucet: 'https://midnight.network/faucet'
   },
 
   // Midnight Network USDC
@@ -62,13 +62,13 @@ export const CLEARNODE_TESTNET_TOKENS = {
     isStablecoin: true,
     testnet: 'midnight-network',
     icon: '🔵💰',
-    faucet: 'https://faucet.arbitrum.io'
+    faucet: 'https://midnight.network/faucet'
   },
 
-  // Polygon Mumbai MATIC
+  // Midnight Network MATIC
   MATIC: {
     symbol: 'MATIC',
-    name: 'Polygon (Mumbai)',
+    name: 'Midnight (Mumbai)',
     decimals: 18,
     address: '0x0000000000000000000000000000000000000000', // Native MATIC
     isNative: true,
@@ -77,10 +77,10 @@ export const CLEARNODE_TESTNET_TOKENS = {
     faucet: 'https://faucet.polygon.technology'
   },
 
-  // Optimism Sepolia ETH
+  // Optimism Midnight ETH
   OP_ETH: {
     symbol: 'ETH',
-    name: 'Ethereum (Optimism Sepolia)',
+    name: 'Midnight Token',
     decimals: 18,
     address: '0x0000000000000000000000000000000000000000', // Native ETH
     isNative: true,

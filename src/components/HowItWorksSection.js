@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import GradientBorderButton from './GradientBorderButton';
-import EthereumConnectWalletButton from './EthereumConnectWalletButton';
+import MidnightConnectWalletButton from './MidnightConnectWalletButton';
 
 const HowItWorksSection = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -109,7 +109,7 @@ const HowItWorksSection = () => {
               
               <div className="mt-6 flex justify-center lg:justify-start">
                 {activeStep === 1 ? (
-                  <EthereumConnectWalletButton />
+                  <MidnightConnectWalletButton />
                 ) : (
                   <GradientBorderButton className="transform hover:scale-105 transition-transform">
                     {activeStep === 2 ? 'Get MIDN tokens' : 

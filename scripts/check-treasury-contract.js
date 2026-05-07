@@ -3,7 +3,7 @@ const { ethers } = require('ethers');
 async function checkTreasuryContract() {
   console.log('🔍 Checking Treasury Contract...');
   
-  // Monad Testnet RPC
+  // Midnight Testnet RPC
   const provider = new ethers.JsonRpcProvider('https://testnet-rpc.monad.xyz');
   
   const treasuryAddress = '0xb424d2369F07b925D1218B08e56700AF5928287b';

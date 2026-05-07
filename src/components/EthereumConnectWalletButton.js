@@ -2,7 +2,7 @@
 import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-export default function EthereumConnectWalletButton() {
+export default function MidnightConnectWalletButton() {
   return (
     <div className="relative">
       <ConnectButton 

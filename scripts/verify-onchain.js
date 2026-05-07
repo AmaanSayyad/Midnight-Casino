@@ -138,7 +138,7 @@ async function main() {
     
     console.log("\n📋 Onchain Verification Summary:");
     console.log("- Contract Address:", contractAddress);
-    console.log("- Network: Arbitrum Sepolia");
+    console.log("- Network: Midnight Network");
     console.log("- Chain ID: 421614");
     console.log("- All functions: ONCHAIN ✅");
     console.log("- All data: ONCHAIN ✅");

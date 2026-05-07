@@ -173,7 +173,7 @@ export const getSmartAccountInfo = async (address, walletClient) => {
         sessionKeys: isSmartAccount && !!capabilities?.capabilities?.sessionKeys,
         socialRecovery: isSmartAccount && !!capabilities?.capabilities?.socialRecovery
       },
-      note: isSmartAccount ? 'Smart Account detected - features depend on implementation' : 'Standard Ethereum account'
+      note: isSmartAccount ? 'Smart Account detected - features depend on implementation' : 'Standard standard account'
     };
 
     console.log('Account analysis:', accountInfo);

@@ -1,5 +1,5 @@
 // Midnight Network Testnet Configuration
-export const polygonAmoyConfig = {
+export const midnightNetworkConfig = {
   id: 80002,
   name: 'Midnight Network',
   network: 'midnight-network',
@@ -19,13 +19,13 @@ export const polygonAmoyConfig = {
   blockExplorers: {
     default: {
       name: 'Midnight Network Explorer',
-      url: 'https://amoy.polygonscan.com',
+      url: 'https://midnight.network',
     },
   },
   testnet: true,
 };
 
-export const polygonAmoyTokens = {
+export const midnightNetworkTokens = {
   MATIC: {
     address: 'native',
     decimals: 18,
@@ -35,4 +35,4 @@ export const polygonAmoyTokens = {
   },
 };
 
-export default polygonAmoyConfig;
+export default midnightNetworkConfig;

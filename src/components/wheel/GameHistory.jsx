@@ -23,7 +23,7 @@ const GameHistory = ({ gameHistory }) => {
       let explorerUrl;
       
       if (network === 'midnight-network') {
-        explorerUrl = `https://sepolia.arbiscan.io/tx/${hash}`;
+        explorerUrl = `https://midnight.network/tx/${hash}`;
       } else if (network === 'midnight-one') {
         explorerUrl = `https://arbiscan.io/tx/${hash}`;
       } else {

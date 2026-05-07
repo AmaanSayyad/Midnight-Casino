@@ -14,12 +14,12 @@ export const TREASURY_CONFIG = {
     CHAIN_ID: process.env.NEXT_PUBLIC_MIDNIGHT_CHAIN_ID_HEX || '0x13882',
     CHAIN_NAME: 'Midnight Network',
     RPC_URL: process.env.NEXT_PUBLIC_MIDNIGHT_RPC || process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology',
-    EXPLORER_URL: process.env.NEXT_PUBLIC_MIDNIGHT_EXPLORER || process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://amoy.polygonscan.com'
+    EXPLORER_URL: process.env.NEXT_PUBLIC_MIDNIGHT_EXPLORER || process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://midnight.network'
   },
   
   // Gas settings for transactions
   GAS: {
-    DEPOSIT_LIMIT: process.env.GAS_LIMIT_DEPOSIT ? '0x' + parseInt(process.env.GAS_LIMIT_DEPOSIT).toString(16) : '0x7530', // 30000 gas for Polygon transfers
+    DEPOSIT_LIMIT: process.env.GAS_LIMIT_DEPOSIT ? '0x' + parseInt(process.env.GAS_LIMIT_DEPOSIT).toString(16) : '0x7530', // 30000 gas for Midnight transfers
     WITHDRAW_LIMIT: process.env.GAS_LIMIT_WITHDRAW ? '0x' + parseInt(process.env.GAS_LIMIT_WITHDRAW).toString(16) : '0x186A0', // 100000 gas for more complex operations
   },
   

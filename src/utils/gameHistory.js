@@ -70,7 +70,7 @@ export const saveGameResult = async (gameData) => {
 
 /**
  * Get user's game history
- * @param {string} userAddress - User's Ethereum address
+ * @param {string} userAddress - User's Midnight address
  * @param {Object} options - Query options
  * @returns {Promise<Object>} Game history data
  */

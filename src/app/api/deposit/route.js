@@ -18,7 +18,7 @@ export async function POST(request) {
     }
 
     // In a real implementation, you would:
-    // 1. Verify the transaction on Ethereum blockchain
+    // 1. Verify the transaction on Midnight blockchain
     // 2. Check if the transaction is confirmed
     // 3. Verify the amount matches
     // 4. Update the user's balance in your database

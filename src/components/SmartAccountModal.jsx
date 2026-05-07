@@ -80,7 +80,7 @@ const SmartAccountModal = ({ isOpen, onClose }) => {
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-green-300 text-sm">Standard Ethereum account</span>
+                    <span className="text-green-300 text-sm">Standard standard account</span>
                   </div>
                   <div className="text-xs text-gray-400">
                     Externally Owned Account (EOA)
@@ -129,7 +129,7 @@ const SmartAccountModal = ({ isOpen, onClose }) => {
                   <>
                     <div>• Simple and secure</div>
                     <div>• Compatible with all games</div>
-                    <div>• Standard Ethereum features</div>
+                    <div>• Standard features</div>
                     <div>• Easy to use and understand</div>
                   </>
                 )}
@@ -149,7 +149,7 @@ const SmartAccountModal = ({ isOpen, onClose }) => {
               <p className="text-xs text-blue-300">
                 {isSmartAccount 
                   ? 'This is a smart contract account with potential for advanced features.'
-                  : 'This is a standard Ethereum account. Smart Account features are not available.'
+                  : 'This is a standard standard account. Smart Account features are not available.'
                 }
               </p>
               {smartAccountInfo?.note && (
