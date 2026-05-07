@@ -129,10 +129,6 @@ const executeBatchBets = async (bets) => {
 };
 ```
 
-## 🏗 System Architecture Overview
-<img width="1540" height="695" alt="Screenshot 2025-10-22 at 11 11 56 PM" src="https://github.com/user-attachments/assets/f8d4e99d-d31b-4a81-b924-5fc1d8dade78" />
-
-
 ## 🔗 Wallet Connection & Smart Account Flow
 
 ```mermaid
