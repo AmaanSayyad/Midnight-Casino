@@ -378,4 +378,4 @@ flowchart TD
 ## 🔗 Links
 
 - **Live Demo**: https://midnight-casino.vercel.app
-- **Pitch Deck**: https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/APT-Casino-Midnight?node-id=1-1812&p=f&t=ZP5psXhRa7ehvfl2-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1
+- **Pitch Deck**: https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&p=f&t=UEqNlvW63v7CuiZx-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1
