@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM APT Casino Deployment Script for Windows
+REM Midnight Casino Deployment Script for Windows
 REM This script deploys the entire casino application to Midnight network and Vercel
 
 REM Configuration
@@ -65,7 +65,7 @@ echo [ERROR] Unknown option: %~1
 goto :show_help
 
 :show_help
-echo APT Casino Deployment Script
+echo Midnight Casino Deployment Script
 echo.
 echo Usage: %0 [OPTIONS]
 echo.
@@ -89,7 +89,7 @@ echo   %0 -v                       # Deploy with verbose output
 exit /b 1
 
 :main
-echo 🚀 APT Casino Deployment Script
+echo 🚀 Midnight Casino Deployment Script
 echo Network: %NETWORK%
 echo Deploy Contracts: %DEPLOY_CONTRACTS%
 echo Deploy Frontend: %DEPLOY_FRONTEND%
