@@ -15,3 +15,6 @@
 | Change | Reason | Commit |
 |--------|--------|--------|
 |        |        |        |
+
+## Level 3 note
+Production polish focus: CI + tests + Sealed-Bid Auction proposal. Collect user feedback in Level 5.
