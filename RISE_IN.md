@@ -18,6 +18,8 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 - Privacy Wheel: https://midnight-casino-eta.vercel.app/game/privacy-wheel
 - Deck: https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1
 - Demo video: https://youtu.be/DVEq_W_Uzrk
+- Product X: *(paste after creating — see docs/BUILD_IN_PUBLIC.md)*
+- L4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md)
 
 ## Challenge layout mapping
 
