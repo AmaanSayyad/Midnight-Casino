@@ -21,8 +21,10 @@ export default function L5FundPage() {
     connecting,
     connectWallet,
     transferTnignt,
+    refreshBalances,
     error: walletError,
     networkId,
+    apiReady,
   } = useWalletStatus();
 
   const wallets = walletList.wallets || [];
@@ -34,6 +36,7 @@ export default function L5FundPage() {
   const [results, setResults] = useState([]);
   const [current, setCurrent] = useState(null);
   const [localError, setLocalError] = useState('');
+  const [ensuring, setEnsuring] = useState(false);
 
   useEffect(() => {
     try {
@@ -55,6 +58,14 @@ export default function L5FundPage() {
     return (n * wallets.length).toFixed(4);
   }, [amount, wallets.length]);
 
+  const onPreview = String(networkId || '').toLowerCase() === 'preview';
+  const balanceNum = Number(tnightBalance);
+  const needNum = Number(totalNeed);
+  const shortFunds =
+    Number.isFinite(balanceNum) &&
+    Number.isFinite(needNum) &&
+    balanceNum + 1e-9 < needNum;
+
   const persist = (nextResults, nextStart) => {
     try {
       localStorage.setItem(
@@ -71,11 +82,24 @@ export default function L5FundPage() {
     setPaused(true);
   };
 
-  const runBatch = useCallback(async () => {
-    if (!isConnected) {
-      setLocalError('Connect 1AM / Lace from the navbar first (Preprod).');
-      return;
+  const ensureLiveApi = useCallback(async () => {
+    setEnsuring(true);
+    setLocalError('');
+    try {
+      // Force a real ConnectedAPI on Preprod (cached navbar session is not enough)
+      await connectWallet('preprod');
+      if (typeof refreshBalances === 'function') {
+        await refreshBalances();
+      }
+    } catch (e) {
+      setLocalError(e?.message || String(e));
+      throw e;
+    } finally {
+      setEnsuring(false);
     }
+  }, [connectWallet, refreshBalances]);
+
+  const runBatch = useCallback(async () => {
     if (!amount || Number(amount) <= 0) {
       setLocalError('Enter a positive tNIGHT amount per wallet.');
       return;
@@ -84,6 +108,15 @@ export default function L5FundPage() {
     setRunning(true);
     pauseRef.current = false;
     setPaused(false);
+
+    try {
+      if (!apiReady) {
+        await ensureLiveApi();
+      }
+    } catch {
+      setRunning(false);
+      return;
+    }
 
     let nextResults = [...results];
     let i = startIndex;
@@ -107,7 +140,6 @@ export default function L5FundPage() {
         setResults(nextResults);
         persist(nextResults, i + 1);
         setStartIndex(i + 1);
-        // Let wallet settle between approvals
         await new Promise((r) => setTimeout(r, 1500));
       } catch (e) {
         const msg = e?.message || String(e);
@@ -132,8 +164,9 @@ export default function L5FundPage() {
     setRunning(false);
     setPaused(false);
   }, [
-    isConnected,
     amount,
+    apiReady,
+    ensureLiveApi,
     results,
     startIndex,
     wallets,
@@ -152,63 +185,89 @@ export default function L5FundPage() {
       <div className="max-w-3xl mx-auto space-y-8">
         <div>
           <p className="text-sm uppercase tracking-[0.2em] text-[#c4a1ff]">
-            Rise In · Level 5
+            Rise In · Level 5 / 6
           </p>
           <h1 className="text-3xl md:text-4xl font-semibold mt-2">
             Fund Preprod wallets (1AM)
           </h1>
           <p className="mt-3 text-white/70 max-w-2xl">
+            Recipients are <code className="text-white/90">mn_addr_preprod…</code>.
             Connect 1AM on <strong>Preprod</strong>, then send a small tNIGHT
-            amount to all {wallets.length} minted L5 addresses. Approve each
-            transfer in the wallet popup.
+            amount. Approve each transfer in the wallet popup.
           </p>
         </div>
 
         <div className="border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-100/90 space-y-2">
           <p className="font-medium text-amber-50">How the transaction works</p>
-          <ol className="list-decimal pl-5 space-y-1 text-amber-100/90">
+          <ol className="list-decimal pl-5 space-y-1">
             <li>
-              <strong>You send tNIGHT</strong> to each recipient address (this page).
+              <strong>You send tNIGHT</strong> to each recipient address.
             </li>
             <li>
-              <strong>Your wallet spends tDUST as the network fee</strong> for that
-              transfer (or 1AM sponsors the fee). DUST is never transferred to them.
+              <strong>Your wallet spends tDUST as the fee</strong> (or 1AM
+              sponsors). DUST is never transferred to them.
             </li>
             <li>
-              Recipients later open 1AM → register their new tNIGHT →{' '}
-              <strong>generate their own tDUST</strong> for future txs.
+              Recipients register received tNIGHT in 1AM to generate their own
+              tDUST later.
             </li>
           </ol>
           <p>
-            Need ≈ <code>{totalNeed}</code> tNIGHT in your wallet + fee DUST /
-            sponsorship for {wallets.length} × {amount || '?'}.
+            Need ≈ <code>{totalNeed}</code> tNIGHT + fee DUST / sponsorship for{' '}
+            {wallets.length} × {amount || '?'}.
           </p>
         </div>
+
+        {onPreview && (
+          <div className="border border-red-500/40 bg-red-500/10 p-4 text-sm text-red-200">
+            Wallet network is <strong>preview</strong>, but recipients are{' '}
+            <strong>preprod</strong>. Click <em>Reconnect on Preprod</em> (and
+            switch 1AM → Preprod) before funding.
+          </div>
+        )}
+
+        {shortFunds && (
+          <div className="border border-orange-500/40 bg-orange-500/10 p-4 text-sm text-orange-100">
+            Wallet shows ~{tnightBalance} tNIGHT but this run needs ~{totalNeed}.
+            Lower the per-address amount (e.g. <code>0.1</code>) or faucet more
+            tNIGHT on Preprod.
+          </div>
+        )}
 
         <section className="border border-white/10 bg-white/5 p-5 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="text-sm text-white/70">
               {isConnected ? (
                 <>
-                  Connected: <code className="text-emerald-300">{trunc(address)}</code>
+                  Address: <code className="text-emerald-300">{trunc(address)}</code>
                   <br />
-                  Network: {networkId || '—'} · tNIGHT:{' '}
-                  {tnightBalance ?? '—'} · DUST: {dustBalance ?? '—'}
+                  Network: {networkId || '—'} · API:{' '}
+                  {apiReady ? (
+                    <span className="text-emerald-400">ready</span>
+                  ) : (
+                    <span className="text-amber-300">
+                      cached only — reconnect required
+                    </span>
+                  )}
+                  <br />
+                  tNIGHT: {tnightBalance ?? '—'} · DUST: {dustBalance ?? '—'}
                 </>
               ) : (
-                'Not connected — use Connect in the navbar (1AM / Lace).'
+                'Not connected — connect 1AM on Preprod.'
               )}
             </div>
-            {!isConnected && (
-              <button
-                type="button"
-                disabled={connecting}
-                onClick={() => connectWallet('preprod')}
-                className="bg-[#7c3aed] hover:bg-[#6d28d9] disabled:opacity-50 px-4 py-2 text-sm font-medium"
-              >
-                {connecting ? 'Connecting…' : 'Connect 1AM (Preprod)'}
-              </button>
-            )}
+            <button
+              type="button"
+              disabled={connecting || ensuring || running}
+              onClick={() => ensureLiveApi().catch(() => {})}
+              className="bg-[#7c3aed] hover:bg-[#6d28d9] disabled:opacity-50 px-4 py-2 text-sm font-medium"
+            >
+              {connecting || ensuring
+                ? 'Connecting…'
+                : apiReady && !onPreview
+                  ? 'Refresh Preprod session'
+                  : 'Reconnect on Preprod'}
+            </button>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
@@ -233,7 +292,10 @@ export default function L5FundPage() {
                 value={startIndex}
                 onChange={(e) =>
                   setStartIndex(
-                    Math.max(0, Math.min(wallets.length, Number(e.target.value) || 0)),
+                    Math.max(
+                      0,
+                      Math.min(wallets.length, Number(e.target.value) || 0),
+                    ),
                   )
                 }
                 disabled={running}
@@ -246,8 +308,7 @@ export default function L5FundPage() {
               <button
                 type="button"
                 onClick={runBatch}
-                disabled={!isConnected}
-                className="bg-[#059669] hover:bg-[#047857] disabled:opacity-40 px-5 py-3 font-medium"
+                className="bg-[#059669] hover:bg-[#047857] px-5 py-3 font-medium"
               >
                 {startIndex > 0
                   ? `Resume funding (${startIndex + 1}→${wallets.length})`

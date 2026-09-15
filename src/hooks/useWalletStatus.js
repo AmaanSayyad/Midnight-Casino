@@ -291,12 +291,37 @@ export function WalletStatusProvider({ children }) {
 
   const transferTnignt = useCallback(
     async (recipient, amountHuman) => {
-      if (!lace.api) throw new Error('Connect 1AM (or another Midnight wallet) first');
-      const result = await transferUnshieldedNight(lace.api, recipient, amountHuman);
+      let api = lace.api;
+      if (!api) {
+        // Cached UI "connected" without ConnectedAPI — rehydrate from 1AM
+        const targetNetwork = lace.networkId || NETWORK;
+        const session = await connectLace(targetNetwork);
+        saveCachedSession(session);
+        api = session.api;
+        setLace({
+          isConnected: true,
+          address: session.unshieldedAddress,
+          shieldedAddress: session.shieldedAddress,
+          networkId: session.networkId,
+          walletName: session.walletName,
+          proofServerUri: session.proofServerUri,
+          api: session.api,
+          detecting: false,
+          extensionPresent: true,
+          tnight: session.tnight || '0',
+          dust: session.dust || '0',
+        });
+      }
+      if (!api) {
+        throw new Error(
+          'Wallet session has no API. Click Connect 1AM again and approve the site.',
+        );
+      }
+      const result = await transferUnshieldedNight(api, recipient, amountHuman);
       await refreshBalances();
       return result;
     },
-    [lace.api, refreshBalances],
+    [lace.api, lace.networkId, refreshBalances],
   );
 
   useEffect(() => {
@@ -360,6 +385,7 @@ export function WalletStatusProvider({ children }) {
     networkId: lace.networkId || NETWORK,
     tnightBalance: laceConnected ? lace.tnight : '0',
     dustBalance: laceConnected ? lace.dust : '0',
+    apiReady: laceConnected && !!lace.api,
   };
 
   return (
