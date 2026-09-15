@@ -10,9 +10,7 @@
 - [x] Slide deck (Figma link in README)
 - [x] Interactive demo route (`/game/privacy-wheel`)
 - [ ] Record & upload demo video (use `DEMO_SCRIPT.md`)
-- [ ] Add GitHub topic/label: `midnightntwrk` (and ideally `compact`)
-  ```bash
-  gh repo edit --add-topic midnightntwrk --add-topic compact --add-topic typescript
-  ```
+- [x] Add GitHub topic/label: `midnightntwrk` (and `compact`, `typescript`, …)
 - [ ] Redeploy Vercel so Privacy Wheel is live on production URL
+  - **Blocked:** Vercel team `amaansayyads-projects` has an **overdue balance** (HTTP 402). Fix billing at https://vercel.com/teams/amaansayyads-projects/settings/billing then re-run deploy + env sync.
 - [ ] Paste Wave progress + what changed into AKINDO submission form
