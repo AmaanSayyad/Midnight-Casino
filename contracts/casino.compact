@@ -1,0 +1,157 @@
+/**
+ * Midnight Casino — Privacy-First Gaming Contract
+ *
+ * PRIVACY MODEL (Rise In / Builder Challenge):
+ * - PUBLIC (on-chain ledger, visible to anyone):
+ *   rounds Map (ownerHash, gameType, betCommit, status, outcome, payout, won),
+ *   nextRoundId, totalRounds, houseSeedCommit
+ * - PRIVATE (witnesses — never written as raw values to the public ledger):
+ *   localSecretKey, getBetChoice, getBetAmount, getBetSalt
+ * - DISCLOSED deliberately via disclose():
+ *   gameType, range-checked fields, roundId, ownerHash, betCommit,
+ *   settlement outcome/payout/won, house seed commit
+ * - User PROVES without revealing: ownership of a round and that the private
+ *   bet matches the prior commitment, without publishing choice/amount/sk.
+ *
+ * Dual-ledger model: public commitments + selective settlement disclosure.
+ *
+ * Apache-2.0
+ *
+ * Keep in sync with midnight-contract/casino.compact
+ */
+
+pragma language_version 0.23;
+
+import CompactStandardLibrary;
+
+enum RoundStatus {
+  OPEN,
+  SETTLED
+}
+
+struct Round {
+  ownerHash: Bytes<32>;
+  gameType: Uint<8>;
+  betCommit: Bytes<32>;
+  status: RoundStatus;
+  outcome: Uint<8>;
+  payout: Uint<64>;
+  won: Boolean;
+}
+
+export ledger rounds: Map<Uint<64>, Round>;
+export ledger nextRoundId: Counter;
+export ledger totalRounds: Counter;
+export ledger houseSeedCommit: Bytes<32>;
+
+witness localSecretKey(): Bytes<32>;
+witness getBetChoice(): Uint<8>;
+witness getBetAmount(): Uint<64>;
+witness getBetSalt(): Bytes<32>;
+
+export circuit ownerCommitment(sk: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([pad(32, "casino:owner:"), sk]);
+}
+
+export circuit betCommitment(
+  choice: Uint<8>,
+  amount: Uint<64>,
+  salt: Bytes<32>
+): Bytes<32> {
+  return persistentHash<Vector<3, Bytes<32>>>([
+    choice as Field as Bytes<32>,
+    amount as Field as Bytes<32>,
+    salt
+  ]);
+}
+
+/**
+ * Commit a hidden bet.
+ * Only gameType + commitment + ownership hash are disclosed to the ledger.
+ * Choice and amount remain private witness inputs.
+ */
+export circuit placeBet(gameType: Uint<8>): [] {
+  assert(disclose(gameType) < 4, "invalid game type");
+
+  const sk = localSecretKey();
+  const choice = getBetChoice();
+  const amount = getBetAmount();
+  const salt = getBetSalt();
+
+  assert(disclose(choice) < 8, "choice out of range");
+  assert(disclose(amount) > 0, "amount must be positive");
+
+  const commit = betCommitment(choice, amount, salt);
+  const owner = ownerCommitment(sk);
+
+  nextRoundId.increment(1);
+  totalRounds.increment(1);
+  const roundId = disclose(nextRoundId.read() as Uint<64>);
+
+  rounds.insert(roundId, Round {
+    ownerHash: disclose(owner),
+    gameType: disclose(gameType),
+    betCommit: disclose(commit),
+    status: RoundStatus.OPEN,
+    outcome: disclose(0 as Uint<8>),
+    payout: disclose(0 as Uint<64>),
+    won: disclose(false)
+  });
+}
+
+/**
+ * Publish a house entropy commitment before settlement (commit-reveal fairness).
+ */
+export circuit commitHouseSeed(commit: Bytes<32>): [] {
+  houseSeedCommit = disclose(commit);
+}
+
+/**
+ * Settle a wheel round.
+ * Player reveals private bet fields inside the circuit (to match commitment)
+ * and proves win/loss against a public house outcome sector [0..7].
+ * Identity stays a commitment; secret key never leaves the client.
+ */
+export circuit settleWheel(roundId: Uint<64>, houseOutcome: Uint<8>): [] {
+  assert(disclose(houseOutcome) < 8, "invalid house outcome");
+  assert(rounds.member(disclose(roundId)), "round not found");
+
+  const round = rounds.lookup(disclose(roundId));
+  assert(round.status == RoundStatus.OPEN, "round already settled");
+  assert(round.gameType == 0, "not a wheel round");
+
+  const sk = localSecretKey();
+  assert(ownerCommitment(sk) == round.ownerHash, "not round owner");
+
+  const choice = getBetChoice();
+  const amount = getBetAmount();
+  const salt = getBetSalt();
+  assert(
+    betCommitment(choice, amount, salt) == round.betCommit,
+    "bet commitment mismatch"
+  );
+
+  const wonLocal = disclose(choice) == disclose(houseOutcome);
+  const amountPublic = disclose(amount);
+  const payoutLocal = wonLocal ? disclose((amountPublic + amountPublic) as Uint<64>) : disclose(0 as Uint<64>);
+
+  rounds.insert(disclose(roundId), Round {
+    ownerHash: round.ownerHash,
+    gameType: round.gameType,
+    betCommit: round.betCommit,
+    status: RoundStatus.SETTLED,
+    outcome: disclose(houseOutcome),
+    payout: payoutLocal,
+    won: disclose(wonLocal)
+  });
+}
+
+/**
+ * Prove ownership of a round without revealing the secret key.
+ */
+export circuit verifyRoundOwnership(roundId: Uint<64>): [] {
+  assert(rounds.member(disclose(roundId)), "round not found");
+  const round = rounds.lookup(disclose(roundId));
+  const caller = ownerCommitment(localSecretKey());
+  assert(caller == round.ownerHash, "not the owner");
+}

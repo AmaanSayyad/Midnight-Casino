@@ -1,1 +1,5 @@
-Legacy Solidity moved to legacy-evm/contracts. Midnight Compact lives in midnight-contract/.
+Midnight Compact for Rise In / Buildathon lives at:
+- contracts/casino.compact (challenge-facing path)
+- midnight-contract/casino.compact (compile + managed keys — keep in sync)
+
+Legacy Solidity: legacy-evm/contracts/
