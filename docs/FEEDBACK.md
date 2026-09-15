@@ -18,3 +18,6 @@
 
 ## Level 3 note
 Production polish focus: CI + tests + Sealed-Bid Auction proposal. Collect user feedback in Level 5.
+
+## Level 4 MVP
+Preprod contract live. After Product X launches, route feedback replies here for Level 5 scoring.
