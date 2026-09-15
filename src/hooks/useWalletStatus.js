@@ -19,6 +19,7 @@ import {
   listMidnightWallets,
   getLaceBalances,
   transferUnshieldedNight,
+  transferUnshieldedNightBatch,
 } from '@/lib/midnight/lace';
 
 const WalletStatusContext = createContext(null);
@@ -324,6 +325,46 @@ export function WalletStatusProvider({ children }) {
     [lace.api, lace.networkId, refreshBalances],
   );
 
+  const ensureApi = useCallback(async () => {
+    if (lace.api) return lace.api;
+    const targetNetwork = lace.networkId || NETWORK;
+    const session = await connectLace(targetNetwork);
+    saveCachedSession(session);
+    setLace({
+      isConnected: true,
+      address: session.unshieldedAddress,
+      shieldedAddress: session.shieldedAddress,
+      networkId: session.networkId,
+      walletName: session.walletName,
+      proofServerUri: session.proofServerUri,
+      api: session.api,
+      detecting: false,
+      extensionPresent: true,
+      tnight: session.tnight || '0',
+      dust: session.dust || '0',
+    });
+    return session.api;
+  }, [lace.api, lace.networkId]);
+
+  const transferTnigntBatch = useCallback(
+    async (recipients, amountHuman) => {
+      const api = await ensureApi();
+      if (!api) {
+        throw new Error(
+          'Wallet session has no API. Click Reconnect on Preprod and approve.',
+        );
+      }
+      const result = await transferUnshieldedNightBatch(
+        api,
+        recipients,
+        amountHuman,
+      );
+      await refreshBalances();
+      return result;
+    },
+    [ensureApi, refreshBalances],
+  );
+
   useEffect(() => {
     const onCancel = () => {
       setConnecting(false);
@@ -397,6 +438,7 @@ export function WalletStatusProvider({ children }) {
         disconnectWallet,
         refreshBalances,
         transferTnignt,
+        transferTnigntBatch,
         resetError,
         error,
       }}

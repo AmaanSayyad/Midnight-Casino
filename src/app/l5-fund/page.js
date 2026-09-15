@@ -21,6 +21,7 @@ export default function L5FundPage() {
     connecting,
     connectWallet,
     transferTnignt,
+    transferTnigntBatch,
     refreshBalances,
     error: walletError,
     networkId,
@@ -82,11 +83,21 @@ export default function L5FundPage() {
     setPaused(true);
   };
 
+  const remaining = useMemo(
+    () => wallets.slice(startIndex),
+    [wallets, startIndex],
+  );
+
+  const remainingNeed = useMemo(() => {
+    const n = Number(amount);
+    if (!Number.isFinite(n) || n <= 0) return '—';
+    return (n * remaining.length).toFixed(4);
+  }, [amount, remaining.length]);
+
   const ensureLiveApi = useCallback(async () => {
     setEnsuring(true);
     setLocalError('');
     try {
-      // Force a real ConnectedAPI on Preprod (cached navbar session is not enough)
       await connectWallet('preprod');
       if (typeof refreshBalances === 'function') {
         await refreshBalances();
@@ -99,7 +110,62 @@ export default function L5FundPage() {
     }
   }, [connectWallet, refreshBalances]);
 
-  const runBatch = useCallback(async () => {
+  /** One wallet popup → all remaining recipients */
+  const runOneClick = useCallback(async () => {
+    if (!amount || Number(amount) <= 0) {
+      setLocalError('Enter a positive tNIGHT amount per wallet.');
+      return;
+    }
+    if (!remaining.length) {
+      setLocalError('Nothing left to fund — reset progress or all done.');
+      return;
+    }
+    setLocalError('');
+    setRunning(true);
+    setCurrent({
+      index: remaining[0].index,
+      address: `batch ${remaining.length} addresses`,
+    });
+
+    try {
+      if (!apiReady) await ensureLiveApi();
+      await transferTnigntBatch(
+        remaining.map((w) => w.address),
+        amount,
+      );
+      const at = new Date().toISOString();
+      const byIndex = new Map(results.map((r) => [r.index, r]));
+      for (const w of remaining) {
+        byIndex.set(w.index, {
+          index: w.index,
+          address: w.address,
+          ok: true,
+          at,
+          amount,
+          batched: true,
+        });
+      }
+      const merged = [...byIndex.values()].sort((a, b) => a.index - b.index);
+      setResults(merged);
+      persist(merged, wallets.length);
+      setStartIndex(wallets.length);
+    } catch (e) {
+      setLocalError(e?.message || String(e));
+    } finally {
+      setCurrent(null);
+      setRunning(false);
+    }
+  }, [
+    amount,
+    remaining,
+    apiReady,
+    ensureLiveApi,
+    transferTnigntBatch,
+    results,
+    wallets.length,
+  ]);
+
+  const runOneByOne = useCallback(async () => {
     if (!amount || Number(amount) <= 0) {
       setLocalError('Enter a positive tNIGHT amount per wallet.');
       return;
@@ -192,8 +258,9 @@ export default function L5FundPage() {
           </h1>
           <p className="mt-3 text-white/70 max-w-2xl">
             Recipients are <code className="text-white/90">mn_addr_preprod…</code>.
-            Connect 1AM on <strong>Preprod</strong>, then send a small tNIGHT
-            amount. Approve each transfer in the wallet popup.
+            Connect 1AM on <strong>Preprod</strong>. Prefer{' '}
+            <strong>one-click batch</strong> (single approval for all remaining
+            addresses). Wait for any pending 1AM tx to clear first.
           </p>
         </div>
 
@@ -213,8 +280,9 @@ export default function L5FundPage() {
             </li>
           </ol>
           <p>
-            Need ≈ <code>{totalNeed}</code> tNIGHT + fee DUST / sponsorship for{' '}
-            {wallets.length} × {amount || '?'}.
+            Need ≈ <code>{remainingNeed}</code> tNIGHT for the{' '}
+            <strong>{remaining.length}</strong> remaining × {amount || '?'}{' '}
+            (full list {totalNeed}).
           </p>
         </div>
 
@@ -305,22 +373,33 @@ export default function L5FundPage() {
 
           <div className="flex flex-wrap gap-3">
             {!running ? (
-              <button
-                type="button"
-                onClick={runBatch}
-                className="bg-[#059669] hover:bg-[#047857] px-5 py-3 font-medium"
-              >
-                {startIndex > 0
-                  ? `Resume funding (${startIndex + 1}→${wallets.length})`
-                  : `Fund all ${wallets.length} addresses`}
-              </button>
+              <>
+                <button
+                  type="button"
+                  onClick={runOneClick}
+                  disabled={!remaining.length}
+                  className="bg-[#059669] hover:bg-[#047857] disabled:opacity-40 px-5 py-3 font-medium"
+                >
+                  {remaining.length
+                    ? `Fund ${remaining.length} in ONE approval`
+                    : 'All funded'}
+                </button>
+                <button
+                  type="button"
+                  onClick={runOneByOne}
+                  disabled={!remaining.length}
+                  className="border border-white/30 px-4 py-3 text-sm hover:bg-white/10 disabled:opacity-40"
+                >
+                  One-by-one (legacy)
+                </button>
+              </>
             ) : (
               <button
                 type="button"
                 onClick={onPause}
                 className="border border-white/30 px-5 py-3 hover:bg-white/10"
               >
-                {paused ? 'Pausing…' : 'Pause after current'}
+                {paused ? 'Pausing…' : 'Pause after current (one-by-one only)'}
               </button>
             )}
             <button

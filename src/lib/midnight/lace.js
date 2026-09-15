@@ -323,6 +323,112 @@ export async function transferUnshieldedNight(api, recipientBech32, amountHuman)
   return { txSubmitted: true };
 }
 
+/**
+ * Send the same tNIGHT amount to many recipients in ONE makeTransfer
+ * (single 1AM / Lace approval popup).
+ * @param {object} api ConnectedAPI
+ * @param {string[]} recipients mn_addr… list
+ * @param {string|number} amountHuman per-recipient amount
+ */
+export async function transferUnshieldedNightBatch(api, recipients, amountHuman) {
+  if (!api || typeof api.makeTransfer !== 'function') {
+    throw new Error('Wallet API missing makeTransfer — update 1AM.');
+  }
+  const list = (recipients || []).map((r) => String(r || '').trim()).filter(Boolean);
+  if (!list.length) throw new Error('No recipients to fund.');
+  for (const r of list) {
+    if (!/^mn_addr/i.test(r)) {
+      throw new Error(`Invalid recipient (need mn_addr…): ${r.slice(0, 24)}…`);
+    }
+  }
+
+  const value = parseTnigntToAtomic(amountHuman);
+  const total = value * BigInt(list.length);
+
+  try {
+    const bal = await getLaceBalances(api);
+    if (bal.tnightAtomic < total) {
+      throw new Error(
+        `Not enough spendable tNIGHT (wallet ${bal.tnight}, need ~${formatAtomicTnignt(total)} for ${list.length} × ${amountHuman}).`,
+      );
+    }
+  } catch (e) {
+    if (/Not enough spendable/i.test(errMessage(e))) throw e;
+    console.warn('Batch balance preflight skipped:', errMessage(e));
+  }
+
+  if (typeof api.hintUsage === 'function') {
+    try {
+      await withTimeout(
+        api.hintUsage(['makeTransfer', 'submitTransaction', 'getUnshieldedBalances']),
+        15_000,
+        'wallet.hintUsage',
+      );
+    } catch (e) {
+      console.warn('hintUsage:', errMessage(e));
+    }
+  }
+
+  const intents = list.map((recipient) => ({
+    kind: 'unshielded',
+    type: NIGHT_TOKEN_TYPE,
+    value,
+    recipient,
+  }));
+
+  let result;
+  try {
+    result = await withTimeout(
+      api.makeTransfer(intents, { payFees: true }),
+      300_000,
+      'wallet.makeTransfer(batch)',
+    );
+  } catch (e) {
+    const msg = errMessage(e);
+    if (/timed out/i.test(msg)) {
+      throw new Error(
+        'Batch makeTransfer timed out after Sign. In 1AM: wait for any pending tx to clear, then retry.',
+      );
+    }
+    if (/pending|already|sponsor|dust/i.test(msg)) {
+      throw new Error(
+        `${msg} — Wait until 1AM Activity shows no pending send, then retry the single-approval batch.`,
+      );
+    }
+    throw e instanceof Error ? e : new Error(msg);
+  }
+
+  const extracted = extractSubmitableTx(result);
+  if (extracted && typeof extracted === 'object' && extracted.alreadySubmitted) {
+    return {
+      txSubmitted: true,
+      alreadySubmitted: true,
+      recipientCount: list.length,
+    };
+  }
+
+  const tx = typeof extracted === 'string' ? extracted : null;
+  if (!tx) {
+    // Some wallets auto-submit multi-output transfers and return a non-hex payload
+    if (result && typeof result === 'object') {
+      console.warn('Batch makeTransfer result (assuming wallet-submitted):', result);
+      return { txSubmitted: true, alreadySubmitted: true, recipientCount: list.length };
+    }
+    throw new Error('Wallet did not return a submitable batch tx. Check 1AM Activity.');
+  }
+
+  try {
+    await withTimeout(api.submitTransaction(tx), 180_000, 'wallet.submitTransaction(batch)');
+  } catch (e) {
+    const msg = errMessage(e);
+    if (/already|duplicate|pending/i.test(msg)) {
+      return { txSubmitted: true, alreadySubmitted: true, recipientCount: list.length };
+    }
+    throw new Error(`Batch signed OK, but submit failed: ${msg}`);
+  }
+  return { txSubmitted: true, recipientCount: list.length };
+}
+
 async function sessionFromConnectedApi(api, networkId, walletName) {
   let unshieldedAddress = null;
 
