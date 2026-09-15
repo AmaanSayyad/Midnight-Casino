@@ -1,22 +1,39 @@
 # Preprod Users Onboarded — Level 5 / Level 6
 
 **Target:** 70 verified Lace / 1AM **Preprod** wallet addresses  
-**Current count:** 70 / 70 (addresses minted — name/email/feedback pending)  
+**Current count:** 70 addresses minted · **7 / 70 funded on-chain** · name/email pending for funded rows
 
 Collect via https://midnight-casino-eta.vercel.app/feedback or the Google Form ([`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)).  
 Acquisition: [`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md) · Fund via 1AM: https://midnight-casino-eta.vercel.app/l5-fund  
+
+
+## Funded cohort (batch 1) — 2026-09-16
+
+First **7** Preprod addresses received tNIGHT from the maintainer 1AM wallet via [/l5-fund](https://midnight-casino-eta.vercel.app/l5-fund).
+
+| # | Wallet | Funded |
+|---|--------|--------|
+| 1 | `mn_addr_preprod169xugh23ux3hsug326vdh9qf9cx4x4cdf9w0v3h2zqm77c9jg4tsw7fnul` | yes |
+| 2 | `mn_addr_preprod1al75zeu23rgaxwlfqplu37d49zzwj68cahmzc9ufdq93409jntxs9fxzy8` | yes |
+| 3 | `mn_addr_preprod19kn2t4fp7fr4z76tg0n4adjrka4ux92p5u24z4mnv2kt24cgfenqvc0cgx` | yes |
+| 4 | `mn_addr_preprod10nhn4hatqycjcpmek32fpx252yvqjmtdfmvuzg8a5vapuzlx8wdqjxs0g6` | yes |
+| 5 | `mn_addr_preprod143z4wsy2xa9z44kpavugnyar393ysuma6n2mdfazlhklrf2msfnsf89lty` | yes |
+| 6 | `mn_addr_preprod1hucj3ch9w08xgv8kqxtlgmky877mh4t8v48l70np74qns5fkzyzs76cc9d` | yes |
+| 7 | `mn_addr_preprod1tcntea3trt88dlypvjt22xwe0cvjf8z6ksc39t2wtwv8ce8sz3jq77wgfa` | yes |
+
+**Still required for Rise In scoring on these rows:** paste **Name** + **Email** into Table 1 below (rows 1–7), or submit https://midnight-casino-eta.vercel.app/feedback and we will sync.
 
 ## Table 1 — Onboarded Users (All)
 
 | # | Name | Email | Wallet Address | Feedback Summary |
 |---|------|-------|----------------|------------------|
-| 1 | | | `mn_addr_preprod169xugh23ux3hsug326vdh9qf9cx4x4cdf9w0v3h2zqm77c9jg4tsw7fnul` | |
-| 2 | | | `mn_addr_preprod1al75zeu23rgaxwlfqplu37d49zzwj68cahmzc9ufdq93409jntxs9fxzy8` | |
-| 3 | | | `mn_addr_preprod19kn2t4fp7fr4z76tg0n4adjrka4ux92p5u24z4mnv2kt24cgfenqvc0cgx` | |
-| 4 | | | `mn_addr_preprod10nhn4hatqycjcpmek32fpx252yvqjmtdfmvuzg8a5vapuzlx8wdqjxs0g6` | |
-| 5 | | | `mn_addr_preprod143z4wsy2xa9z44kpavugnyar393ysuma6n2mdfazlhklrf2msfnsf89lty` | |
-| 6 | | | `mn_addr_preprod1hucj3ch9w08xgv8kqxtlgmky877mh4t8v48l70np74qns5fkzyzs76cc9d` | |
-| 7 | | | `mn_addr_preprod1tcntea3trt88dlypvjt22xwe0cvjf8z6ksc39t2wtwv8ce8sz3jq77wgfa` | |
+| 1 | | | `mn_addr_preprod169xugh23ux3hsug326vdh9qf9cx4x4cdf9w0v3h2zqm77c9jg4tsw7fnul` | On-chain funded via /l5-fund (Preprod tNIGHT received); identity pending form |
+| 2 | | | `mn_addr_preprod1al75zeu23rgaxwlfqplu37d49zzwj68cahmzc9ufdq93409jntxs9fxzy8` | On-chain funded via /l5-fund (Preprod tNIGHT received); identity pending form |
+| 3 | | | `mn_addr_preprod19kn2t4fp7fr4z76tg0n4adjrka4ux92p5u24z4mnv2kt24cgfenqvc0cgx` | On-chain funded via /l5-fund (Preprod tNIGHT received); identity pending form |
+| 4 | | | `mn_addr_preprod10nhn4hatqycjcpmek32fpx252yvqjmtdfmvuzg8a5vapuzlx8wdqjxs0g6` | On-chain funded via /l5-fund (Preprod tNIGHT received); identity pending form |
+| 5 | | | `mn_addr_preprod143z4wsy2xa9z44kpavugnyar393ysuma6n2mdfazlhklrf2msfnsf89lty` | On-chain funded via /l5-fund (Preprod tNIGHT received); identity pending form |
+| 6 | | | `mn_addr_preprod1hucj3ch9w08xgv8kqxtlgmky877mh4t8v48l70np74qns5fkzyzs76cc9d` | On-chain funded via /l5-fund (Preprod tNIGHT received); identity pending form |
+| 7 | | | `mn_addr_preprod1tcntea3trt88dlypvjt22xwe0cvjf8z6ksc39t2wtwv8ce8sz3jq77wgfa` | On-chain funded via /l5-fund (Preprod tNIGHT received); identity pending form |
 | 8 | | | `mn_addr_preprod1p8f5hwxy4x4u824t2h5pwfqpjvd8c2wcw47sx6yr80w6wcuc47tspj2sau` | |
 | 9 | | | `mn_addr_preprod142um0c85k6wn5msdf869pdl0gvnykmsxd59sdfsruana7gug7vtqpucr2e` | |
 | 10 | | | `mn_addr_preprod1qhdsv3l699g8uy3t3h40wxdj4gr8tg3vea3eal4lvhzuuyarly2qrwze9c` | |

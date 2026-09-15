@@ -38,7 +38,8 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 - Preprod MVP live: `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
 - Docs/CI complete; Product X profile pending handle paste in README.
 
-## Rise In L6 (2026-09-15)
-- Target raised to **70 Preprod** wallet addresses (minted + listed in USERS.md / CSV)
-- Fund UI `/l5-fund`: sender pays tDUST fees; recipients receive tNIGHT only
+## Rise In L6 (2026-09-16)
+- Target **70 Preprod** wallet addresses (minted + listed)
+- **Batch 1 funded:** 7 wallets on-chain via `/l5-fund` — [`docs/funded-batch-1.json`](docs/funded-batch-1.json)
+- Fund UX iterated from cohort friction (API rehydrate, batch, chunk size 3–5)
 - Runbook: [`docs/LEVEL6.md`](docs/LEVEL6.md)

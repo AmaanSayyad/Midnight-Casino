@@ -14,7 +14,7 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
 | **Google Form (L5)** | `[PASTE forms.gle link — see docs/GOOGLE_FORM.md]` |
 | **Feedback sheet (L5)** | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) · `[PASTE public Google Sheet URL after publish]` |
-| **Users onboarded** | [`USERS.md`](USERS.md) — **70 / 70** Preprod addresses (name/email/feedback pending) |
+| **Users onboarded** | [`USERS.md`](USERS.md) — **7 / 70 funded on-chain** (63 minted, awaiting fund + identity) |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
@@ -58,7 +58,7 @@ Same Preprod MVP, refined through a feedback loop. **Target this cycle: 70 Prepr
 
 ### Table 1 — Onboarded Users (All)
 
-Full 70-row tracker: [`USERS.md`](USERS.md). Summary columns: Name · Email · Wallet Address · Feedback Summary. **Addresses: 70 / 70 minted.**
+Full 70-row tracker: [`USERS.md`](USERS.md). **On-chain funded:** 7 (batch 1 — [`docs/funded-batch-1.json`](docs/funded-batch-1.json)). Name/Email still pending on those rows.
 
 ### Fees (why we don’t “send tDUST”)
 
@@ -73,6 +73,9 @@ Each fund transfer is: **tNIGHT output to recipient** + **tDUST fee burned from 
 | Cohort theme | — | — | No place to leave structured feedback | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
 | Cohort theme | — | — | Onboarding steps scattered | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
 | Cohort theme | — | — | Compact dapp circuit order unclear | [`ec86b80`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec86b80) |
+| Fund UX | — | batch 1 (#1–#7) | Cached navbar session blocked transfers | [`ec23e03`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec23e03) |
+| Fund UX | — | batch 1 (#1–#7) | One approval per wallet too slow | [`65b53fd`](https://github.com/AmaanSayyad/Midnight-Casino/commit/65b53fd) |
+| Fund UX | — | batch 1 (#1–#7) | 70-output 1AM popup not scrollable | [`1605335`](https://github.com/AmaanSayyad/Midnight-Casino/commit/1605335) |
 
 Themes and change log: [`docs/FEEDBACK.md`](docs/FEEDBACK.md). Docs pack: [`ead7341`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ead7341).
 

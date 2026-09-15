@@ -14,13 +14,14 @@
 
 ## What we heard (themes)
 
-Early Preprod dogfood + first-cohort notes (Privacy Wheel + Compact dapp):
+Early Preprod dogfood + first-cohort notes (Privacy Wheel + Compact dapp + fund UI):
 
 1. **Unclear first step** — players did not know whether to connect, join the contract, or press placeBet first.
 2. **Missing busy/loading feedback** — circuit buttons felt “dead” with no pending state.
 3. **Public vs private still confusing** — needed an on-page legend during the round.
 4. **No obvious place to leave feedback** — L5 requires a durable loop; form was buried in docs.
 5. **Onboarding friction** — faucet / proof-server / Preprod network steps were scattered.
+6. **Fund UX (batch 1, wallets #1–#7)** — cached navbar session lacked ConnectedAPI; one-approve-per-wallet too slow; 70-output 1AM popup not scrollable → chunked batching (3–5).
 
 ## What we changed (improvement summary)
 
@@ -33,8 +34,15 @@ Early Preprod dogfood + first-cohort notes (Privacy Wheel + Compact dapp):
 | `/onboard` Preprod checklist | Scattered onboarding | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
 | Compact dapp step progress | Unclear circuit order | [`ec86b80`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec86b80) |
 | USAGE + LEVEL5 docs sync | Docs lag product | [`ead7341`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ead7341) / [`bee78a5`](https://github.com/AmaanSayyad/Midnight-Casino/commit/bee78a5) |
+| Rehydrate wallet API before fund | Cached session blocked sends | [`ec23e03`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec23e03) |
+| Batch `makeTransfer` multi-out | Too many approvals | [`65b53fd`](https://github.com/AmaanSayyad/Midnight-Casino/commit/65b53fd) |
+| Chunk size 3–5 for 1AM UI | Unscrollable mega-popup | [`1605335`](https://github.com/AmaanSayyad/Midnight-Casino/commit/1605335) |
 
 Also mirrored in README **Feedback Implementation**.
+
+## Funded wallets (batch 1)
+
+See [`funded-batch-1.json`](funded-batch-1.json) and [`USERS.md`](../USERS.md) — **7** Preprod addresses funded on-chain. Name/Email columns awaiting form entries.
 
 ## Raw feedback log
 

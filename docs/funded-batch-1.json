@@ -1,0 +1,37 @@
+{
+  "fundedAt": "2026-09-16",
+  "network": "preprod",
+  "method": "https://midnight-casino-eta.vercel.app/l5-fund",
+  "count": 7,
+  "wallets": [
+    {
+      "index": 1,
+      "address": "mn_addr_preprod169xugh23ux3hsug326vdh9qf9cx4x4cdf9w0v3h2zqm77c9jg4tsw7fnul"
+    },
+    {
+      "index": 2,
+      "address": "mn_addr_preprod1al75zeu23rgaxwlfqplu37d49zzwj68cahmzc9ufdq93409jntxs9fxzy8"
+    },
+    {
+      "index": 3,
+      "address": "mn_addr_preprod19kn2t4fp7fr4z76tg0n4adjrka4ux92p5u24z4mnv2kt24cgfenqvc0cgx"
+    },
+    {
+      "index": 4,
+      "address": "mn_addr_preprod10nhn4hatqycjcpmek32fpx252yvqjmtdfmvuzg8a5vapuzlx8wdqjxs0g6"
+    },
+    {
+      "index": 5,
+      "address": "mn_addr_preprod143z4wsy2xa9z44kpavugnyar393ysuma6n2mdfazlhklrf2msfnsf89lty"
+    },
+    {
+      "index": 6,
+      "address": "mn_addr_preprod1hucj3ch9w08xgv8kqxtlgmky877mh4t8v48l70np74qns5fkzyzs76cc9d"
+    },
+    {
+      "index": 7,
+      "address": "mn_addr_preprod1tcntea3trt88dlypvjt22xwe0cvjf8z6ksc39t2wtwv8ce8sz3jq77wgfa"
+    }
+  ],
+  "note": "Name/email/feedback identity fields filled by maintainer after Google Form / /feedback export"
+}
