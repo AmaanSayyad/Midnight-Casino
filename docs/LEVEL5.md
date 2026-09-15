@@ -31,13 +31,13 @@ Same Preprod MVP as L4, refined through a **living feedback loop**, with **50 Pr
 - [x] Demo video (same MVP)
 - [x] ≥20 meaningful commits
 
-## How to finish the 50-user gate
+## How to finish the user gate
 
-1. Publish Google Form from [`GOOGLE_FORM.md`](GOOGLE_FORM.md) (or use in-app `/feedback`).
+1. Collect feedback on the website: https://midnight-casino-eta.vercel.app/feedback
 2. Share acquisition copy from [`ACQUIRE_USERS.md`](ACQUIRE_USERS.md).
-3. Each user: Lace Preprod → play Privacy Wheel / Join Compact dapp → submit form with wallet.
-4. Export responses → update [`feedback-sheet.csv`](feedback-sheet.csv) + [`USERS.md`](../USERS.md).
-5. Paste Google Form + public sheet links into README.
+3. Each user: Lace Preprod → play Privacy Wheel → submit `/feedback` with wallet.
+4. Export / merge into [`feedback-sheet.csv`](feedback-sheet.csv) + [`USERS.md`](../USERS.md).
+5. Link the website form + CSV from README (not Google Forms).
 
 ## Improvement loop
 

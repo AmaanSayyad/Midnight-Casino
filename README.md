@@ -245,7 +245,7 @@ Midnight Casino uses Midnight’s **programmable privacy**: prove fair settlemen
 
 ## What's next for Midnight Casino
 
-- **L5:** Fill 50 Preprod users + publish Google Form / sheet links ([`docs/LEVEL5.md`](docs/LEVEL5.md))
+- **L5/L6:** 70 Preprod users funded + website feedback ([`docs/LEVEL6.md`](docs/LEVEL6.md))
 - **Wave 2 / L6 path:** Mainnet Compact deploy, brand assets, first real users
 - **Beyond:** Compact circuits for Mines/Plinko private boards; indexer-backed settlement UX
 

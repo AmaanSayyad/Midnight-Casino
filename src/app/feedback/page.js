@@ -98,10 +98,9 @@ export default function FeedbackPage() {
             Preprod feedback
           </h1>
           <p className="mt-3 text-white/70">
-            Same fields as the Google Form: identity, Preprod wallet, rating, and
-            three product questions. Submitting downloads a CSV row you can merge
-            into{' '}
-            <code className="text-white/90">docs/feedback-sheet.csv</code>.
+            Leave product feedback on our website: identity, Preprod wallet,
+            rating, and three product questions. Submitting downloads a CSV row
+            for [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv).
           </p>
         </div>
 
@@ -109,26 +108,18 @@ export default function FeedbackPage() {
           <Link href="/onboard" className="underline text-white/70 hover:text-white">
             Onboarding checklist
           </Link>
-            <Link
-              href="/l5-fund"
-              className="underline text-white/70 hover:text-white"
-            >
-              Fund wallets (1AM)
-            </Link>
-            <Link
-              href="/game/privacy-wheel"
-              className="underline text-white/70 hover:text-white"
-            >
-              Play Privacy Wheel
-            </Link>
-          <a
-            href="https://github.com/AmaanSayyad/Midnight-Casino/blob/main/docs/GOOGLE_FORM.md"
+          <Link
+            href="/l5-fund"
             className="underline text-white/70 hover:text-white"
-            target="_blank"
-            rel="noreferrer"
           >
-            Google Form setup
-          </a>
+            Fund wallets (1AM)
+          </Link>
+          <Link
+            href="/game/privacy-wheel"
+            className="underline text-white/70 hover:text-white"
+          >
+            Play Privacy Wheel
+          </Link>
         </div>
 
         {submitted ? (
