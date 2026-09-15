@@ -24,7 +24,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 - Product X: *(paste after creating — see docs/BUILD_IN_PUBLIC.md)*
 - L4: [`docs/LEVEL4.md`](docs/LEVEL4.md) · L5: [`docs/LEVEL5.md`](docs/LEVEL5.md) · L6: [`docs/LEVEL6.md`](docs/LEVEL6.md)
 - Users: [`USERS.md`](USERS.md) (**70 / 70 funded** + name/email/feedback)
-- Feedback sheet: https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing
+- Feedback sheet: [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv)
 - Fees explained: [`docs/LEVEL6.md`](docs/LEVEL6.md#how-fees-work-tnight-vs-tdust)
 
 ## Manual steps (remaining)

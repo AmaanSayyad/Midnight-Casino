@@ -13,7 +13,7 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **Preprod MVP** | Contract `33d34f16…be92` · [deploy tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod) |
 | **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
 | **Google Form (L5)** | https://midnight-casino-eta.vercel.app/feedback (in-app; same fields as [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)) |
-| **Feedback sheet (L5)** | https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing · [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
+| **Feedback sheet (L5)** | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
 | **Users onboarded** | [`USERS.md`](USERS.md) — **70 / 70 funded** + name/email/feedback filled |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
@@ -52,7 +52,7 @@ Same Preprod MVP, refined through a feedback loop. **Target this cycle: 70 Prepr
 | Onboard checklist | https://midnight-casino-eta.vercel.app/onboard |
 | **Fund wallets (1AM)** | https://midnight-casino-eta.vercel.app/l5-fund — you send **tNIGHT**; **your tDUST pays fees** (DUST is not transferable) |
 | Google Form | https://midnight-casino-eta.vercel.app/feedback |
-| Public sheet | https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing · [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
+| Public sheet | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
 | Feedback write-up | [`docs/FEEDBACK.md`](docs/FEEDBACK.md) |
 | Acquire / fill identity | [`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md) |
 

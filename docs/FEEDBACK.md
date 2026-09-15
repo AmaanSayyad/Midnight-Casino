@@ -46,7 +46,7 @@ All **70** Preprod addresses funded on-chain via `/l5-fund` — [`funded-all-70.
 
 ## Raw feedback log
 
-Synced from cohort sheet + product feedback notes into [`feedback-sheet.csv`](feedback-sheet.csv) (70 rows). Public sheet: https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing
+Synced into [`feedback-sheet.csv`](feedback-sheet.csv) (70 rows).
 
 | # | User | Feedback Summary | Date |
 |---|------|------------------|------|
