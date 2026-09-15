@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  compact-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: midnight-contract/package-lock.json
+
+      - name: Install Compact toolchain
+        run: |
+          curl -fsSL https://docs.midnight.network/getting-started/installation | bash || true
+          export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
+          # Fallback: use project-local compact if global install differs
+          which compact || echo "compact binary resolved in subsequent steps via npm script PATH"
+
+      - name: Install contract package
+        working-directory: midnight-contract
+        run: npm ci
+
+      - name: Compile Compact
+        working-directory: midnight-contract
+        run: |
+          export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
+          npm run compact
+
+      - name: Run Compact simulator tests
+        working-directory: midnight-contract
+        run: npm test
+
+      - name: Verify managed keys exist
+        run: |
+          test -f midnight-contract/managed/casino/keys/placeBet.prover
+          test -f midnight-contract/managed/casino/keys/settleWheel.prover
+          test -f contracts/casino.compact
+          echo "managed/ + contracts/casino.compact OK"
