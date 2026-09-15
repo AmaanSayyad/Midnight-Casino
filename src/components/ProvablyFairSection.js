@@ -126,7 +126,7 @@ const ProvablyFairSection = () => {
                     </p>
                   </div>
                   
-                  {/* Pyth Entropy */}
+                  {/* Midnight entropy */}
                   <div className="bg-[#0D0D0D] rounded-lg p-4 overflow-x-auto">
                     <pre className="text-sm text-green-400 font-mono">
                       {steps[activeTab-1].code}

@@ -456,7 +456,7 @@ export default function Navbar() {
     },
   ];
 
-  // Pyth Entropy handles randomness generation
+  // Midnight entropy handles randomness generation
 
   return (
     <>
@@ -465,7 +465,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <a href="/" className="logo mr-6">
             <Image
-              src="/Midnight%20Logo%20Pack/01_Symbol%20+%20Wordmark/Horizontal/Midnight-RGB_Logo-Horizontal-White.svg"
+              src="/brand/midnight-logo-horizontal-white.svg"
               alt="Midnight logo"
               width={180}
               height={24}
@@ -813,7 +813,7 @@ export default function Navbar() {
         <div className="w-full h-[2px] magic-gradient overflow-hidden"></div>
       </nav>
       
-      {/* Pyth Entropy handles randomness generation */}
+      {/* Midnight entropy handles randomness generation */}
       
       {/* Live Chat Modal */}
       <LiveChat

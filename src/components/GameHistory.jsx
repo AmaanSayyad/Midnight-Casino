@@ -100,7 +100,7 @@ const GameHistory = ({ hotNumbers, coldNumbers, recentGames = [] }) => {
         />
       </Box>
       <Typography variant="body1" paragraph color="white">
-        Track the results of previous spins and identify patterns. All results are verified using Pyth Entropy.
+        Track previous spins. Privacy Wheel rounds use Compact settlement proofs.
         {showVrfDetails && ' Click on verified numbers to view transaction details.'}
       </Typography>
       

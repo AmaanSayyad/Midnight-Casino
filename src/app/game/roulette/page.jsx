@@ -33,7 +33,7 @@ import WinProbabilities from './components/WinProbabilities';
 import RouletteHistory from './components/RouletteHistory';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, setLoading, loadBalanceFromStorage } from '@/store/balanceSlice';
-import pythEntropyService from '@/services/PythEntropyService';
+import midnightEntropyService from '@/services/MidnightEntropyService';
 
 // Midnight client functions will be added here when needed
 
@@ -1497,14 +1497,14 @@ export default function GameRoulette() {
     }
     
     // Initialize Yellow Network for Roulette
-    if (!pythEntropyService.isInitialized) {
-      console.log('🔮 PYTH ENTROPY: Initializing Roulette game...');
+    if (!midnightEntropyService.isInitialized) {
+      console.log('🔮 MIDNIGHT ENTROPY: Initializing Roulette game...');
       
-      pythEntropyService.initialize().then(() => {
-        console.log('✅ PYTH ENTROPY: Roulette initialized');
-        console.log('🎮 Network:', pythEntropyService.network);
+      midnightEntropyService.initialize().then(() => {
+        console.log('✅ MIDNIGHT ENTROPY: Roulette initialized');
+        console.log('🎮 Network:', midnightEntropyService.network);
       }).catch(error => {
-        console.error('❌ PYTH ENTROPY: Initialization failed:', error);
+        console.error('❌ MIDNIGHT ENTROPY: Initialization failed:', error);
       });
     }
       
@@ -2128,17 +2128,17 @@ export default function GameRoulette() {
           }
         };
 
-        // Generate random number using Pyth Entropy
+        // Generate random number using Midnight entropy
         (async () => {
           try {
-            const entropyResult = await pythEntropyService.generateRandom('ROULETTE', {
+            const entropyResult = await midnightEntropyService.generateRandom('ROULETTE', {
               purpose: 'roulette_spin',
               gameType: 'ROULETTE'
             });
             
-            console.log('🔮 PYTH ENTROPY: Roulette randomness generated:', entropyResult);
+            console.log('🔮 MIDNIGHT ENTROPY: Roulette randomness generated:', entropyResult);
             
-            // Add Pyth Entropy proof info to the bet result
+            // Add Midnight entropy proof info to the bet result
             newBet.entropyProof = {
               requestId: entropyResult.entropyProof.requestId,
               sequenceNumber: entropyResult.entropyProof.sequenceNumber,
@@ -2147,7 +2147,7 @@ export default function GameRoulette() {
               midnightExplorerUrl: entropyResult.entropyProof.midnightExplorerUrl,
               explorerUrl: entropyResult.entropyProof.explorerUrl,
               timestamp: entropyResult.entropyProof.timestamp,
-              source: 'Pyth Entropy'
+              source: 'Midnight entropy'
             };
             
             // Update betting history with entropy proof
@@ -2180,18 +2180,18 @@ export default function GameRoulette() {
               console.warn('Casino session log threw (Roulette):', e);
             }
             
-            // Pyth Entropy handles randomness generation
-            console.log('✅ Pyth Entropy randomness processed for Roulette');
+            // Midnight entropy handles randomness generation
+            console.log('✅ Midnight entropy randomness processed for Roulette');
 
             // Log game result with entropy transaction hash
             console.log('🔄 About to call logGameResult with:', entropyResult.entropyProof?.transactionHash);
             await logGameResult(entropyResult.entropyProof?.transactionHash);
             console.log('✅ logGameResult called successfully');
             
-            console.log('📊 PYTH ENTROPY: Roulette game completed successfully');
+            console.log('📊 MIDNIGHT ENTROPY: Roulette game completed successfully');
           } catch (error) {
-            console.error('❌ PYTH ENTROPY: Error processing Roulette game:', error);
-            // Still add the bet result even if Pyth Entropy processing fails
+            console.error('❌ MIDNIGHT ENTROPY: Error processing Roulette game:', error);
+            // Still add the bet result even if Midnight entropy processing fails
             newBet.entropyProof = null;
             
             // Log game result even if entropy fails
@@ -3227,7 +3227,7 @@ export default function GameRoulette() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <Shield size={16} style={{ color: '#FFC107' }} />
                 <Typography variant="subtitle2" sx={{ color: '#FFC107', fontWeight: 'bold' }}>
-                  Pyth Entropy
+                  Midnight entropy
                 </Typography>
               </Box>
               
@@ -3261,7 +3261,7 @@ export default function GameRoulette() {
                     fontWeight: 'bold',
                     textAlign: 'center'
                   }}>
-                    Pyth Entropy
+                    Midnight entropy
                   </Typography>
                   
                   <Typography variant="body2" sx={{ 
@@ -3762,7 +3762,7 @@ export default function GameRoulette() {
           </MuiAlert>
         </Snackbar>
 
-        {/* Pyth Entropy handles randomness generation */}
+        {/* Midnight entropy handles randomness generation */}
 
       </div>
     </ThemeProvider>

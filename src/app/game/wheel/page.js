@@ -15,11 +15,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, setLoading, loadBalanceFromStorage } from '@/store/balanceSlice';
 import { useNotification } from '@/components/NotificationSystem';
 import useWalletStatus from '@/hooks/useWalletStatus';
-// Pyth Entropy integration for randomness
+// Midnight entropy integration for randomness
 // import vrfProofService from '@/services/VRFProofService';
 // import VRFProofRequiredModal from '@/components/VRF/VRFProofRequiredModal';
 // import vrfLogger from '@/services/VRFLoggingService';
-import pythEntropyService from '@/services/PythEntropyService';
+import midnightEntropyService from '@/services/MidnightEntropyService';
 
 // Import new components
 import WheelVideo from "./components/WheelVideo";
@@ -144,17 +144,17 @@ export default function Home() {
       return;
     }
 
-    // Generate Pyth Entropy in background for provably fair proof
+    // Generate Midnight entropy in background for provably fair proof
   const generateEntropyInBackground = async (historyItemId) => {
     try {
-      console.log('🔮 PYTH ENTROPY: Generating background entropy for Wheel game...');
+      console.log('🔮 MIDNIGHT ENTROPY: Generating background entropy for Wheel game...');
       
-      const entropyResult = await pythEntropyService.generateRandom('WHEEL', { 
+      const entropyResult = await midnightEntropyService.generateRandom('WHEEL', { 
         purpose: 'wheel_spin', 
         gameType: 'WHEEL' 
       });
       
-      console.log('✅ PYTH ENTROPY: Background entropy generated successfully');
+      console.log('✅ MIDNIGHT ENTROPY: Background entropy generated successfully');
       console.log('🔗 Transaction:', entropyResult.entropyProof.transactionHash);
       
       // Update the history item with real entropy proof
@@ -171,7 +171,7 @@ export default function Home() {
                 midnightExplorerUrl: entropyResult.entropyProof?.midnightExplorerUrl,
                 explorerUrl: entropyResult.entropyProof?.explorerUrl,
                 timestamp: entropyResult.entropyProof?.timestamp,
-                source: 'Pyth Entropy'
+                source: 'Midnight entropy'
               }
             }
           : item
@@ -199,7 +199,7 @@ export default function Home() {
       }
       
     } catch (error) {
-      console.error('❌ PYTH ENTROPY: Background generation failed:', error);
+      console.error('❌ MIDNIGHT ENTROPY: Background generation failed:', error);
     }
   };
 
@@ -276,7 +276,7 @@ export default function Home() {
             randomNumber: Math.floor(Math.random() * 1000000),
             transactionHash: 'generating...',
             midnightExplorerUrl: 'https://amoy.midnightscan.com/',
-            explorerUrl: 'https://entropy-explorer.pyth.network/?chain=midnight-network',
+            explorerUrl: '#',
             timestamp: Date.now(),
             source: 'Generating...'
           };
@@ -325,7 +325,7 @@ export default function Home() {
             notification.info(`Game over. Multiplier: ${actualMultiplier.toFixed(2)}x`);
           }
 
-          // Generate Pyth Entropy in background for provably fair proof
+          // Generate Midnight entropy in background for provably fair proof
           generateEntropyInBackground(newHistoryItem.id).catch(error => {
             console.error('❌ Background entropy generation failed:', error);
           });
@@ -395,7 +395,7 @@ export default function Home() {
       return;
     }
     
-    // Auto betting with Pyth Entropy for randomness
+    // Auto betting with Midnight entropy for randomness
     
     if (isSpinning) return; // Prevent overlapping spins
 
@@ -567,16 +567,16 @@ export default function Home() {
         color: wheelSegmentData.color
       };
 
-      // Generate Pyth Entropy for this auto bet game
+      // Generate Midnight entropy for this auto bet game
       try {
-        const entropyResult = await pythEntropyService.generateRandom('WHEEL', {
+        const entropyResult = await midnightEntropyService.generateRandom('WHEEL', {
           purpose: 'wheel_auto_bet',
           gameType: 'WHEEL'
         });
         
-        console.log(`🎲 Wheel auto bet ${i + 1} completed with Pyth Entropy:`, entropyResult);
+        console.log(`🎲 Wheel auto bet ${i + 1} completed with Midnight entropy:`, entropyResult);
         
-        // Add Pyth Entropy proof info to the history item
+        // Add Midnight entropy proof info to the history item
         newHistoryItem.entropyProof = {
           requestId: entropyResult.entropyProof?.requestId,
           sequenceNumber: entropyResult.entropyProof?.sequenceNumber,
@@ -584,11 +584,11 @@ export default function Home() {
           transactionHash: entropyResult.entropyProof?.transactionHash,
           explorerUrl: entropyResult.entropyProof?.explorerUrl,
           timestamp: entropyResult.entropyProof?.timestamp,
-          source: 'Pyth Entropy'
+          source: 'Midnight entropy'
         };
         
       } catch (error) {
-        console.error(`❌ Error generating Pyth Entropy for Wheel auto bet ${i + 1}:`, error);
+        console.error(`❌ Error generating Midnight entropy for Wheel auto bet ${i + 1}:`, error);
       }
 
       setGameHistory(prev => [newHistoryItem, ...prev]);

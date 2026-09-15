@@ -32,13 +32,7 @@ export default function GameHistory({ history }) {
     }
   }, [history?.map(item => item.midnightTxHash).join(',')]);
   
-  // Open Entropy Explorer link
-  const openEntropyExplorer = (txHash) => {
-    if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
-      window.open(entropyExplorerUrl, '_blank');
-    }
-  };
+  const openEntropyExplorer = () => {};
 
   // Open Midnight Explorer link
   const openMidnightExplorer = (txHash) => {
@@ -183,7 +177,7 @@ export default function GameHistory({ history }) {
                             String(game.entropyProof.transactionHash || '').startsWith('local_') ? (
                             <div
                               className="flex items-center gap-1 px-2 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded text-emerald-400 text-xs"
-                              title="Local Midnight entropy (Pyth path unavailable)"
+                              title="Local Midnight entropy "
                             >
                               Local entropy
                             </div>

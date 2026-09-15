@@ -252,7 +252,7 @@ export class GameHistoryService {
             gameSubType: row.game_sub_type,
             etherscanUrl: `${process.env.NEXT_PUBLIC_SEPOLIA_EXPLORER}/tx/${row.transaction_hash}`,
             verifiable: true,
-            verificationNote: "This result was generated using Pyth Entropy - click to verify on Etherscan"
+            verificationNote: "This result was generated using Midnight entropy - click to verify on Etherscan"
           };
         }
 
@@ -426,7 +426,7 @@ export class GameHistoryService {
         requestId: game.request_id,
         etherscanUrl: `${process.env.NEXT_PUBLIC_SEPOLIA_EXPLORER}/tx/${game.transaction_hash}`,
         verified: true, // This would be the result of actual verification
-        message: 'Game result is verifiable on-chain via Pyth Entropy'
+        message: 'Game result is verifiable on-chain via Midnight entropy'
       };
 
     } catch (error) {

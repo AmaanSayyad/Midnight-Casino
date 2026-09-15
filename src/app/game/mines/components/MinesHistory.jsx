@@ -19,13 +19,7 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
     }
   };
 
-  // Open Entropy Explorer link
-  const openEntropyExplorer = (txHash) => {
-    if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
-      window.open(entropyExplorerUrl, '_blank');
-    }
-  };
+  const openEntropyExplorer = () => {};
   
   // Default user stats if none provided
   const defaultStats = {

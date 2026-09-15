@@ -40,7 +40,7 @@ export default function HeroSection() {
           </span>
         </h1>
         <h2 className="text-[#D0D0D0] mt-4 text-lg sm:text-xl leading-relaxed max-w-3xl [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
-          <span className="text-white font-semibold">Autonomous Provably Transparent</span> gaming powered by <span className="text-white font-semibold">Midnight Network</span> & <span className="text-white font-semibold">Pyth Entropy</span>. Experience decentralized randomness with cryptographic fairness you can verify, not just trust.
+          <span className="text-white font-semibold">Autonomous Provably Transparent</span> gaming powered by <span className="text-white font-semibold">Midnight Network</span> Compact ZK. Experience decentralized randomness with cryptographic fairness you can verify, not just trust.
         </h2>
         <p className="text-[#B3B3B3] text-lg sm:text-xl max-w-3xl">
           No rigged outcomes. No hidden limits. No custody of your funds. 

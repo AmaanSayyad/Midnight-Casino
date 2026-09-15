@@ -10,8 +10,8 @@ export class MinesResultProcessor {
   }
 
   /**
-   * Process Pyth Entropy value to generate mine positions
-   * @param {string|bigint} entropyValue - Pyth Entropy random value
+   * Process Midnight entropy value to generate mine positions
+   * @param {string|bigint} entropyValue - Midnight entropy random value
    * @param {Object} gameConfig - Game configuration
    * @returns {Object} Mines game result
    */
@@ -48,7 +48,7 @@ export class MinesResultProcessor {
           totalPositions: this.gridSize,
           safePositions: this.gridSize - mineCount,
           generatedAt: new Date().toISOString(),
-          source: 'Pyth Entropy'
+          source: 'Midnight entropy'
         }
       };
 
@@ -64,7 +64,7 @@ export class MinesResultProcessor {
 
   /**
    * Generate mine positions using Fisher-Yates shuffle algorithm
-   * @param {bigint} entropyValue - Pyth Entropy random value
+   * @param {bigint} entropyValue - Midnight entropy random value
    * @param {number} mineCount - Number of mines to place
    * @returns {number[]} Array of mine positions
    */

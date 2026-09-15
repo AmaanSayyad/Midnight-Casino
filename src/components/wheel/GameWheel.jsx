@@ -414,7 +414,7 @@ const GameWheel = ({
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-[5]">
           <div className="w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] rounded-full bg-[#12081f]/90 border border-[#7c3aed]/50 flex items-center justify-center shadow-lg shadow-[#7c3aed]/20">
             <Image
-              src="/Midnight%20Logo%20Pack/02_Symbol/Midnight-RGB_Symbol-White.svg"
+              src="/brand/midnight-symbol-white.svg"
               alt="Midnight"
               width={48}
               height={48}

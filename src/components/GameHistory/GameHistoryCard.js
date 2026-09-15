@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import { ExternalLink, Copy, CheckCircle } from 'lucide-react';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
-import pythEntropyService from '@/services/PythEntropyService';
 
 const GameHistoryCard = ({ game, gameType }) => {
   const [expanded, setExpanded] = useState(false);
@@ -51,7 +50,7 @@ const GameHistoryCard = ({ game, gameType }) => {
 
   const openEntropyExplorer = (txHash) => {
     if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
+      const entropyExplorerUrl = `#`;
       window.open(entropyExplorerUrl, '_blank');
     }
   };
@@ -72,7 +71,7 @@ const GameHistoryCard = ({ game, gameType }) => {
     return '🤝 DRAW';
   };
 
-  const proof = null; // VRF removed in Pyth Entropy mode
+  const proof = null; // VRF removed in Midnight entropy mode
 
   return (
     <Card 
@@ -151,7 +150,7 @@ const GameHistoryCard = ({ game, gameType }) => {
           </Grid>
         </Box>
 
-        {/* Pyth Entropy Info */}
+        {/* Midnight entropy Info */}
         <Box sx={{ 
           mb: 2, 
           p: 2, 
@@ -163,7 +162,7 @@ const GameHistoryCard = ({ game, gameType }) => {
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <CheckCircle size={16} color="#FFC107" />
               <Typography variant="subtitle2" sx={{ color: '#FFC107', fontWeight: 'bold' }}>
-                🔮 Pyth Entropy
+                Local entropy
               </Typography>
             </Box>
             {entropyTransactionHash && (

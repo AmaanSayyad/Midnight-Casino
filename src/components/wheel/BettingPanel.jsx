@@ -6,8 +6,8 @@ import Image from "next/image";
 // Using Next.js public asset reference instead of import
 import useWalletStatus from '@/hooks/useWalletStatus';
 import { Shield } from "lucide-react";
-import pythEntropyService from '@/services/PythEntropyService';
-// VRF removed in Pyth Entropy mode
+import midnightEntropyService from '@/services/MidnightEntropyService';
+// VRF removed in Local entropy mode
 // import { wheelDataByRisk } from "./GameWheel"; // Make sure this is exported
 
 const BettingPanel = ({
@@ -27,7 +27,7 @@ const BettingPanel = ({
   
   const { isConnected, connectWallet, connecting } = useWalletStatus();
   const [inputValue, setInputValue] = useState('0');
-  const [pythReady, setPythReady] = useState(false);
+  const [entropyReady, setEntropyReady] = useState(false);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -47,15 +47,15 @@ const BettingPanel = ({
   const [stopProfit, setStopProfit] = useState(0);
   const [stopLoss, setStopLoss] = useState(0);
 
-  // Check Pyth Entropy readiness periodically
+  // Check entropy readiness periodically
   useEffect(() => {
     let cancelled = false;
     const check = async () => {
       try {
-        const ready = await pythEntropyService.isInitialized();
-        if (!cancelled) setPythReady(!!ready);
+        await midnightEntropyService.initialize();
+        if (!cancelled) setEntropyReady(true);
       } catch {
-        if (!cancelled) setPythReady(false);
+        if (!cancelled) setEntropyReady(false);
       }
     };
     check();
@@ -81,15 +81,15 @@ const BettingPanel = ({
         </div>
       </div>
 
-      {/* Pyth Entropy Status */}
+      {/* Local entropy Status */}
       <div className="mb-4 p-3 bg-gradient-to-r from-midnight-blue/15 to-pink-900/20 rounded-lg border border-midnight-blue/20">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Shield size={16} className="text-blue-300" />
-            <span className="text-sm font-medium text-blue-300">Pyth Entropy</span>
+            <span className="text-sm font-medium text-blue-300">Local entropy</span>
           </div>
           {isConnected && (
-            <div className={`w-2 h-2 rounded-full ${pythReady ? 'bg-green-400' : 'bg-red-400'}`}></div>
+            <div className={`w-2 h-2 rounded-full ${entropyReady ? 'bg-green-400' : 'bg-red-400'}`}></div>
           )}
         </div>
         
@@ -107,7 +107,7 @@ const BettingPanel = ({
           </div>
         ) : (
           <div className="flex items-center justify-between text-xs text-emerald-300/90">
-            <span>Wallet connected · entropy via Midnight local / Pyth</span>
+            <span>Wallet connected · local entropy</span>
           </div>
         )}
       </div>

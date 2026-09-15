@@ -11,8 +11,8 @@ export class PlinkoResultProcessor {
   }
 
   /**
-   * Process Pyth Entropy value to generate ball path and final position
-   * @param {string|bigint} entropyValue - Pyth Entropy random value
+   * Process Midnight entropy value to generate ball path and final position
+   * @param {string|bigint} entropyValue - Midnight entropy random value
    * @param {Object} gameConfig - Game configuration
    * @returns {Object} Plinko game result
    */
@@ -57,7 +57,7 @@ export class PlinkoResultProcessor {
           leftMoves: ballPath.filter(move => move === 0).length,
           rightMoves: ballPath.filter(move => move === 1).length,
           generatedAt: new Date().toISOString(),
-          source: 'Pyth Entropy'
+          source: 'Midnight entropy'
         }
       };
 
@@ -73,7 +73,7 @@ export class PlinkoResultProcessor {
 
   /**
    * Generate ball path with controlled randomness
-   * @param {bigint} entropyValue - Pyth Entropy random value
+   * @param {bigint} entropyValue - Midnight entropy random value
    * @param {number} rows - Number of rows
    * @returns {number[]} Array of moves (0 = left, 1 = right)
    */

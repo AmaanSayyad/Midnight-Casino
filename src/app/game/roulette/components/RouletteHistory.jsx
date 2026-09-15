@@ -266,13 +266,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
     }
   };
 
-  // Open Entropy Explorer link
-  const openEntropyExplorer = (txHash) => {
-    if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
-      window.open(entropyExplorerUrl, '_blank');
-    }
-  };
+  const openEntropyExplorer = () => {};
   
   return (
     <Paper

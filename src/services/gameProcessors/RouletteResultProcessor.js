@@ -16,8 +16,8 @@ export class RouletteResultProcessor {
   }
 
   /**
-   * Process Pyth Entropy value to generate roulette number and color
-   * @param {string|bigint} entropyValue - Pyth Entropy random value
+   * Process Midnight entropy value to generate roulette number and color
+   * @param {string|bigint} entropyValue - Midnight entropy random value
    * @param {Object} gameConfig - Game configuration
    * @returns {Object} Roulette game result
    */
@@ -48,7 +48,7 @@ export class RouletteResultProcessor {
           totalPossibleOutcomes: this.totalNumbers,
           wheelType: 'european',
           generatedAt: new Date().toISOString(),
-          source: 'Pyth Entropy'
+          source: 'Midnight entropy'
         }
       };
 
@@ -64,7 +64,7 @@ export class RouletteResultProcessor {
 
   /**
    * Generate roulette number using Entropy value
-   * @param {bigint} entropyValue - Pyth Entropy random value
+   * @param {bigint} entropyValue - Midnight entropy random value
    * @returns {number} Roulette number (0-36)
    */
   generateRouletteNumber(entropyValue) {

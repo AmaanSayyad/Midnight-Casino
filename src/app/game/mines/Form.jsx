@@ -3,7 +3,6 @@ import { FaArrowRight, FaCoins, FaBomb, FaDice, FaCog, FaExchangeAlt, FaTimes, F
 import CustomSelect from "@/components/CustomSelect";
 import CustomInput from "@/components/CustomInput";
 import { motion, AnimatePresence } from "framer-motion";
-import pythEntropyService from '@/services/PythEntropyService';
 import useWalletStatus from '@/hooks/useWalletStatus';
 
 const DynamicForm = ({ config, onSubmit, gameStatus = { isPlaying: false, hasPlacedBet: false } }) => {

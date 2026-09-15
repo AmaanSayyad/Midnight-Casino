@@ -196,7 +196,7 @@ const Game = ({ betSettings = {}, onGameStatusChange, onGameComplete }) => {
     }
   };
   
-  // Initialize the grid with Pyth Entropy randomness
+  // Initialize the grid with Midnight entropy randomness
   const initializeGrid = async (mines = minesCount) => {
     // Ensure mines count is valid (never more than totalTiles - 1)
     const validMines = Math.min(mines, totalTiles - 1);

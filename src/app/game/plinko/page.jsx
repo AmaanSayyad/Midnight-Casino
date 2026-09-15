@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import { Typography } from "@mui/material";
 import { GiRollingDices, GiCardRandom, GiPokerHand } from "react-icons/gi";
 import { FaPercentage, FaBalanceScale, FaChartLine, FaCoins, FaTrophy, FaPlay, FaExternalLinkAlt } from "react-icons/fa";
-import pythEntropyService from '../../../services/PythEntropyService';
+import midnightEntropyService from '@/services/MidnightEntropyService';
 import { generateEntropyWithFallback } from '@/lib/midnight/localEntropy';
 
 export default function Plinko() {
@@ -252,7 +252,7 @@ export default function Plinko() {
         }
         return updatedHistory;
       });
-      return; // Don't process Pyth Entropy again for updates
+      return; // Don't process Midnight entropy again for updates
     }
     
     // Store the bet result immediately to ensure it exists for Midnight updates
@@ -270,7 +270,7 @@ export default function Plinko() {
     try {
       console.log('🎯 Generating Plinko entropy…');
       const randomData = await generateEntropyWithFallback(
-        pythEntropyService,
+        midnightEntropyService,
         'PLINKO',
         { purpose: 'plinko_ball_path', gameType: 'PLINKO' },
         4000,

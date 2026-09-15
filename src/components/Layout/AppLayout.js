@@ -99,7 +99,7 @@ const AppLayout = ({ children }) => {
                 <span className="font-medium">Provably Fair Gaming</span>
               </div>
               <p className="text-sm">
-                All games use Pyth Entropy for verifiable randomness on Midnight Network
+                Privacy Wheel: Compact ZK commit-reveal on Midnight. Arcade games: local entropy.
               </p>
             </div>
           </div>

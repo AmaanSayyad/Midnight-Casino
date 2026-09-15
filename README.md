@@ -4,17 +4,317 @@ Privacy-first GameFi on **Midnight Network** — Compact ZK contracts, dual-ledg
 
 Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 
-## Why this project (privacy problem → Midnight fit)
+**Judging surface:** [`midnight-contract/casino.compact`](midnight-contract/casino.compact) + Privacy Wheel ([`/game/privacy-wheel`](https://midnight-casino-eta.vercel.app/game/privacy-wheel))  
+**Live demo:** https://midnight-casino-eta.vercel.app/
 
-Online casinos either (a) hide everything and ask users to trust them, or (b) put every bet on a public chain and dox player strategy/bankroll. Midnight’s programmable privacy lets us **prove fair settlement without publishing private bet intent**.
+---
+
+## What it does
+
+Midnight Casino is a privacy-first GameFi app on **Midnight Network**. Players place bets whose **choice, stake, and identity binding stay private**, while the public ledger only sees commitments and — after settlement — a selectively disclosed outcome and payout.
+
+The Wave 1 product surface is:
+
+- A compiling **Compact** contract (`casino.compact`) with circuits `placeBet`, `commitHouseSeed`, `settleWheel`, and `verifyRoundOwnership`
+- A playable **Privacy Wheel** at `/game/privacy-wheel` that mirrors that dual-ledger flow
+- A full casino UI (wheel, mines, plinko, roulette) with **1AM / Lace** wallet connect, tNIGHT deposit/withdraw, and a live deploy at [midnight-casino-eta.vercel.app](https://midnight-casino-eta.vercel.app/)
+
+---
+
+## The problem it solves
+
+Online casinos force a bad tradeoff:
+
+- **Opaque houses** hide the RNG — players must trust the operator  
+- **Public chains** publish every bet — strategy and bankroll get doxxed  
+- **Off-chain “private” games** have no portable cryptographic proof when something goes wrong  
+
+Midnight Casino uses Midnight’s **programmable privacy**: prove fair settlement **without publishing private bet intent**. Observers see commitments; only win/loss and payout are disclosed when the round settles.
+
+---
+
+## Challenges I ran into
+
+- **Compact vs legacy EVM** — Early stack assumed Solidity/Pyth-style entropy. Buildathon judging needs Compact dual-ledger, so we moved EVM experiments to `legacy-evm/` and rebuilt the fairness model around witnesses + `disclose()`.
+- **Proving & ops** — Local proof server (Docker), circuit compile (0.30.0), and managed proving keys had to stay reproducible for judges (`npm run compact` / `npm test`).
+- **Wallet & dust UX** — 1AM/Lace deposit and treasury withdraw on Preview depend on sync, tDUST for fees, and sponsorship edge cases; first withdraws can stall until dust generates.
+- **Deploy quirks** — Brand assets with `+` / spaces in paths 404 on Vercel; env and billing must target the correct team (`amaan002s-projects`).
+- **Arcade vs Compact story** — Arcade games still need fast UX randomness; after removing Pyth we use local entropy there, while **Privacy Wheel remains the Compact fairness surface** so we don’t confuse judges.
+
+---
+
+## Technologies I used
+
+- **Midnight Compact** (`casino.compact`, witnesses, selective disclosure)  
+- **@midnight-ntwrk/** stack, proof server Docker, Preview network (tNIGHT / tDUST)  
+- **TypeScript / Vitest** contract simulator  
+- **Next.js** casino + Privacy Wheel UI  
+- **1AM / Lace** DApp connector for wallet connect & transfers  
+- **Vercel** production hosting  
+- **Apache-2.0** for Midnight-related code  
+
+---
+
+## How we built it
+
+1. Defined a **dual-ledger** Compact contract: private witnesses (secret key, choice, amount, salt) vs public rounds map (commitments, status, outcome, payout).  
+2. Compiled four circuits and committed proving keys under `midnight-contract/managed/`.  
+3. Wrote a **Vitest simulator** for place → house commit → settle and tamper rejection.  
+4. Wired **Privacy Wheel** UI to the same semantics via `PrivacyCasinoClient`.  
+5. Integrated **wallet connect**, treasury deposit, and on-chain withdraw API for playable tNIGHT loops.  
+6. Documented judge path (compile → test → demo), Wave progress, and shipped a public repo + live Vercel demo.
+
+---
+
+## What we learned
+
+- Midnight privacy is a **product shape**, not a bolt-on: what you hide (intent) and what you disclose (settlement) has to be designed into the UX.  
+- Compact’s witness + ledger + `disclose()` model matches gaming better than “put the RNG on a public L1.”  
+- Shipping for a Buildathon means **judge-reproducible artifacts** (compile, keys, tests, demo URL) matter as much as features.  
+- Wallet dust/sponsorship and proof-server ops are first-class product risks on Preview — not afterthoughts.
+
+---
+
+## What's next for Midnight Casino
+
+- **Wave 2:** Lace/1AM deploy to Preprod, shielded balances, smoother DUST sponsorship / gasless play  
+- **Wave 3:** Compact circuits for Mines/Plinko private boards; indexer-backed settlement UX  
+- **Beyond:** multi-table privacy lobbies, audits, and Build Club / ecosystem path  
+
+---
+
+## The story
+
+Online gaming sits in a false choice: **opaque houses** (“trust us”) or **fully public chains** (every bet, bankroll, and strategy is doxxed). Players who want fairness usually pay with privacy; players who want privacy usually pay with trust.
+
+Midnight Casino is built for the third path: **prove the game was fair without publishing private intent**. A player commits a hidden bet, the house commits entropy, settlement discloses only what must be public — win/loss and payout — while choice, stake size, and secret key stay in private witnesses.
+
+Wave 1 ships that loop as a compiling Compact contract, simulator tests, and a playable Privacy Wheel on a public repo under Apache-2.0.
+
+```mermaid
+journey
+  title Player journey (privacy-first)
+  section Arrive
+    Open casino: 5: Player
+    Connect 1AM / Lace: 4: Player
+  section Private play
+    Pick wheel choice privately: 5: Player
+    Place bet (ZK commit): 4: Player
+  section Fair settle
+    House commits seed: 4: House
+    Settle & see outcome: 5: Player
+  section Optional cash
+    Deposit / withdraw tNIGHT: 3: Player
+```
+
+---
+
+## The problem
+
+| Failure mode | What goes wrong |
+|---|---|
+| Centralized RNG | Players cannot verify fairness; house can soft-rug trust |
+| Public-chain bets | Strategy, stake, and bankroll leak on the mempool / explorer |
+| “Private” off-chain | No portable proof; disputes become social, not cryptographic |
+| Legacy EVM casino stack | Wrong tool for Midnight Buildathon — Solidity ≠ Compact dual ledger |
+
+```mermaid
+flowchart LR
+  subgraph Broken["Today’s broken tradeoff"]
+    A[Want privacy] --> B[Trust the house]
+    C[Want fairness] --> D[Publish every bet]
+  end
+
+  subgraph Cost["Player cost"]
+    B --> E[Counterparty risk]
+    D --> F[Strategy & bankroll leak]
+  end
+```
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant P as Player
+  participant C as Centralized casino
+  participant X as Public L1 mempool
+
+  Note over P,X: Opaque house
+  P->>C: Place bet (private to house only)
+  C-->>P: “You lost” (no portable proof)
+
+  Note over P,X: Transparent chain
+  P->>X: Broadcast bet choice + amount
+  X-->>P: Fairness yes — privacy gone
+```
+
+---
+
+## The solution
+
+**Midnight dual ledger + Compact circuits**
+
+- **Private witnesses:** `localSecretKey`, `getBetChoice`, `getBetAmount`, `getBetSalt`
+- **Public ledger:** round id, game type, bet commitment, owner hash, later outcome / payout
+- **Circuits:** `placeBet` → `commitHouseSeed` → `settleWheel` (+ `verifyRoundOwnership`)
+- **Product surface:** `/game/privacy-wheel`; proving keys under `midnight-contract/managed/`
 
 | Data | Visibility |
 |---|---|
-| Secret key, bet choice, amount, salt | **Private** (local witnesses) |
-| Round id, game type, bet commitment, ownership hash | **Public ledger** |
+| Secret key, choice, amount, salt | **Private** (witnesses) |
+| Round id, game type, commitments | **Public ledger** |
 | Outcome + payout after settle | **Selective disclosure** |
 
-Official Midnight gaming framing matches this: verify game logic privately on-chain.
+### Architecture (Compact-first)
+
+```mermaid
+flowchart TB
+  subgraph Client["Browser / wallet"]
+    UI[Privacy Wheel UI]
+    W[Private witnesses]
+    PS[Proof server / Lace]
+  end
+
+  subgraph Compact["casino.compact"]
+    PB[placeBet]
+    HS[commitHouseSeed]
+    SW[settleWheel]
+    VO[verifyRoundOwnership]
+  end
+
+  subgraph Ledger["Public ledger"]
+    R[rounds Map]
+    N[nextRoundId]
+    H[houseSeedCommit]
+  end
+
+  UI --> W
+  W --> PS
+  PS --> PB & HS & SW & VO
+  PB --> R & N
+  HS --> H
+  SW --> R
+```
+
+### Sequence — Privacy Wheel round
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant P as Player
+  participant UI as Privacy Wheel
+  participant W as Private witnesses
+  participant Pr as Proof server
+  participant L as Midnight public ledger
+  participant H as House
+
+  P->>UI: Choose color / amount (stays local)
+  UI->>W: Store choice, amount, salt, secret key
+  UI->>Pr: Prove placeBet(gameType)
+  Pr->>L: Disclose commitment + ownerHash + gameType
+  Note over L: choice & amount NOT on ledger
+
+  H->>Pr: Prove commitHouseSeed(commit)
+  Pr->>L: Write houseSeedCommit
+
+  P->>UI: Settle round
+  UI->>W: Re-open private inputs
+  UI->>Pr: Prove settleWheel(roundId, outcome)
+  Pr->>L: Disclose won + payout (status SETTLED)
+  L-->>UI: Public settlement fields
+  UI-->>P: Show result without leaking prior strategy to observers
+```
+
+### Sequence — Deposit / play / withdraw
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant P as Player wallet (1AM)
+  participant App as Next.js casino
+  participant T as House treasury
+  participant Net as Midnight Preview
+
+  P->>App: Connect wallet
+  P->>Net: makeTransfer tNIGHT → treasury
+  Net-->>App: Deposit confirmed
+  App->>App: Credit play balance
+
+  P->>App: Play Privacy Wheel / games
+  Note over App: Compact commits hide intent
+
+  P->>App: Request withdraw
+  App->>T: Sign unshielded payout (treasury seed)
+  T->>Net: Transfer tNIGHT → player
+  Net-->>P: Funds arrive in wallet
+  App->>App: Debit play balance
+```
+
+### Visibility over one round
+
+```mermaid
+stateDiagram-v2
+  [*] --> PrivateInputs: Player sets choice/amount
+  PrivateInputs --> Committed: placeBet ZK proof
+  Committed --> HouseReady: commitHouseSeed
+  HouseReady --> Settled: settleWheel
+  Settled --> [*]
+
+  note right of PrivateInputs
+    Observers see nothing useful
+  end note
+  note right of Committed
+    Public: commitment + owner hash
+  end note
+  note right of Settled
+    Public: outcome + payout only
+  end note
+```
+
+---
+
+## The future
+
+Roadmap aligns with Midnight Buildathon waves — not a rewrite to EVM.
+
+```mermaid
+timeline
+  title Midnight Casino roadmap
+  section Wave 1 (now)
+    Compact casino.compact : 4 circuits + keys
+    Privacy Wheel UX : Simulator tests
+    Public repo + Apache-2.0 : Live Vercel demo
+  section Wave 2
+    Lace / 1AM on Preprod : Shielded balances
+    DUST sponsorship UX : Smoother gasless play
+  section Wave 3
+    Mines / Plinko private boards : More Compact circuits
+    Indexer sync : Production-grade settlement UX
+  section Beyond
+    Multi-table privacy lobbies : Selective disclosure profiles
+    Audits + Build Club path : Ecosystem integrations
+```
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant P as Player
+  participant App as Casino
+  participant Zk as Compact circuits
+  participant Idx as Indexer
+  participant W as Wallet (shielded)
+
+  Note over P,W: Wave 2+ target flow
+  P->>W: Hold shielded tNIGHT / dust
+  P->>App: Private Mines / Plinko board
+  App->>Zk: placeBet + game-specific circuits
+  Zk-->>Idx: Public commitments only
+  Idx-->>App: Sync round state
+  App->>Zk: settle + selective disclose
+  Zk-->>W: Payout path (shielded / unshielded)
+  W-->>P: Balance update without strategy leak
+```
+
+---
 
 ## Technical gate (Buildathon)
 
@@ -35,20 +335,10 @@ npm run compact    # must succeed
 npm test           # simulator QA
 ```
 
-## Architecture
-
-```
-┌──────────────────────────┐     ZK proof      ┌────────────────────────────┐
-│ Browser / Lace client    │ ───────────────► │ Midnight public ledger     │
-│ privateState (witnesses) │                  │ rounds Map, commitments   │
-│ choice, amount, salt, sk │                  │ outcome, payout (settled) │
-└──────────────────────────┘                  └────────────────────────────┘
-```
-
 - **Compact contract** — rules + dual ledger (`midnight-contract/`)
 - **UI** — Next.js casino + Privacy Wheel at `/game/privacy-wheel`
 - **Proof server** — `npm run proof:up` (Docker `midnightntwrk/proof-server`)
-- **Legacy EVM** — previous Solidity/Pyth experiments kept in `legacy-evm/` (not the Midnight submission surface)
+- **Legacy EVM** — archived Solidity experiments in `legacy-evm/` (not the Midnight submission surface)
 
 ## How judges can evaluate
 

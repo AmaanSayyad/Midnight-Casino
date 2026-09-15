@@ -62,7 +62,7 @@ export default function Footer() {
         <div className="md:col-span-4">
           <a href="/" className="logo block mb-6 transition-transform hover:scale-105">
             <Image
-              src="/Midnight%20Logo%20Pack/01_Symbol%20+%20Wordmark/Horizontal/Midnight-RGB_Logo-Horizontal-White.svg"
+              src="/brand/midnight-logo-horizontal-white.svg"
               alt="Midnight logo"
               width={180}
               height={24}

@@ -1,59 +1,31 @@
 import { NextResponse } from 'next/server';
-import { ethers, JsonRpcProvider, Wallet } from 'ethers';
-import { TREASURY_CONFIG } from '@/config/treasury.js';
-import PYTH_ENTROPY_CONFIG from '@/config/pythEntropy.js';
+import { TREASURY_CONFIG, getTreasuryUnshieldedAddress } from '@/config/treasury.js';
 
+/** Treasury status for Midnight unshielded treasury (Midnight-native). */
 export async function GET() {
   try {
-    const network = process.env.NEXT_PUBLIC_NETWORK || 'midnight-network';
-    const networkConfig = PYTH_ENTROPY_CONFIG.getNetworkConfig(network);
-    
-    if (!networkConfig) {
-      return NextResponse.json(
-        { error: 'Unsupported network' },
-        { status: 400 }
-      );
-    }
+    const address =
+      getTreasuryUnshieldedAddress?.() ||
+      process.env.NEXT_PUBLIC_MIDNIGHT_TREASURY_UNSHIELDED ||
+      TREASURY_CONFIG?.UNSHIELDED_ADDRESS ||
+      null;
 
-    // Create provider
-    const provider = new JsonRpcProvider(networkConfig.rpcUrl);
-    
-    // Create treasury wallet
-    const treasuryWallet = new Wallet(TREASURY_CONFIG.PRIVATE_KEY, provider);
-    
-    // Get treasury balance
-    const balance = await provider.getBalance(treasuryWallet.address);
-    const balanceInMatic = ethers.formatEther(balance);
-    
-    // Get entropy contract address
-    const entropyContractAddress = PYTH_ENTROPY_CONFIG.getEntropyContract(network);
-    
     return NextResponse.json({
       success: true,
       treasury: {
-        address: treasuryWallet.address,
-        balance: balanceInMatic,
-        balanceWei: balance.toString()
-      },
-      network: {
-        name: networkConfig.name,
-        chainId: networkConfig.chainId,
-        rpcUrl: networkConfig.rpcUrl
+        address,
+        network: process.env.NEXT_PUBLIC_MIDNIGHT_NETWORK || 'preview',
+        note: 'On-chain tNIGHT balance is read from the wallet / indexer, not an EVM RPC.',
       },
       entropy: {
-        contractAddress: entropyContractAddress,
-        requiredFee: "0.001" // MIDN
-      }
-    });
-    
-  } catch (error) {
-    console.error('❌ Treasury balance check failed:', error);
-    return NextResponse.json(
-      { 
-        error: 'Failed to check treasury balance',
-        details: error.message 
+        arcade: 'local',
+        privacyWheel: 'compact-commitHouseSeed',
       },
-      { status: 500 }
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error?.message || 'Treasury status failed' },
+      { status: 500 },
     );
   }
 }

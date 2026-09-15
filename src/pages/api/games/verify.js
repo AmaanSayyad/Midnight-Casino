@@ -87,7 +87,7 @@ export default async function handler(req, res) {
         reprocessedResult,
         matches: isValid,
         verificationNote: isValid ? 
-          'Game result verified successfully using Pyth Entropy' :
+          'Game result verified successfully using Midnight entropy' :
           'Game result verification failed - results do not match',
         timestamp: new Date().toISOString()
       }

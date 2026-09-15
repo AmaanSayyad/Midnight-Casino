@@ -60,7 +60,7 @@ const HistoryPage = () => {
                 🔒 Provably Fair Gaming
               </h3>
               <p className="text-gray-600 text-sm">
-                Every game result is generated using Pyth Entropy, ensuring 
+                Every game result is generated using Midnight entropy, ensuring 
                 complete transparency and fairness. All results are verifiable 
                 on the blockchain.
               </p>

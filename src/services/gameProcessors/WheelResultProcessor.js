@@ -10,8 +10,8 @@ export class WheelResultProcessor {
   }
 
   /**
-   * Process Pyth Entropy value to generate wheel segment position
-   * @param {string|bigint} entropyValue - Pyth Entropy random value
+   * Process Midnight entropy value to generate wheel segment position
+   * @param {string|bigint} entropyValue - Midnight entropy random value
    * @param {Object} gameConfig - Game configuration
    * @returns {Object} Wheel game result
    */
@@ -54,7 +54,7 @@ export class WheelResultProcessor {
           totalSegments: segments,
           segmentAngle: (360 / segments).toFixed(2) + '°',
           generatedAt: new Date().toISOString(),
-          source: 'Pyth Entropy'
+          source: 'Midnight entropy'
         }
       };
 
@@ -70,7 +70,7 @@ export class WheelResultProcessor {
 
   /**
    * Generate wheel segment using Entropy value
-   * @param {bigint} entropyValue - Pyth Entropy random value
+   * @param {bigint} entropyValue - Midnight entropy random value
    * @param {number} segments - Number of segments
    * @returns {number} Segment number (0 to segments-1)
    */

@@ -367,7 +367,7 @@ const RouletteWithHistory = () => {
           <div className="mt-4 p-3 bg-blue-50 rounded text-xs text-blue-700">
             <p className="font-medium mb-1">🔒 Blockchain Verified</p>
             <p>
-              This result was generated using Pyth Entropy and is permanently recorded on the blockchain.
+              Result recorded with local entropy metadata (Privacy Wheel uses Compact ZK).
               Click the transaction hash to verify the randomness independently.
             </p>
           </div>

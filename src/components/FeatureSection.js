@@ -11,7 +11,7 @@ export default function FeatureSection() {
     {
       id: 1,
       title: "Transparent & Provably Fair",
-      description: "All games use verifiable on-chain randomness through our Pyth Entropy, ensuring complete transparency and fairness in every outcome.",
+      description: "Privacy Wheel uses Midnight Compact commit-reveal and selective disclosure. Arcade games use local entropy for UX while Compact remains the fairness surface.",
       icon: "🎲"
     },
     {

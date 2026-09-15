@@ -1,6 +1,6 @@
 /**
- * Fast local entropy for Midnight preview when Pyth/EVM treasury is unavailable.
- * Used so game history never blocks on hanging /api/generate-entropy.
+ * Midnight local entropy for arcade games (Wheel / Mines / Plinko / Roulette).
+ * Privacy Wheel fairness uses Compact commitHouseSeed — not this helper.
  * Apache-2.0
  */
 
@@ -31,7 +31,7 @@ export function makeLocalEntropyProof(gameType = 'GAME') {
       source: 'Midnight local entropy',
       network: 'preview',
       explorerUrl: null,
-      note: `Local ${gameType} entropy (Pyth path unavailable on this deploy)`,
+      note: `Local ${gameType} entropy`,
     },
     success: true,
     gameType,
@@ -44,27 +44,52 @@ export function makeLocalEntropyProof(gameType = 'GAME') {
   };
 }
 
-export async function generateEntropyWithFallback(pythService, gameType, gameConfig = {}, timeoutMs = 4000) {
-  try {
-    const result = await Promise.race([
-      pythService.generateRandom(gameType, gameConfig),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('entropy-timeout')), timeoutMs),
-      ),
-    ]);
-    if (result?.entropyProof?.transactionHash === 'timeout') {
-      return makeLocalEntropyProof(gameType);
-    }
-    // Treat hanging API fallbacks that look empty as local
-    if (!result?.entropyProof) return makeLocalEntropyProof(gameType);
-    return {
-      ...result,
-      entropyProof: {
-        ...result.entropyProof,
-        status: result.entropyProof.status || 'ok',
-      },
-    };
-  } catch {
+/** @deprecated use makeLocalEntropyProof — kept for older call sites */
+export async function generateEntropyWithFallback(_unused, gameType) {
+  return makeLocalEntropyProof(gameType);
+}
+
+class MidnightEntropyService {
+  constructor() {
+    this.isInitialized = true;
+    this.network = 'preview';
+  }
+
+  async initialize() {
+    this.isInitialized = true;
+    return true;
+  }
+
+  async generateRandom(gameType = 'GAME', _gameConfig = {}) {
     return makeLocalEntropyProof(gameType);
   }
+
+  async generateRandomBatch(requests = []) {
+    return Promise.all(
+      requests.map((r) => this.generateRandom(r?.gameType || 'GAME', r?.gameConfig)),
+    );
+  }
+
+  getNetworkConfig() {
+    return { name: 'Midnight Preview', chainId: 'preview', rpcUrl: null };
+  }
+
+  getSupportedNetworks() {
+    return ['preview'];
+  }
+
+  isNetworkSupported() {
+    return true;
+  }
+
+  async switchNetwork() {
+    return true;
+  }
+
+  async getRequestStatus() {
+    return { status: 'local' };
+  }
 }
+
+const midnightEntropyService = new MidnightEntropyService();
+export default midnightEntropyService;

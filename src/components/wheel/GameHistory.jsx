@@ -90,7 +90,7 @@ const GameHistory = ({ gameHistory }) => {
                 <th className="py-6 px-4 font-medium">Bet amount</th>
                 <th className="py-6 px-4 font-medium">Multiplier</th>
                 <th className="py-6 px-4 font-medium">Payout</th>
-                <th className="py-6 px-4 font-medium">Pyth Entropy</th>
+                <th className="py-6 px-4 font-medium">Midnight entropy</th>
               </tr>
             </thead>
             <tbody>
@@ -143,7 +143,7 @@ const GameHistory = ({ gameHistory }) => {
                             )}
                             {item.entropyProof.transactionHash && (
                               <button
-                                onClick={() => window.open(`https://entropy-explorer.pyth.network/?chain=midnight-network&search=${item.entropyProof.transactionHash}`, '_blank')}
+                                disabled
                                 className="flex items-center gap-1 px-2 py-1 bg-[#681DDB]/10 border border-[#681DDB]/30 rounded text-[#681DDB] text-xs hover:bg-[#681DDB]/20 transition-colors"
                               >
                                 <FaExternalLinkAlt size={8} />

@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/Midnight%20Logo%20Pack/02_Symbol/Midnight-RGB_Symbol-White.svg" />
+        <link rel="icon" href="/brand/midnight-symbol-white.svg" />
       </head>
       <body 
         className={`${outfit.variable} font-sans overflow-x-hidden w-full`}

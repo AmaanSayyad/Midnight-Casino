@@ -24,7 +24,7 @@ import "./mines.css";
 import GameDetail from "@/components/GameDetail";
 import AIAutoBetting from "./components/AIAutoBetting";
 import AISettingsModal from "./components/AISettingsModal";
-import pythEntropyService from '@/services/PythEntropyService';
+import midnightEntropyService from '@/services/MidnightEntropyService';
 
 export default function Mines() {
   // Game State
@@ -176,21 +176,21 @@ export default function Mines() {
   // Handle form submission
   const handleFormSubmit = async (formData) => {
     try {
-      console.log('🔮 PYTH ENTROPY: Initializing Mines game session...');
-      console.log('🔗 Network: Midnight Network | Token: tNIGHT | Protocol: Pyth Entropy');
+      console.log('🔮 MIDNIGHT ENTROPY: Initializing Mines game session...');
+      console.log('🔗 Network: Midnight Network | Token: tNIGHT | Protocol: Midnight entropy');
       
-      // Initialize Pyth Entropy
-      console.log('🔮 PYTH ENTROPY: Initializing...');
-      await pythEntropyService.initialize();
-      console.log('✅ PYTH ENTROPY: Initialized successfully');
+      // Initialize Midnight entropy
+      console.log('🔮 MIDNIGHT ENTROPY: Initializing...');
+      await midnightEntropyService.initialize();
+      console.log('✅ MIDNIGHT ENTROPY: Initialized successfully');
       
-      console.log('✅ PYTH ENTROPY: Mines game session created successfully');
+      console.log('✅ MIDNIGHT ENTROPY: Mines game session created successfully');
       console.log(`🎮 Game Config: ${formData.mines || 3} mines | ${formData.betAmount || '0.01'} tNIGHT bet`);
       
     } catch (error) {
-      console.error('❌ PYTH ENTROPY: Connection failed:', error);
-      console.warn('⚠️  Falling back to demo mode without Pyth Entropy');
-      alert('❌ Pyth Entropy connection failed. Running in demo mode.');
+      console.error('❌ MIDNIGHT ENTROPY: Connection failed:', error);
+      console.warn('⚠️  Falling back to demo mode without Midnight entropy');
+      alert('❌ Midnight entropy connection failed. Running in demo mode.');
     }
     
     console.log('Form submitted with data:', formData);
@@ -284,7 +284,7 @@ export default function Mines() {
     try {
       const { generateEntropyWithFallback } = await import('@/lib/midnight/localEntropy');
       const entropyResult = await generateEntropyWithFallback(
-        pythEntropyService,
+        midnightEntropyService,
         'MINES',
         {
           purpose: 'mines_game_result',

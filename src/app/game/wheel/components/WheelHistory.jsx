@@ -12,13 +12,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
 
-  // Open Entropy Explorer link
-  const openEntropyExplorer = (txHash) => {
-    if (txHash) {
-      const entropyExplorerUrl = `https://entropy-explorer.pyth.network/?chain=midnight-network&search=${txHash}`;
-      window.open(entropyExplorerUrl, '_blank');
-    }
-  };
+  const openEntropyExplorer = () => {};
   
   // Use real game history data from props instead of sample data
   const historyData = gameHistory.length > 0 ? gameHistory : [];
@@ -587,7 +581,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
                           <Button
                             onClick={() => {
                               if (item.entropyProof.transactionHash) {
-                                window.open(`https://entropy-explorer.pyth.network/?chain=midnight-network&search=${item.entropyProof.transactionHash}`, '_blank');
+                                window.open(`#`, '_blank');
                               }
                             }}
                             size="small"
@@ -630,7 +624,7 @@ const WheelHistory = ({ gameHistory = [] }) => {
 
                         </Box>
                         <Typography variant="caption" color="rgba(255,255,255,0.5)">
-                          Pyth Entropy
+                          Midnight entropy
                         </Typography>
                       </Box>
                     ) : (

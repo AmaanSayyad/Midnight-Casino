@@ -3,7 +3,6 @@ import { useState, forwardRef, useImperativeHandle, useCallback, useEffect, useR
 import Matter from 'matter-js';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, addToBalance, subtractFromBalance } from '@/store/balanceSlice';
-import pythEntropyService from '@/services/PythEntropyService';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay, FaPause, FaRedo, FaCog, FaInfoCircle } from 'react-icons/fa';
 import useWalletStatus from '@/hooks/useWalletStatus';
