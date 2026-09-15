@@ -14,7 +14,7 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
 | **Google Form (L5)** | `[PASTE forms.gle link — see docs/GOOGLE_FORM.md]` |
 | **Feedback sheet (L5)** | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) · `[PASTE public Google Sheet URL after publish]` |
-| **Users onboarded** | [`USERS.md`](USERS.md) — **7 / 70 funded on-chain** (63 minted, awaiting fund + identity) |
+| **Users onboarded** | [`USERS.md`](USERS.md) — **70 / 70 funded on-chain** (name/email pending) |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
@@ -58,7 +58,7 @@ Same Preprod MVP, refined through a feedback loop. **Target this cycle: 70 Prepr
 
 ### Table 1 — Onboarded Users (All)
 
-Full 70-row tracker: [`USERS.md`](USERS.md). **On-chain funded:** 7 (batch 1 — [`docs/funded-batch-1.json`](docs/funded-batch-1.json)). Name/Email still pending on those rows.
+Full 70-row tracker: [`USERS.md`](USERS.md). **On-chain funded: 70 / 70** ([`docs/funded-all-70.json`](docs/funded-all-70.json)). Name/Email still pending.
 
 ### Fees (why we don’t “send tDUST”)
 

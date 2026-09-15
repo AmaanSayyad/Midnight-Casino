@@ -30,8 +30,8 @@ Midnight design: DUST is non-transferable. Recipients generate their own DUST la
 
 ## Pass requirements
 
-- [x] Same MVP from Level 4, extended
 - [x] 70 Preprod wallet addresses minted (public list) — name/email/feedback you fill
+- [x] All 70 funded on-chain via `/l5-fund`
 - [x] Feedback loop documented ([`FEEDBACK.md`](FEEDBACK.md))
 - [x] Updated documentation
 - [x] ≥30 meaningful commits (repo history)
@@ -40,7 +40,7 @@ Midnight design: DUST is non-transferable. Recipients generate their own DUST la
 
 - [x] Public GitHub with updated docs
 - [x] Live demo link
-- [x] List of 70 Preprod addresses ([`USERS.md`](../USERS.md))
+- [x] List of 70 Preprod addresses ([`USERS.md`](../USERS.md)) — **funded**
 - [x] Feedback documentation
 - [x] Demo video
 - [x] ≥30 meaningful commits

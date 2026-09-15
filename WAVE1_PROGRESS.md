@@ -39,7 +39,7 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 - Docs/CI complete; Product X profile pending handle paste in README.
 
 ## Rise In L6 (2026-09-16)
-- Target **70 Preprod** wallet addresses (minted + listed)
-- **Batch 1 funded:** 7 wallets on-chain via `/l5-fund` — [`docs/funded-batch-1.json`](docs/funded-batch-1.json)
-- Fund UX iterated from cohort friction (API rehydrate, batch, chunk size 3–5)
+- Target **70 Preprod** wallet addresses — **all 70 funded on-chain** via `/l5-fund`
+- Lists: [`USERS.md`](USERS.md) · [`docs/funded-all-70.json`](docs/funded-all-70.json)
+- Remaining: Name/Email/feedback + Google Form URLs + Product X
 - Runbook: [`docs/LEVEL6.md`](docs/LEVEL6.md)

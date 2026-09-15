@@ -40,9 +40,9 @@ Early Preprod dogfood + first-cohort notes (Privacy Wheel + Compact dapp + fund 
 
 Also mirrored in README **Feedback Implementation**.
 
-## Funded wallets (batch 1)
+## Funded wallets
 
-See [`funded-batch-1.json`](funded-batch-1.json) and [`USERS.md`](../USERS.md) — **7** Preprod addresses funded on-chain. Name/Email columns awaiting form entries.
+All **70** Preprod addresses funded on-chain via `/l5-fund` — [`funded-all-70.json`](funded-all-70.json) · [`USERS.md`](../USERS.md). Name/Email columns awaiting form entries.
 
 ## Raw feedback log
 
