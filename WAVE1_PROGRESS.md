@@ -33,3 +33,7 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 ## Rise In L2 (2026-09-15)
 - Compact dapp defaults to Preprod; Lace connect/disconnect + placeBet UI ready.
 - Headless `npm run deploy:preprod` available; address pending funded wallet sync.
+
+## Rise In L4 (2026-09-15)
+- Preprod MVP live: `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
+- Docs/CI complete; Product X profile pending handle paste in README.
