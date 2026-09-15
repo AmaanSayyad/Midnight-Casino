@@ -35,15 +35,21 @@ jobs:
         working-directory: midnight-contract
         run: npm ci
 
+      - name: Run Vitest before compile
+        working-directory: midnight-contract
+        run: npm test
+
       - name: Compile Compact
         working-directory: midnight-contract
         run: |
           export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
           npm run compact
 
-      - name: Run Compact simulator + Rise privacy tests
+      - name: Run Vitest after compile
         working-directory: midnight-contract
-        run: npm test
+        run: |
+          npm test 2>&1 | tee vitest-after-compile.log
+          test -f vitest-after-compile.log
 
       - name: Verify managed keys + contracts path
         run: |
@@ -55,11 +61,10 @@ jobs:
           test -L managed || test -d midnight-contract/managed
           echo "managed/ + contracts/casino.compact OK"
 
-      - name: Upload test log
+      - name: Upload vitest log
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: vitest-output
-          path: |
-            midnight-contract/**/*.log
+          path: midnight-contract/vitest-after-compile.log
           if-no-files-found: ignore
