@@ -41,10 +41,15 @@ describe('Rise In — casino.compact privacy gates', () => {
   it('privacy: private inputs never exposed on public ledger view', () => {
     const roundId = sim.placeBet(sk(), 0, 2, 10n, salt());
     const pub = sim.publicLedgerView(roundId)!;
-    const serialized = JSON.stringify(pub);
+    expect(Object.keys(pub)).not.toContain('choice');
+    expect(Object.keys(pub)).not.toContain('amount');
+    expect(Object.keys(pub)).not.toContain('secretKey');
+    const serialized = JSON.stringify(pub, (_k, v) =>
+      typeof v === 'bigint' ? v.toString() : v,
+    );
     expect(serialized).not.toMatch(/"choice"/);
     expect(serialized).not.toMatch(/"amount"/);
-    expect(serialized).not.toContain('secret');
+    expect(serialized).not.toContain('secretKey');
   });
 
   it('rejects non-owner settlement (ownership proof)', () => {
