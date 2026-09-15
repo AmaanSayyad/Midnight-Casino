@@ -8,14 +8,16 @@ on:
 jobs:
   compact-and-test:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: development
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
-          cache-dependency-path: midnight-contract/package-lock.json
+          # Disable cache — a polluted cache was a suspected cause of missing vitest
+          cache: ''
 
       - name: Install Compact toolchain
         run: |
@@ -33,30 +35,37 @@ jobs:
 
       - name: Install contract package
         working-directory: midnight-contract
-        run: npm ci
+        run: npm ci --include=dev
 
       - name: Diagnose environment
         working-directory: midnight-contract
         run: |
+          set +e
+          echo "NODE_ENV=$NODE_ENV"
           node -v
           npm -v
-          npx vitest --version
-          ls -la test/
-          ls -la vitest.config.* || true
+          ls -la node_modules/.bin/vitest || echo 'MISSING vitest bin'
+          ls -la test/ || echo 'MISSING test dir'
+          ls -la vitest.config.mjs || echo 'MISSING vitest.config.mjs'
+          ./node_modules/.bin/vitest --version || echo 'vitest --version failed'
+          set -e
+          test -x node_modules/.bin/vitest
 
       - name: Run Vitest
         working-directory: midnight-contract
         run: |
           set +e
-          npx vitest run --reporter=verbose > vitest.log 2>&1
+          ./node_modules/.bin/vitest run --reporter=verbose > vitest.log 2>&1
           CODE=$?
           cat vitest.log
           if [ "$CODE" -ne 0 ]; then
             echo "::error title=Vitest failed::$(tail -c 1800 vitest.log | tr '\n' ' ')"
-            echo '## Vitest failure' >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-            cat vitest.log >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            {
+              echo '## Vitest failure'
+              echo '```'
+              cat vitest.log
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
           fi
           exit "$CODE"
 
