@@ -1,0 +1,95 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+  background: #070005;
+  color: #f5f5f5;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  padding: 0.7rem 1rem;
+  background: #7c3aed;
+  color: white;
+}
+
+button.secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input,
+select {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.55rem 0.7rem;
+}
+
+.error {
+  color: #f87171;
+  margin-top: 0.75rem;
+}
+
+.ok {
+  color: #34d399;
+}
+
+.muted {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+pre {
+  background: #000;
+  padding: 0.75rem;
+  overflow: auto;
+  font-size: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+td,
+th {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.4rem;
+  text-align: left;
+}

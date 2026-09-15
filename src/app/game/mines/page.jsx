@@ -19,7 +19,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import useWalletStatus from '@/hooks/useWalletStatus';
 import MidnightConnectWalletButton from '@/components/MidnightConnectWalletButton';
-import { useAccount } from 'wagmi';
 import Image from "next/image";
 import "./mines.css";
 import GameDetail from "@/components/GameDetail";
@@ -61,9 +60,22 @@ export default function Mines() {
     }
   });
   
-  // Wallet connection
+  // Wallet connection (Lace)
   const { isConnected, address } = useWalletStatus();
-  const { address: walletAddress } = useAccount();
+  const walletAddress = address;
+
+  // Restore mines history across refresh
+  useEffect(() => {
+    try {
+      const key = `minesHistory:${walletAddress || address || 'local'}`;
+      const raw = localStorage.getItem(key) || localStorage.getItem('minesHistory:local');
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) setGameHistory(parsed);
+    } catch {
+      // ignore
+    }
+  }, [walletAddress, address]);
 
   // Function to log game results to Midnight Network with retry mechanism
   const logGameResultToMidnight = async (gameData, retryCount = 0) => {
@@ -165,7 +177,7 @@ export default function Mines() {
   const handleFormSubmit = async (formData) => {
     try {
       console.log('🔮 PYTH ENTROPY: Initializing Mines game session...');
-      console.log('🔗 Network: Midnight Network | Token: MIDN | Protocol: Pyth Entropy');
+      console.log('🔗 Network: Midnight Network | Token: tNIGHT | Protocol: Pyth Entropy');
       
       // Initialize Pyth Entropy
       console.log('🔮 PYTH ENTROPY: Initializing...');
@@ -173,7 +185,7 @@ export default function Mines() {
       console.log('✅ PYTH ENTROPY: Initialized successfully');
       
       console.log('✅ PYTH ENTROPY: Mines game session created successfully');
-      console.log(`🎮 Game Config: ${formData.mines || 3} mines | ${formData.betAmount || '0.01'} MIDN bet`);
+      console.log(`🎮 Game Config: ${formData.mines || 3} mines | ${formData.betAmount || '0.01'} tNIGHT bet`);
       
     } catch (error) {
       console.error('❌ PYTH ENTROPY: Connection failed:', error);
@@ -244,46 +256,91 @@ export default function Mines() {
   // Handle game completion (only when game ends - cashout or mine hit)
   const handleGameComplete = async (result) => {
     console.log('Game completed with result:', result);
-    
-    // Generate Pyth Entropy for Mines game
-    let entropyProof = null;
+
+    // Record history immediately so UI never stays empty while entropy hangs
+    const historyId = Date.now();
+    const newHistoryItem = {
+      id: historyId,
+      mines: result.mines || 0,
+      bet: `${result.betAmount || '0.00000'} tNIGHT`,
+      outcome: result.won ? 'win' : 'loss',
+      payout: result.won ? `${result.payout || '0.00000'} tNIGHT` : '0.00000 tNIGHT',
+      multiplier: result.won ? `${result.multiplier || '0.00'}x` : '0.00x',
+      time: new Date().toLocaleTimeString(),
+      entropyProof: null,
+    };
+
+    setGameHistory((prev) => {
+      const next = [newHistoryItem, ...prev].slice(0, 50);
+      try {
+        const key = `minesHistory:${walletAddress || address || 'local'}`;
+        localStorage.setItem(key, JSON.stringify(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+
     try {
-      console.log('🔮 PYTH ENTROPY: Generating randomness for Mines game...');
-      const entropyResult = await pythEntropyService.generateRandom('MINES', {
-        purpose: 'mines_game_result',
-        gameType: 'MINES',
-        mines: result.mines || 0,
-        won: result.won || false
-      });
-      
-      entropyProof = {
+      const { generateEntropyWithFallback } = await import('@/lib/midnight/localEntropy');
+      const entropyResult = await generateEntropyWithFallback(
+        pythEntropyService,
+        'MINES',
+        {
+          purpose: 'mines_game_result',
+          gameType: 'MINES',
+          mines: result.mines || 0,
+          won: result.won || false,
+        },
+        4000,
+      );
+      const entropyProof = {
         requestId: entropyResult.entropyProof?.requestId,
         sequenceNumber: entropyResult.entropyProof?.sequenceNumber,
         randomValue: entropyResult.randomValue,
         transactionHash: entropyResult.entropyProof?.transactionHash,
-        arbiscanUrl: entropyResult.entropyProof?.arbiscanUrl,
-        explorerUrl: entropyResult.entropyProof?.explorerUrl,
         timestamp: entropyResult.entropyProof?.timestamp,
-        source: 'Pyth Entropy'
+        status: entropyResult.entropyProof?.status || 'ok',
+        source: entropyResult.entropyProof?.source || 'Midnight entropy',
       };
-      
-      console.log('✅ PYTH ENTROPY: Mines randomness generated:', entropyProof);
+      setGameHistory((prev) => {
+        const next = prev.map((item) =>
+          item.id === historyId ? { ...item, entropyProof } : item,
+        );
+        try {
+          const key = `minesHistory:${walletAddress || address || 'local'}`;
+          localStorage.setItem(key, JSON.stringify(next));
+        } catch {
+          // ignore
+        }
+        return next;
+      });
     } catch (error) {
-      console.error('❌ Error using Pyth Entropy for Mines game:', error);
+      console.error('❌ Entropy for Mines game:', error);
     }
-    
-    const newHistoryItem = {
-      id: Date.now(),
-      mines: result.mines || 0,
-      bet: `${result.betAmount || '0.00000'} MIDN`,
-      outcome: result.won ? 'win' : 'loss',
-      payout: result.won ? `${result.payout || '0.00000'} MIDN` : '0.00000 MIDN',
-      multiplier: result.won ? `${result.multiplier || '0.00'}x` : '0.00x',
-      time: 'Just now',
-      entropyProof: entropyProof
-    };
-    
-    setGameHistory(prev => [newHistoryItem, ...prev].slice(0, 50));
+
+    // Compact privacy commitment when Lace session is present
+    try {
+      const { recordPrivateGameRound } = await import('@/lib/midnight/midnightGameBridge');
+      let playerAddress = walletAddress || address || null;
+      try {
+        playerAddress =
+          JSON.parse(localStorage.getItem('midnight-lace-session') || '{}').unshieldedAddress ||
+          playerAddress;
+      } catch {}
+      const privacy = recordPrivateGameRound({
+        gameName: 'MINES',
+        choice: Number(result.mines || 0) % 8,
+        amount: parseFloat(result.betAmount || 0),
+        outcome: result.won ? 1 : 0,
+        won: !!result.won,
+        payout: parseFloat(result.payout || 0),
+        playerAddress,
+      });
+      console.log('🔐 Midnight privacy round (Mines):', privacy.publicLedger);
+    } catch (e) {
+      console.warn('Midnight privacy bridge (Mines):', e);
+    }
 
     // Log game result to Midnight Network (non-blocking)
     logGameResultToMidnight({

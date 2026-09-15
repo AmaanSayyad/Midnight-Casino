@@ -58,7 +58,7 @@ const WheelStrategyGuide = () => {
       description: 'A modified Martingale system where you double your bet after each loss, but only on the low-risk wheel to improve win probability. Switch back to your base bet after any win.',
       pros: ['Can recover previous losses with a single win', 'Works well during short sessions', 'Simple concept to follow'],
       cons: ['Requires large bankroll', 'Table limits can prevent proper execution', 'A long losing streak can be devastating'],
-      example: 'Start with a small base bet (e.g., 0.001 MIDN) on Low Risk. After each loss, double your bet. After any win, return to your base bet amount.'
+      example: 'Start with a small base bet (e.g., 0.001 tNIGHT) on Low Risk. After each loss, double your bet. After any win, return to your base bet amount.'
     },
     {
       id: 'strategy-5',

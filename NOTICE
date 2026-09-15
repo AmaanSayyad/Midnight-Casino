@@ -1,0 +1,9 @@
+Midnight Casino
+Copyright 2026 Midnight Casino contributors
+
+This product includes software developed for the Midnight Buildathon.
+Compact contract sources and Midnight-related TypeScript under midnight-contract/
+and src/lib/midnight/ are licensed under the Apache License, Version 2.0.
+
+Midnight Network, Compact, and related marks are trademarks of their respective owners.
+Documentation references: https://docs.midnight.network/

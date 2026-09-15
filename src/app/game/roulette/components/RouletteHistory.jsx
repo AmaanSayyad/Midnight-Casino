@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Paper, Tabs, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip, CircularProgress, Fade } from '@mui/material';
 import { FaHistory, FaChartLine, FaFire, FaExclamationCircle, FaCoins, FaInfoCircle, FaTrophy, FaDice, FaExternalLinkAlt } from 'react-icons/fa';
 
-// Utility function to format MIDN amounts with proper decimal precision
+// Utility function to format tNIGHT amounts with proper decimal precision
 const formatMIDNAmount = (amount) => {
   if (typeof amount !== 'number') {
     amount = parseFloat(amount) || 0;
@@ -484,7 +484,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                             )}
                           </Box>
                         </TableCell>
-                        <TableCell align="center">{formatMIDNAmount(bet.amount || bet.totalBetAmount || 0)} MIDN</TableCell>
+                        <TableCell align="center">{formatMIDNAmount(bet.amount || bet.totalBetAmount || 0)} tNIGHT</TableCell>
                         <TableCell align="center">
                           <Box 
                             sx={{ 
@@ -520,7 +520,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                             {bet.win ? (
                               <>
                                 <FaCoins size={12} color="#14D854" />
-                                +{formatMIDNAmount(bet.payout || bet.netResult || 0)} MIDN
+                                +{formatMIDNAmount(bet.payout || bet.netResult || 0)} tNIGHT
                               </>
                             ) : '-'}
                           </Typography>
@@ -740,7 +740,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                       </Box>
                       <Typography variant="body2" color="rgba(255,255,255,0.7)">Total Wagered</Typography>
                     </Box>
-                    <Typography variant="h4" fontWeight="bold" color="white" sx={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{formatMIDNAmount(stats.totalWagered)} MIDN</Typography>
+                    <Typography variant="h4" fontWeight="bold" color="white" sx={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{formatMIDNAmount(stats.totalWagered)} tNIGHT</Typography>
                   </Box>
                   
                   <Box 
@@ -782,7 +782,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                       color={stats.netProfit >= 0 ? '#14D854' : '#d82633'}
                       sx={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
                     >
-                      {stats.netProfit >= 0 ? '+' : ''}{formatMIDNAmount(stats.netProfit)} MIDN
+                      {stats.netProfit >= 0 ? '+' : ''}{formatMIDNAmount(stats.netProfit)} tNIGHT
                     </Typography>
                   </Box>
                 </Box>
@@ -902,7 +902,7 @@ const RouletteHistory = ({ bettingHistory = [] }) => {
                             zIndex: 2 
                           }}
                         >
-                          {stats.biggestWin.payout} MIDN
+                          {stats.biggestWin.payout} tNIGHT
                         </Typography>
                         <Box 
                           sx={{ 

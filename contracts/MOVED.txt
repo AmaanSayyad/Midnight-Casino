@@ -1,0 +1,1 @@
+Legacy Solidity moved to legacy-evm/contracts. Midnight Compact lives in midnight-contract/.

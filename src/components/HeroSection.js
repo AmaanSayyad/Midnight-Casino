@@ -19,7 +19,7 @@ export default function HeroSection() {
         <div className="w-full max-w-2xl mx-auto bg-gradient-to-r from-red-magic/10 to-blue-magic/10 backdrop-blur-sm p-3 rounded-lg border border-midnight-blue/15 flex justify-center items-center mb-8 mt-8 sm:mt-6">
           <p className="text-sm text-white text-center">
             <span className="bg-midnight-blue text-white px-2 py-0.5 rounded-md text-xs font-medium mr-2">NEW</span>
-            High Roller Tournament starting soon! 10,000 MIDN prize pool.
+            High Roller Tournament starting soon! 10,000 tNIGHT prize pool.
           </p>
           <button 
             onClick={() => setShowAnnouncement(false)}
@@ -73,7 +73,7 @@ export default function HeroSection() {
           <div className="text-center">
             <p className="text-gray-400 text-sm">Jackpot Size</p>
             <p className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-blue-500">
-              {isDev ? '15,000' : '37,500'} MIDN
+              {isDev ? '15,000' : '37,500'} tNIGHT
             </p>
           </div>
           <div className="text-center hidden sm:block">

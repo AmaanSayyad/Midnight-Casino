@@ -14,6 +14,7 @@ import { Typography } from "@mui/material";
 import { GiRollingDices, GiCardRandom, GiPokerHand } from "react-icons/gi";
 import { FaPercentage, FaBalanceScale, FaChartLine, FaCoins, FaTrophy, FaPlay, FaExternalLinkAlt } from "react-icons/fa";
 import pythEntropyService from '../../../services/PythEntropyService';
+import { generateEntropyWithFallback } from '@/lib/midnight/localEntropy';
 
 export default function Plinko() {
   const userBalance = useSelector((state) => state.balance.userBalance);
@@ -25,6 +26,25 @@ export default function Plinko() {
   const [showMobileWarning, setShowMobileWarning] = useState(false);
 
   const plinkoGameRef = useRef(null);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('plinkoHistory');
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) setGameHistory(parsed);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('plinkoHistory', JSON.stringify(gameHistory.slice(0, 100)));
+    } catch {
+      // ignore
+    }
+  }, [gameHistory]);
 
   // Smooth scroll helper
   const scrollToElement = (elementId) => {
@@ -51,8 +71,8 @@ export default function Plinko() {
   const PlinkoHeader = () => {
     const gameStatistics = {
       totalBets: '1,234,567',
-      totalVolume: '5.2M MIDN',
-      maxWin: '120,000 MIDN'
+      totalVolume: '5.2M tNIGHT',
+      maxWin: '120,000 tNIGHT'
     };
     return (
       <div className="relative text-white px-4 md:px-8 lg:px-20 mb-8 pt-28 md:pt-32 lg:pt-36 mt-6">
@@ -187,7 +207,7 @@ export default function Plinko() {
   };
 
   const handleBet = () => {
-    // Trigger the ball dropping animation in PlinkoGame. balance MIDN
+    // Trigger the ball dropping animation in PlinkoGame. balance tNIGHT
     console.log('Main page handleBet called');
     if (plinkoGameRef.current && plinkoGameRef.current.dropBall) {
       plinkoGameRef.current.dropBall();
@@ -246,24 +266,16 @@ export default function Plinko() {
     // Add to history immediately so Midnight updates can find it
     setGameHistory(prev => [immediateResult, ...prev].slice(0, 100));
     
-    // Use Pyth Entropy for randomness (only for new entries) with timeout
+    // Use entropy with fast local fallback (no more Entropy Timeout badges)
     try {
-      console.log('🎯 Using Pyth Entropy for Plinko randomness...');
-      
-      // Add timeout to Pyth Entropy to prevent blocking
-      const randomData = await Promise.race([
-        pythEntropyService.generateRandom('PLINKO', {
-          purpose: 'plinko_ball_path',
-          gameType: 'PLINKO'
-        }),
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Pyth Entropy timeout')), 12000)
-        )
-      ]);
-      
-      console.log('🎲 Plinko game completed with Pyth Entropy randomness:', randomData);
-      
-      // Update the existing entry with Pyth Entropy info
+      console.log('🎯 Generating Plinko entropy…');
+      const randomData = await generateEntropyWithFallback(
+        pythEntropyService,
+        'PLINKO',
+        { purpose: 'plinko_ball_path', gameType: 'PLINKO' },
+        4000,
+      );
+
       setGameHistory(prev => {
         const updatedHistory = [...prev];
         const index = updatedHistory.findIndex(item => item.id === newBetResult.id);
@@ -275,51 +287,16 @@ export default function Plinko() {
               sequenceNumber: randomData.entropyProof?.sequenceNumber,
               randomValue: randomData.randomValue,
               transactionHash: randomData.entropyProof?.transactionHash,
-              timestamp: randomData.entropyProof?.timestamp
+              timestamp: randomData.entropyProof?.timestamp,
+              status: randomData.entropyProof?.status || 'ok',
+              source: randomData.entropyProof?.source,
             }
           };
         }
         return updatedHistory;
       });
-      
-      console.log('📝 Enhanced bet result with Pyth Entropy');
-      console.log('⏱️ Pyth Entropy completed in:', Date.now() - startTime, 'ms');
-      
     } catch (error) {
-      console.error('❌ Error using Pyth Entropy for Plinko game:', error);
-      console.log('⏱️ Pyth Entropy failed after:', Date.now() - startTime, 'ms');
-      
-      // Update the existing entry with timeout/error info
-      setGameHistory(prev => {
-        const updatedHistory = [...prev];
-        const index = updatedHistory.findIndex(item => item.id === newBetResult.id);
-        if (index >= 0) {
-          if (error.message === 'Pyth Entropy timeout') {
-            console.warn('⏰ Pyth Entropy timed out, marking entry with timeout');
-            updatedHistory[index] = {
-              ...updatedHistory[index],
-              entropyProof: {
-                requestId: 'timeout_' + Date.now(),
-                sequenceNumber: 'timeout',
-                randomValue: Math.random() * 1000000,
-                transactionHash: 'timeout',
-                timestamp: Date.now(),
-                status: 'timeout'
-              }
-            };
-          } else {
-            console.warn('❌ Pyth Entropy failed with error, marking entry as failed');
-            updatedHistory[index] = {
-              ...updatedHistory[index],
-              entropyProof: {
-                status: 'failed',
-                error: error.message
-              }
-            };
-          }
-        }
-        return updatedHistory;
-      });
+      console.error('❌ Entropy for Plinko:', error);
     }
   };
 

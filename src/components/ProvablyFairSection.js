@@ -9,31 +9,31 @@ const ProvablyFairSection = () => {
   const steps = [
     {
       id: 1,
-      title: 'Pyth Entropy Request',
-      description: 'When you start a game, a randomness request is sent to Pyth Network Entropy on Midnight Network. The request includes a custom gas limit and required fee.',
+      title: 'Private bet (Compact witness)',
+      description: 'Your sector choice, amount, and salt stay in local private state. The Compact placeBet circuit only discloses a commitment and ownership hash to the public ledger.',
       icon: 'client-seed',
-      code: 'import pythEntropyService from \'@/services/PythEntropyService\';\n\nconst result = await pythEntropyService.generateRandom(\'ROULETTE\', {\n  purpose: \'roulette_spin\',\n  gameType: \'ROULETTE\',\n  betAmount: 0.1\n});'
+      code: '// midnight-contract/casino.compact\nexport circuit placeBet(gameType: Uint<8>): [] {\n  const choice = getBetChoice();\n  const amount = getBetAmount();\n  const salt = getBetSalt();\n  const commit = betCommitment(choice, amount, salt);\n  // only commit + ownerHash hit the public ledger\n}'
     },
     {
       id: 2,
-      title: 'Decentralized Randomness',
-      description: 'Pyth Network provides cryptographically secure randomness derived from multiple data sources, ensuring provably fair results with on-chain verification.',
+      title: 'House commit-reveal',
+      description: 'House entropy is committed on-ledger before settlement so neither side can grind outcomes after seeing the private bet.',
       icon: 'server-seed',
-      code: 'const requestId = result.entropyProof.requestId;\nconst randomValue = result.randomValue;\nconst sequenceNumber = result.entropyProof.sequenceNumber;\nconst transactionHash = result.entropyProof.transactionHash;\nconst explorerUrl = result.entropyProof.explorerUrl;'
+      code: 'export circuit commitHouseSeed(commit: Bytes<32>): [] {\n  houseSeedCommit = disclose(commit);\n}'
     },
     {
       id: 3,
-      title: 'On-Chain Verification',
-      description: 'All randomness requests and results are recorded on Midnight Network blockchain, providing complete transparency and verifiability.',
+      title: 'ZK settlement',
+      description: 'settleWheel proves you own the round and that the reveal matches the commitment, then selectively discloses outcome and payout.',
       icon: 'calculation',
-      code: '// Verify randomness via Pyth Entropy Explorer\nconsole.log(\'Transaction:\', transactionHash);\nconsole.log(\'Explorer:\', explorerUrl);\nconsole.log(\'Arbiscan:\', `https://midnight.network/tx/${transactionHash}`);'
+      code: 'export circuit settleWheel(roundId: Uint<64>, houseOutcome: Uint<8>): [] {\n  assert(betCommitment(...) == round.betCommit, "bet mismatch");\n  // disclose won + payout only\n}'
     },
     {
       id: 4,
-      title: 'Transparent Results',
-      description: 'Each game result includes request ID, sequence number, and transaction hash for complete transparency and verifiability.',
+      title: 'Try Privacy Wheel',
+      description: 'Open /game/privacy-wheel for an end-to-end dual-ledger demo wired to these Compact semantics.',
       icon: 'verification',
-      code: '// Game result with Pyth Entropy proof\nconst gameResult = {\n  randomValue: result.randomValue,\n  entropyProof: {\n    requestId: result.entropyProof.requestId,\n    sequenceNumber: result.entropyProof.sequenceNumber,\n    transactionHash: result.entropyProof.transactionHash,\n    explorerUrl: result.entropyProof.explorerUrl,\n    timestamp: result.entropyProof.timestamp\n  }\n};'
+      code: 'npm run compact   # Compiling 4 circuits\nnpm run compact:test\nnpm run dev        # → /game/privacy-wheel'
     },
   ];
   
@@ -46,7 +46,7 @@ const ProvablyFairSection = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex items-center mb-8">
           <div className="w-1 h-6 bg-gradient-to-r from-red-magic to-blue-magic rounded-full mr-3"></div>
-          <h2 className="text-2xl font-display font-bold text-white">Pyth Entropy Powered Fairness</h2>
+          <h2 className="text-2xl font-display font-bold text-white">Compact ZK Privacy + Fair Settlement</h2>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -54,28 +54,28 @@ const ProvablyFairSection = () => {
           <div className="lg:col-span-5">
             <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-xl h-full">
               <div className="bg-[#0A0A0A] rounded-xl p-6 h-full">
-                <h3 className="text-white text-xl font-medium mb-4">What is Pyth Entropy?</h3>
+                <h3 className="text-white text-xl font-medium mb-4">What is Midnight Compact?</h3>
                 <p className="text-white/80 mb-6">
-                  Pyth Entropy is a decentralized randomness service that provides cryptographically secure random numbers on-chain.
-                  It aggregates randomness from multiple sources and makes it available to smart contracts on Midnight Network.
+                  Compact is Midnight&apos;s privacy-first smart-contract language. Circuits prove game rules with
+                  zero-knowledge while witnesses keep bet intent on your device until selective disclosure.
                 </p>
                 
                 <div className="bg-[#0A0A0A] p-4 rounded-lg mb-6 border-l-2 border-red-magic">
-                  <h4 className="text-white font-medium mb-2">Why Pyth Entropy matters</h4>
+                  <h4 className="text-white font-medium mb-2">Why Compact privacy matters</h4>
                   <ul className="text-white/70 text-sm space-y-2 list-disc pl-4">
-                    <li>Cryptographically secure randomness from multiple sources</li>
-                    <li>On-chain verification and transparency</li>
-                    <li>High throughput suitable for gaming applications</li>
-                    <li>Immune to manipulation by players, casino, or validators</li>
-                    <li>Complete audit trail from request to result</li>
+                    <li>Private bet choice and amount via witnesses</li>
+                    <li>Public commitments on the dual ledger</li>
+                    <li>Selective disclosure of outcome and payout</li>
+                    <li>Ownership proofs without revealing secret keys</li>
+                    <li>Compiler-enforced disclose() boundaries</li>
                   </ul>
                 </div>
                 
-                <Link href="/provably-fair">
+                <Link href="/game/privacy-wheel">
                   <div className="inline-block">
                     <div className="p-[1px] bg-gradient-to-r from-red-magic to-blue-magic rounded-md inline-block">
                       <button className="bg-[#0A0A0A] hover:bg-[#0A0A0A] transition-colors text-white px-6 py-2 rounded-md flex items-center">
-                        Verify On-Chain
+                        Open Privacy Wheel
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
@@ -91,7 +91,7 @@ const ProvablyFairSection = () => {
           <div className="lg:col-span-7">
             <div className="p-[1px] bg-gradient-to-r from-red-magic/40 to-blue-magic/40 rounded-xl">
               <div className="bg-[#0A0A0A] rounded-xl p-6">
-                <h3 className="text-white text-xl font-medium mb-4">How Pyth Entropy Works</h3>
+                <h3 className="text-white text-xl font-medium mb-4">How Compact Casino Circuits Work</h3>
                 
                 {/* Steps tabs */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-6">

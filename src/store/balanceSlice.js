@@ -3,18 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 // Load initial state from localStorage
 const loadInitialState = () => {
   if (typeof window !== 'undefined') {
-    const savedBalance = localStorage.getItem('userBalance');
+    const savedBalance =
+      localStorage.getItem('playTnignt') || localStorage.getItem('userBalance');
     const savedLoading = localStorage.getItem('isLoading');
-    
-    // Normal balance validation (restored)
+
     let cleanBalance = "0";
     if (savedBalance && !isNaN(savedBalance) && parseFloat(savedBalance) >= 0) {
       cleanBalance = savedBalance;
     } else {
-      // Reset invalid balance to 0
       localStorage.setItem('userBalance', "0");
+      localStorage.setItem('playTnignt', "0");
     }
-    
+
     return {
       userBalance: cleanBalance,
       isLoading: savedLoading === 'true' || false,
@@ -41,9 +41,10 @@ const balanceSlice = createSlice({
       } else {
         state.userBalance = newBalance;
       }
-      // Persist to localStorage
+      // Persist to localStorage (both keys — reconnect must not wipe play chips)
       if (typeof window !== 'undefined') {
         localStorage.setItem('userBalance', state.userBalance);
+        localStorage.setItem('playTnignt', state.userBalance);
       }
     },
     addToBalance(state, action) {
@@ -51,9 +52,9 @@ const balanceSlice = createSlice({
       const currentBalance = parseFloat(state.userBalance);
       const newBalance = Math.max(0, currentBalance + amountToAdd).toFixed(5);
       state.userBalance = newBalance;
-      // Persist to localStorage
       if (typeof window !== 'undefined') {
         localStorage.setItem('userBalance', newBalance);
+        localStorage.setItem('playTnignt', newBalance);
       }
     },
     subtractFromBalance(state, action) {
@@ -61,9 +62,9 @@ const balanceSlice = createSlice({
       const currentBalance = parseFloat(state.userBalance);
       const newBalance = Math.max(0, currentBalance - amountToSubtract).toFixed(5);
       state.userBalance = newBalance;
-      // Persist to localStorage
       if (typeof window !== 'undefined') {
         localStorage.setItem('userBalance', newBalance);
+        localStorage.setItem('playTnignt', newBalance);
       }
     },
     setLoading(state, action) {

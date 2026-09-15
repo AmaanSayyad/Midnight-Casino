@@ -160,10 +160,18 @@ export default function GameHistory({ history }) {
                             </button>
                           ) : (
                             <div className="text-xs text-gray-500">
-                              {game.midnightTxHash ? `Status: ${game.midnightTxHash}` : 'No Midnight TX'}
+                              {game.midnightStatus === 'pending'
+                                ? 'Logging…'
+                                : game.midnightTxHash === 'failed'
+                                  ? 'Log failed'
+                                  : game.midnightTxHash
+                                    ? `Status: ${game.midnightTxHash}`
+                                    : 'No Midnight TX'}
                             </div>
                           )}
-                          {game.entropyProof.transactionHash && game.entropyProof.transactionHash !== 'timeout' ? (
+                          {game.entropyProof.transactionHash &&
+                          game.entropyProof.transactionHash !== 'timeout' &&
+                          !String(game.entropyProof.transactionHash).startsWith('local_') ? (
                             <button
                               onClick={() => openEntropyExplorer(game.entropyProof.transactionHash)}
                               className="flex items-center gap-1 px-2 py-1 bg-[#681DDB]/10 border border-[#681DDB]/30 rounded text-[#681DDB] text-xs hover:bg-[#681DDB]/20 transition-colors"
@@ -171,6 +179,14 @@ export default function GameHistory({ history }) {
                               <FaExternalLinkAlt size={8} />
                               Entropy
                             </button>
+                          ) : game.entropyProof.status === 'local' ||
+                            String(game.entropyProof.transactionHash || '').startsWith('local_') ? (
+                            <div
+                              className="flex items-center gap-1 px-2 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded text-emerald-400 text-xs"
+                              title="Local Midnight entropy (Pyth path unavailable)"
+                            >
+                              Local entropy
+                            </div>
                           ) : game.entropyProof.status === 'timeout' ? (
                             <div className="flex items-center gap-1 px-2 py-1 bg-yellow-500/10 border border-yellow-500/30 rounded text-yellow-500 text-xs" title="Entropy generation timed out">
                               ⏰ Entropy Timeout

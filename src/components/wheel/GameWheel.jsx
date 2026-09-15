@@ -262,12 +262,32 @@ const GameWheel = ({
       
     }
     
-    // Draw inner circle
+    // Draw inner circle + Midnight symbol hub
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius * 0.4, 0, Math.PI * 2);
     ctx.fillStyle = "#0A0009";
     ctx.fill();
     ctx.strokeStyle = "#333947";
+    ctx.stroke();
+
+    // Midnight hub ring
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 0.22, 0, Math.PI * 2);
+    ctx.fillStyle = "#1a0a2e";
+    ctx.fill();
+    ctx.strokeStyle = "#7c3aed";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Simple Midnight-style mark (circle + vertical stem)
+    ctx.beginPath();
+    ctx.arc(centerX, centerY - radius * 0.02, radius * 0.08, 0, Math.PI * 2);
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = Math.max(2, radius * 0.015);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY - radius * 0.1);
+    ctx.lineTo(centerX, centerY + radius * 0.12);
     ctx.stroke();
 
     // Restore the context to draw the pointer without rotation
@@ -389,9 +409,22 @@ const GameWheel = ({
             isSpinning && "animate-pulse"
           )}
         />
+
+        {/* Midnight brand hub (replaces any prior chain/Monad center mark) */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-[5]">
+          <div className="w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] rounded-full bg-[#12081f]/90 border border-[#7c3aed]/50 flex items-center justify-center shadow-lg shadow-[#7c3aed]/20">
+            <Image
+              src="/Midnight%20Logo%20Pack/02_Symbol/Midnight-RGB_Symbol-White.svg"
+              alt="Midnight"
+              width={48}
+              height={48}
+              className="opacity-95"
+            />
+          </div>
+        </div>
         
         {!isSpinning && hasSpun && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
             <div className="text-4xl font-bold text-white animate-bounce mb-2">
               {currentSegment.multiplier.toFixed(2)}x
             </div>

@@ -236,7 +236,7 @@ const AIAutoBetting = ({ onActivate, isActive, onSettings }) => {
                   <div className="bg-black/30 p-2 rounded-lg border border-blue-900/30">
                     <div className="text-white/60 text-xs mb-1">Profit</div>
                     <div className={`text-sm font-medium ${stats.profit >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {stats.profit >= 0 ? '+' : ''}{stats.profit} MIDN
+                      {stats.profit >= 0 ? '+' : ''}{stats.profit} tNIGHT
                     </div>
                   </div>
                 </div>

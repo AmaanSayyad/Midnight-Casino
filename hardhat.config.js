@@ -60,7 +60,7 @@ module.exports = {
     },
   },
   paths: {
-    sources: "./contracts",
+    sources: "./legacy-evm/contracts",
     tests: "./test",
     cache: "./cache",
     artifacts: "./artifacts",

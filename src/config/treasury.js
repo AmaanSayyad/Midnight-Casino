@@ -1,45 +1,51 @@
-// Casino Treasury Configuration
-// This file contains the treasury wallet address and related configuration
+// Casino Treasury Configuration — Midnight unshielded (tNIGHT), not EVM.
+// Apache-2.0
 
-// Test Treasury Address (Replace with your actual treasury address in production)
 export const TREASURY_CONFIG = {
-  // Midnight Network Treasury Wallet (for deposits/withdrawals)
-  ADDRESS: process.env.MIDNIGHT_TREASURY_ADDRESS || process.env.POLYGON_TREASURY_ADDRESS || process.env.TREASURY_ADDRESS || '0x025182b20Da64b5997d09a5a62489741F68d9B96',
-  
-  // ⚠️  DEVELOPMENT ONLY - Never use in production!
-  PRIVATE_KEY: process.env.MIDNIGHT_TREASURY_PRIVATE_KEY || process.env.POLYGON_TREASURY_PRIVATE_KEY || process.env.TREASURY_PRIVATE_KEY || '0x73e0cfb4d786d6e542533e18eb78fb5c727ab802b89c6850962042a8f0835f0c',
-  
-  // Network configuration for Midnight Network (for deposit/withdraw)
+  /**
+   * Unshielded Midnight Bech32 treasury (mn_…).
+   * Deposits: wallet makeTransfer → this address.
+   * Withdraws: server signs with MIDNIGHT_TREASURY_SEED via /api/midnight-withdraw.
+   * Set in .env.local: NEXT_PUBLIC_MIDNIGHT_TREASURY_UNSHIELDED=mn_addr…
+   */
+  UNSHIELDED_ADDRESS:
+    process.env.NEXT_PUBLIC_MIDNIGHT_TREASURY_UNSHIELDED ||
+    process.env.MIDNIGHT_TREASURY_UNSHIELDED ||
+    '',
+
+  // Legacy EVM fields kept only for old Polygon scripts — do not use for Lace.
+  ADDRESS:
+    process.env.MIDNIGHT_TREASURY_ADDRESS ||
+    process.env.POLYGON_TREASURY_ADDRESS ||
+    process.env.TREASURY_ADDRESS ||
+    '',
+  PRIVATE_KEY: process.env.MIDNIGHT_TREASURY_PRIVATE_KEY || '',
+
   NETWORK: {
-    CHAIN_ID: process.env.NEXT_PUBLIC_MIDNIGHT_CHAIN_ID_HEX || '0x13882',
-    CHAIN_NAME: 'Midnight Network',
-    RPC_URL: process.env.NEXT_PUBLIC_MIDNIGHT_RPC || process.env.NEXT_PUBLIC_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology',
-    EXPLORER_URL: process.env.NEXT_PUBLIC_MIDNIGHT_EXPLORER || process.env.NEXT_PUBLIC_POLYGON_AMOY_EXPLORER || 'https://midnight.network'
+    CHAIN_NAME: 'Midnight Preview',
+    NETWORK_ID: process.env.NEXT_PUBLIC_MIDNIGHT_NETWORK || 'preview',
   },
-  
-  // Gas settings for transactions
-  GAS: {
-    DEPOSIT_LIMIT: process.env.GAS_LIMIT_DEPOSIT ? '0x' + parseInt(process.env.GAS_LIMIT_DEPOSIT).toString(16) : '0x7530', // 30000 gas for Midnight transfers
-    WITHDRAW_LIMIT: process.env.GAS_LIMIT_WITHDRAW ? '0x' + parseInt(process.env.GAS_LIMIT_WITHDRAW).toString(16) : '0x186A0', // 100000 gas for more complex operations
-  },
-  
-  // Minimum and maximum deposit amounts (in MIDN)
+
   LIMITS: {
-    MIN_DEPOSIT: parseFloat(process.env.MIN_DEPOSIT) || 0.001, // 0.001 MIDN minimum
-    MAX_DEPOSIT: parseFloat(process.env.MAX_DEPOSIT) || 100, // 100 MIDN maximum
-  }
+    MIN_DEPOSIT: parseFloat(process.env.MIN_DEPOSIT) || 0.001,
+    MAX_DEPOSIT: parseFloat(process.env.MAX_DEPOSIT) || 100,
+  },
+
+  CURRENCY: 'tNIGHT',
+  DECIMALS: 6,
 };
 
-// Helper function to validate treasury address
-export const isValidTreasuryAddress = (address) => {
-  return /^0x[a-fA-F0-9]{40}$/.test(address);
+export const isValidMidnightUnshieldedAddress = (address) => {
+  return typeof address === 'string' && /^mn_addr/i.test(address);
 };
 
-// Helper function to get treasury info
+export const getTreasuryUnshieldedAddress = () => TREASURY_CONFIG.UNSHIELDED_ADDRESS;
+
 export const getTreasuryInfo = () => {
   return {
-    address: TREASURY_CONFIG.ADDRESS,
+    address: TREASURY_CONFIG.UNSHIELDED_ADDRESS,
     network: TREASURY_CONFIG.NETWORK.CHAIN_NAME,
-    chainId: TREASURY_CONFIG.NETWORK.CHAIN_ID
+    networkId: TREASURY_CONFIG.NETWORK.NETWORK_ID,
+    currency: TREASURY_CONFIG.CURRENCY,
   };
 };

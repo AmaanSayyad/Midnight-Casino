@@ -6,12 +6,12 @@ import { setBalance, addToBalance, subtractFromBalance } from '@/store/balanceSl
 import pythEntropyService from '@/services/PythEntropyService';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay, FaPause, FaRedo, FaCog, FaInfoCircle } from 'react-icons/fa';
-import { useAccount } from 'wagmi';
+import useWalletStatus from '@/hooks/useWalletStatus';
 
 const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChange, betAmount = 0, onBetHistoryChange }, ref) => {
   const dispatch = useDispatch();
   const userBalance = useSelector((state) => state.balance.userBalance);
-  const { address } = useAccount();
+  const { address } = useWalletStatus();
   
   const [isDropping, setIsDropping] = useState(false);
   const [ballPosition, setBallPosition] = useState(null);
@@ -548,7 +548,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
         console.log('Bet amount (ref):', betAmountRef.current);
         console.log('Multiplier:', multiplier, '(bin index:', binIndex, ')');
         console.log('Multiplier value:', multiplierValue);
-        console.log('Reward calculated:', reward, 'MIDN');
+        console.log('Reward calculated:', reward, 'tNIGHT');
         console.log('==================');
         
         // Add reward to current balance (bet amount already deducted when ball was spawned)
@@ -591,6 +591,29 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
         } else {
           console.warn('⚠️ PlinkoGame: onBetHistoryChange is not defined!');
         }
+
+        // Midnight privacy commitment (sync import — never await inside Matter collision handler)
+        try {
+          const { recordPrivateGameRound } = require('@/lib/midnight/midnightGameBridge');
+          let playerAddress = address || null;
+          try {
+            playerAddress =
+              JSON.parse(localStorage.getItem('midnight-lace-session') || '{}').unshieldedAddress ||
+              playerAddress;
+          } catch {}
+          const privacy = recordPrivateGameRound({
+            gameName: 'PLINKO',
+            choice: binIndex % 8,
+            amount: latestBetAmount,
+            outcome: binIndex % 8,
+            won: reward > latestBetAmount,
+            payout: reward,
+            playerAddress,
+          });
+          console.log('🔐 Midnight privacy round (Plinko):', privacy.publicLedger);
+        } catch (e) {
+          console.warn('Midnight privacy bridge (Plinko):', e);
+        }
         
         // Fire-and-forget casino session log
         try {
@@ -623,32 +646,20 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
           }
         });
 
-        // Set a fallback timeout - if Midnight logging takes too long, mark as failed
+        // Soft timeout — don't paint Entropy Timeout; logging can finish later
         const fallbackTimeout = setTimeout(() => {
-          console.warn('⏰ Midnight logging timeout - marking as failed');
-          setBetHistory(prev => {
+          console.warn('⏰ Midnight logging still pending');
+          setBetHistory((prev) => {
             const updatedHistory = [...prev];
-            if (updatedHistory.length > 0) {
-              updatedHistory[0] = { 
-                ...updatedHistory[0], 
-                midnightTxHash: 'timeout',
-                midnightStatus: 'timeout'
+            if (updatedHistory.length > 0 && !updatedHistory[0].midnightTxHash) {
+              updatedHistory[0] = {
+                ...updatedHistory[0],
+                midnightStatus: 'pending',
               };
             }
             return updatedHistory;
           });
-          
-          if (onBetHistoryChange) {
-            const timeoutBetResult = {
-              ...newBetResult,
-              id: betResultId, // Use the same ID
-              midnightTxHash: 'timeout',
-              midnightStatus: 'timeout'
-            };
-            console.log('⏰ PlinkoGame: Notifying parent about timeout:', timeoutBetResult);
-            onBetHistoryChange(timeoutBetResult);
-          }
-        }, 12000); // 12 second fallback
+        }, 15000);
 
         midnightLoggingPromise.then(midnightResult => {
           clearTimeout(fallbackTimeout);
@@ -761,7 +772,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
         betAmount: latestBetAmount,
         balanceInETH: currentBalance.toFixed(9)
       });
-              alert(`Insufficient balance! You have ${currentBalance.toFixed(9)} MIDN but need ${latestBetAmount} MIDN`);
+              alert(`Insufficient balance! You have ${currentBalance.toFixed(9)} tNIGHT but need ${latestBetAmount} tNIGHT`);
       return;
     }
     
@@ -945,7 +956,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
               {betHistory.slice(0, 5).map((bet, index) => (
                 <div key={index} className="w-16 h-16 bg-[#2A0025] border border-[#333947] rounded-lg flex flex-col items-center justify-center p-1">
                   <span className="w-full text-center leading-tight text-xs font-bold text-white">{bet.multiplier}</span>
-                  <span className="w-full text-center leading-tight text-[10px] text-green-400">+{bet.payout} MIDN</span>
+                  <span className="w-full text-center leading-tight text-[10px] text-green-400">+{bet.payout} tNIGHT</span>
                 </div>
               ))}
               {Array.from({ length: Math.max(0, 5 - Math.min(5, betHistory.length)) }).map((_, index) => (
@@ -1003,7 +1014,7 @@ const PlinkoGame = forwardRef(({ rowCount = 16, riskLevel = "Medium", onRowChang
           <div className="text-xs text-gray-400">Best Multiplier</div>
         </div>
         <div className="text-center">
-                          <div className="text-2xl font-bold text-white">{totalWon.toFixed(5)} MIDN</div>
+                          <div className="text-2xl font-bold text-white">{totalWon.toFixed(5)} tNIGHT</div>
           <div className="text-xs text-gray-400">Total Won</div>
         </div>
       </div>

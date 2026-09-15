@@ -25,7 +25,7 @@ const BettingPanel = ({
   isSpinning
 }) => {
   
-  const { isConnected } = useWalletStatus();
+  const { isConnected, connectWallet, connecting } = useWalletStatus();
   const [inputValue, setInputValue] = useState('0');
   const [pythReady, setPythReady] = useState(false);
 
@@ -71,7 +71,7 @@ const BettingPanel = ({
           <span className="text-sm text-gray-300">Balance:</span>
           {isConnected ? (
             <span className="text-sm text-green-300 font-medium">
-              {parseFloat(balance || 0).toFixed(5)} MIDN
+              {parseFloat(balance || 0).toFixed(5)} tNIGHT
             </span>
           ) : (
             <span className="text-sm text-red-300 font-medium">
@@ -95,21 +95,19 @@ const BettingPanel = ({
         
         {!isConnected ? (
           <div className="text-center py-2">
-            <div className="text-sm text-gray-400 mb-2">Connect wallet to view VRF proofs</div>
+            <div className="text-sm text-gray-400 mb-2">Connect 1AM to play (same as navbar)</div>
             <button
-              onClick={() => {
-                // Trigger wallet connection
-                if (window.ethereum) {
-                  window.ethereum.request({ method: 'eth_requestAccounts' });
-                }
-              }}
-              className="bg-gradient-to-r from-midnight-blue to-midnight-blue hover:from-midnight-blue hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
+              type="button"
+              disabled={connecting}
+              onClick={() => connectWallet()}
+              className="bg-gradient-to-r from-midnight-blue to-midnight-blue hover:from-midnight-blue hover:to-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all disabled:opacity-50"
             >
-              Connect Wallet
+              {connecting ? 'Approve in wallet…' : 'Connect 1AM'}
             </button>
           </div>
         ) : (
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between text-xs text-emerald-300/90">
+            <span>Wallet connected · entropy via Midnight local / Pyth</span>
           </div>
         )}
       </div>
@@ -145,7 +143,7 @@ const BettingPanel = ({
       <div className="mb-4">
         <div className="flex justify-between p-1 mb-1">
           <label className="text-sm text-white">Bet Amount</label>
-          <div className="text-sm">{betAmount.toFixed(5)} MIDN</div>
+          <div className="text-sm">{betAmount.toFixed(5)} tNIGHT</div>
         </div>
         <div className="flex w-full gradient-border">
         <div className="flex items-center w-[60%]">

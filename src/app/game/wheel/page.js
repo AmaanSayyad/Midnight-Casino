@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, setLoading, loadBalanceFromStorage } from '@/store/balanceSlice';
 import { useNotification } from '@/components/NotificationSystem';
 import useWalletStatus from '@/hooks/useWalletStatus';
-import { useAccount } from 'wagmi';
 // Pyth Entropy integration for randomness
 // import vrfProofService from '@/services/VRFProofService';
 // import VRFProofRequiredModal from '@/components/VRF/VRFProofRequiredModal';
@@ -53,7 +52,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const { userBalance, isLoading: isLoadingBalance } = useSelector((state) => state.balance);
   const notification = useNotification();
-  const { address } = useAccount();
+  const { address, isConnected } = useWalletStatus();
 
   // Function to log game results to Midnight Network with retry mechanism
   const logGameResultToMidnight = async (gameData, retryCount = 0) => {
@@ -105,7 +104,6 @@ export default function Home() {
       throw error;
     }
   };
-  const { isConnected } = useWalletStatus();
   
   // Use ref to prevent infinite loop in useEffect
   const isInitialized = useRef(false);
@@ -142,7 +140,7 @@ export default function Home() {
     // Check if wallet is connected first
     console.log('🔌 Wheel Bet - Wallet Status:', { isConnected, userBalance });
     if (!isConnected) {
-      alert("Please connect your wallet first to play Wheel!");
+      alert("Please connect your 1AM (Midnight) wallet first to play Wheel!");
       return;
     }
 
@@ -179,7 +177,7 @@ export default function Home() {
           : item
       ));
       
-      // Log on-chain via casino wallet (non-blocking)
+      // Legacy session log (non-blocking) — privacy Compact round recorded in spin callback
       try {
         fetch('/api/casino-session', {
           method: 'POST',
@@ -205,11 +203,11 @@ export default function Home() {
     }
   };
 
-    // Check Redux balance (balance is already in MIDN)
+    // Check Redux balance (balance is already in tNIGHT)
     const currentBalance = parseFloat(userBalance || '0');
     
     if (currentBalance < betAmount) {
-      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} MIDN but need ${betAmount} MIDN`);
+      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} tNIGHT but need ${betAmount} tNIGHT`);
       return;
     }
 
@@ -226,7 +224,7 @@ export default function Home() {
       const newBalance = (parseFloat(userBalance || '0') - betAmount).toString();
       dispatch(setBalance(newBalance));
       
-      console.log('balance MIDN');
+      console.log('balance tNIGHT');
       
       // Set up callback to handle wheel animation completion
       window.wheelBetCallback = async (landedMultiplier) => {
@@ -287,10 +285,30 @@ export default function Home() {
           
           setIsSpinning(false);
           setHasSpun(true);
+
+          try {
+            const { recordPrivateGameRound } = await import('@/lib/midnight/midnightGameBridge');
+            let playerAddress = null;
+            try {
+              playerAddress = JSON.parse(localStorage.getItem('midnight-lace-session') || '{}').unshieldedAddress;
+            } catch {}
+            const privacy = recordPrivateGameRound({
+              gameName: 'WHEEL',
+              choice: Math.floor(actualMultiplier) % 8,
+              amount: betAmount,
+              outcome: Math.floor(actualMultiplier) % 8,
+              won: actualMultiplier > 0,
+              payout: winAmount,
+              playerAddress,
+            });
+            console.log('🔐 Midnight privacy round (Wheel):', privacy.publicLedger);
+          } catch (e) {
+            console.warn('Midnight privacy bridge (Wheel):', e);
+          }
           
           // Show result and update balance immediately
           if (actualMultiplier > 0) {
-            notification.success(`Congratulations! ${betAmount} MIDN × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(5)} MIDN won!`);
+            notification.success(`Congratulations! ${betAmount} tNIGHT × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(5)} tNIGHT won!`);
             
             // Update balance with winnings
             const currentBalance = parseFloat(userBalance || '0');
@@ -373,7 +391,7 @@ export default function Home() {
   }) => {
     // Check if wallet is connected first
     if (!isConnected) {
-      alert('Please connect your wallet first to play Wheel!');
+      alert('Please connect your 1AM (Midnight) wallet first to play Wheel!');
       return;
     }
     
@@ -395,7 +413,7 @@ export default function Home() {
       });
       
       if (currentBalance < currentBet) {
-        alert(`Insufficient balance for bet ${i + 1}. Need ${currentBet.toFixed(5)} MIDN but have ${currentBalance.toFixed(5)} MIDN`);
+        alert(`Insufficient balance for bet ${i + 1}. Need ${currentBet.toFixed(5)} tNIGHT but have ${currentBalance.toFixed(5)} tNIGHT`);
         break;
       }
 
@@ -498,7 +516,7 @@ export default function Home() {
       
       // Show notification for win
       if (actualMultiplier > 0) {
-        notification.success(`Congratulations! ${currentBet} MIDN × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(8)} MIDN won!`);
+        notification.success(`Congratulations! ${currentBet} tNIGHT × ${actualMultiplier.toFixed(2)} = ${winAmount.toFixed(8)} tNIGHT won!`);
       }
 
       // Log auto bet result to Midnight Network (non-blocking)
@@ -608,8 +626,8 @@ export default function Home() {
     // Sample statistics
     const gameStatistics = {
       totalBets: '1,856,342',
-      totalVolume: '8.3M MIDN',
-      maxWin: '243,500 MIDN'
+      totalVolume: '8.3M tNIGHT',
+      maxWin: '243,500 tNIGHT'
     };
     
     return (

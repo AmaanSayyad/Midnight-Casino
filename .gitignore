@@ -44,3 +44,22 @@ Thumbs.db
 # misc
 *.pem
 .vercel
+
+# Midnight contract build output (keep managed/ proving keys committed)
+midnight-contract/dist/
+midnight-contract/node_modules
+midnight-contract/node_modules/
+midnight-cli/node_modules/
+midnight-cli/logs/
+midnight-cli/reports/
+midnight-cli/midnight-level-db/
+midnight-api/node_modules/
+midnight-dapp/node_modules/
+midnight-dapp/.vite/
+midnight-dapp/dist/
+
+# local tooling / editor
+.cursor/
+.tmp-vercel-project-patch.json
+agent-transcripts/
+

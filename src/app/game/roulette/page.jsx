@@ -31,7 +31,6 @@ import StrategyGuide from './components/StrategyGuide';
 import RoulettePayout from './components/RoulettePayout';
 import WinProbabilities from './components/WinProbabilities';
 import RouletteHistory from './components/RouletteHistory';
-import { useAccount } from 'wagmi';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBalance, setLoading, loadBalanceFromStorage } from '@/store/balanceSlice';
 import pythEntropyService from '@/services/PythEntropyService';
@@ -42,7 +41,7 @@ import pythEntropyService from '@/services/PythEntropyService';
 const CASINO_MODULE_ADDRESS = process.env.NEXT_PUBLIC_CASINO_MODULE_ADDRESS || "0x0000000000000000000000000000000000000000";
 
 const parseMIDNAmount = (amount) => {
-  // Parse MIDN amount
+  // Parse tNIGHT amount
   return parseFloat(amount);
 };
 
@@ -1104,8 +1103,8 @@ export default function GameRoulette() {
                       <FaCoins className="text-yellow-400" />
                     </div>
                     <div className="text-xs text-white/50 font-sans text-center">Volume</div>
-                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.totalVolume} MIDN`}>
-                      {gameStatistics.totalVolume} MIDN
+                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.totalVolume} tNIGHT`}>
+                      {gameStatistics.totalVolume} tNIGHT
                     </div>
                   </div>
 
@@ -1114,8 +1113,8 @@ export default function GameRoulette() {
                       <FaTrophy className="text-yellow-500" />
                     </div>
                     <div className="text-xs text-white/50 font-sans text-center">Max Win</div>
-                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.maxWin} MIDN`}>
-                      {gameStatistics.maxWin} MIDN
+                    <div className="text-white font-display text-sm md:text-base truncate w-full text-center" title={`${gameStatistics.maxWin} tNIGHT`}>
+                      {gameStatistics.maxWin} tNIGHT
                     </div>
                   </div>
                 </motion.div>
@@ -1190,8 +1189,8 @@ export default function GameRoulette() {
   const [bettingHistory, setBettingHistory] = useState([]);
   const [error, setError] = useState(null);
 
-  // wallet
-  const { address, isConnected } = useAccount();
+  // Prefer shared wallet status (supports NEXT_PUBLIC_DEV_WALLET E2E mock)
+  const { address, isConnected, connectWallet, connecting } = useWalletStatus();
   const account = { address };
   const connected = isConnected;
 
@@ -1250,7 +1249,7 @@ export default function GameRoulette() {
   const { balance } = useToken(address); // Keep for compatibility
   const HOUSE_ADDR = CASINO_MODULE_ADDRESS;
 
-  // Function to fetch real MIDN balance will be defined after useSelector
+  // Function to fetch real tNIGHT balance will be defined after useSelector
 
   // Sound refs
   const spinSoundRef = useRef(null);
@@ -1417,7 +1416,7 @@ export default function GameRoulette() {
   const dispatch = useDispatch();
   const { userBalance, isLoading: isLoadingBalance } = useSelector((state) => state.balance);
 
-  // Function to fetch real MIDN balance
+  // Function to fetch real tNIGHT balance
   const fetchRealBalance = useCallback(async () => {
     if (!account?.address) return;
 
@@ -1648,7 +1647,7 @@ export default function GameRoulette() {
   const lockBet = async () => {
     // Check if wallet is connected
     if (!isConnected) {
-      alert("Please connect your wallet first to play Roulette!");
+      alert("Please connect your 1AM (Midnight) wallet first to play Roulette!");
       return;
     }
 
@@ -1658,11 +1657,11 @@ export default function GameRoulette() {
     }
 
     // Check Redux balance instead of wallet
-    const currentBalance = parseFloat(userBalance || '0'); // Balance is already in MIDN
+    const currentBalance = parseFloat(userBalance || '0'); // Balance is already in tNIGHT
     const totalBetAmount = total;
 
     if (currentBalance < totalBetAmount) {
-      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} MIDN but need ${totalBetAmount.toFixed(5)} MIDN`);
+      alert(`Insufficient balance. You have ${currentBalance.toFixed(5)} tNIGHT but need ${totalBetAmount.toFixed(5)} tNIGHT`);
       return;
     }
 
@@ -1684,7 +1683,7 @@ export default function GameRoulette() {
       
       // Check if user has enough balance
       if (originalBalance < totalBetAmount) {
-        alert(`Insufficient balance. You have ${originalBalance.toFixed(5)} MIDN but need ${totalBetAmount.toFixed(5)} MIDN`);
+        alert(`Insufficient balance. You have ${originalBalance.toFixed(5)} tNIGHT but need ${totalBetAmount.toFixed(5)} tNIGHT`);
         setSubmitDisabled(false);
         setWheelSpinning(false);
         return;
@@ -2068,6 +2067,28 @@ export default function GameRoulette() {
         const logGameResult = async (entropyTxHash = 'roulette_pending') => {
           console.log('🎯 logGameResult called with entropyTxHash:', entropyTxHash);
           try {
+            try {
+              const { recordPrivateGameRound } = await import('@/lib/midnight/midnightGameBridge');
+              let playerAddress = address || null;
+              try {
+                playerAddress =
+                  JSON.parse(localStorage.getItem('midnight-lace-session') || '{}').unshieldedAddress ||
+                  playerAddress;
+              } catch {}
+              const privacy = recordPrivateGameRound({
+                gameName: 'ROULETTE',
+                choice: Number(winningNumber || 0) % 8,
+                amount: totalBetAmount,
+                outcome: Number(winningNumber || 0) % 8,
+                won: netResult > totalBetAmount,
+                payout: netResult,
+                playerAddress,
+              });
+              console.log('🔐 Midnight privacy round (Roulette):', privacy.publicLedger);
+            } catch (e) {
+              console.warn('Midnight privacy bridge (Roulette):', e);
+            }
+
             const midnightResult = await logGameResultToMidnight({
               gameType: 'ROULETTE',
               player: address,
@@ -2196,16 +2217,16 @@ export default function GameRoulette() {
         // Show result notification
         if (netResult > 0) {
           const winMessage = winningBets.length === 1
-                    ? `🎉 WINNER! ${winningBets[0].name} - You won ${(netResult - totalBetAmount).toFixed(5)} MIDN!`
-                    : `🎉 MULTIPLE WINNERS! ${winningBets.length} bets won - Total: ${(netResult - totalBetAmount).toFixed(5)} MIDN!`;
+                    ? `🎉 WINNER! ${winningBets[0].name} - You won ${(netResult - totalBetAmount).toFixed(5)} tNIGHT!`
+                    : `🎉 MULTIPLE WINNERS! ${winningBets.length} bets won - Total: ${(netResult - totalBetAmount).toFixed(5)} tNIGHT!`;
 
           setNotificationMessage(winMessage);
           setNotificationSeverity("success");
           setSnackbarMessage(winMessage);
         } else {
-          setNotificationMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} MIDN!`);
+          setNotificationMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} tNIGHT!`);
           setNotificationSeverity("error");
-          setSnackbarMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} MIDN!`);
+          setSnackbarMessage(`💸 Number ${winningNumber} - You lost ${totalBetAmount.toFixed(5)} tNIGHT!`);
         }
         setSnackbarOpen(true);
 
@@ -2268,7 +2289,7 @@ export default function GameRoulette() {
 
     if (!address) {
       console.error("Wallet not connected.");
-      alert("Please connect your wallet.");
+      alert("Please connect 1AM (Midnight wallet) first.");
       return;
     }
 
@@ -2426,7 +2447,7 @@ export default function GameRoulette() {
       // Check if wallet is connected first
       if (!isConnected) {
         console.log("Wallet not connected, please connect wallet first");
-        alert("Please connect your wallet first using the connect button in the top right corner");
+        alert("Please connect 1AM using Connect 1AM in the top right");
         return;
       }
 
@@ -2718,7 +2739,7 @@ export default function GameRoulette() {
               }}
             >
               <FaCoins className="text-yellow-400" />
-              Balance: {isConnected ? `${parseFloat(userBalance || '0').toFixed(5)} MIDN` : 'Connect Wallet'}
+              Balance: {isConnected ? `${parseFloat(userBalance || '0').toFixed(5)} tNIGHT` : 'Connect Wallet'}
             </Typography>
           </Box>
 
@@ -3212,24 +3233,25 @@ export default function GameRoulette() {
               
               {!isConnected ? (
                 <Box sx={{ textAlign: 'center', py: 1 }}>
+                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', mb: 1 }}>
+                    Connect 1AM (same as navbar)
+                  </Typography>
                   <Button
-                    onClick={() => {
-                      if (window.ethereum) {
-                        window.ethereum.request({ method: 'eth_requestAccounts' });
-                      }
-                    }}
+                    onClick={() => connectWallet()}
+                    disabled={connecting}
                     sx={{
-                      background: 'linear-gradient(135deg, #FFC107 0%, #FF9800 100%)',
+                      background: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
                       color: 'white',
                       px: 2,
                       py: 1,
                       fontSize: '0.8rem',
                       '&:hover': {
-                        background: 'linear-gradient(135deg, #FFB300 0%, #F57C00 100%)',
-                      }
+                        background: 'linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%)',
+                      },
+                      '&.Mui-disabled': { opacity: 0.5, color: 'white' },
                     }}
                   >
-                    Connect Wallet
+                    {connecting ? 'Approve…' : 'Connect 1AM'}
                   </Button>
                 </Box>
               ) : (
@@ -3272,7 +3294,7 @@ export default function GameRoulette() {
               />
 
               <Typography color="white" sx={{ opacity: 0.8 }}>
-                Current Bet Total: {total.toFixed(5)} MIDN
+                Current Bet Total: {total.toFixed(5)} tNIGHT
               </Typography>
 
               {/* Quick Bet Buttons */}
@@ -3357,7 +3379,7 @@ export default function GameRoulette() {
                       loading={submitDisabled}
                       onClick={lockBet}
                     >
-                      {total > 0 ? `Place Bet (${total.toFixed(5)} MIDN)` : 'Place Bet (MIDN)'}
+                      {total > 0 ? `Place Bet (${total.toFixed(5)} tNIGHT)` : 'Place Bet (tNIGHT)'}
                     </Button>
                     {submitDisabled && rollResult < 0 && (
                       <Typography color="white" sx={{ opacity: 0.8 }}>
@@ -3699,9 +3721,9 @@ export default function GameRoulette() {
             {notificationIndex === notificationSteps.RESULT_READY && (
               <Typography>
                 {winnings > 0
-                  ? `🎉 You won ${winnings.toFixed(4)} MIDN!`
+                  ? `🎉 You won ${winnings.toFixed(4)} tNIGHT!`
                   : winnings < 0
-                  ? `💸 You lost ${Math.abs(winnings).toFixed(4)} MIDN!`
+                  ? `💸 You lost ${Math.abs(winnings).toFixed(4)} tNIGHT!`
                   : "🤝 Break even!"}
               </Typography>
             )}

@@ -6,7 +6,7 @@ export const MIDNIGHT_NETWORK_CONFIG = {
   chainName: midnightNetwork.name,
   nativeCurrency: {
     name: 'Midnight',
-    symbol: 'MIDN',
+    symbol: 'tNIGHT',
     decimals: 18,
   },
   rpcUrls: midnightNetwork.rpcUrls.default.http,
@@ -48,7 +48,7 @@ export const isMidnightNetwork = (chainId) => {
 
 export const formatMidnightBalance = (balance, decimals = 5) => {
   const numBalance = parseFloat(balance || '0');
-  return `${numBalance.toFixed(decimals)} MIDN`;
+  return `${numBalance.toFixed(decimals)} tNIGHT`;
 };
 
 export const getMidnightExplorerUrl = (txHash) => {

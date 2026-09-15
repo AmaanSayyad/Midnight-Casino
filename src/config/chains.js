@@ -16,7 +16,7 @@ export const midnightNetwork = defineChain({
   nativeCurrency: {
     decimals: 18,
     name: 'Midnight',
-    symbol: 'MIDN',
+    symbol: 'tNIGHT',
   },
   rpcUrls: {
     default: {

@@ -24,13 +24,13 @@ const HowItWorksSection = () => {
     {
       id: 1,
       title: 'Connect Your Wallet',
-      description: 'Link any wallet in seconds to unlock the full Midnight Casino experience. We support keyless login wallets, MetaMask, and all major Web3 wallets.',
+      description: 'Link any wallet in seconds to unlock the full Midnight Casino experience.',
       emoji: '👛'
     },
     {
       id: 2,
-      title: 'Get MIDN tokens',
-      description: 'Power your gameplay with MIDN tokens of Midnight Network.',
+      title: 'Get tNIGHT tokens',
+      description: 'Power your gameplay with tNIGHT tokens of Midnight Network.',
       emoji: '💰'
     },
     {
@@ -42,7 +42,7 @@ const HowItWorksSection = () => {
     {
       id: 4,
       title: 'Earn Rewards',
-      description: 'Win MIDN tokens and unlock exclusive perks through our multi-tiered loyalty program. Earn cashback on losses and gain access to tournaments.',
+      description: 'Win tNIGHT tokens and unlock exclusive perks through our multi-tiered loyalty program. Earn cashback on losses and gain access to tournaments.',
       emoji: '🏆'
     },
   ];
@@ -112,7 +112,7 @@ const HowItWorksSection = () => {
                   <MidnightConnectWalletButton />
                 ) : (
                   <GradientBorderButton className="transform hover:scale-105 transition-transform">
-                    {activeStep === 2 ? 'Get MIDN tokens' : 
+                    {activeStep === 2 ? 'Get tNIGHT tokens' : 
                      activeStep === 3 ? 'Browse Games' : 'View Rewards'}
                   </GradientBorderButton>
                 )}

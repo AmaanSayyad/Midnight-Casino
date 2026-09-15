@@ -1,0 +1,33 @@
+{
+  "name": "@midnight-casino/contract",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "compact": "compact compile casino.compact managed/casino",
+    "build": "rm -rf dist && tsc --project tsconfig.build.json && cp -Rf ./managed ./dist/managed",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@midnight-ntwrk/compact-js": "2.5.0",
+    "@midnight-ntwrk/compact-runtime": "0.15.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
+  },
+  "overrides": {
+    "@midnight-ntwrk/compact-runtime": "0.15.0"
+  }
+}

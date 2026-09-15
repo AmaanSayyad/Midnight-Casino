@@ -120,7 +120,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
       windowProviderAccount: window.ethereum?.selectedAddress
     });
     if (!isConnected) {
-      alert("Please connect your wallet first to play Plinko!");
+      alert("Please connect your 1AM (Midnight) wallet first to play Plinko!");
       return;
     }
     
@@ -130,12 +130,12 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
     console.log('handleBet called with betValue:', betValue, 'currentBalance (ETH):', currentBalance);
     
     if (betValue < 0.001) {
-      alert("Minimum bet amount is 0.001 MIDN");
+      alert("Minimum bet amount is 0.001 tNIGHT");
       return;
     }
     
     if (betValue > currentBalance) {
-      alert(`Insufficient balance! You have ${currentBalance.toFixed(5)} MIDN but need ${betValue} MIDN`);
+      alert(`Insufficient balance! You have ${currentBalance.toFixed(5)} tNIGHT but need ${betValue} tNIGHT`);
       return;
     }
     
@@ -189,7 +189,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
     });
     
     if (totalBetAmount > currentBalance) {
-      alert(`Insufficient balance for ${totalBets} bets of ${betAmount} MIDN each. You need ${totalBetAmount.toFixed(3)} MIDN but have ${currentBalance.toFixed(5)} MIDN`);
+      alert(`Insufficient balance for ${totalBets} bets of ${betAmount} tNIGHT each. You need ${totalBetAmount.toFixed(3)} tNIGHT but have ${currentBalance.toFixed(5)} tNIGHT`);
       setIsAutoPlaying(false);
       return;
     }
@@ -337,7 +337,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
     return totalBetAmount <= currentBalance && betValue >= 0.001;
   };
 
-  // Get current balance in MIDN for display
+  // Get current balance in tNIGHT for display
   const getCurrentBalanceInMIDN = () => {
     return parseFloat(userBalance || '0').toFixed(5);
   };
@@ -377,7 +377,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
           Bet Amount
         </label>
         <div className="mb-2">
-          <span className="text-2xl font-bold text-white">{betAmount} MIDN</span>
+          <span className="text-2xl font-bold text-white">{betAmount} tNIGHT</span>
         </div>
         <div className="relative">
           <input
@@ -433,37 +433,37 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
             onClick={() => handleBetAmountChange(0.001)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            0.001 MIDN
+            0.001 tNIGHT
           </button>
           <button
             onClick={() => handleBetAmountChange(0.01)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            0.01 MIDN
+            0.01 tNIGHT
           </button>
           <button
             onClick={() => handleBetAmountChange(0.1)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            0.1 MIDN
+            0.1 tNIGHT
           </button>
           <button
             onClick={() => handleBetAmountChange(1)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            1.0 MIDN
+            1.0 tNIGHT
           </button>
           <button
             onClick={() => handleBetAmountChange(5)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            5.0 MIDN
+            5.0 tNIGHT
           </button>
           <button
             onClick={() => handleBetAmountChange(10)}
             className="bg-[#2A0025] border border-[#333947] rounded-lg py-2 text-xs text-white hover:bg-[#3A0035] transition-colors"
           >
-            10.0 MIDN
+            10.0 tNIGHT
           </button>
         </div>
       </div>
@@ -568,7 +568,7 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
           <div className="text-center p-3 bg-[#2A0025] rounded-lg border border-[#333947]">
             <span className="text-sm text-gray-400">Current Balance:</span>
             {isConnected ? (
-              <div className="text-lg font-bold text-green-400">{getCurrentBalanceInMIDN()} MIDN</div>
+              <div className="text-lg font-bold text-green-400">{getCurrentBalanceInMIDN()} tNIGHT</div>
             ) : (
               <div className="text-lg font-bold text-red-400">Connect Wallet</div>
             )}
@@ -591,8 +591,8 @@ export default function GameControls({ onBet, onRowChange, onRiskLevelChange, on
           {((gameMode === "auto" && !hasSufficientBalanceForAutoBet()) || (!gameMode === "auto" && !hasSufficientBalance())) && parseFloat(betAmount) > 0 && (
             <div className="text-center text-red-400 text-sm">
               {gameMode === "auto" 
-                ? `Insufficient balance MIDN each` 
-                : `Insufficient balance MIDN bet`
+                ? `Insufficient balance tNIGHT each` 
+                : `Insufficient balance tNIGHT bet`
               }
             </div>
           )}

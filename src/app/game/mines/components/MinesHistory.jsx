@@ -37,10 +37,42 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
     profitLoss: "0",
   };
 
-  const stats = { ...defaultStats, ...userStats };
+  // Use real game history data from props (must be before computedStats)
+  const history = Array.isArray(gameHistory) ? gameHistory : [];
 
-  // Use real game history data from props
-  const history = gameHistory.length > 0 ? gameHistory : [];
+  // Derive stats from real history (parent often passes empty userStats)
+  const computedStats = {
+    totalPlayed: history.length,
+    totalWon: history.filter((g) => g.outcome === 'win').length,
+    winRate:
+      history.length > 0
+        ? `${Math.round((history.filter((g) => g.outcome === 'win').length / history.length) * 100)}%`
+        : '0%',
+    biggestWin:
+      history
+        .filter((g) => g.outcome === 'win')
+        .map((g) => parseFloat(String(g.payout).replace(/[^\d.]/g, '')) || 0)
+        .reduce((a, b) => Math.max(a, b), 0)
+        .toFixed(5) || '0',
+    avgMultiplier:
+      history.length > 0
+        ? `${(
+            history.reduce(
+              (s, g) => s + (parseFloat(String(g.multiplier).replace(/x/i, '')) || 0),
+              0,
+            ) / history.length
+          ).toFixed(2)}x`
+        : '0x',
+    profitLoss: history
+      .reduce((s, g) => {
+        const bet = parseFloat(String(g.bet).replace(/[^\d.]/g, '')) || 0;
+        const payout = parseFloat(String(g.payout).replace(/[^\d.]/g, '')) || 0;
+        return s + (payout - bet);
+      }, 0)
+      .toFixed(5),
+  };
+
+  const stats = { ...defaultStats, ...computedStats, ...userStats };
   
   // Handle sorting
   const handleSort = (field) => {
@@ -326,7 +358,9 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
                           Midnight
                         </button>
                       )}
-                      {game.entropyProof.transactionHash && (
+                      {game.entropyProof.transactionHash &&
+                      !String(game.entropyProof.transactionHash).startsWith('local_') &&
+                      game.entropyProof.transactionHash !== 'timeout' ? (
                         <button
                           onClick={() => openEntropyExplorer(game.entropyProof.transactionHash)}
                           className="flex items-center gap-1 px-2 py-1 bg-[#681DDB]/10 border border-[#681DDB]/30 rounded text-[#681DDB] text-xs hover:bg-[#681DDB]/20 transition-colors"
@@ -334,6 +368,10 @@ const MinesHistory = ({ gameHistory = [], userStats = {} }) => {
                           <FaExternalLinkAlt size={8} />
                           Entropy
                         </button>
+                      ) : (
+                        <div className="px-2 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded text-emerald-400 text-xs">
+                          Local entropy
+                        </div>
                       )}
                     </div>
                   </div>

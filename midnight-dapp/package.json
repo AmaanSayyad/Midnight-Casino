@@ -1,0 +1,43 @@
+{
+  "name": "@midnight-casino/dapp",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "predev": "mkdir -p ./public/keys ./public/zkir && cp -R ../midnight-contract/managed/casino/keys/. ./public/keys/ && cp -R ../midnight-contract/managed/casino/zkir/. ./public/zkir/",
+    "dev": "vite",
+    "prebuild": "npm run predev",
+    "build": "tsc -p tsconfig.json --noEmit false || true; vite build",
+    "preview": "vite preview --port 5173"
+  },
+  "dependencies": {
+    "@midnight-ntwrk/compact-js": "2.5.1",
+    "@midnight-ntwrk/dapp-connector-api": "4.0.1",
+    "@midnight-ntwrk/midnight-js-contracts": "4.1.1",
+    "@midnight-ntwrk/midnight-js-fetch-zk-config-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-http-client-proof-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-indexer-public-data-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-network-id": "4.1.1",
+    "@midnight-ntwrk/midnight-js-protocol": "4.1.1",
+    "@midnight-ntwrk/midnight-js-types": "4.1.1",
+    "@midnight-ntwrk/midnight-js-utils": "4.1.1",
+    "buffer": "^6.0.3",
+    "fp-ts": "^2.16.11",
+    "pino": "^10.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rxjs": "^7.8.2",
+    "semver": "^7.7.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/semver": "^7.7.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.8.3",
+    "vite": "^6.0.0",
+    "vite-plugin-top-level-await": "^1.4.4",
+    "vite-plugin-wasm": "^3.4.1"
+  }
+}
