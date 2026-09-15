@@ -101,7 +101,9 @@ Midnight Casino is a privacy-first GameFi product on Midnight: players place bet
 
 ## Product Proposal
 
-See [`PROPOSAL.md`](PROPOSAL.md)
+**Chosen idea (Rise In L3 list):** Sealed-Bid Auction — private bids, verifiable winner.
+
+Full write-up: [`PROPOSAL.md`](PROPOSAL.md) · Level 3 runbook: [`docs/LEVEL3.md`](docs/LEVEL3.md)
 
 ## Usage Guide
 
@@ -109,7 +111,13 @@ See [`docs/USAGE.md`](docs/USAGE.md)
 
 ## CI/CD
 
-GitHub Actions (`.github/workflows/ci.yml`) on push/PR to `main`: install → `compact compile` → Vitest simulator suite → verify `managed/` keys.
+![CI](https://github.com/AmaanSayyad/Midnight-Casino/actions/workflows/ci.yml/badge.svg)
+
+GitHub Actions (`.github/workflows/ci.yml`) on push/PR to `main`: install Compact 0.31.1 → `compact compile` → Vitest simulator (9) + Rise privacy gates (4) → verify `managed/` keys.
+
+### Screenshot: tests passing (3+)
+
+![Vitest output showing 9+ simulator tests and Rise privacy-gate tests passing](docs/screenshots/vitest-passing.png)
 
 ---
 
