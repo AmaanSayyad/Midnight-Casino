@@ -11,11 +11,14 @@ export default function Footer() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [showLanguage, setShowLanguage] = useState(false);
   
+  const xProfile =
+    process.env.NEXT_PUBLIC_X_PROFILE ||
+    'https://github.com/AmaanSayyad/Midnight-Casino/blob/main/docs/BUILD_IN_PUBLIC.md';
   const socialLinks = [
-    { name: "Twitter", url: "https://twitter.com", icon: "/icons/twitter.svg" },
-    { name: "Discord", url: "https://discord.com", icon: "/icons/discord.svg" },
-    { name: "Telegram", url: "https://telegram.org", icon: "/icons/telegram.svg" },
-    { name: "GitHub", url: "https://github.com", icon: "/icons/github.svg" },
+    { name: "X / Twitter", url: xProfile, icon: "/icons/twitter.svg" },
+    { name: "GitHub", url: "https://github.com/AmaanSayyad/Midnight-Casino", icon: "/icons/github.svg" },
+    { name: "Live Demo", url: "https://midnight-casino-eta.vercel.app/", icon: "/icons/discord.svg" },
+    { name: "Privacy Wheel", url: "https://midnight-casino-eta.vercel.app/game/privacy-wheel", icon: "/icons/telegram.svg" },
   ];
   
   const languages = [
