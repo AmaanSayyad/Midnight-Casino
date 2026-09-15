@@ -273,6 +273,14 @@ export default function App() {
     }
   }, [roundId, houseOutcome]);
 
+  const stepConnected = walletState === 'connected';
+  const stepJoined = !!contractAddress;
+  const stepProgress = [
+    { label: 'Connect wallet', done: stepConnected },
+    { label: 'Join / Deploy', done: stepJoined },
+    { label: 'placeBet → commit → settle', done: stepJoined && !!ledger },
+  ];
+
   return (
     <div className="app">
       <h1>Midnight Casino (1AM + Compact)</h1>
@@ -284,6 +292,30 @@ export default function App() {
         </a>
         .
       </p>
+
+      <div className="card" style={{ padding: '0.75rem 1rem' }}>
+        <p className="muted" style={{ margin: '0 0 0.5rem' }}>
+          Progress (L5 UX)
+        </p>
+        <ol style={{ margin: 0, paddingLeft: '1.25rem' }}>
+          {stepProgress.map((s) => (
+            <li key={s.label} style={{ color: s.done ? '#34d399' : undefined }}>
+              {s.done ? '✓ ' : '○ '}
+              {s.label}
+            </li>
+          ))}
+        </ol>
+        <p className="muted" style={{ margin: '0.75rem 0 0' }}>
+          After a round, leave Preprod feedback:{' '}
+          <a
+            href="https://midnight-casino-eta.vercel.app/feedback"
+            target="_blank"
+            rel="noreferrer"
+          >
+            midnight-casino-eta.vercel.app/feedback
+          </a>
+        </p>
+      </div>
 
       <div className="card">
         <h2>1. Midnight wallet</h2>
