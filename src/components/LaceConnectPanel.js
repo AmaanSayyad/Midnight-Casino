@@ -31,7 +31,7 @@ export default function LaceConnectPanel({ compact = false }) {
             {walletName || '1AM / Midnight'}
           </p>
           <p className="text-white/80 mt-1">
-            Network: <code>{networkId || 'preview'}</code>
+            Network: <code>{networkId || 'preprod'}</code>
           </p>
           {isConnected && proofServerUri && (
             <p className="text-white/50 text-xs mt-1 break-all">
@@ -41,9 +41,10 @@ export default function LaceConnectPanel({ compact = false }) {
           {isConnected && (
             <p className="text-white/50 text-xs mt-1">
               On-chain Compact UI:{' '}
-              <a className="underline text-white" href={DAPP_URL} target="_blank" rel="noreferrer">
-                {DAPP_URL}
-              </a>
+                <a className="underline text-white" href={DAPP_URL} target="_blank" rel="noreferrer">
+                  {DAPP_URL}
+                </a>
+                {' '}(set wallet to <strong>Preprod</strong>)
             </p>
           )}
         </div>
