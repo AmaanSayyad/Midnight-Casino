@@ -34,6 +34,7 @@ export default function L5FundPage() {
   const [running, setRunning] = useState(false);
   const [paused, setPaused] = useState(false);
   const pauseRef = React.useRef(false);
+  const [chunkSize, setChunkSize] = useState(5);
   const [results, setResults] = useState([]);
   const [current, setCurrent] = useState(null);
   const [localError, setLocalError] = useState('');
@@ -110,8 +111,8 @@ export default function L5FundPage() {
     }
   }, [connectWallet, refreshBalances]);
 
-  /** One wallet popup → all remaining recipients */
-  const runOneClick = useCallback(async () => {
+  /** Chunked batch: few recipients per makeTransfer so 1AM popup stays scrollable / approvable */
+  const runChunked = useCallback(async () => {
     if (!amount || Number(amount) <= 0) {
       setLocalError('Enter a positive tNIGHT amount per wallet.');
       return;
@@ -120,49 +121,75 @@ export default function L5FundPage() {
       setLocalError('Nothing left to fund — reset progress or all done.');
       return;
     }
+    const size = Math.max(1, Math.min(10, Number(chunkSize) || 5));
     setLocalError('');
     setRunning(true);
-    setCurrent({
-      index: remaining[0].index,
-      address: `batch ${remaining.length} addresses`,
-    });
+    pauseRef.current = false;
+    setPaused(false);
 
     try {
       if (!apiReady) await ensureLiveApi();
-      await transferTnigntBatch(
-        remaining.map((w) => w.address),
-        amount,
-      );
-      const at = new Date().toISOString();
-      const byIndex = new Map(results.map((r) => [r.index, r]));
-      for (const w of remaining) {
-        byIndex.set(w.index, {
-          index: w.index,
-          address: w.address,
-          ok: true,
-          at,
-          amount,
-          batched: true,
-        });
-      }
-      const merged = [...byIndex.values()].sort((a, b) => a.index - b.index);
-      setResults(merged);
-      persist(merged, wallets.length);
-      setStartIndex(wallets.length);
-    } catch (e) {
-      setLocalError(e?.message || String(e));
-    } finally {
-      setCurrent(null);
+    } catch {
       setRunning(false);
+      return;
     }
+
+    let byIndex = new Map(results.map((r) => [r.index, r]));
+    let cursor = startIndex;
+
+    while (cursor < wallets.length) {
+      if (pauseRef.current) break;
+      const slice = wallets.slice(cursor, cursor + size);
+      setCurrent({
+        index: slice[0].index,
+        address: `chunk ${slice.length} (#${slice[0].index}–#${slice[slice.length - 1].index})`,
+      });
+      try {
+        await transferTnigntBatch(
+          slice.map((w) => w.address),
+          amount,
+        );
+        const at = new Date().toISOString();
+        for (const w of slice) {
+          byIndex.set(w.index, {
+            index: w.index,
+            address: w.address,
+            ok: true,
+            at,
+            amount,
+            batched: true,
+          });
+        }
+        const merged = [...byIndex.values()].sort((a, b) => a.index - b.index);
+        setResults(merged);
+        cursor += slice.length;
+        persist(merged, cursor);
+        setStartIndex(cursor);
+        // Let pending settle before next popup
+        if (cursor < wallets.length) {
+          await new Promise((r) => setTimeout(r, 4000));
+        }
+      } catch (e) {
+        setLocalError(
+          `${e?.message || e} — Reject the stuck 1AM popup if open, wait until Activity has no pending, then resume. Use chunk size 3–5 if the popup was too tall.`,
+        );
+        break;
+      }
+    }
+
+    setCurrent(null);
+    setRunning(false);
+    setPaused(false);
   }, [
     amount,
-    remaining,
+    chunkSize,
+    remaining.length,
     apiReady,
     ensureLiveApi,
     transferTnigntBatch,
     results,
-    wallets.length,
+    startIndex,
+    wallets,
   ]);
 
   const runOneByOne = useCallback(async () => {
@@ -258,9 +285,9 @@ export default function L5FundPage() {
           </h1>
           <p className="mt-3 text-white/70 max-w-2xl">
             Recipients are <code className="text-white/90">mn_addr_preprod…</code>.
-            Connect 1AM on <strong>Preprod</strong>. Prefer{' '}
-            <strong>one-click batch</strong> (single approval for all remaining
-            addresses). Wait for any pending 1AM tx to clear first.
+            1AM cannot scroll a popup with 70 outputs — we fund in{' '}
+            <strong>small chunks</strong> (default 5 addresses = 1 approval each).
+            Reject any stuck oversized popup first.
           </p>
         </div>
 
@@ -338,7 +365,7 @@ export default function L5FundPage() {
             </button>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-3 gap-4">
             <label className="block text-sm text-white/70">
               tNIGHT per address
               <input
@@ -346,6 +373,22 @@ export default function L5FundPage() {
                 value={amount}
                 onChange={(e) =>
                   setAmount(e.target.value.replace(/[^0-9.]/g, ''))
+                }
+                disabled={running}
+              />
+            </label>
+            <label className="block text-sm text-white/70">
+              Addresses per approval (3–5 recommended)
+              <input
+                type="number"
+                min={1}
+                max={10}
+                className="mt-1 w-full bg-black/40 border border-white/20 px-3 py-2"
+                value={chunkSize}
+                onChange={(e) =>
+                  setChunkSize(
+                    Math.max(1, Math.min(10, Number(e.target.value) || 5)),
+                  )
                 }
                 disabled={running}
               />
@@ -376,12 +419,12 @@ export default function L5FundPage() {
               <>
                 <button
                   type="button"
-                  onClick={runOneClick}
+                  onClick={runChunked}
                   disabled={!remaining.length}
                   className="bg-[#059669] hover:bg-[#047857] disabled:opacity-40 px-5 py-3 font-medium"
                 >
                   {remaining.length
-                    ? `Fund ${remaining.length} in ONE approval`
+                    ? `Fund remaining (~${Math.ceil(remaining.length / Math.max(1, chunkSize))} approvals × ${chunkSize})`
                     : 'All funded'}
                 </button>
                 <button
@@ -390,7 +433,7 @@ export default function L5FundPage() {
                   disabled={!remaining.length}
                   className="border border-white/30 px-4 py-3 text-sm hover:bg-white/10 disabled:opacity-40"
                 >
-                  One-by-one (legacy)
+                  One-by-one
                 </button>
               </>
             ) : (
@@ -399,7 +442,7 @@ export default function L5FundPage() {
                 onClick={onPause}
                 className="border border-white/30 px-5 py-3 hover:bg-white/10"
               >
-                {paused ? 'Pausing…' : 'Pause after current (one-by-one only)'}
+                {paused ? 'Pausing…' : 'Pause after current chunk'}
               </button>
             )}
             <button
