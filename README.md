@@ -1,17 +1,107 @@
 # Midnight Casino
 
-Privacy-first GameFi on **Midnight Network** — Compact ZK contracts, dual-ledger private bets, and a playable casino UI.
+![CI](https://github.com/AmaanSayyad/Midnight-Casino/actions/workflows/ci.yml/badge.svg)
+
+> Privacy-first GameFi on Midnight — Compact ZK dual-ledger bets; prove fair settlement without publishing private intent.
 
 Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 
 | | |
 |---|---|
 | **GitHub** | https://github.com/AmaanSayyad/Midnight-Casino/ |
-| **Live** | https://midnight-casino-eta.vercel.app/ |
+| **Live Demo** | https://midnight-casino-eta.vercel.app/ |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
-| **Judging surface** | [`midnight-contract/casino.compact`](midnight-contract/casino.compact) |
+| **Rise In challenge** | [`RISE_IN.md`](RISE_IN.md) |
+| **Judging surface** | [`contracts/casino.compact`](contracts/casino.compact) |
+
+## Contract Address
+
+| Network | Address |
+|---------|---------|
+| Preview | `50a1cb0c358c57b52d32eb44d6c1054aa2d0352420fcb76ccd823b81ccac49f4` |
+| Preprod | `[PASTE ADDRESS AFTER DEPLOY]` |
+
+*(Rise In Levels 1–6: Preview address recorded from Lace/1AM deploy on 2026-09-15. Join in dapp with the 64-hex value above.)*
+
+## Live Demo
+
+https://midnight-casino-eta.vercel.app/  
+Privacy Wheel: https://midnight-casino-eta.vercel.app/game/privacy-wheel  
+On-chain Compact UI (local): `npm run midnight:dapp` → http://localhost:5173
+
+## What This Does
+
+Midnight Casino lets players wager with **private bet intent**. Compact circuits commit a hidden choice/amount, then settle with selective disclosure of outcome and payout. Observers see commitments — not strategy or bankroll size.
+
+## Privacy Model
+
+- **PUBLIC** (on-chain, visible to anyone): `rounds` map (ownerHash, gameType, betCommit, status, outcome, payout, won), `nextRoundId`, `totalRounds`, `houseSeedCommit`
+- **PRIVATE** (witnesses, never as raw ledger fields): `localSecretKey`, `getBetChoice`, `getBetAmount`, `getBetSalt`
+- **PROVED without revealing**: round ownership and that the reveal matches the prior commitment, without publishing choice/amount/secret key
+
+## Privacy Claim
+
+An on-chain observer **can** see round commitments, game type, and (after settle) outcome/payout. They **cannot** see unsettled bet choice, stake size, or the player’s secret key — those remain private witnesses inside the ZK circuit.
+
+## Tech Stack
+
+Midnight Network · Compact · Node.js v22 · Docker proof server · Next.js · 1AM/Lace · TypeScript/Vitest · Vercel
+
+## Prerequisites
+
+- Node.js v22+
+- Docker (proof server)
+- Compact toolchain (`compact` on PATH)
+- Lace or 1AM wallet (for on-chain deploy / play)
+
+## Setup
+
+```bash
+export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
+git clone https://github.com/AmaanSayyad/Midnight-Casino.git
+cd Midnight-Casino
+npm install
+cd midnight-contract && npm install && npm run compact && npm test && cd ..
+npm run proof:up
+npm run dev   # http://localhost:3000/game/privacy-wheel
+```
+
+## Run Tests
+
+```bash
+cd midnight-contract && npm test
+# 9 passing — circuit logic, state transitions, privacy (no raw choice/amount on public view)
+```
+
+## Initial Idea
+
+Midnight Casino is a privacy-first GameFi product on Midnight: players place bets whose choice, stake, and identity binding stay in Compact private witnesses, while the public ledger only stores commitments and — after settlement — a selectively disclosed outcome and payout. The Wave 1 / Rise In surface is a compiling `casino.compact` contract (placeBet → commitHouseSeed → settleWheel), simulator tests, and a playable Privacy Wheel plus Lace/1AM deploy path on Preview, so fairness is proved without doxxing strategy or bankroll.
+
+## Screenshots
+
+### Compact compile (4 circuits)
+
+![Compact compile listing commitHouseSeed, placeBet, settleWheel, verifyRoundOwnership](docs/screenshots/compact-compile.png)
+
+### Contract deployed on Preview (address visible)
+
+![Lace/1AM dapp showing Active Preview contract address and Contract ready status](docs/screenshots/deploy-preview-address.png)
+
+**Preview address:** `50a1cb0c358c57b52d32eb44d6c1054aa2d0352420fcb76ccd823b81ccac49f4`
+
+## Product Proposal
+
+See [`PROPOSAL.md`](PROPOSAL.md)
+
+## Usage Guide
+
+See [`docs/USAGE.md`](docs/USAGE.md)
+
+## CI/CD
+
+GitHub Actions (`.github/workflows/ci.yml`) on push/PR to `main`: install → `compact compile` → Vitest simulator suite → verify `managed/` keys.
 
 ---
 
@@ -42,7 +132,7 @@ Midnight Casino uses Midnight’s **programmable privacy**: prove fair settlemen
 ## Challenges I ran into
 
 - **Compact vs legacy EVM** — Early stack assumed Solidity/Pyth-style entropy. Buildathon judging needs Compact dual-ledger, so we moved EVM experiments to `legacy-evm/` and rebuilt the fairness model around witnesses + `disclose()`.
-- **Proving & ops** — Local proof server (Docker), circuit compile (0.30.0), and managed proving keys had to stay reproducible for judges (`npm run compact` / `npm test`).
+- **Proving & ops** — Local proof server (Docker), circuit compile (0.31.1), and managed proving keys had to stay reproducible for judges (`npm run compact` / `npm test`).
 - **Wallet & dust UX** — 1AM/Lace deposit and treasury withdraw on Preview depend on sync, tDUST for fees, and sponsorship edge cases; first withdraws can stall until dust generates.
 - **Deploy quirks** — Brand assets with `+` / spaces in paths 404 on Vercel; env and billing must target the correct team (`amaan002s-projects`).
 - **Arcade vs Compact story** — Arcade games still need fast UX randomness; after removing Pyth we use local entropy there, while **Privacy Wheel remains the Compact fairness surface** so we don’t confuse judges.
@@ -325,7 +415,7 @@ sequenceDiagram
 ## Technical gate (Buildathon)
 
 - Compact contract: [`midnight-contract/casino.compact`](midnight-contract/casino.compact)
-- Compiles with Compact toolchain **0.30.0** / language **0.22**
+- Compiles with Compact toolchain **0.31.1** / language **0.23** / runtime **0.16.0**
 - Circuits: `placeBet`, `commitHouseSeed`, `settleWheel`, `verifyRoundOwnership`
 - Private-state witnesses: `localSecretKey`, `getBetChoice`, `getBetAmount`, `getBetSalt`
 - Proving keys committed under `midnight-contract/managed/casino/keys/`
@@ -333,7 +423,7 @@ sequenceDiagram
 ```bash
 # Install Compact: https://docs.midnight.network/getting-started/installation
 export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
-compact update 0.30.0
+compact update 0.31.1
 
 cd midnight-contract
 npm install

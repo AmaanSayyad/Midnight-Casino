@@ -49,6 +49,7 @@ Thumbs.db
 midnight-contract/dist/
 midnight-contract/node_modules
 midnight-contract/node_modules/
+# root managed/ is a symlink to midnight-contract/managed — do not commit broken links as dirs
 midnight-cli/node_modules/
 midnight-cli/logs/
 midnight-cli/reports/

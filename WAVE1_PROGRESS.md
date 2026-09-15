@@ -6,7 +6,7 @@
 ## What shipped this Wave
 
 1. **New Compact contract** `midnight-contract/casino.compact`
-   - Compiles with Compact 0.30.0 (4 circuits + proving keys)
+   - Compiles with Compact 0.31.1 (4 circuits + proving keys, runtime 0.16.0)
    - Private-state witnesses for secret key, bet choice, amount, salt
    - Public ledger: rounds map, commitments, selective settlement disclosure
 2. **QA:** Vitest simulator covering place / settle / ownership / tamper rejection
