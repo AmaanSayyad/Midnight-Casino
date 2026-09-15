@@ -24,17 +24,17 @@ Early Preprod dogfood + first-cohort notes (Privacy Wheel + Compact dapp):
 
 ## What we changed (improvement summary)
 
-| Change | Reason (theme) | Surface |
-|--------|----------------|---------|
-| Onboarding checklist on Privacy Wheel | Unclear first step | `/game/privacy-wheel` |
-| Busy/loading labels on place / settle | Missing loading feedback | Privacy Wheel |
-| Public vs private legend panel | Privacy confusion | Privacy Wheel |
-| In-app `/feedback` + CTA | No feedback surface | Next.js |
-| `/onboard` Preprod checklist | Scattered onboarding | Next.js |
-| Compact dapp step progress | Unclear circuit order | `midnight-dapp` |
-| USAGE + LEVEL5 docs sync | Docs lag product | `docs/` |
+| Change | Reason (theme) | Commit |
+|--------|----------------|--------|
+| Onboarding checklist on Privacy Wheel | Unclear first step | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| Busy/loading labels on place / settle | Missing loading feedback | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| Public vs private legend panel | Privacy confusion | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| In-app `/feedback` + CTA | No feedback surface | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
+| `/onboard` Preprod checklist | Scattered onboarding | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
+| Compact dapp step progress | Unclear circuit order | [`ec86b80`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec86b80) |
+| USAGE + LEVEL5 docs sync | Docs lag product | [`ead7341`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ead7341) / [`bee78a5`](https://github.com/AmaanSayyad/Midnight-Casino/commit/bee78a5) |
 
-Commit IDs for the **Feedback Implementation** table are filled in README after each L5 commit lands on `main`.
+Also mirrored in README **Feedback Implementation**.
 
 ## Raw feedback log
 

@@ -63,14 +63,14 @@ Full 50-row tracker: [`USERS.md`](USERS.md). Summary columns: Name · Email · W
 
 | Name | Email | Wallet Address | Feedback Summary | Commit ID |
 |------|-------|----------------|------------------|-----------|
-| Cohort theme | — | — | Unclear first step / need checklist | *(filled after push — Privacy Wheel checklist)* |
-| Cohort theme | — | — | Buttons feel dead without loading state | *(filled after push — busy labels)* |
-| Cohort theme | — | — | Public vs private still confusing mid-round | *(filled after push — legend panel)* |
-| Cohort theme | — | — | No place to leave structured feedback | *(filled after push — `/feedback`)* |
-| Cohort theme | — | — | Onboarding steps scattered | *(filled after push — `/onboard`)* |
-| Cohort theme | — | — | Compact dapp circuit order unclear | *(filled after push — dapp progress)* |
+| Cohort theme | — | — | Unclear first step / need checklist | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| Cohort theme | — | — | Buttons feel dead without loading state | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| Cohort theme | — | — | Public vs private still confusing mid-round | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| Cohort theme | — | — | No place to leave structured feedback | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
+| Cohort theme | — | — | Onboarding steps scattered | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
+| Cohort theme | — | — | Compact dapp circuit order unclear | [`ec86b80`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec86b80) |
 
-Themes and change log: [`docs/FEEDBACK.md`](docs/FEEDBACK.md).
+Themes and change log: [`docs/FEEDBACK.md`](docs/FEEDBACK.md). Docs pack: [`ead7341`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ead7341).
 
 ### Improvement summary
 
