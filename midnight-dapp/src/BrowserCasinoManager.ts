@@ -121,7 +121,7 @@ export class BrowserCasinoManager {
 }
 
 const initializeProviders = async (logger: Logger): Promise<CasinoProviders> => {
-  const networkId = (import.meta.env.VITE_NETWORK_ID ?? 'preview') as NetworkId;
+  const networkId = (import.meta.env.VITE_NETWORK_ID ?? 'preprod') as NetworkId;
   setNetworkId(networkId);
 
   const connectedAPI = await connectToWallet(logger, networkId);

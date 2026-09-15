@@ -8,8 +8,9 @@ import type { ConnectedAPI, InitialAPI } from '@midnight-ntwrk/dapp-connector-ap
 import type { CasinoAPI } from './casino-api';
 import type { CasinoDerivedState } from './casino-types';
 
-const NETWORK_ID = import.meta.env.VITE_NETWORK_ID ?? 'preview';
+const NETWORK_ID = import.meta.env.VITE_NETWORK_ID ?? 'preprod';
 const ONE_AM_INSTALL_URL = 'https://1am.xyz/';
+const PREPROD_FAUCET = 'https://midnight-tmnight-preprod.nethermind.dev/';
 
 type WalletState = 'detecting' | 'no-wallet' | 'ready' | 'connecting' | 'connected';
 
@@ -30,10 +31,10 @@ function friendlyError(e: unknown): string {
     return 'Proof server unreachable. Run `npm run proof:up` and point the wallet at http://127.0.0.1:6300.';
   }
   if (msg.includes('DUST') || msg.includes('insufficient')) {
-    return 'Insufficient DUST/NIGHT. Fund unshielded Preview faucet address, then register DUST.';
+    return `Insufficient DUST/NIGHT. Fund unshielded Preprod address at ${PREPROD_FAUCET}, then Generate tDUST in the wallet.`;
   }
   if (msg.includes('No Midnight wallet') || msg.includes('Could not find')) {
-    return `Install 1AM (${ONE_AM_INSTALL_URL}), unlock it, set network to Preview, then refresh.`;
+    return `Install 1AM (${ONE_AM_INSTALL_URL}), unlock it, set network to Preprod, proof server http://127.0.0.1:6300, then refresh.`;
   }
   if (msg.includes("'ctor'") || msg.includes('CompactContext')) {
     return 'Compact stack failed to load (runtime/module mismatch). Hard-refresh http://localhost:5173 and retry Deploy. If it persists, restart: npm run midnight:dapp';
@@ -135,6 +136,25 @@ export default function App() {
       setWalletState('ready');
     }
   }, [walletAPI]);
+
+  const disconnect = useCallback(async () => {
+    try {
+      const maybe = wallet as ConnectedAPI & { disconnect?: () => Promise<void> | void };
+      await maybe?.disconnect?.();
+    } catch {
+      /* wallet may not expose disconnect — clear local session anyway */
+    }
+    unsubRef.current?.();
+    unsubRef.current = null;
+    apiRef.current = null;
+    setWallet(null);
+    setAddress(null);
+    setContractAddress('');
+    setLedger(null);
+    setWalletState(walletAPI ? 'ready' : 'no-wallet');
+    setStatus(`Disconnected from Midnight ${NETWORK_ID}`);
+    setError(null);
+  }, [wallet, walletAPI]);
 
   const attachApi = useCallback(async (api: CasinoAPI) => {
     unsubRef.current?.();
@@ -271,17 +291,32 @@ export default function App() {
             <a href={ONE_AM_INSTALL_URL} target="_blank" rel="noreferrer">
               1AM
             </a>{' '}
-            on Preview, then refresh.
+            on Preprod, then refresh.
           </p>
         )}
         {(walletState === 'ready' || walletState === 'connecting') && (
           <button disabled={walletState === 'connecting'} onClick={connect}>
-            {walletState === 'connecting' ? 'Approve in wallet…' : 'Connect 1AM'}
+            {walletState === 'connecting' ? 'Approve in wallet…' : 'Connect Lace / 1AM'}
           </button>
         )}
         {walletState === 'connected' && address && (
-          <p className="ok">Connected: {truncAddr(address)}</p>
+          <div className="row" style={{ alignItems: 'center' }}>
+            <p className="ok" style={{ margin: 0 }}>
+              Connected: {truncAddr(address)}
+            </p>
+            <button className="secondary" disabled={busy || deploying} onClick={disconnect}>
+              Disconnect
+            </button>
+          </div>
         )}
+        <p className="muted" style={{ marginTop: '0.75rem' }}>
+          Wallet must be on <strong>Preprod</strong> with proof server{' '}
+          <code>http://127.0.0.1:6300</code>. Faucet:{' '}
+          <a href={PREPROD_FAUCET} target="_blank" rel="noreferrer">
+            tNIGHT Preprod
+          </a>
+          .
+        </p>
       </div>
 
       <div className="card">

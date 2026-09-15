@@ -17,6 +17,8 @@
     "compact:build": "cd midnight-contract && npm run build",
     "sync:compact": "cp contracts/casino.compact midnight-contract/casino.compact",
     "midnight:dapp": "cd midnight-dapp && npm run predev && npm run dev",
+    "midnight:dapp:preprod": "cd midnight-dapp && VITE_NETWORK_ID=preprod npm run predev && VITE_NETWORK_ID=preprod npm run dev",
+    "deploy:preprod": "cd midnight-cli && npm run deploy:preprod",
     "midnight:install": "cd midnight-contract && npm install && cd ../midnight-api && npm install && cd ../midnight-dapp && npm install",
     "proof:up": "docker compose -f proof-server/docker-compose.yml up -d",
     "proof:down": "docker compose -f proof-server/docker-compose.yml down",
