@@ -35,7 +35,10 @@ jobs:
 
       - name: Install contract package
         working-directory: midnight-contract
-        run: npm ci --include=dev
+        run: |
+          npm ci --include=dev
+          # Lockfile may be macOS-authored; ensure Linux native optional bins for Vite/Rollup.
+          npm install --no-save @rollup/rollup-linux-x64-gnu @esbuild/linux-x64
 
       - name: Diagnose environment
         working-directory: midnight-contract
