@@ -1,6 +1,10 @@
-# Acquire 50 Preprod users (L5)
+# Acquire Preprod users (L5 / L6)
 
-Target: **50** people who (1) use the Preprod MVP and (2) leave a wallet address on the feedback form.
+Target: **70** wallets listed in [`USERS.md`](../USERS.md) (fill Name / Email / Feedback yourself).
+
+## Fees when funding via `/l5-fund`
+
+You send **tNIGHT**. Your connected wallet burns **tDUST as the fee** (or 1AM sponsors it). Recipients do **not** receive DUST.
 
 ## One-message invite (copy)
 
@@ -17,23 +21,13 @@ Need: Name, Email, Preprod wallet address, rating + 3 short answers.
 #MidnightNetwork #zk
 ```
 
-## Channels
+## Maintainer fund path
 
-- Rise In / Midnight Discord & Telegram cohorts
-- Product X posts (pin + daily reply threads) — [`BUILD_IN_PUBLIC.md`](BUILD_IN_PUBLIC.md)
-- Friends / cohort builders (batch DMs of 10)
-- Demo video comment: https://youtu.be/DVEq_W_Uzrk
-
-## What counts
-
-| Counts | Does not count |
-|--------|----------------|
-| Lace/1AM Preprod address on the form | Fabricated / random hex |
-| User who opened Privacy Wheel or Compact dapp | Duplicate wallets |
-| Optional: Join/placeBet tx on Preprod | Mainnet-only wallets |
+https://midnight-casino-eta.vercel.app/l5-fund — batch tNIGHT to all 70 minted addresses.
 
 ## Tracking
 
-- Live counter: [`USERS.md`](../USERS.md)
+- Live list: [`USERS.md`](../USERS.md)
 - Sheet: [`feedback-sheet.csv`](feedback-sheet.csv)
-- Onboard page: `/onboard`
+- Addresses CSV: [`l5-wallets.public.csv`](l5-wallets.public.csv)
+- L6 runbook: [`LEVEL6.md`](LEVEL6.md)
