@@ -13,7 +13,7 @@ import {
   createCasinoPrivateState,
   setBetInputs,
   type CasinoPrivateState,
-} from '../../midnight-contract/src/index.js';
+} from './compiled-casino.js';
 import {
   casinoPrivateStateKey,
   type CasinoDerivedState,

@@ -215,7 +215,7 @@ export default function PrivacyWheelPage() {
             )}
             <p className="text-sm text-white/60">
               Contract source: <code>midnight-contract/casino.compact</code>{' '}
-              (compiles with Compact 0.30 / language 0.22). Start proof server
+              (compiles with Compact 0.31 / language 0.23). Start proof server
               with <code>npm run proof:up</code>.
             </p>
           </section>

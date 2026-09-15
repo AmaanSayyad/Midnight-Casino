@@ -35,6 +35,9 @@ function friendlyError(e: unknown): string {
   if (msg.includes('No Midnight wallet') || msg.includes('Could not find')) {
     return `Install 1AM (${ONE_AM_INSTALL_URL}), unlock it, set network to Preview, then refresh.`;
   }
+  if (msg.includes("'ctor'") || msg.includes('CompactContext')) {
+    return 'Compact stack failed to load (runtime/module mismatch). Hard-refresh http://localhost:5173 and retry Deploy. If it persists, restart: npm run midnight:dapp';
+  }
   return msg || 'Unexpected error — check browser console.';
 }
 

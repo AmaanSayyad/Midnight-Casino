@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@midnight-casino/contract": "file:../midnight-contract",
-    "@midnight-ntwrk/compact-js": "2.5.0",
-    "@midnight-ntwrk/compact-runtime": "0.15.0",
+    "@midnight-ntwrk/compact-js": "2.5.1",
+    "@midnight-ntwrk/compact-runtime": "0.16.0",
     "@midnight-ntwrk/ledger-v8": "8.0.3",
     "@midnight-ntwrk/midnight-js": "4.0.4",
     "@midnight-ntwrk/midnight-js-http-client-proof-provider": "4.0.4",
@@ -41,8 +41,8 @@
   },
   "overrides": {
     "smoldot": "npm:@aspect-build/empty@0.0.0",
-    "@midnight-ntwrk/compact-runtime": "0.15.0",
+    "@midnight-ntwrk/compact-runtime": "0.16.0",
     "@midnight-ntwrk/ledger-v8": "8.0.3",
-    "@midnight-ntwrk/compact-js": "2.5.0"
+    "@midnight-ntwrk/compact-js": "2.5.1"
   }
 }
