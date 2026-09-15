@@ -1,43 +1,60 @@
-# How to Use Midnight Casino
+# How to Use Midnight Casino (Preprod MVP)
 
 ## What You Need
 
-- A modern browser
-- [1AM](https://1am.xyz/) or Lace wallet with a Midnight Preview account
-- Optional: local proof server (`npm run proof:up`) for on-chain Compact proving
+- A modern browser (Chrome recommended for 1AM / Lace)
+- [1AM](https://1am.xyz/) or Lace wallet on **Midnight Preprod**
+- Local proof server for on-chain Compact proving: `npm run proof:up` → `http://127.0.0.1:6300`
+- tNIGHT from the [Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev/) + Generate tDUST in wallet
 
-## Step-by-Step Guide
+## Live product
 
-1. Open the live demo: https://midnight-casino-eta.vercel.app/
-2. Connect your Midnight wallet from the navbar (1AM / Lace).
-3. Open **Privacy Wheel**: https://midnight-casino-eta.vercel.app/game/privacy-wheel
-4. Set a private sector choice and amount (these stay local witnesses).
-5. Run **placeBet** — only a commitment + ownership hash go public.
-6. Run **commitHouseSeed**, then **settleWheel** — outcome/payout are selectively disclosed.
-7. Optional: deposit/withdraw tNIGHT via Manage balance (treasury flow).
+| Surface | URL |
+|---------|-----|
+| Casino UI | https://midnight-casino-eta.vercel.app/ |
+| Privacy Wheel | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
+| Preprod contract | `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92` |
+| Deploy tx | https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod |
 
-For full on-chain Lace deploy UI locally:
+## Player path (web)
+
+1. Open https://midnight-casino-eta.vercel.app/
+2. Connect 1AM / Lace from the navbar (Preprod).
+3. Open **Privacy Wheel** and set a private sector + amount (witnesses).
+4. Run the sealed-bid loop: placeBet → commitHouseSeed → settleWheel.
+5. Observe: public ledger shows commitments; choice/amount stay private until settle disclosure.
+
+## On-chain Compact path (Lace dapp)
 
 ```bash
+export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
 npm run proof:up
-npm run midnight:dapp:preprod   # http://localhost:5173 (Lace on Preprod)
+npm run midnight:dapp:preprod   # http://localhost:5173
 ```
+
+1. Connect Lace / 1AM on Preprod.
+2. **Join** the prefilled Preprod MVP address (`33d34f16…be92`) — or Deploy your own.
+3. Call **placeBet** (approve in wallet). Choice/amount never appear as raw ledger fields.
+4. Optional: commitHouseSeed → settleWheel.
 
 ## What Gets Proved (and What Stays Private)
 
 | Proved | Stays private |
 |--------|----------------|
 | You own the round | Secret key |
-| Reveal matches prior bet commitment | Raw choice & amount (until you settle) |
-| Fair settle against house outcome | Strategy history of unsettled bets |
+| Reveal matches prior bet commitment | Raw choice & amount (until settle) |
+| Fair settle against house outcome | Unsettled strategy / bankroll size |
 
 ## Troubleshooting
 
-- **Wallet won’t connect** — Install 1AM/Lace; switch to Midnight Preprod (L2) or Preview (L1).
-- **Proving hangs** — Start proof server: `npm run proof:up` → `http://127.0.0.1:6300`.
-- **Withdraw stuck** — Treasury needs tDUST for fees; wait or retry a small amount.
+- **Wallet won’t connect** — Install 1AM/Lace; switch to Midnight **Preprod**; refresh.
+- **Proving hangs** — `npm run proof:up` → wallet proof server `http://127.0.0.1:6300`.
+- **Insufficient DUST** — Faucet tNIGHT, then Generate tDUST / register for dust.
+- **Join fails** — Confirm 64-hex address matches README Preprod row.
 - **Compile fails** — `export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"` then `cd midnight-contract && npm run compact`.
 
-## Rise In Level 3
+## Rise In
 
-Product proposal: **Sealed-Bid Auction** — see [`PROPOSAL.md`](../PROPOSAL.md). Run `npm run test:all` before pushing; CI compiles Compact and runs Vitest on `main`.
+- L3 proposal: **Sealed-Bid Auction** — [`PROPOSAL.md`](../PROPOSAL.md)
+- L4 MVP: [`LEVEL4.md`](LEVEL4.md) · Build in public: [`BUILD_IN_PUBLIC.md`](BUILD_IN_PUBLIC.md)
+- Tests: `npm run test:all` · CI on every push to `main`
