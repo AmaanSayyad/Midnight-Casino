@@ -6,7 +6,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 |-------|--------|---------------------|
 | L1 New Moon | Compact + tests + README gates | **Done** — compile, 9 tests, `managed/` keys, Preview deploy `50a1cb0c…49f4`, Initial Idea + screenshots in README |
 | L2 Waxing Crescent | Wallet + circuit UI + Preprod | **Done** — Lace connect/disconnect + placeBet UI; Preprod `33d34f16…be92` ([tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod)) |
-| L3 First Quarter | CI + PROPOSAL + polish | **Scaffolded** — CI + PROPOSAL.md added; fill placeholders |
+| L3 First Quarter | CI + PROPOSAL + polish | **Done** — Sealed-Bid Auction proposal, fixed CI Compact install, test screenshot, privacy model |
 | L4 Waxing Gibbous | Preprod MVP | Pending proposal approval + Preprod deploy |
 | L5 Full Moon | 50 users + feedback | Scaffold later |
 | L6 Supermoon | Mainnet path | Later |
@@ -32,8 +32,8 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 
 ## Manual steps (remaining)
 
-1. **L2** — Complete on Preprod (`33d34f16…be92`). Keep circuit calls via `midnight-dapp` / Privacy Wheel.
-2. **PROPOSAL.md** — Fill remaining `[I WILL FILL THIS IN]` sections before L4.
+1. **L3** — Sealed-Bid Auction proposal shipped (`PROPOSAL.md`). Confirm CI badge green after this push.
+2. **L4** — After proposal approval, deepen Preprod MVP polish.
 3. Connect Midnight docs MCP: https://midnight.mcp.kapa.ai
 
 ### Deploy (Lace) — Preprod
@@ -75,3 +75,15 @@ NODE_OPTIONS='--max-old-space-size=8192' npm run deploy:preprod
 - [x] Preprod contract address recorded in README — `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
 - [x] ≥8 meaningful commits on repo history
 - [x] Preprod dapp default (`VITE_NETWORK_ID=preprod`) + [`docs/LEVEL2.md`](docs/LEVEL2.md)
+
+## L3 checklist
+
+- [x] Functional privacy dApp (Privacy Wheel + Lace Preprod Compact UI)
+- [x] ≥3 tests passing (9 simulator + 4 Rise gates)
+- [x] CI/CD workflow with Compact install + compile + test (`.github/workflows/ci.yml`)
+- [x] Chosen idea from list: **Sealed-Bid Auction** (`PROPOSAL.md`)
+- [x] README Privacy Model / Privacy Claim
+- [x] Test output screenshot (`docs/screenshots/vitest-passing.png`)
+- [x] Live demo + demo video links
+- [x] ≥10 meaningful commits
+- [x] [`docs/LEVEL3.md`](docs/LEVEL3.md)
