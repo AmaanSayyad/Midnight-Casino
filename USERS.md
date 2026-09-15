@@ -71,4 +71,6 @@ Acquisition playbook: [`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md).
 
 - Privacy Wheel: https://midnight-casino-eta.vercel.app/game/privacy-wheel  
 - Contract: `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`  
-- Feedback: https://midnight-casino-eta.vercel.app/feedback
+- Feedback: https://midnight-casino-eta.vercel.app/feedback  
+- **Fund L5 wallets (1AM UI):** https://midnight-casino-eta.vercel.app/l5-fund  
+  (sends tNIGHT only — tDUST is non-transferable; recipients generate their own after receiving NIGHT)

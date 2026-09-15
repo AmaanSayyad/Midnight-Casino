@@ -34,6 +34,12 @@ const STEPS = [
     href: '/feedback',
     hrefLabel: 'Feedback form',
   },
+  {
+    title: 'Maintainer: fund wallets via 1AM',
+    body: 'Send small tNIGHT to all L5 addresses from a funded Preprod wallet. DUST is not transferable — fees come from the sender.',
+    href: '/l5-fund',
+    hrefLabel: 'Open L5 fund UI',
+  },
 ];
 
 export default function OnboardPage() {

@@ -109,12 +109,18 @@ export default function FeedbackPage() {
           <Link href="/onboard" className="underline text-white/70 hover:text-white">
             Onboarding checklist
           </Link>
-          <Link
-            href="/game/privacy-wheel"
-            className="underline text-white/70 hover:text-white"
-          >
-            Play Privacy Wheel
-          </Link>
+            <Link
+              href="/l5-fund"
+              className="underline text-white/70 hover:text-white"
+            >
+              Fund wallets (1AM)
+            </Link>
+            <Link
+              href="/game/privacy-wheel"
+              className="underline text-white/70 hover:text-white"
+            >
+              Play Privacy Wheel
+            </Link>
           <a
             href="https://github.com/AmaanSayyad/Midnight-Casino/blob/main/docs/GOOGLE_FORM.md"
             className="underline text-white/70 hover:text-white"
