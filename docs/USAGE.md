@@ -37,3 +37,7 @@ npm run midnight:dapp:preprod   # http://localhost:5173 (Lace on Preprod)
 - **Proving hangs** — Start proof server: `npm run proof:up` → `http://127.0.0.1:6300`.
 - **Withdraw stuck** — Treasury needs tDUST for fees; wait or retry a small amount.
 - **Compile fails** — `export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"` then `cd midnight-contract && npm run compact`.
+
+## Rise In Level 3
+
+Product proposal: **Sealed-Bid Auction** — see [`PROPOSAL.md`](../PROPOSAL.md). Run `npm run test:all` before pushing; CI compiles Compact and runs Vitest on `main`.
