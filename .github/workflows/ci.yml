@@ -19,10 +19,17 @@ jobs:
 
       - name: Install Compact toolchain
         run: |
-          curl -fsSL https://docs.midnight.network/getting-started/installation | bash || true
+          curl --proto '=https' --tlsv1.2 -LsSf \
+            https://github.com/midnightntwrk/compact/releases/latest/download/compact-installer.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.compact/bin" >> "$GITHUB_PATH"
+
+      - name: Pin Compact compiler 0.31.1
+        run: |
           export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
-          # Fallback: use project-local compact if global install differs
-          which compact || echo "compact binary resolved in subsequent steps via npm script PATH"
+          compact update 0.31.1
+          compact --version
+          compact compile --version
 
       - name: Install contract package
         working-directory: midnight-contract
@@ -34,13 +41,27 @@ jobs:
           export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
           npm run compact
 
-      - name: Run Compact simulator tests
+      - name: Run Compact simulator + Rise privacy tests
         working-directory: midnight-contract
-        run: npm test
+        run: |
+          npm test
+          npx vitest run --config vitest.rise.config.ts
 
-      - name: Verify managed keys exist
+      - name: Verify managed keys + contracts path
         run: |
           test -f midnight-contract/managed/casino/keys/placeBet.prover
           test -f midnight-contract/managed/casino/keys/settleWheel.prover
+          test -f midnight-contract/managed/casino/keys/commitHouseSeed.prover
+          test -f midnight-contract/managed/casino/keys/verifyRoundOwnership.prover
           test -f contracts/casino.compact
+          test -L managed || test -d midnight-contract/managed
           echo "managed/ + contracts/casino.compact OK"
+
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitest-output
+          path: |
+            midnight-contract/**/*.log
+          if-no-files-found: ignore
