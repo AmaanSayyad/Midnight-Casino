@@ -11,6 +11,8 @@
 - [x] Interactive demo route (`/game/privacy-wheel`)
 - [ ] Record & upload demo video (use `DEMO_SCRIPT.md`)
 - [x] Add GitHub topic/label: `midnightntwrk` (and `compact`, `typescript`, …)
-- [ ] Redeploy Vercel so Privacy Wheel is live on production URL
-  - **Blocked:** Vercel team `amaansayyads-projects` has an **overdue balance** (HTTP 402). Fix billing at https://vercel.com/teams/amaansayyads-projects/settings/billing then re-run deploy + env sync.
+- [x] Redeploy Vercel so Privacy Wheel is live on production URL
+  - Team: [`amaan002s-projects`](https://vercel.com/amaan002s-projects) · Project: `midnight-casino`
+  - Live: https://midnight-casino-eta.vercel.app/game/privacy-wheel
+  - Note: GitHub auto-link from this Vercel account needs write access to `AmaanSayyad/Midnight-Casino` (manual CLI deploy works).
 - [ ] Paste Wave progress + what changed into AKINDO submission form

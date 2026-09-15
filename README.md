@@ -73,7 +73,7 @@ npm test           # simulator QA
 
 4. **Pitch deck** — [Figma deck](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Midnight-Casino?node-id=1-1812&p=f&t=UEqNlvW63v7CuiZx-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
-5. **Live demo** — https://midnight-casino.vercel.app/ (redeploy after merge for Privacy Wheel route)
+5. **Live demo** — https://midnight-casino-eta.vercel.app/ (Privacy Wheel: [/game/privacy-wheel](https://midnight-casino-eta.vercel.app/game/privacy-wheel))
 
 6. **Wave progress** — see [`WAVE1_PROGRESS.md`](WAVE1_PROGRESS.md)
 
