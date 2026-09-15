@@ -4,8 +4,13 @@ Privacy-first GameFi on **Midnight Network** — Compact ZK contracts, dual-ledg
 
 Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 
-**Judging surface:** [`midnight-contract/casino.compact`](midnight-contract/casino.compact) + Privacy Wheel ([`/game/privacy-wheel`](https://midnight-casino-eta.vercel.app/game/privacy-wheel))  
-**Live demo:** https://midnight-casino-eta.vercel.app/
+| | |
+|---|---|
+| **GitHub** | https://github.com/AmaanSayyad/Midnight-Casino/ |
+| **Live** | https://midnight-casino-eta.vercel.app/ |
+| **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
+| **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
+| **Judging surface** | [`midnight-contract/casino.compact`](midnight-contract/casino.compact) |
 
 ---
 
@@ -361,9 +366,10 @@ npm test           # simulator QA
    Open [http://localhost:3000/game/privacy-wheel](http://localhost:3000/game/privacy-wheel)  
    Flow: set private choice/amount → `placeBet` → inspect public commitment → `commitHouseSeed` → `settleWheel`.
 
-4. **Pitch deck** — [Figma deck](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Midnight-Casino?node-id=1-1812&p=f&t=UEqNlvW63v7CuiZx-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
+4. **Pitch deck** — [Figma deck](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
-5. **Live demo** — https://midnight-casino-eta.vercel.app/ (Privacy Wheel: [/game/privacy-wheel](https://midnight-casino-eta.vercel.app/game/privacy-wheel))
+5. **Live demo** — https://midnight-casino-eta.vercel.app/ (Privacy Wheel: [/game/privacy-wheel](https://midnight-casino-eta.vercel.app/game/privacy-wheel))  
+   **GitHub** — https://github.com/AmaanSayyad/Midnight-Casino/
 
 6. **Wave progress** — see [`WAVE1_PROGRESS.md`](WAVE1_PROGRESS.md)
 
