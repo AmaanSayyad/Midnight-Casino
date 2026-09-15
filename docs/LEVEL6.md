@@ -45,7 +45,7 @@ Midnight design: DUST is non-transferable. Recipients generate their own DUST la
 - [x] Feedback documentation
 - [x] Demo video
 - [x] ≥30 meaningful commits
-- [x] Google Form / in-app feedback + public sheet URLs in README
+- [x] Website feedback form + CSV sheet linked in README (collected on-site, not Google Forms)
 - [x] Name / email / feedback columns filled for scoring
 - [ ] Product X (from L4) if not done
 

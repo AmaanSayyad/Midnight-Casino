@@ -31,7 +31,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 
 1. **Product X** — [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md) (L4)
 2. ~~Fund wallets~~ **Done** (70/70)
-3. ~~Google sheet + feedback~~ **Done** (sheet linked; [`USERS.md`](USERS.md) filled)
+3. ~~Website feedback + CSV~~ **Done** (https://midnight-casino-eta.vercel.app/feedback · [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv))
 4. ~~Name / Email / Feedback~~ **Done**
 
 ## L6 checklist (this cycle)

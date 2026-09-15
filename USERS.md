@@ -3,8 +3,8 @@
 **Target:** 70 verified Lace / 1AM **Preprod** wallet addresses  
 **Current count:** **70 / 70 funded on-chain** · identity + feedback filled  
 
-**Feedback sheet:** [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv)  
-**In-app form:** https://midnight-casino-eta.vercel.app/feedback  
+**Feedback:** collected on our website — https://midnight-casino-eta.vercel.app/feedback  
+**Feedback sheet (CSV):** [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv)  
 **Funded list:** [`docs/funded-all-70.json`](docs/funded-all-70.json)
 
 ## Table 1 — Onboarded Users (All)

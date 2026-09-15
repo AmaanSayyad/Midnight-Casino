@@ -41,5 +41,5 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 ## Rise In L6 (2026-09-16)
 - Target **70 Preprod** wallet addresses — **all 70 funded on-chain** via `/l5-fund`
 - Lists: [`USERS.md`](USERS.md) · [`docs/funded-all-70.json`](docs/funded-all-70.json)
-- Remaining: Name/Email/feedback + Google Form URLs + Product X
+- Remaining: Product X (L4)
 - Runbook: [`docs/LEVEL6.md`](docs/LEVEL6.md)
