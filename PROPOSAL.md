@@ -43,7 +43,7 @@ Yes — realistic by Level 6 if Preprod dust/wallet UX stays stable:
 |----------|----------|-------------------------------------------|
 | Done     | Preview  | Compact deploy + Lace path                |
 | Done     | Preprod  | Address `33d34f16…be92` live              |
-| L4–L5    | Preprod  | MVP polish, users, feedback               |
+| L4–L5    | Preprod  | MVP live (`33d34f16…be92`); users + X profile + feedback |
 | L6       | Mainnet  | Audits, dust sponsorship, indexer ops     |
 
 The sealed-bid / private-wager circuits already compile and run on Preprod; Mainnet is an ops + audit climb, not a redesign.
