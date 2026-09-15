@@ -81,9 +81,8 @@ export default function PrivacyWheelPage() {
             </h1>
             <p className="mt-3 text-white/70 max-w-2xl">
               Local Compact semantics demo. Connect once via the navbar (1AM) —
-              this page shares that session. For full on-chain Preprod
-              deploy/placeBet/settle with proofs, open the Compact DApp
-              (Lace on Preprod + local proof server).
+              this page shares that session. Preprod MVP contract is live — Join 33d34f16…be92 in the Compact DApp
+              (Lace on Preprod + local proof server) for on-chain placeBet.
             </p>
           </div>
           <div className="flex flex-col gap-2 items-end">
