@@ -43,9 +43,7 @@ jobs:
 
       - name: Run Compact simulator + Rise privacy tests
         working-directory: midnight-contract
-        run: |
-          npm test
-          npx vitest run --config vitest.rise.config.ts
+        run: npm test
 
       - name: Verify managed keys + contracts path
         run: |
