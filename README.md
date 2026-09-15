@@ -10,6 +10,8 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 |---|---|
 | **GitHub** | https://github.com/AmaanSayyad/Midnight-Casino/ |
 | **Live Demo** | https://midnight-casino-eta.vercel.app/ |
+| **Preprod MVP** | Contract `33d34f16…be92` · [deploy tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod) |
+| **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
@@ -29,8 +31,13 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 
 https://midnight-casino-eta.vercel.app/  
 Privacy Wheel: https://midnight-casino-eta.vercel.app/game/privacy-wheel  
-On-chain Compact UI (Preprod): `npm run midnight:dapp:preprod` → http://localhost:5173  
-Level 2 runbook: [`docs/LEVEL2.md`](docs/LEVEL2.md)
+On-chain Compact UI (Preprod MVP): `npm run midnight:dapp:preprod` → Join prefilled `33d34f16…be92`  
+Level 4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md) · Build in public: [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)
+
+## Product X profile
+
+Required for Rise In Level 4. Create the account with the bio/posts in [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md), then replace the table cell above with your live `https://x.com/...` URL.
+
 
 ## What This Does
 
