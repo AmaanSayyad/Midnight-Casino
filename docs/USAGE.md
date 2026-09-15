@@ -20,7 +20,7 @@ For full on-chain Lace deploy UI locally:
 
 ```bash
 npm run proof:up
-npm run midnight:dapp   # http://localhost:5173
+npm run midnight:dapp:preprod   # http://localhost:5173 (Lace on Preprod)
 ```
 
 ## What Gets Proved (and What Stays Private)
@@ -33,7 +33,7 @@ npm run midnight:dapp   # http://localhost:5173
 
 ## Troubleshooting
 
-- **Wallet won’t connect** — Install 1AM/Lace; switch to Midnight Preview.
+- **Wallet won’t connect** — Install 1AM/Lace; switch to Midnight Preprod (L2) or Preview (L1).
 - **Proving hangs** — Start proof server: `npm run proof:up` → `http://127.0.0.1:6300`.
 - **Withdraw stuck** — Treasury needs tDUST for fees; wait or retry a small amount.
 - **Compile fails** — `export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"` then `cd midnight-contract && npm run compact`.
