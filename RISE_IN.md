@@ -7,7 +7,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 | L1 New Moon | Compact + tests + README gates | **Done** — compile, 9 tests, `managed/` keys, Preview deploy `50a1cb0c…49f4`, Initial Idea + screenshots in README |
 | L2 Waxing Crescent | Wallet + circuit UI + Preprod | **Done** — Lace connect/disconnect + placeBet UI; Preprod `33d34f16…be92` ([tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod)) |
 | L3 First Quarter | CI + PROPOSAL + polish | **Done** — Sealed-Bid Auction proposal, fixed CI Compact install, test screenshot, privacy model |
-| L4 Waxing Gibbous | Preprod MVP | Pending proposal approval + Preprod deploy |
+| L4 Waxing Gibbous | Preprod MVP + public X | **In progress** — Preprod MVP + docs + CI live; **create Product X profile** ([`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)) then paste URL in README |
 | L5 Full Moon | 50 users + feedback | Scaffold later |
 | L6 Supermoon | Mainnet path | Later |
 
@@ -32,8 +32,8 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 
 ## Manual steps (remaining)
 
-1. **L3** — Sealed-Bid Auction proposal shipped (`PROPOSAL.md`). Confirm CI badge green after this push.
-2. **L4** — After proposal approval, deepen Preprod MVP polish.
+1. **L4 Product X** — Create the product account using [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md); paste `https://x.com/...` into README.
+2. **L5** — User acquisition + feedback (`USERS.md` / `docs/FEEDBACK.md`).
 3. Connect Midnight docs MCP: https://midnight.mcp.kapa.ai
 
 ### Deploy (Lace) — Preprod
@@ -87,3 +87,14 @@ NODE_OPTIONS='--max-old-space-size=8192' npm run deploy:preprod
 - [x] Live demo + demo video links
 - [x] ≥10 meaningful commits
 - [x] [`docs/LEVEL3.md`](docs/LEVEL3.md)
+
+## L4 checklist
+
+- [x] Working MVP on Preprod — `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
+- [x] Live demo — https://midnight-casino-eta.vercel.app/
+- [x] Documentation — README + Setup + [`docs/USAGE.md`](docs/USAGE.md) + [`docs/LEVEL4.md`](docs/LEVEL4.md)
+- [x] CI/CD passing on product repo
+- [ ] Product X profile linked in README — create via [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)
+- [x] Demo video — https://youtu.be/DVEq_W_Uzrk
+- [x] ≥15 meaningful commits (repo history)
+- [x] Join prefill for Preprod MVP in `midnight-dapp`
