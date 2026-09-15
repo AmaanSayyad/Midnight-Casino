@@ -21,15 +21,16 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | Network | Address |
 |---------|---------|
 | Preview | `50a1cb0c358c57b52d32eb44d6c1054aa2d0352420fcb76ccd823b81ccac49f4` |
-| Preprod | `[PASTE ADDRESS AFTER DEPLOY]` |
+| Preprod | `[PASTE AFTER PREPROD DEPLOY — see docs/LEVEL2.md]` |
 
-*(Rise In Levels 1–6: Preview address recorded from Lace/1AM deploy on 2026-09-15. Join in dapp with the 64-hex value above.)*
+*(L1 Preview address from Lace/1AM on 2026-09-15. L2 targets Preprod: `npm run midnight:dapp:preprod` or `npm run deploy:preprod`.)*
 
 ## Live Demo
 
 https://midnight-casino-eta.vercel.app/  
 Privacy Wheel: https://midnight-casino-eta.vercel.app/game/privacy-wheel  
-On-chain Compact UI (local): `npm run midnight:dapp` → http://localhost:5173
+On-chain Compact UI (Preprod): `npm run midnight:dapp:preprod` → http://localhost:5173  
+Level 2 runbook: [`docs/LEVEL2.md`](docs/LEVEL2.md)
 
 ## What This Does
 

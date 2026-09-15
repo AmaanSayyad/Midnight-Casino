@@ -5,7 +5,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 | Level | Focus | Status in this repo |
 |-------|--------|---------------------|
 | L1 New Moon | Compact + tests + README gates | **Done** — compile, 9 tests, `managed/` keys, Preview deploy `50a1cb0c…49f4`, Initial Idea + screenshots in README |
-| L2 Waxing Crescent | Wallet + circuit UI + live demo | **Mostly done** — 1AM/Lace + Privacy Wheel + Vercel live |
+| L2 Waxing Crescent | Wallet + circuit UI + Preprod | **In progress** — Lace connect/disconnect + placeBet UI on Preprod; address pending faucet/deploy |
 | L3 First Quarter | CI + PROPOSAL + polish | **Scaffolded** — CI + PROPOSAL.md added; fill placeholders |
 | L4 Waxing Gibbous | Preprod MVP | Pending proposal approval + Preprod deploy |
 | L5 Full Moon | 50 users + feedback | Scaffold later |
@@ -32,20 +32,27 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 
 ## Manual steps (remaining)
 
-1. **L1** — Complete on Preview (address + idea + screenshots shipped). Keep ≥5 meaningful challenge commits on `main`.
+1. **L2 Preprod** — Fund Preprod wallet → `npm run midnight:dapp:preprod` or `NODE_OPTIONS=--max-old-space-size=8192 npm run deploy:preprod` → paste address into README. See [`docs/LEVEL2.md`](docs/LEVEL2.md).
 2. **PROPOSAL.md** — Fill remaining `[I WILL FILL THIS IN]` sections before L4.
-3. **Preprod** — Deploy Compact when moving to L4; paste address into README.
-4. Connect Midnight docs MCP: https://midnight.mcp.kapa.ai
+3. Connect Midnight docs MCP: https://midnight.mcp.kapa.ai
 
-### Deploy (Lace) — Preview
+### Deploy (Lace) — Preprod
 
 ```bash
 export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
 npm run proof:up
-cd midnight-contract && npm run compact && npm test
-cd .. && npm run midnight:dapp
-# Browser: http://localhost:5173 → Connect Lace → Deploy casino.compact
-# Paste the printed contract address into README.md
+npm run midnight:dapp:preprod
+# 1AM/Lace → Network Preprod → proof server http://127.0.0.1:6300
+# Fund: https://midnight-tmnight-preprod.nethermind.dev/
+# Browser: http://localhost:5173 → Connect → Deploy → placeBet
+# Paste Active 64-hex into README Contract Address (Preprod)
+```
+
+### Deploy (CLI) — Preprod
+
+```bash
+npm run proof:up
+NODE_OPTIONS='--max-old-space-size=8192' npm run deploy:preprod
 ```
 
 ## L1 checklist (auto)
@@ -57,3 +64,14 @@ cd .. && npm run midnight:dapp
 - [x] Contract address in README
 - [x] README has required Challenge sections
 - [x] File structure matches adapted spec (`contracts/`, `managed/`, `tests/`, CI)
+
+## L2 checklist
+
+- [x] Lace connect / disconnect in frontend (`midnight-dapp` + navbar)
+- [x] Circuit call path from frontend (`placeBet` in `midnight-dapp`)
+- [x] Observable privacy behavior documented (README Privacy Claim)
+- [x] Live demo link (Vercel)
+- [x] Demo video link
+- [ ] Preprod contract address recorded in README (awaiting funded deploy)
+- [x] ≥8 meaningful commits on repo history
+- [x] Preprod dapp default (`VITE_NETWORK_ID=preprod`) + [`docs/LEVEL2.md`](docs/LEVEL2.md)
