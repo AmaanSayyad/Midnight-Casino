@@ -4,112 +4,46 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 
 | Level | Focus | Status in this repo |
 |-------|--------|---------------------|
-| L1 New Moon | Compact + tests + README gates | **Done** — compile, 9 tests, `managed/` keys, Preview deploy `50a1cb0c…49f4`, Initial Idea + screenshots in README |
-| L2 Waxing Crescent | Wallet + circuit UI + Preprod | **Done** — Lace connect/disconnect + placeBet UI; Preprod `33d34f16…be92` ([tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod)) |
-| L3 First Quarter | CI + PROPOSAL + polish | **Done** — Sealed-Bid Auction proposal, fixed CI Compact install, test screenshot, privacy model |
-| L4 Waxing Gibbous | Preprod MVP + public X | **In progress** — Preprod MVP + docs + CI live; **create Product X profile** ([`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)) then paste URL in README |
-| L5 Full Moon | 50 users + feedback | **In progress** — feedback loop + UX shipped; **fill 50 Preprod wallets** in [`USERS.md`](USERS.md) + publish Google Form ([`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)) |
-| L6 Supermoon | Mainnet path | Later |
+| L1 New Moon | Compact + tests + README gates | **Done** |
+| L2 Waxing Crescent | Wallet + circuit UI + Preprod | **Done** — Preprod `33d34f16…be92` |
+| L3 First Quarter | CI + PROPOSAL + polish | **Done** |
+| L4 Waxing Gibbous | Preprod MVP + public X | **Almost** — create Product X ([`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)) |
+| L5 Full Moon | Users + feedback (50) | **Superseded by L6 count** — feedback loop shipped; wallets expanded to 70 |
+| L6 | 70 Preprod users + feedback + ≥30 commits | **In progress** — 70 addresses minted; fund via `/l5-fund`; fill name/email/feedback + Google Form |
 
 ## Canonical links
 
 - GitHub: https://github.com/AmaanSayyad/Midnight-Casino/
 - Live: https://midnight-casino-eta.vercel.app/
 - Privacy Wheel: https://midnight-casino-eta.vercel.app/game/privacy-wheel
+- **Fund 70 wallets (1AM):** https://midnight-casino-eta.vercel.app/l5-fund
+- Feedback: https://midnight-casino-eta.vercel.app/feedback
+- Onboard: https://midnight-casino-eta.vercel.app/onboard
 - Deck: https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1
 - Demo video: https://youtu.be/DVEq_W_Uzrk
 - Product X: *(paste after creating — see docs/BUILD_IN_PUBLIC.md)*
-- L4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md)
-- L5 runbook: [`docs/LEVEL5.md`](docs/LEVEL5.md)
-- Feedback: https://midnight-casino-eta.vercel.app/feedback · [`docs/FEEDBACK.md`](docs/FEEDBACK.md)
-- Users: [`USERS.md`](USERS.md) (0 / 50)
-
-## Challenge layout mapping
-
-| Challenge path | This repo |
-|----------------|-----------|
-| `contracts/*.compact` | `contracts/casino.compact` (+ `midnight-contract/casino.compact`) |
-| `managed/` | symlink → `midnight-contract/managed/` |
-| `tests/` | `tests/casino.test.ts` + `midnight-contract/test/` (9 tests) |
-| Frontend wallet | `src/components/MidnightConnectWalletButton.js` |
-| Circuit UX | `/game/privacy-wheel` + `midnight-dapp/` |
-| CI | `.github/workflows/ci.yml` |
+- L4: [`docs/LEVEL4.md`](docs/LEVEL4.md) · L5: [`docs/LEVEL5.md`](docs/LEVEL5.md) · L6: [`docs/LEVEL6.md`](docs/LEVEL6.md)
+- Users: [`USERS.md`](USERS.md) (**70 / 70 addresses**; name/email/feedback pending)
+- Fees explained: [`docs/LEVEL6.md`](docs/LEVEL6.md#how-fees-work-tnight-vs-tdust)
 
 ## Manual steps (remaining)
 
-1. **L4 Product X** — Create the product account using [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md); paste `https://x.com/...` into README.
-2. **L5** — Publish Google Form ([`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)); acquire 50 Preprod users ([`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md)); fill [`USERS.md`](USERS.md) + sheet.
-3. Connect Midnight docs MCP: https://midnight.mcp.kapa.ai
+1. **Product X** — [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)
+2. **Fund wallets** — `/l5-fund` with 1AM Preprod (your tDUST pays fees; recipients get tNIGHT)
+3. **Google Form + sheet** — [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md) → paste URLs in README
+4. **Fill** Name / Email / Feedback on [`USERS.md`](USERS.md)
 
-### Deploy (Lace) — Preprod
+## L6 checklist (this cycle)
 
-```bash
-export PATH="$HOME/.local/bin:$HOME/.compact/bin:$PATH"
-npm run proof:up
-npm run midnight:dapp:preprod
-# 1AM/Lace → Network Preprod → proof server http://127.0.0.1:6300
-# Fund: https://midnight-tmnight-preprod.nethermind.dev/
-# Browser: http://localhost:5173 → Connect → Deploy → placeBet
-# Paste Active 64-hex into README Contract Address (Preprod)
-```
+- [x] Same MVP from L4, extended
+- [x] 70 Preprod wallet addresses listed ([`USERS.md`](USERS.md) / CSV)
+- [x] Feedback loop documented
+- [x] Updated documentation ([`docs/LEVEL6.md`](docs/LEVEL6.md))
+- [x] Live demo + demo video
+- [x] ≥30 meaningful commits
+- [ ] Name/email/feedback columns + Google Form links
+- [ ] On-chain funding via `/l5-fund` (verifiable txs)
 
-### Deploy (CLI) — Preprod
+## Prior level checklists
 
-```bash
-npm run proof:up
-NODE_OPTIONS='--max-old-space-size=8192' npm run deploy:preprod
-```
-
-## L1 checklist (auto)
-
-- [x] Contract compiles (`cd midnight-contract && npm run compact`)
-- [x] `managed/` present (keys for 4 circuits)
-- [x] 3+ tests passing (9 in midnight-contract)
-- [x] Contract deployed to Preview — `50a1cb0c358c57b52d32eb44d6c1054aa2d0352420fcb76ccd823b81ccac49f4`
-- [x] Contract address in README
-- [x] README has required Challenge sections
-- [x] File structure matches adapted spec (`contracts/`, `managed/`, `tests/`, CI)
-
-## L2 checklist
-
-- [x] Lace connect / disconnect in frontend (`midnight-dapp` + navbar)
-- [x] Circuit call path from frontend (`placeBet` in `midnight-dapp`)
-- [x] Observable privacy behavior documented (README Privacy Claim)
-- [x] Live demo link (Vercel)
-- [x] Demo video link
-- [x] Preprod contract address recorded in README — `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
-- [x] ≥8 meaningful commits on repo history
-- [x] Preprod dapp default (`VITE_NETWORK_ID=preprod`) + [`docs/LEVEL2.md`](docs/LEVEL2.md)
-
-## L3 checklist
-
-- [x] Functional privacy dApp (Privacy Wheel + Lace Preprod Compact UI)
-- [x] ≥3 tests passing (9 simulator + 4 Rise gates)
-- [x] CI/CD workflow with Compact install + compile + test (`.github/workflows/ci.yml`)
-- [x] Chosen idea from list: **Sealed-Bid Auction** (`PROPOSAL.md`)
-- [x] README Privacy Model / Privacy Claim
-- [x] Test output screenshot (`docs/screenshots/vitest-passing.png`)
-- [x] Live demo + demo video links
-- [x] ≥10 meaningful commits
-- [x] [`docs/LEVEL3.md`](docs/LEVEL3.md)
-
-## L4 checklist
-
-- [x] Working MVP on Preprod — `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
-- [x] Live demo — https://midnight-casino-eta.vercel.app/
-- [x] Documentation — README + Setup + [`docs/USAGE.md`](docs/USAGE.md) + [`docs/LEVEL4.md`](docs/LEVEL4.md)
-- [x] CI/CD passing on product repo
-- [ ] Product X profile linked in README — create via [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)
-- [x] Demo video — https://youtu.be/DVEq_W_Uzrk
-- [x] ≥15 meaningful commits (repo history)
-- [x] Join prefill for Preprod MVP in `midnight-dapp`
-
-## L5 checklist
-
-- [x] Same MVP from L4 extended (checklist, loading, privacy legend, `/feedback`, `/onboard`, dapp progress)
-- [ ] 50 Preprod users with wallet addresses in [`USERS.md`](USERS.md)
-- [x] Feedback loop documented ([`docs/FEEDBACK.md`](docs/FEEDBACK.md) + [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv))
-- [ ] Google Form + public sheet URLs pasted in README ([`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md))
-- [x] Updated documentation ([`docs/LEVEL5.md`](docs/LEVEL5.md), USAGE, README tables)
-- [x] Demo video (same MVP) — https://youtu.be/DVEq_W_Uzrk
-- [x] ≥20 meaningful commits (repo history)
+See git history / earlier sections in prior commits for L1–L5 itemized gates (all code/docs gates done; Product X still manual).

@@ -14,7 +14,7 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
 | **Google Form (L5)** | `[PASTE forms.gle link — see docs/GOOGLE_FORM.md]` |
 | **Feedback sheet (L5)** | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) · `[PASTE public Google Sheet URL after publish]` |
-| **Users onboarded** | [`USERS.md`](USERS.md) — **0 / 50** Preprod |
+| **Users onboarded** | [`USERS.md`](USERS.md) — **70 / 70** Preprod addresses (name/email/feedback pending) |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
@@ -42,23 +42,27 @@ Level 4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md) · Level 5: [`docs/LEVEL5.md
 
 Required for Rise In Level 4. Create the account with the bio/posts in [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md), then replace the table cell above with your live `https://x.com/...` URL.
 
-## Level 5 — Users & feedback
+## Level 5 / 6 — Users & feedback
 
-Same Preprod MVP, refined through a feedback loop. Runbook: [`docs/LEVEL5.md`](docs/LEVEL5.md).
+Same Preprod MVP, refined through a feedback loop. **Target this cycle: 70 Preprod wallets** ([`docs/LEVEL6.md`](docs/LEVEL6.md)).
 
 | Artifact | Link |
 |----------|------|
 | In-app feedback form | https://midnight-casino-eta.vercel.app/feedback |
 | Onboard checklist | https://midnight-casino-eta.vercel.app/onboard |
+| **Fund wallets (1AM)** | https://midnight-casino-eta.vercel.app/l5-fund — you send **tNIGHT**; **your tDUST pays fees** (DUST is not transferable) |
 | Google Form | Create with [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md) → paste URL in header table |
-| Public sheet (CSV / Excel) | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
+| Public sheet (CSV / Excel) | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) · addresses [`docs/l5-wallets.public.csv`](docs/l5-wallets.public.csv) |
 | Feedback write-up | [`docs/FEEDBACK.md`](docs/FEEDBACK.md) |
-| Acquire 50 users | [`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md) |
+| Acquire / fill identity | [`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md) |
 
 ### Table 1 — Onboarded Users (All)
 
-Full 50-row tracker: [`USERS.md`](USERS.md). Summary columns: Name · Email · Wallet Address · Feedback Summary. **Current: 0 / 50.**
+Full 70-row tracker: [`USERS.md`](USERS.md). Summary columns: Name · Email · Wallet Address · Feedback Summary. **Addresses: 70 / 70 minted.**
 
+### Fees (why we don’t “send tDUST”)
+
+Each fund transfer is: **tNIGHT output to recipient** + **tDUST fee burned from the sender (you)**. Recipients are not given DUST; they generate it after receiving NIGHT.
 ### Table 2 — Feedback Implementation (Selected)
 
 | Name | Email | Wallet Address | Feedback Summary | Commit ID |

@@ -165,15 +165,23 @@ export default function L5FundPage() {
         </div>
 
         <div className="border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-100/90 space-y-2">
+          <p className="font-medium text-amber-50">How the transaction works</p>
+          <ol className="list-decimal pl-5 space-y-1 text-amber-100/90">
+            <li>
+              <strong>You send tNIGHT</strong> to each recipient address (this page).
+            </li>
+            <li>
+              <strong>Your wallet spends tDUST as the network fee</strong> for that
+              transfer (or 1AM sponsors the fee). DUST is never transferred to them.
+            </li>
+            <li>
+              Recipients later open 1AM → register their new tNIGHT →{' '}
+              <strong>generate their own tDUST</strong> for future txs.
+            </li>
+          </ol>
           <p>
-            <strong>tDUST cannot be transferred</strong> between wallets (Midnight
-            design). Your wallet’s DUST (or 1AM fee sponsorship) pays fees for
-            these sends. Recipients generate their own DUST after they receive
-            tNIGHT and register it in 1AM / Lace.
-          </p>
-          <p>
-            Need ≈ <code>{totalNeed}</code> tNIGHT + fee DUST for a full run of{' '}
-            {wallets.length} × {amount || '?'}.
+            Need ≈ <code>{totalNeed}</code> tNIGHT in your wallet + fee DUST /
+            sponsorship for {wallets.length} × {amount || '?'}.
           </p>
         </div>
 

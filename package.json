@@ -48,6 +48,7 @@
     "test:monad": "node scripts/test-monad-integration.js",
     "docs:l4": "echo See docs/LEVEL4.md and docs/BUILD_IN_PUBLIC.md",
     "docs:l5": "echo See docs/LEVEL5.md docs/FEEDBACK.md docs/ACQUIRE_USERS.md USERS.md",
+    "docs:l6": "echo See docs/LEVEL6.md USERS.md — 70 Preprod wallets; fund via /l5-fund",
     "l5:mint": "cd midnight-cli && npm run l5:mint",
     "l5:fund": "cd midnight-cli && npm run l5:fund"
   },

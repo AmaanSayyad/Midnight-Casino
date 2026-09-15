@@ -38,7 +38,7 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 - Preprod MVP live: `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
 - Docs/CI complete; Product X profile pending handle paste in README.
 
-## Rise In L5 (2026-09-15)
-- Feedback loop: `/feedback`, `/onboard`, `docs/FEEDBACK.md`, `docs/feedback-sheet.csv`
-- Privacy Wheel checklist + loading + public/private legend; Compact dapp progress strip
-- Users tracker [`USERS.md`](USERS.md) — fill to 50 Preprod wallets; Google Form via [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)
+## Rise In L6 (2026-09-15)
+- Target raised to **70 Preprod** wallet addresses (minted + listed in USERS.md / CSV)
+- Fund UI `/l5-fund`: sender pays tDUST fees; recipients receive tNIGHT only
+- Runbook: [`docs/LEVEL6.md`](docs/LEVEL6.md)
