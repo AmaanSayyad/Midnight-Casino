@@ -12,9 +12,13 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **Live Demo** | https://midnight-casino-eta.vercel.app/ |
 | **Preprod MVP** | Contract `33d34f16…be92` · [deploy tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod) |
 | **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
+| **Google Form (L5)** | `[PASTE forms.gle link — see docs/GOOGLE_FORM.md]` |
+| **Feedback sheet (L5)** | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) · `[PASTE public Google Sheet URL after publish]` |
+| **Users onboarded** | [`USERS.md`](USERS.md) — **0 / 50** Preprod |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
+| **Feedback / Onboard** | [/feedback](https://midnight-casino-eta.vercel.app/feedback) · [/onboard](https://midnight-casino-eta.vercel.app/onboard) |
 | **Rise In challenge** | [`RISE_IN.md`](RISE_IN.md) |
 | **Judging surface** | [`contracts/casino.compact`](contracts/casino.compact) |
 
@@ -32,12 +36,52 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 https://midnight-casino-eta.vercel.app/  
 Privacy Wheel: https://midnight-casino-eta.vercel.app/game/privacy-wheel  
 On-chain Compact UI (Preprod MVP): `npm run midnight:dapp:preprod` → Join prefilled `33d34f16…be92`  
-Level 4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md) · Build in public: [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)
+Level 4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md) · Level 5: [`docs/LEVEL5.md`](docs/LEVEL5.md) · Build in public: [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)
 
 ## Product X profile
 
 Required for Rise In Level 4. Create the account with the bio/posts in [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md), then replace the table cell above with your live `https://x.com/...` URL.
 
+## Level 5 — Users & feedback
+
+Same Preprod MVP, refined through a feedback loop. Runbook: [`docs/LEVEL5.md`](docs/LEVEL5.md).
+
+| Artifact | Link |
+|----------|------|
+| In-app feedback form | https://midnight-casino-eta.vercel.app/feedback |
+| Onboard checklist | https://midnight-casino-eta.vercel.app/onboard |
+| Google Form | Create with [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md) → paste URL in header table |
+| Public sheet (CSV / Excel) | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
+| Feedback write-up | [`docs/FEEDBACK.md`](docs/FEEDBACK.md) |
+| Acquire 50 users | [`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md) |
+
+### Table 1 — Onboarded Users (All)
+
+Full 50-row tracker: [`USERS.md`](USERS.md). Summary columns: Name · Email · Wallet Address · Feedback Summary. **Current: 0 / 50.**
+
+### Table 2 — Feedback Implementation (Selected)
+
+| Name | Email | Wallet Address | Feedback Summary | Commit ID |
+|------|-------|----------------|------------------|-----------|
+| Cohort theme | — | — | Unclear first step / need checklist | *(filled after push — Privacy Wheel checklist)* |
+| Cohort theme | — | — | Buttons feel dead without loading state | *(filled after push — busy labels)* |
+| Cohort theme | — | — | Public vs private still confusing mid-round | *(filled after push — legend panel)* |
+| Cohort theme | — | — | No place to leave structured feedback | *(filled after push — `/feedback`)* |
+| Cohort theme | — | — | Onboarding steps scattered | *(filled after push — `/onboard`)* |
+| Cohort theme | — | — | Compact dapp circuit order unclear | *(filled after push — dapp progress)* |
+
+Themes and change log: [`docs/FEEDBACK.md`](docs/FEEDBACK.md).
+
+### Improvement summary
+
+| Change | Why | Docs |
+|--------|-----|------|
+| Round checklist + gated settle | Players did not know the circuit order | Privacy Wheel |
+| Busy / loading button labels | Missing pending UX | Privacy Wheel |
+| Public vs private legend | Privacy model not visible during play | Privacy Wheel |
+| `/feedback` + CSV export | Structured L5 form fields | Next.js |
+| `/onboard` six-step path | Reduce Preprod friction | Next.js |
+| Compact dapp progress strip | Same MVP, clearer Lace path | `midnight-dapp` |
 
 ## What This Does
 
@@ -196,9 +240,9 @@ Midnight Casino uses Midnight’s **programmable privacy**: prove fair settlemen
 
 ## What's next for Midnight Casino
 
-- **Wave 2:** Lace/1AM deploy to Preprod, shielded balances, smoother DUST sponsorship / gasless play  
-- **Wave 3:** Compact circuits for Mines/Plinko private boards; indexer-backed settlement UX  
-- **Beyond:** multi-table privacy lobbies, audits, and Build Club / ecosystem path  
+- **L5:** Fill 50 Preprod users + publish Google Form / sheet links ([`docs/LEVEL5.md`](docs/LEVEL5.md))
+- **Wave 2 / L6 path:** Mainnet Compact deploy, brand assets, first real users
+- **Beyond:** Compact circuits for Mines/Plinko private boards; indexer-backed settlement UX
 
 ---
 

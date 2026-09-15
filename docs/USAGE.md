@@ -57,4 +57,8 @@ npm run midnight:dapp:preprod   # http://localhost:5173
 
 - L3 proposal: **Sealed-Bid Auction** — [`PROPOSAL.md`](../PROPOSAL.md)
 - L4 MVP: [`LEVEL4.md`](LEVEL4.md) · Build in public: [`BUILD_IN_PUBLIC.md`](BUILD_IN_PUBLIC.md)
+- L5 users + feedback: [`LEVEL5.md`](LEVEL5.md) · [`FEEDBACK.md`](FEEDBACK.md) · [`ACQUIRE_USERS.md`](ACQUIRE_USERS.md)
+- Onboard: https://midnight-casino-eta.vercel.app/onboard
+- Feedback form: https://midnight-casino-eta.vercel.app/feedback
+- Users tracker: [`USERS.md`](../USERS.md)
 - Tests: `npm run test:all` · CI on every push to `main`

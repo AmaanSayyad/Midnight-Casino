@@ -8,7 +8,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 | L2 Waxing Crescent | Wallet + circuit UI + Preprod | **Done** — Lace connect/disconnect + placeBet UI; Preprod `33d34f16…be92` ([tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod)) |
 | L3 First Quarter | CI + PROPOSAL + polish | **Done** — Sealed-Bid Auction proposal, fixed CI Compact install, test screenshot, privacy model |
 | L4 Waxing Gibbous | Preprod MVP + public X | **In progress** — Preprod MVP + docs + CI live; **create Product X profile** ([`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)) then paste URL in README |
-| L5 Full Moon | 50 users + feedback | Scaffold later |
+| L5 Full Moon | 50 users + feedback | **In progress** — feedback loop + UX shipped; **fill 50 Preprod wallets** in [`USERS.md`](USERS.md) + publish Google Form ([`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)) |
 | L6 Supermoon | Mainnet path | Later |
 
 ## Canonical links
@@ -20,6 +20,9 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 - Demo video: https://youtu.be/DVEq_W_Uzrk
 - Product X: *(paste after creating — see docs/BUILD_IN_PUBLIC.md)*
 - L4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md)
+- L5 runbook: [`docs/LEVEL5.md`](docs/LEVEL5.md)
+- Feedback: https://midnight-casino-eta.vercel.app/feedback · [`docs/FEEDBACK.md`](docs/FEEDBACK.md)
+- Users: [`USERS.md`](USERS.md) (0 / 50)
 
 ## Challenge layout mapping
 
@@ -35,7 +38,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 ## Manual steps (remaining)
 
 1. **L4 Product X** — Create the product account using [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md); paste `https://x.com/...` into README.
-2. **L5** — User acquisition + feedback (`USERS.md` / `docs/FEEDBACK.md`).
+2. **L5** — Publish Google Form ([`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)); acquire 50 Preprod users ([`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md)); fill [`USERS.md`](USERS.md) + sheet.
 3. Connect Midnight docs MCP: https://midnight.mcp.kapa.ai
 
 ### Deploy (Lace) — Preprod
@@ -100,3 +103,13 @@ NODE_OPTIONS='--max-old-space-size=8192' npm run deploy:preprod
 - [x] Demo video — https://youtu.be/DVEq_W_Uzrk
 - [x] ≥15 meaningful commits (repo history)
 - [x] Join prefill for Preprod MVP in `midnight-dapp`
+
+## L5 checklist
+
+- [x] Same MVP from L4 extended (checklist, loading, privacy legend, `/feedback`, `/onboard`, dapp progress)
+- [ ] 50 Preprod users with wallet addresses in [`USERS.md`](USERS.md)
+- [x] Feedback loop documented ([`docs/FEEDBACK.md`](docs/FEEDBACK.md) + [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv))
+- [ ] Google Form + public sheet URLs pasted in README ([`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md))
+- [x] Updated documentation ([`docs/LEVEL5.md`](docs/LEVEL5.md), USAGE, README tables)
+- [x] Demo video (same MVP) — https://youtu.be/DVEq_W_Uzrk
+- [x] ≥20 meaningful commits (repo history)

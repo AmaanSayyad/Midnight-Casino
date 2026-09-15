@@ -46,7 +46,8 @@
     "test:polygon": "node scripts/test-polygon-integration.js",
     "deploy:monad": "npx hardhat run scripts/deploy-casino.js --network monad-testnet",
     "test:monad": "node scripts/test-monad-integration.js",
-    "docs:l4": "echo See docs/LEVEL4.md and docs/BUILD_IN_PUBLIC.md"
+    "docs:l4": "echo See docs/LEVEL4.md and docs/BUILD_IN_PUBLIC.md",
+    "docs:l5": "echo See docs/LEVEL5.md docs/FEEDBACK.md docs/ACQUIRE_USERS.md USERS.md"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.0",
