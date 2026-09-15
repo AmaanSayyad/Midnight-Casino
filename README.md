@@ -11,7 +11,7 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **GitHub** | https://github.com/AmaanSayyad/Midnight-Casino/ |
 | **Live Demo** | https://midnight-casino-eta.vercel.app/ |
 | **Preprod MVP** | Contract `33d34f16…be92` · [deploy tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod) |
-| **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
+| **Product X** | https://x.com/amaanbiz · [launch post](https://x.com/amaanbiz/status/2099944455533158574) |
 | **Feedback form (L5/L6)** | https://midnight-casino-eta.vercel.app/feedback (collected on our website) |
 | **Feedback sheet (L5)** | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
 | **Users onboarded** | [`USERS.md`](USERS.md) — **70 / 70 funded** + name/email/feedback filled |
@@ -40,7 +40,10 @@ Level 4 runbook: [`docs/LEVEL4.md`](docs/LEVEL4.md) · Level 5: [`docs/LEVEL5.md
 
 ## Product X profile
 
-Required for Rise In Level 4. Create the account with the bio/posts in [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md), then replace the table cell above with your live `https://x.com/...` URL.
+Rise In Level 4 — build in public:
+
+- **Profile:** https://x.com/amaanbiz (`@amaanbiz`)
+- **Launch / pin post:** https://x.com/amaanbiz/status/2099944455533158574
 
 ## Level 5 / 6 — Users & feedback
 

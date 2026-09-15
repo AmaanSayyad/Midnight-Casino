@@ -15,7 +15,7 @@ Mission: MVP live on Preprod, with docs, CI/CD, and a public product X profile.
 | CI | ![CI](https://github.com/AmaanSayyad/Midnight-Casino/actions/workflows/ci.yml/badge.svg) |
 | Proposal | Sealed-Bid Auction — [`PROPOSAL.md`](../PROPOSAL.md) |
 | Demo video | https://youtu.be/DVEq_W_Uzrk |
-| Product X | See README **Product X profile** (create + paste handle) |
+| Product X | https://x.com/amaanbiz · [launch post](https://x.com/amaanbiz/status/2099944455533158574) |
 
 ## Privacy-critical core (shipped first)
 

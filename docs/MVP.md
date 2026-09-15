@@ -7,6 +7,6 @@
 - **Core circuits:** placeBet → commitHouseSeed → settleWheel
 - **Idea:** Sealed-Bid Auction (private bid, verifiable settle)
 - **CI:** https://github.com/AmaanSayyad/Midnight-Casino/actions/workflows/ci.yml
-- **X profile:** create via [BUILD_IN_PUBLIC.md](BUILD_IN_PUBLIC.md)
+- **X profile:** https://x.com/amaanbiz · [launch post](https://x.com/amaanbiz/status/2099944455533158574)
 
 See [LEVEL4.md](LEVEL4.md) for the full gate list.
