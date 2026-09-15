@@ -1,5 +1,5 @@
 import * as __compactRuntime from '@midnight-ntwrk/compact-runtime';
-__compactRuntime.checkRuntimeVersion('0.15.0');
+__compactRuntime.checkRuntimeVersion('0.16.0');
 
 const _descriptor_0 = new __compactRuntime.CompactTypeUnsignedInteger(18446744073709551615n, 8);
 
@@ -114,14 +114,14 @@ export class Contract {
         if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.currentQueryContext != undefined)) {
           __compactRuntime.typeError('placeBet',
                                      'argument 1 (as invoked from Typescript)',
-                                     'casino.compact line 64 char 1',
+                                     'casino.compact line 73 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
         }
         if (!(typeof(gameType_0) === 'bigint' && gameType_0 >= 0n && gameType_0 <= 255n)) {
           __compactRuntime.typeError('placeBet',
                                      'argument 1 (argument 2 as invoked from Typescript)',
-                                     'casino.compact line 64 char 1',
+                                     'casino.compact line 73 char 1',
                                      'Uint<0..256>',
                                      gameType_0)
         }
@@ -148,14 +148,14 @@ export class Contract {
         if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.currentQueryContext != undefined)) {
           __compactRuntime.typeError('commitHouseSeed',
                                      'argument 1 (as invoked from Typescript)',
-                                     'casino.compact line 96 char 1',
+                                     'casino.compact line 105 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
         }
         if (!(commit_0.buffer instanceof ArrayBuffer && commit_0.BYTES_PER_ELEMENT === 1 && commit_0.length === 32)) {
           __compactRuntime.typeError('commitHouseSeed',
                                      'argument 1 (argument 2 as invoked from Typescript)',
-                                     'casino.compact line 96 char 1',
+                                     'casino.compact line 105 char 1',
                                      'Bytes<32>',
                                      commit_0)
         }
@@ -185,21 +185,21 @@ export class Contract {
         if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.currentQueryContext != undefined)) {
           __compactRuntime.typeError('settleWheel',
                                      'argument 1 (as invoked from Typescript)',
-                                     'casino.compact line 106 char 1',
+                                     'casino.compact line 115 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
         }
         if (!(typeof(roundId_0) === 'bigint' && roundId_0 >= 0n && roundId_0 <= 18446744073709551615n)) {
           __compactRuntime.typeError('settleWheel',
                                      'argument 1 (argument 2 as invoked from Typescript)',
-                                     'casino.compact line 106 char 1',
+                                     'casino.compact line 115 char 1',
                                      'Uint<0..18446744073709551616>',
                                      roundId_0)
         }
         if (!(typeof(houseOutcome_0) === 'bigint' && houseOutcome_0 >= 0n && houseOutcome_0 <= 255n)) {
           __compactRuntime.typeError('settleWheel',
                                      'argument 2 (argument 3 as invoked from Typescript)',
-                                     'casino.compact line 106 char 1',
+                                     'casino.compact line 115 char 1',
                                      'Uint<0..256>',
                                      houseOutcome_0)
         }
@@ -229,14 +229,14 @@ export class Contract {
         if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.currentQueryContext != undefined)) {
           __compactRuntime.typeError('verifyRoundOwnership',
                                      'argument 1 (as invoked from Typescript)',
-                                     'casino.compact line 143 char 1',
+                                     'casino.compact line 152 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
         }
         if (!(typeof(roundId_0) === 'bigint' && roundId_0 >= 0n && roundId_0 <= 18446744073709551615n)) {
           __compactRuntime.typeError('verifyRoundOwnership',
                                      'argument 1 (argument 2 as invoked from Typescript)',
-                                     'casino.compact line 143 char 1',
+                                     'casino.compact line 152 char 1',
                                      'Uint<0..18446744073709551616>',
                                      roundId_0)
         }
@@ -368,7 +368,7 @@ export class Contract {
     if (!(result_0.buffer instanceof ArrayBuffer && result_0.BYTES_PER_ELEMENT === 1 && result_0.length === 32)) {
       __compactRuntime.typeError('localSecretKey',
                                  'return value',
-                                 'casino.compact line 38 char 1',
+                                 'casino.compact line 47 char 1',
                                  'Bytes<32>',
                                  result_0)
     }
@@ -385,7 +385,7 @@ export class Contract {
     if (!(typeof(result_0) === 'bigint' && result_0 >= 0n && result_0 <= 255n)) {
       __compactRuntime.typeError('getBetChoice',
                                  'return value',
-                                 'casino.compact line 39 char 1',
+                                 'casino.compact line 48 char 1',
                                  'Uint<0..256>',
                                  result_0)
     }
@@ -402,7 +402,7 @@ export class Contract {
     if (!(typeof(result_0) === 'bigint' && result_0 >= 0n && result_0 <= 18446744073709551615n)) {
       __compactRuntime.typeError('getBetAmount',
                                  'return value',
-                                 'casino.compact line 40 char 1',
+                                 'casino.compact line 49 char 1',
                                  'Uint<0..18446744073709551616>',
                                  result_0)
     }
@@ -419,7 +419,7 @@ export class Contract {
     if (!(result_0.buffer instanceof ArrayBuffer && result_0.BYTES_PER_ELEMENT === 1 && result_0.length === 32)) {
       __compactRuntime.typeError('getBetSalt',
                                  'return value',
-                                 'casino.compact line 41 char 1',
+                                 'casino.compact line 50 char 1',
                                  'Bytes<32>',
                                  result_0)
     }
@@ -436,10 +436,10 @@ export class Contract {
   _betCommitment_0(choice_0, amount_0, salt_0) {
     return this._persistentHash_1([__compactRuntime.convertFieldToBytes(32,
                                                                         choice_0,
-                                                                        'casino.compact line 53 char 5'),
+                                                                        'casino.compact line 62 char 5'),
                                    __compactRuntime.convertFieldToBytes(32,
                                                                         amount_0,
-                                                                        'casino.compact line 54 char 5'),
+                                                                        'casino.compact line 63 char 5'),
                                    salt_0]);
   }
   _placeBet_0(context, partialProofData, gameType_0) {
@@ -598,7 +598,7 @@ export class Contract {
     const payoutLocal_0 = wonLocal_0 ?
                           ((t1) => {
                             if (t1 > 18446744073709551615n) {
-                              throw new __compactRuntime.CompactError('casino.compact line 127 char 43: cast from Field or Uint value to smaller Uint value failed: ' + t1 + ' is greater than 18446744073709551615');
+                              throw new __compactRuntime.CompactError('casino.compact line 136 char 43: cast from Field or Uint value to smaller Uint value failed: ' + t1 + ' is greater than 18446744073709551615');
                             }
                             return t1;
                           })(amountPublic_0 + amountPublic_0)
@@ -756,7 +756,7 @@ export function ledger(stateOrChargedState) {
         if (!(typeof(key_0) === 'bigint' && key_0 >= 0n && key_0 <= 18446744073709551615n)) {
           __compactRuntime.typeError('member',
                                      'argument 1',
-                                     'casino.compact line 33 char 1',
+                                     'casino.compact line 42 char 1',
                                      'Uint<0..18446744073709551616>',
                                      key_0)
         }
@@ -785,7 +785,7 @@ export function ledger(stateOrChargedState) {
         if (!(typeof(key_0) === 'bigint' && key_0 >= 0n && key_0 <= 18446744073709551615n)) {
           __compactRuntime.typeError('lookup',
                                      'argument 1',
-                                     'casino.compact line 33 char 1',
+                                     'casino.compact line 42 char 1',
                                      'Uint<0..18446744073709551616>',
                                      key_0)
         }
@@ -878,7 +878,7 @@ export const pureCircuits = {
     if (!(sk_0.buffer instanceof ArrayBuffer && sk_0.BYTES_PER_ELEMENT === 1 && sk_0.length === 32)) {
       __compactRuntime.typeError('ownerCommitment',
                                  'argument 1',
-                                 'casino.compact line 43 char 1',
+                                 'casino.compact line 52 char 1',
                                  'Bytes<32>',
                                  sk_0)
     }
@@ -894,21 +894,21 @@ export const pureCircuits = {
     if (!(typeof(choice_0) === 'bigint' && choice_0 >= 0n && choice_0 <= 255n)) {
       __compactRuntime.typeError('betCommitment',
                                  'argument 1',
-                                 'casino.compact line 47 char 1',
+                                 'casino.compact line 56 char 1',
                                  'Uint<0..256>',
                                  choice_0)
     }
     if (!(typeof(amount_0) === 'bigint' && amount_0 >= 0n && amount_0 <= 18446744073709551615n)) {
       __compactRuntime.typeError('betCommitment',
                                  'argument 2',
-                                 'casino.compact line 47 char 1',
+                                 'casino.compact line 56 char 1',
                                  'Uint<0..18446744073709551616>',
                                  amount_0)
     }
     if (!(salt_0.buffer instanceof ArrayBuffer && salt_0.BYTES_PER_ELEMENT === 1 && salt_0.length === 32)) {
       __compactRuntime.typeError('betCommitment',
                                  'argument 3',
-                                 'casino.compact line 47 char 1',
+                                 'casino.compact line 56 char 1',
                                  'Bytes<32>',
                                  salt_0)
     }

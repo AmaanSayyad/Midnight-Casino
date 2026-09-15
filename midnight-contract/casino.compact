@@ -1,17 +1,26 @@
 /**
  * Midnight Casino — Privacy-First Gaming Contract
  *
- * Dual-ledger model:
- * - Public ledger: round id, game type, bet commitment, settlement result
- * - Private local state (witnesses): secret key, bet choice, bet amount, salt
+ * PRIVACY MODEL (Rise In / Builder Challenge):
+ * - PUBLIC (on-chain ledger, visible to anyone):
+ *   rounds Map (ownerHash, gameType, betCommit, status, outcome, payout, won),
+ *   nextRoundId, totalRounds, houseSeedCommit
+ * - PRIVATE (witnesses — never written as raw values to the public ledger):
+ *   localSecretKey, getBetChoice, getBetAmount, getBetSalt
+ * - DISCLOSED deliberately via disclose():
+ *   gameType, range-checked fields, roundId, ownerHash, betCommit,
+ *   settlement outcome/payout/won, house seed commit
+ * - User PROVES without revealing: ownership of a round and that the private
+ *   bet matches the prior commitment, without publishing choice/amount/sk.
  *
- * Players prove ownership and fair settlement with ZK circuits without
- * revealing their strategy until (and unless) they choose to settle.
+ * Dual-ledger model: public commitments + selective settlement disclosure.
  *
  * Apache-2.0
+ *
+ * Keep in sync with midnight-contract/casino.compact
  */
 
-pragma language_version 0.22;
+pragma language_version 0.23;
 
 import CompactStandardLibrary;
 
