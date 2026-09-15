@@ -1,0 +1,7 @@
+{
+  "network": "preprod",
+  "contractAddress": "33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92",
+  "deployTxId": "7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d",
+  "explorer": "https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod",
+  "deployedAt": "2026-09-15T13:41:00.000Z"
+}

@@ -21,9 +21,9 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | Network | Address |
 |---------|---------|
 | Preview | `50a1cb0c358c57b52d32eb44d6c1054aa2d0352420fcb76ccd823b81ccac49f4` |
-| Preprod | `[PASTE AFTER PREPROD DEPLOY — see docs/LEVEL2.md]` |
+| Preprod | `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92` |
 
-*(L1 Preview address from Lace/1AM on 2026-09-15. L2 targets Preprod: `npm run midnight:dapp:preprod` or `npm run deploy:preprod`.)*
+*(L1 Preview + L2 Preprod from Lace/1AM. Preprod deploy tx: [7d306596…c764d](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod). Join with the 64-hex value above.)*
 
 ## Live Demo
 
@@ -91,6 +91,13 @@ Midnight Casino is a privacy-first GameFi product on Midnight: players place bet
 ![Lace/1AM dapp showing Active Preview contract address and Contract ready status](docs/screenshots/deploy-preview-address.png)
 
 **Preview address:** `50a1cb0c358c57b52d32eb44d6c1054aa2d0352420fcb76ccd823b81ccac49f4`
+
+### Contract deployed on Preprod (address visible)
+
+![Lace/1AM dapp deploying casino.compact on Preprod](docs/screenshots/deploy-preprod.png)
+
+**Preprod address:** `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`  
+**Deploy tx:** https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod
 
 ## Product Proposal
 

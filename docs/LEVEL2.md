@@ -11,7 +11,7 @@ Mission: Compact contract wired to a frontend, Lace/1AM connected on **Preprod**
 | Observable privacy | Choice/amount stay witnesses; public ledger shows commitments only until settle — see README **Privacy Claim** |
 | Live demo | https://midnight-casino-eta.vercel.app/ (+ local on-chain UI `:5173`) |
 | Demo video | https://youtu.be/DVEq_W_Uzrk |
-| Preprod address | README **Contract Address** table (filled after deploy) |
+| Preprod address | README **Contract Address** — `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92` ([deploy tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod)) |
 
 ## Lace / 1AM on Preprod (required)
 

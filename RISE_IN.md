@@ -5,7 +5,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 | Level | Focus | Status in this repo |
 |-------|--------|---------------------|
 | L1 New Moon | Compact + tests + README gates | **Done** — compile, 9 tests, `managed/` keys, Preview deploy `50a1cb0c…49f4`, Initial Idea + screenshots in README |
-| L2 Waxing Crescent | Wallet + circuit UI + Preprod | **In progress** — Lace connect/disconnect + placeBet UI on Preprod; address pending faucet/deploy |
+| L2 Waxing Crescent | Wallet + circuit UI + Preprod | **Done** — Lace connect/disconnect + placeBet UI; Preprod `33d34f16…be92` ([tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod)) |
 | L3 First Quarter | CI + PROPOSAL + polish | **Scaffolded** — CI + PROPOSAL.md added; fill placeholders |
 | L4 Waxing Gibbous | Preprod MVP | Pending proposal approval + Preprod deploy |
 | L5 Full Moon | 50 users + feedback | Scaffold later |
@@ -32,7 +32,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 
 ## Manual steps (remaining)
 
-1. **L2 Preprod** — Fund Preprod wallet → `npm run midnight:dapp:preprod` or `NODE_OPTIONS=--max-old-space-size=8192 npm run deploy:preprod` → paste address into README. See [`docs/LEVEL2.md`](docs/LEVEL2.md).
+1. **L2** — Complete on Preprod (`33d34f16…be92`). Keep circuit calls via `midnight-dapp` / Privacy Wheel.
 2. **PROPOSAL.md** — Fill remaining `[I WILL FILL THIS IN]` sections before L4.
 3. Connect Midnight docs MCP: https://midnight.mcp.kapa.ai
 
@@ -72,6 +72,6 @@ NODE_OPTIONS='--max-old-space-size=8192' npm run deploy:preprod
 - [x] Observable privacy behavior documented (README Privacy Claim)
 - [x] Live demo link (Vercel)
 - [x] Demo video link
-- [ ] Preprod contract address recorded in README (awaiting funded deploy)
+- [x] Preprod contract address recorded in README — `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
 - [x] ≥8 meaningful commits on repo history
 - [x] Preprod dapp default (`VITE_NETWORK_ID=preprod`) + [`docs/LEVEL2.md`](docs/LEVEL2.md)
