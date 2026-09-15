@@ -29,3 +29,7 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 
 - Wave 2: Lace wallet deploy to Preprod, shielded balance / DUST sponsorship for gasless UX
 - Wave 3: Expand Compact circuits to Mines/Plinko private boards; production indexer sync
+
+## Rise In L2 (2026-09-15)
+- Compact dapp defaults to Preprod; Lace connect/disconnect + placeBet UI ready.
+- Headless `npm run deploy:preprod` available; address pending funded wallet sync.
