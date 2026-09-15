@@ -23,7 +23,7 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 - **GitHub:** https://github.com/AmaanSayyad/Midnight-Casino/
 - **Live:** https://midnight-casino-eta.vercel.app/ (Privacy Wheel: `/game/privacy-wheel`)
 - **Deck:** [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
-- **Video pitch:** record 2–3 min walkthrough of compile → Privacy Wheel placeBet/settleWheel (attach on AKINDO)
+- **Demo video:** https://youtu.be/DVEq_W_Uzrk
 
 ## Next Waves (roadmap)
 

@@ -9,6 +9,7 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **GitHub** | https://github.com/AmaanSayyad/Midnight-Casino/ |
 | **Live** | https://midnight-casino-eta.vercel.app/ |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
+| **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
 | **Judging surface** | [`midnight-contract/casino.compact`](midnight-contract/casino.compact) |
 
@@ -369,7 +370,8 @@ npm test           # simulator QA
 4. **Pitch deck** — [Figma deck](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)
 
 5. **Live demo** — https://midnight-casino-eta.vercel.app/ (Privacy Wheel: [/game/privacy-wheel](https://midnight-casino-eta.vercel.app/game/privacy-wheel))  
-   **GitHub** — https://github.com/AmaanSayyad/Midnight-Casino/
+   **GitHub** — https://github.com/AmaanSayyad/Midnight-Casino/  
+   **Demo video** — https://youtu.be/DVEq_W_Uzrk
 
 6. **Wave progress** — see [`WAVE1_PROGRESS.md`](WAVE1_PROGRESS.md)
 
