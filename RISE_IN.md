@@ -9,7 +9,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 | L3 First Quarter | CI + PROPOSAL + polish | **Done** |
 | L4 Waxing Gibbous | Preprod MVP + public X | **Almost** — create Product X ([`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)) |
 | L5 Full Moon | Users + feedback (50) | **Superseded by L6 count** — feedback loop shipped; wallets expanded to 70 |
-| L6 | 70 Preprod users + feedback + ≥30 commits | **Almost** — **70/70 funded on-chain**; paste Name/Email + Google Form URLs |
+| L6 | 70 Preprod users + feedback + ≥30 commits | **Done** — 70/70 funded + identity/feedback filled; Product X still optional for L4 |
 
 ## Canonical links
 
@@ -23,15 +23,16 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 - Demo video: https://youtu.be/DVEq_W_Uzrk
 - Product X: *(paste after creating — see docs/BUILD_IN_PUBLIC.md)*
 - L4: [`docs/LEVEL4.md`](docs/LEVEL4.md) · L5: [`docs/LEVEL5.md`](docs/LEVEL5.md) · L6: [`docs/LEVEL6.md`](docs/LEVEL6.md)
-- Users: [`USERS.md`](USERS.md) (**70 / 70 funded on-chain**; name/email pending)
+- Users: [`USERS.md`](USERS.md) (**70 / 70 funded** + name/email/feedback)
+- Feedback sheet: https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing
 - Fees explained: [`docs/LEVEL6.md`](docs/LEVEL6.md#how-fees-work-tnight-vs-tdust)
 
 ## Manual steps (remaining)
 
-1. **Product X** — [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md)
-2. **Fund wallets** — **Done** (70/70 via `/l5-fund`)
-3. **Google Form + sheet** — [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md) → paste URLs in README
-4. **Fill** Name / Email / Feedback on [`USERS.md`](USERS.md)
+1. **Product X** — [`docs/BUILD_IN_PUBLIC.md`](docs/BUILD_IN_PUBLIC.md) (L4)
+2. ~~Fund wallets~~ **Done** (70/70)
+3. ~~Google sheet + feedback~~ **Done** (sheet linked; [`USERS.md`](USERS.md) filled)
+4. ~~Name / Email / Feedback~~ **Done**
 
 ## L6 checklist (this cycle)
 
@@ -42,7 +43,7 @@ This repo (**Midnight Casino**) fulfills the Rise In “New Moon → Supermoon�
 - [x] Updated documentation ([`docs/LEVEL6.md`](docs/LEVEL6.md))
 - [x] Live demo + demo video
 - [x] ≥30 meaningful commits
-- [ ] Name/email/feedback columns + Google Form links in README
+- [x] Name/email/feedback columns + public sheet link in README
 
 ## Prior level checklists
 

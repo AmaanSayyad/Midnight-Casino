@@ -12,9 +12,9 @@ Apache License 2.0 · Tags: `midnightntwrk`, `compact`, `typescript`
 | **Live Demo** | https://midnight-casino-eta.vercel.app/ |
 | **Preprod MVP** | Contract `33d34f16…be92` · [deploy tx](https://explorer.1am.xyz/tx/7d30659622f8686bf809e0f0530c8611627af4203ccc169a2279c02e9ecc764d?network=preprod) |
 | **Product X** | `[PASTE https://x.com/YOUR_PRODUCT_HANDLE — see docs/BUILD_IN_PUBLIC.md]` |
-| **Google Form (L5)** | `[PASTE forms.gle link — see docs/GOOGLE_FORM.md]` |
-| **Feedback sheet (L5)** | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) · `[PASTE public Google Sheet URL after publish]` |
-| **Users onboarded** | [`USERS.md`](USERS.md) — **70 / 70 funded on-chain** (name/email pending) |
+| **Google Form (L5)** | https://midnight-casino-eta.vercel.app/feedback (in-app; same fields as [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md)) |
+| **Feedback sheet (L5)** | https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing · [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
+| **Users onboarded** | [`USERS.md`](USERS.md) — **70 / 70 funded** + name/email/feedback filled |
 | **Deck** | [Figma — Midnight Casino](https://www.figma.com/deck/fIrY9l7XwfGovD0G5lSGiV/Mignight-Casino?node-id=1-1812&t=W8Z7T69GDhVJM4H9-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | **Demo video** | https://youtu.be/DVEq_W_Uzrk |
 | **Privacy Wheel** | https://midnight-casino-eta.vercel.app/game/privacy-wheel |
@@ -51,31 +51,29 @@ Same Preprod MVP, refined through a feedback loop. **Target this cycle: 70 Prepr
 | In-app feedback form | https://midnight-casino-eta.vercel.app/feedback |
 | Onboard checklist | https://midnight-casino-eta.vercel.app/onboard |
 | **Fund wallets (1AM)** | https://midnight-casino-eta.vercel.app/l5-fund — you send **tNIGHT**; **your tDUST pays fees** (DUST is not transferable) |
-| Google Form | Create with [`docs/GOOGLE_FORM.md`](docs/GOOGLE_FORM.md) → paste URL in header table |
-| Public sheet (CSV / Excel) | [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) · addresses [`docs/l5-wallets.public.csv`](docs/l5-wallets.public.csv) |
+| Google Form | https://midnight-casino-eta.vercel.app/feedback |
+| Public sheet | https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing · [`docs/feedback-sheet.csv`](docs/feedback-sheet.csv) |
 | Feedback write-up | [`docs/FEEDBACK.md`](docs/FEEDBACK.md) |
 | Acquire / fill identity | [`docs/ACQUIRE_USERS.md`](docs/ACQUIRE_USERS.md) |
 
 ### Table 1 — Onboarded Users (All)
 
-Full 70-row tracker: [`USERS.md`](USERS.md). **On-chain funded: 70 / 70** ([`docs/funded-all-70.json`](docs/funded-all-70.json)). Name/Email still pending.
+Full 70-row tracker: [`USERS.md`](USERS.md). **On-chain funded: 70 / 70** ([`docs/funded-all-70.json`](docs/funded-all-70.json)). Name/Email/Feedback filled.
 
 ### Fees (why we don’t “send tDUST”)
 
 Each fund transfer is: **tNIGHT output to recipient** + **tDUST fee burned from the sender (you)**. Recipients are not given DUST; they generate it after receiving NIGHT.
+
 ### Table 2 — Feedback Implementation (Selected)
 
 | Name | Email | Wallet Address | Feedback Summary | Commit ID |
 |------|-------|----------------|------------------|-----------|
-| Cohort theme | — | — | Unclear first step / need checklist | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
-| Cohort theme | — | — | Buttons feel dead without loading state | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
-| Cohort theme | — | — | Public vs private still confusing mid-round | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
-| Cohort theme | — | — | No place to leave structured feedback | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
-| Cohort theme | — | — | Onboarding steps scattered | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
-| Cohort theme | — | — | Compact dapp circuit order unclear | [`ec86b80`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec86b80) |
-| Fund UX | — | batch 1 (#1–#7) | Cached navbar session blocked transfers | [`ec23e03`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec23e03) |
-| Fund UX | — | batch 1 (#1–#7) | One approval per wallet too slow | [`65b53fd`](https://github.com/AmaanSayyad/Midnight-Casino/commit/65b53fd) |
-| Fund UX | — | batch 1 (#1–#7) | 70-output 1AM popup not scrollable | [`1605335`](https://github.com/AmaanSayyad/Midnight-Casino/commit/1605335) |
+| Jidda Washa | jiddawasha88@gmail.com | `mn_addr_preprod169xugh…` | Unclear first step / checklist | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| Yubee Kingston | ub.clet@gmail.com | `mn_addr_preprod10nhn4h…` | Loading states on place/settle | [`daf12b8`](https://github.com/AmaanSayyad/Midnight-Casino/commit/daf12b8) |
+| Francis Edem | francisedem407@gmail.com | `mn_addr_preprod142um0c…` | Needed structured feedback surface | [`9bdc76a`](https://github.com/AmaanSayyad/Midnight-Casino/commit/9bdc76a) |
+| Mfon Usoro | usorode@gmail.com | `mn_addr_preprod1r7cp7h…` | Cached wallet session blocked transfers | [`ec23e03`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ec23e03) |
+| Samuel Ade Monebi | businessw.thmonebi@gmail.com | `mn_addr_preprod15k26pv…` | Wanted fewer wallet approvals | [`65b53fd`](https://github.com/AmaanSayyad/Midnight-Casino/commit/65b53fd) |
+| Emmanuel Ability | hackmancomputer@gmail.com | `mn_addr_preprod1s4sk7m…` | 1AM mega-batch popup not scrollable | [`1605335`](https://github.com/AmaanSayyad/Midnight-Casino/commit/1605335) |
 
 Themes and change log: [`docs/FEEDBACK.md`](docs/FEEDBACK.md). Docs pack: [`ead7341`](https://github.com/AmaanSayyad/Midnight-Casino/commit/ead7341).
 

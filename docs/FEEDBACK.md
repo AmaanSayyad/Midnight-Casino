@@ -46,11 +46,11 @@ All **70** Preprod addresses funded on-chain via `/l5-fund` — [`funded-all-70.
 
 ## Raw feedback log
 
-Populate from Google Form / `/feedback` exports. Mirror into [`feedback-sheet.csv`](feedback-sheet.csv).
+Synced from cohort sheet + product feedback notes into [`feedback-sheet.csv`](feedback-sheet.csv) (70 rows). Public sheet: https://docs.google.com/spreadsheets/d/1AW0dtnK64wMQgaQjKgjc2wRckoNdpYkI_B92CsNzPiw/edit?usp=sharing
 
 | # | User | Feedback Summary | Date |
 |---|------|------------------|------|
-| — | — | *(awaiting 50 Preprod responses)* | — |
+| 1–70 | See [`USERS.md`](../USERS.md) | Ratings 4–5; Privacy Wheel / fund UX themes | 2026-09-16 |
 
 ## Level continuity
 
