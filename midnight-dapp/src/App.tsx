@@ -11,6 +11,9 @@ import type { CasinoDerivedState } from './casino-types';
 const NETWORK_ID = import.meta.env.VITE_NETWORK_ID ?? 'preprod';
 const ONE_AM_INSTALL_URL = 'https://1am.xyz/';
 const PREPROD_FAUCET = 'https://midnight-tmnight-preprod.nethermind.dev/';
+const DEFAULT_JOIN =
+  (import.meta.env.VITE_CONTRACT_ADDRESS as string | undefined)?.trim() ||
+  '33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92';
 
 type WalletState = 'detecting' | 'no-wallet' | 'ready' | 'connecting' | 'connected';
 
@@ -82,7 +85,7 @@ export default function App() {
   const [status, setStatus] = useState<string | null>(null);
 
   const [contractAddress, setContractAddress] = useState('');
-  const [joinInput, setJoinInput] = useState('');
+  const [joinInput, setJoinInput] = useState(DEFAULT_JOIN);
   const [deploying, setDeploying] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -334,7 +337,7 @@ export default function App() {
             onChange={(e) => setJoinInput(e.target.value)}
           />
           <button className="secondary" disabled={!wallet || busy} onClick={joinContract}>
-            Join
+            Join Preprod MVP
           </button>
         </div>
         {contractAddress && (
