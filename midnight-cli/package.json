@@ -8,6 +8,8 @@
     "test-api": "docker compose -f standalone.yml pull && DEBUG='testcontainers' vitest run",
     "test:e2e": "DEBUG='testcontainers' vitest run",
     "deploy:preprod": "npx tsx scripts/deploy-preprod.mjs",
+    "l5:mint": "node scripts/mint-preprod-users.mjs --generate --count 50",
+    "l5:fund": "node scripts/mint-preprod-users.mjs --fund --amount 0.1",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {

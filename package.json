@@ -47,7 +47,9 @@
     "deploy:monad": "npx hardhat run scripts/deploy-casino.js --network monad-testnet",
     "test:monad": "node scripts/test-monad-integration.js",
     "docs:l4": "echo See docs/LEVEL4.md and docs/BUILD_IN_PUBLIC.md",
-    "docs:l5": "echo See docs/LEVEL5.md docs/FEEDBACK.md docs/ACQUIRE_USERS.md USERS.md"
+    "docs:l5": "echo See docs/LEVEL5.md docs/FEEDBACK.md docs/ACQUIRE_USERS.md USERS.md",
+    "l5:mint": "cd midnight-cli && npm run l5:mint",
+    "l5:fund": "cd midnight-cli && npm run l5:fund"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.0",

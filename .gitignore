@@ -25,6 +25,8 @@ pnpm-debug.log*
 .env.preprod
 .env.preview
 midnight-dapp/.env
+.l5-wallets.secrets.json
+docs/l5-fund-results.json
 
 # coverage
 coverage/
