@@ -21,12 +21,21 @@ export default function PrivacyWheelPage() {
   const [houseCommit, setHouseCommit] = useState(null);
   const [error, setError] = useState('');
   const [log, setLog] = useState([]);
+  const [busy, setBusy] = useState('');
 
   const push = (msg) => setLog((prev) => [msg, ...prev].slice(0, 12));
+
+  const checklist = [
+    { done: true, label: 'Open Privacy Wheel (you are here)' },
+    { done: !!lastPlace, label: 'placeBet — private choice/amount as witnesses' },
+    { done: !!houseCommit, label: 'commitHouseSeed — public house commitment' },
+    { done: !!lastSettle, label: 'settleWheel — disclose outcome + payout only' },
+  ];
 
   const onPlace = () => {
     try {
       setError('');
+      setBusy('Placing private bet…');
       const result = client.placeBet({
         gameType: GAME_TYPES.WHEEL,
         choice,
@@ -41,18 +50,26 @@ export default function PrivacyWheelPage() {
       );
     } catch (e) {
       setError(e.message || String(e));
+    } finally {
+      setBusy('');
     }
   };
 
   const onCommitHouse = () => {
-    const commit = client.commitHouseSeed();
-    setHouseCommit(commit);
-    push('commitHouseSeed -> ' + commit.slice(0, 18) + '...');
+    setBusy('Committing house seed…');
+    try {
+      const commit = client.commitHouseSeed();
+      setHouseCommit(commit);
+      push('commitHouseSeed -> ' + commit.slice(0, 18) + '...');
+    } finally {
+      setBusy('');
+    }
   };
 
   const onSettle = () => {
     try {
       setError('');
+      setBusy('Proving settlement…');
       const settled = client.settleWheel(Number(houseOutcome));
       setLastSettle(settled);
       push(
@@ -65,6 +82,8 @@ export default function PrivacyWheelPage() {
       );
     } catch (e) {
       setError(e.message || String(e));
+    } finally {
+      setBusy('');
     }
   };
 
@@ -81,11 +100,24 @@ export default function PrivacyWheelPage() {
             </h1>
             <p className="mt-3 text-white/70 max-w-2xl">
               Local Compact semantics demo. Connect once via the navbar (1AM) —
-              this page shares that session. Preprod MVP contract is live — Join 33d34f16…be92 in the Compact DApp
-              (Lace on Preprod + local proof server) for on-chain placeBet.
+              this page shares that session. Preprod MVP contract is live — Join
+              33d34f16…be92 in the Compact DApp (Lace on Preprod + local proof
+              server) for on-chain placeBet.
             </p>
           </div>
           <div className="flex flex-col gap-2 items-end">
+            <Link
+              href="/onboard"
+              className="underline text-white/60 hover:text-white"
+            >
+              Preprod onboard
+            </Link>
+            <Link
+              href="/feedback"
+              className="underline text-white/60 hover:text-white"
+            >
+              Leave feedback
+            </Link>
             <Link
               href="/game/wheel"
               className="underline text-white/60 hover:text-white"
@@ -103,8 +135,71 @@ export default function PrivacyWheelPage() {
           </div>
         </div>
 
+        <div className="border border-[#c4a1ff]/30 bg-[#c4a1ff]/10 px-4 py-3 text-sm flex flex-wrap items-center justify-between gap-3">
+          <span className="text-white/80">
+            Rise In L5 — after one round, tell us what worked. We ship from your
+            notes.
+          </span>
+          <Link
+            href="/feedback"
+            className="shrink-0 bg-[#7c3aed] hover:bg-[#6d28d9] px-3 py-1.5 text-sm font-medium"
+          >
+            Feedback form
+          </Link>
+        </div>
+
+        <section className="border border-white/10 bg-white/5 p-4">
+          <h2 className="text-sm uppercase tracking-widest text-white/50 mb-3">
+            Round checklist
+          </h2>
+          <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+            {checklist.map((item) => (
+              <li key={item.label} className="flex gap-2 items-start">
+                <span
+                  className={
+                    item.done ? 'text-emerald-400' : 'text-white/30'
+                  }
+                  aria-hidden
+                >
+                  {item.done ? '✓' : '○'}
+                </span>
+                <span className={item.done ? 'text-white/90' : 'text-white/50'}>
+                  {item.label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="border border-white/10 bg-black/30 p-4 grid sm:grid-cols-2 gap-4 text-sm">
+          <div>
+            <h3 className="text-emerald-300/90 font-medium mb-1">
+              Public (ledger)
+            </h3>
+            <p className="text-white/60">
+              Round id, game type, bet commitment, owner hash, status; after
+              settle — outcome, payout, won.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-[#c4a1ff] font-medium mb-1">
+              Private (witnesses)
+            </h3>
+            <p className="text-white/60">
+              Secret key, sector choice, stake amount, salt — never raw public
+              fields before settle disclosure.
+            </p>
+          </div>
+        </section>
+
         {/* Status only — connect lives in navbar (shared WalletStatusProvider) */}
         <LaceConnectPanel />
+
+        {busy && (
+          <p className="text-amber-200/90 text-sm" role="status">
+            {busy}
+          </p>
+        )}
 
         <div className="grid md:grid-cols-2 gap-6">
           <section className="border border-white/10 bg-white/5 p-6 space-y-4">
@@ -115,6 +210,7 @@ export default function PrivacyWheelPage() {
                 className="mt-1 w-full bg-black/40 border border-white/20 px-3 py-2"
                 value={choice}
                 onChange={(e) => setChoice(Number(e.target.value))}
+                disabled={!!busy}
               >
                 {SECTORS.map((s) => (
                   <option key={s} value={s}>
@@ -131,14 +227,16 @@ export default function PrivacyWheelPage() {
                 onChange={(e) =>
                   setAmount(e.target.value.replace(/[^0-9]/g, ''))
                 }
+                disabled={!!busy}
               />
             </label>
             <button
               type="button"
               onClick={onPlace}
-              className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] py-3 font-medium"
+              disabled={!!busy}
+              className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] disabled:opacity-50 py-3 font-medium"
             >
-              placeBet (ZK circuit)
+              {busy.startsWith('Placing') ? 'Placing…' : 'placeBet (ZK circuit)'}
             </button>
           </section>
 
@@ -170,9 +268,12 @@ export default function PrivacyWheelPage() {
             <button
               type="button"
               onClick={onCommitHouse}
-              className="w-full border border-white/30 py-3 hover:bg-white/10"
+              disabled={!!busy || !lastPlace}
+              className="w-full border border-white/30 py-3 hover:bg-white/10 disabled:opacity-40"
             >
-              commitHouseSeed
+              {busy.startsWith('Committing')
+                ? 'Committing…'
+                : 'commitHouseSeed'}
             </button>
             {houseCommit && (
               <p className="text-xs break-all text-white/60">
@@ -185,6 +286,7 @@ export default function PrivacyWheelPage() {
                 className="mt-1 w-full bg-black/40 border border-white/20 px-3 py-2"
                 value={houseOutcome}
                 onChange={(e) => setHouseOutcome(Number(e.target.value))}
+                disabled={!!busy}
               >
                 {SECTORS.map((s) => (
                   <option key={s} value={s}>
@@ -196,9 +298,12 @@ export default function PrivacyWheelPage() {
             <button
               type="button"
               onClick={onSettle}
-              className="w-full bg-[#059669] hover:bg-[#047857] py-3 font-medium"
+              disabled={!!busy || !houseCommit}
+              className="w-full bg-[#059669] hover:bg-[#047857] disabled:opacity-50 py-3 font-medium"
             >
-              settleWheel (prove + disclose)
+              {busy.startsWith('Proving')
+                ? 'Proving…'
+                : 'settleWheel (prove + disclose)'}
             </button>
           </section>
 
