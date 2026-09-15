@@ -14,6 +14,8 @@
     "compact": "cd midnight-contract && npm run compact",
     "compact:test": "cd midnight-contract && npm test",
     "test": "cd midnight-contract && npm test",
+    "test:rise": "cd midnight-contract && npx vitest run --config vitest.rise.config.ts",
+    "test:all": "npm test && npm run test:rise",
     "compact:build": "cd midnight-contract && npm run build",
     "sync:compact": "cp contracts/casino.compact midnight-contract/casino.compact",
     "midnight:dapp": "cd midnight-dapp && npm run predev && npm run dev",
