@@ -1,11 +1,12 @@
 # Build in public — Product X profile (Level 4)
 
-**Status: Done**
+**Status: Done** — product-branded account `@AptCasinofun` (not a personal handle).
 
 | | |
 |---|---|
-| **Profile** | https://x.com/amaanbiz (`@amaanbiz`) |
-| **Launch post** | https://x.com/amaanbiz/status/2099944455533158574 |
+| **Profile** | https://x.com/AptCasinofun (`@AptCasinofun`) |
+| **Launch post** | https://x.com/AptCasinofun/status/2100145981979549826 |
+| **MVP / Preprod post** | https://x.com/AptCasinofun/status/2100145986362560612 |
 
 ## Follow-ups (build-in-public cadence)
 

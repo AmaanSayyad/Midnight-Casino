@@ -12,7 +12,7 @@ export default function Footer() {
   const [showLanguage, setShowLanguage] = useState(false);
   
   const xProfile =
-    process.env.NEXT_PUBLIC_X_PROFILE || 'https://x.com/amaanbiz';
+    process.env.NEXT_PUBLIC_X_PROFILE || 'https://x.com/AptCasinofun';
   const socialLinks = [
     { name: "X / Twitter", url: xProfile, icon: "/icons/twitter.svg" },
     { name: "GitHub", url: "https://github.com/AmaanSayyad/Midnight-Casino", icon: "/icons/github.svg" },

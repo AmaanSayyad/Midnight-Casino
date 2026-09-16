@@ -47,7 +47,7 @@ Midnight design: DUST is non-transferable. Recipients generate their own DUST la
 - [x] ≥30 meaningful commits
 - [x] Website feedback form + CSV sheet linked in README (collected on-site, not Google Forms)
 - [x] Name / email / feedback columns filled for scoring
-- [x] Product X (L4) — https://x.com/amaanbiz · [launch post](https://x.com/amaanbiz/status/2099944455533158574)
+- [x] Product X (L4) — https://x.com/AptCasinofun · [launch](https://x.com/AptCasinofun/status/2100145981979549826) · [MVP](https://x.com/AptCasinofun/status/2100145986362560612)
 
 ## Fund the 70 (1AM)
 

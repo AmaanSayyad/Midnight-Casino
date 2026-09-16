@@ -36,10 +36,10 @@ Players can wager without broadcasting strategy or bankroll size on a public mem
 
 ## Rise In L4 (2026-09-15)
 - Preprod MVP live: `33d34f168e360498df9b9e08baca1c999cdf50e61642f8af2888eaed7ec4be92`
-- Docs/CI complete; Product X: https://x.com/amaanbiz · https://x.com/amaanbiz/status/2099944455533158574
+- Docs/CI complete; Product X: https://x.com/AptCasinofun · https://x.com/AptCasinofun/status/2100145981979549826 · https://x.com/AptCasinofun/status/2100145986362560612
 
 ## Rise In L6 (2026-09-16)
 - Target **70 Preprod** wallet addresses — **all 70 funded on-chain** via `/l5-fund`
 - Lists: [`USERS.md`](USERS.md) · [`docs/funded-all-70.json`](docs/funded-all-70.json)
-- Remaining: none for L1–L6 (optional: more build-in-public posts from `@amaanbiz`)
+- Remaining: none for L1–L6 (optional: more build-in-public posts from `@AptCasinofun`)
 - Runbook: [`docs/LEVEL6.md`](docs/LEVEL6.md)
